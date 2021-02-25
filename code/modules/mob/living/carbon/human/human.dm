@@ -3,6 +3,7 @@
 	b_type = pick(7;"O-", 38;"O+", 6;"A-", 34;"A+", 2;"B-", 9;"B+", 1;"AB-", 3;"AB+")
 	blood_type = b_type
 
+	dna = new()
 	if(!species)
 		set_species()
 
@@ -42,6 +43,7 @@
 	RegisterSignal(src, COMSIG_GRAB_SELF_ATTACK, .proc/fireman_carry_grabbed) // Fireman carry
 	AddComponent(/datum/component/footstep, FOOTSTEP_MOB_HUMAN)
 
+
 /mob/living/carbon/human/proc/human_z_changed(datum/source, old_z, new_z)
 	SIGNAL_HANDLER
 	LAZYREMOVE(GLOB.humans_by_zlevel["[old_z]"], src)
@@ -77,6 +79,8 @@
 	GLOB.alive_human_list -= src
 	LAZYREMOVE(GLOB.humans_by_zlevel["[z]"], src)
 	GLOB.dead_human_list -= src
+	QDEL_NULL(dna)
+
 	return ..()
 
 /mob/living/carbon/human/Stat()
@@ -905,21 +909,17 @@
 /mob/living/carbon/human/species
 	var/race = null
 
-/mob/living/carbon/human/species/set_species(new_species, default_colour)
+/mob/living/carbon/human/species/set_species(new_species, default_colour, datum/preferences/pref_load)
 	if(!new_species)
 		new_species = race
 	return ..()
 
-/mob/living/carbon/human/proc/set_species(new_species, default_colour)
+/mob/living/carbon/human/proc/set_species(new_species, default_colour, datum/preferences/pref_load)
 
 	if(!new_species)
 		new_species = "Human"
 
 	if(species)
-
-		if(species.name && species.name == new_species) //we're already that species.
-			return
-
 		// Clear out their species abilities.
 		species.remove_inherent_verbs(src)
 
@@ -935,23 +935,7 @@
 
 	dextrous = species.has_fine_manipulation
 
-	if(species.default_language_holder)
-		language_holder = new species.default_language_holder(src)
-
-	if(species.base_color && default_colour)
-		//Apply colour.
-		r_skin = hex2num(copytext(species.base_color,2,4))
-		g_skin = hex2num(copytext(species.base_color,4,6))
-		b_skin = hex2num(copytext(species.base_color,6,8))
-	else
-		r_skin = 0
-		g_skin = 0
-		b_skin = 0
-
-	if(species.hair_color)
-		r_hair = hex2num(copytext(species.hair_color, 2, 4))
-		g_hair = hex2num(copytext(species.hair_color, 4, 6))
-		b_hair = hex2num(copytext(species.hair_color, 6, 8))
+	set_appearances(default_colour, pref_load)
 
 	species.handle_post_spawn(src)
 
@@ -966,6 +950,78 @@
 
 	add_movespeed_modifier(MOVESPEED_ID_SPECIES, TRUE, 0, NONE, TRUE, species.slowdown)
 	return TRUE
+
+/mob/living/carbon/human/proc/set_appearances(default_colour, datum/preferences/pref_load)
+	if(pref_load)
+		real_name = pref_load.real_name
+		name = real_name
+
+		flavor_text = pref_load.flavor_text
+
+		med_record = pref_load.med_record
+		sec_record = pref_load.sec_record
+		gen_record = pref_load.gen_record
+		exploit_record = pref_load.exploit_record
+
+		age = pref_load.age
+		gender = pref_load.gender
+		ethnicity = pref_load.ethnicity
+		body_type = pref_load.body_type
+
+		r_eyes = pref_load.r_eyes
+		g_eyes = pref_load.g_eyes
+		b_eyes = pref_load.b_eyes
+
+		r_hair = pref_load.r_hair
+		g_hair = pref_load.g_hair
+		b_hair = pref_load.b_hair
+
+		r_grad	= pref_load.r_grad
+		g_grad	= pref_load.g_grad
+		b_grad	= pref_load.b_grad
+
+		r_facial = pref_load.r_facial
+		g_facial = pref_load.g_facial
+		b_facial = pref_load.b_facial
+
+		h_style = pref_load.h_style
+		grad_style= pref_load.grad_style
+		f_style = pref_load.f_style
+
+		citizenship = pref_load.citizenship
+		religion = pref_load.religion
+
+		moth_wings = pref_load.moth_wings
+		underwear = pref_load.underwear
+		undershirt = pref_load.undershirt
+		backpack = pref_load.backpack
+
+		features = pref_load.features.Copy()
+		mutant_bodyparts = pref_load.mutant_bodyparts.Copy()
+	else
+		if(species.default_language_holder)
+			language_holder = new species.default_language_holder(src)
+
+		if(species.base_color && default_colour)
+			//Apply colour.
+			r_skin = hex2num(copytext(species.base_color,2,4))
+			g_skin = hex2num(copytext(species.base_color,4,6))
+			b_skin = hex2num(copytext(species.base_color,6,8))
+		else
+			r_skin = 0
+			g_skin = 0
+			b_skin = 0
+
+		if(species.hair_color)
+			r_hair = hex2num(copytext(species.hair_color, 2, 4))
+			g_hair = hex2num(copytext(species.hair_color, 4, 6))
+			b_hair = hex2num(copytext(species.hair_color, 6, 8))
+
+		features = species.get_random_features()
+		mutant_bodyparts = species.get_random_mutant_bodyparts(features)
+
+	dna.features = features.Copy()
+	dna.mutant_bodyparts = mutant_bodyparts.Copy()
 
 
 /mob/living/carbon/human/reagent_check(datum/reagent/R)
@@ -991,7 +1047,7 @@
 			if(S.turn_light(src, FALSE, 0, FALSE, forced))
 				light_off++
 		for(var/obj/item/clothing/head/hardhat/H in contents)
-			H.turn_light(src, FALSE, 0,FALSE, forced)				  
+			H.turn_light(src, FALSE, 0,FALSE, forced)
 			light_off++
 		for(var/obj/item/flashlight/L in contents)
 			if(istype(L, /obj/item/flashlight/flare))
@@ -1048,7 +1104,7 @@
 				to_chat(src, "<span class='notice'>Your sources of light short out.</span>")
 				return
 			to_chat(src, "<span class='notice'>Your source of light shorts out.</span>")
-		
+
 
 
 /mob/living/carbon/human/proc/randomize_appearance()
@@ -1145,7 +1201,7 @@
 	ethnicity = random_ethnicity()
 	body_type = random_body_type()
 
-	age = rand(17, 55)
+	age = rand(18, 55)
 
 	update_hair()
 	update_body()

@@ -355,6 +355,9 @@
 	READ_FILE(S["exploit_record"], exploit_record)
 	READ_FILE(S["flavor_text"], flavor_text)
 
+	READ_FILE(S["features"], features)
+	READ_FILE(S["mutant_bodyparts"], mutant_bodyparts)
+
 
 	be_special		= sanitize_integer(be_special, NONE, MAX_BITFLAG, initial(be_special))
 
@@ -421,6 +424,14 @@
 		ai_name = "ARES v3.2"
 	if(!real_name)
 		real_name = GLOB.namepool[/datum/namepool].get_random_name(gender)
+
+	features = SANITIZE_LIST(features)
+	//Validate features
+	for(var/key in MANDATORY_FEATURE_LIST)
+		if(!features[key])
+			features[key] = MANDATORY_FEATURE_LIST[key]
+
+	mutant_bodyparts = SANITIZE_LIST(mutant_bodyparts)
 
 	return TRUE
 
@@ -550,6 +561,9 @@
 	WRITE_FILE(S["gen_record"], gen_record)
 	WRITE_FILE(S["exploit_record"], exploit_record)
 	WRITE_FILE(S["flavor_text"], flavor_text)
+
+	WRITE_FILE(S["features"], features)
+	WRITE_FILE(S["mutant_bodyparts"], mutant_bodyparts)
 
 	return TRUE
 

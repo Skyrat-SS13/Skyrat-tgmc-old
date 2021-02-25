@@ -371,14 +371,13 @@ GLOBAL_LIST_INIT(xenoupgradetiers, list(XENO_UPGRADE_BASETYPE, XENO_UPGRADE_INVA
 
 
 // Human Overlay Indexes
-#define HEADBITE_LAYER			30
-#define LASER_LAYER				29 //For sniper targeting laser
-#define MOTH_WINGS_LAYER		28
-#define MUTANTRACE_LAYER		27
-#define MUTATIONS_LAYER			26
-#define DAMAGE_LAYER			25
-#define UNIFORM_LAYER			24
-#define TAIL_LAYER				23 //bs12 specific. this hack is probably gonna come back to haunt me
+#define HEADBITE_LAYER			29
+#define LASER_LAYER				28 //For sniper targeting laser27
+#define MUTATIONS_LAYER			27
+#define BODY_BEHIND_LAYER		26 //certain mutantrace features (tail when looking south) that must appear behind the body parts
+#define BODY_ADJ_LAYER			25 //certain mutantrace features (snout, body markings) that must appear above the body parts
+#define DAMAGE_LAYER			24
+#define UNIFORM_LAYER			23
 #define ID_LAYER				22
 #define SHOES_LAYER				21
 #define GLOVES_LAYER			20
@@ -394,18 +393,17 @@ GLOBAL_LIST_INIT(xenoupgradetiers, list(XENO_UPGRADE_BASETYPE, XENO_UPGRADE_INVA
 #define HEAD_LAYER				10
 #define COLLAR_LAYER			9
 #define HANDCUFF_LAYER			8
-#define L_HAND_LAYER			6
-#define R_HAND_LAYER			5
+#define L_HAND_LAYER			7
+#define R_HAND_LAYER			6
+#define BODY_FRONT_LAYER		5
 #define BURST_LAYER				4 //Chestburst overlay
 #define OVERHEALTH_SHIELD_LAYER	3
 #define TARGETED_LAYER			2 //for target sprites when held at gun point, and holo cards.
 #define FIRE_LAYER				1 //If you're on fire
 
-#define TOTAL_LAYERS			30
+#define TOTAL_LAYERS			29
 
-#define MOTH_WINGS_BEHIND_LAYER	1
-
-#define TOTAL_UNDERLAYS			1
+#define TOTAL_UNDERLAYS			0
 
 #define ANTI_CHAINSTUN_TICKS	2
 

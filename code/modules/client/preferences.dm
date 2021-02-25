@@ -39,7 +39,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/show_typing = TRUE
 	var/windowflashing = TRUE
 	var/focus_chat = FALSE
-	var/clientfps = 0
+	var/clientfps = 40
 
 	// Custom Keybindings
 	var/list/key_bindings = null
@@ -134,6 +134,13 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	var/auto_fit_viewport = TRUE
 
+	var/current_tab = 0
+	var/character_tab = 0
+
+	var/list/features = MANDATORY_FEATURE_LIST
+
+	var/list/mutant_bodyparts = list()
+
 
 /datum/preferences/New(client/C)
 	if(!istype(C))
@@ -204,170 +211,192 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				dat += "<a style='white-space:nowrap;' href='?_src_=prefs;preference=changeslot;num=[i];' [i == default_slot ? "class='linkOn'" : ""]>[name]</a> "
 			dat += "</center>"
 
-	dat += "<br>"
+	dat += "<style>span.color_holder_box{display: inline-block; width: 20px; height: 8px; border:1px solid #000; padding: 0px;}</style>"
 
-	dat += "<center>"
-	dat += "<a href='?_src_=prefs;preference=jobmenu'>Set Role Preferences</a><br>"
-	dat += "<a href='?_src_=prefs;preference=keybindings_menu'>Keybindings</a>"
-	dat += "</center>"
+	dat += "<HR><center>"
+	dat += "<a href='?_src_=prefs;preference=tab;tab=0' [current_tab == 0 ? "class='linkOn'" : ""]>Character Settings</a>"
+	dat += "<a href='?_src_=prefs;preference=tab;tab=1' [current_tab == 1 ? "class='linkOn'" : ""]>Game Preferences</a>"
+	dat += "<HR></center>"
 
-	dat += "<div class='row'>"
-	dat += "<div class='column'>"
+	switch(current_tab)
+		if(0) //Character Settings
+			dat += "<center><a href='?_src_=prefs;preference=character_tab;tab=0' [character_tab == 0 ? "class='linkOn'" : ""]>General</a>"
+			dat += "<a href='?_src_=prefs;preference=character_tab;tab=1' [character_tab == 1 ? "class='linkOn'" : ""]>Appearances</a>"
+			dat += "</center><HR>"
+			switch(character_tab)
+				if(0) //General
+					dat += "<center>"
+					dat += "<a href='?_src_=prefs;preference=jobmenu'>Set Role Preferences</a><br>"
+					dat += "<a href='?_src_=prefs;preference=keybindings_menu'>Keybindings</a>"
+					dat += "</center>"
+				
+					dat += "<div class='row'>"
+					dat += "<div class='column'>"
+				
+				
+				
+					dat += "<h2>Identity</h2>"
+				
+					if(is_banned_from(user.ckey, "Appearance"))
+						dat += "You are banned from using custom names and appearances.<br>"
+				
+					dat += "<b>Name:</b> "
+					dat += "<a href='?_src_=prefs;preference=name_real'><b>[real_name]</b></a>"
+					dat += "<a href='?_src_=prefs;preference=randomize_name'>(R)</a>"
+					dat += "<br>"
+					dat += "Always Pick Random Name: <a href='?_src_=prefs;preference=random_name'>[random_name ? "Yes" : "No"]</a>"
+					dat += "<br><br>"
+					dat += "<b>Synthetic Name:</b>"
+					dat += "<a href='?_src_=prefs;preference=synth_name'>[synthetic_name]</a>"
+					dat += "<br>"
+					dat += "<b>Synthetic Type:</b>"
+					dat += "<a href='?_src_=prefs;preference=synth_type'>[synthetic_type]</a>"
+					dat += "<br>"
+					dat += "<b>Xenomorph name:</b>"
+					dat += "<a href='?_src_=prefs;preference=xeno_name'>[xeno_name]</a>"
+					dat += "<br>"
+					dat += "<b>AI name:</b>"
+					dat += "<a href='?_src_=prefs;preference=ai_name'>[ai_name]</a>"
+					dat += "<br><br>"
+				
+				
+				
+					dat += "<h2>Body</h2>"
+				
+					dat += "<b>Age:</b> <a href='?_src_=prefs;preference=age'>[age]</a><br>"
+					dat += "<b>Gender:</b> <a href='?_src_=prefs;preference=gender'>[gender == MALE ? MALE : FEMALE]</a><br>"
+					dat += "<b>Ethnicity:</b> <a href='?_src_=prefs;preference=ethnicity'>[ethnicity]</a><br>"
+					dat += "<b>Species:</b> <a href='?_src_=prefs;preference=species'>[species]</a><br>"
+					dat += "<b>Body Type:</b> <a href='?_src_=prefs;preference=body_type'>[body_type]</a><br>"
+					dat += "<b>Good Eyesight:</b> <a href='?_src_=prefs;preference=eyesight'>[good_eyesight ? "Yes" : "No"]</a><br>"
+					dat += "<br>"
 
+					var/datum/species/current_species = GLOB.all_species[species]
+					if(current_species.preferences)
+						for(var/preference_id in current_species.preferences)
+							dat += "<b>[current_species.preferences[preference_id]]:</b> <a href='?_src_=prefs;preference=[preference_id]'><b>[vars[preference_id]]</b></a><br>"
+				
+					dat += "<a href='?_src_=prefs;preference=random'>Randomize</a>"
+				
+				
+				
+					dat += "<h2>Occupation Choices:</h2>"
+				
+					for(var/role in BE_SPECIAL_FLAGS)
+						var/n = BE_SPECIAL_FLAGS[role]
+						var/ban_check_name
+				
+						switch(role)
+							if("Xenomorph")
+								ban_check_name = ROLE_XENOMORPH
+				
+							if("Xeno Queen")
+								ban_check_name = ROLE_XENO_QUEEN
+				
+						if(is_banned_from(user.ckey, ban_check_name))
+							dat += "<b>[role]:</b> <a href='?_src_=prefs;preference=bancheck;role=[role]'>BANNED</a><br>"
+						else
+							dat += "<b>[role]:</b> <a href='?_src_=prefs;preference=be_special;flag=[n]'>[CHECK_BITFIELD(be_special, n) ? "Yes" : "No"]</a><br>"
+				
+					dat += "<br><b>Preferred Squad:</b> <a href ='?_src_=prefs;preference=squad'>[preferred_squad]</a><br>"
+				
+				
+				
+				
+					dat += "</div>"
+					dat += "<div class='column'>"
+				
+				
+				
+				
+					dat += "<h2>Marine Gear:</h2>"
+					if(gender == MALE)
+						dat += "<b>Underwear:</b> <a href ='?_src_=prefs;preference=underwear'>[GLOB.underwear_m[underwear]]</a><br>"
+					else
+						dat += "<b>Underwear:</b> <a href ='?_src_=prefs;preference=underwear'>[GLOB.underwear_f[underwear]]</a><br>"
+				
+					dat += "<b>Undershirt:</b> <a href='?_src_=prefs;preference=undershirt'>[GLOB.undershirt_t[undershirt]]</a><br>"
+				
+					dat += "<b>Backpack Type:</b> <a href ='?_src_=prefs;preference=backpack'>[GLOB.backpacklist[backpack]]</a><br>"
+				
+					dat += "<b>Custom Loadout:</b> "
+					var/total_cost = 0
+				
+					if(!islist(gear))
+						gear = list()
+				
+					if(length(gear))
+						dat += "<br>"
+						for(var/i in GLOB.gear_datums)
+							var/datum/gear/G = GLOB.gear_datums[i]
+							if(!G || !gear.Find(i))
+								continue
+							total_cost += G.cost
+							dat += "[i] ([G.cost] points) <a href ='?_src_=prefs;preference=loadoutremove;gear=[i]'>\[remove\]</a><br>"
+				
+						dat += "<b>Used:</b> [total_cost] points."
+					else
+						dat += "None"
+				
+					if(total_cost < MAX_GEAR_COST)
+						dat += " <a href ='?_src_=prefs;preference=loadoutadd'>\[add\]</a>"
+						if(length(gear))
+							dat += " <a href ='?_src_=prefs;preference=loadoutclear'>\[clear\]</a>"
+				
+				
+				
+					dat += "<h2>Background Information:</h2>"
+				
+					dat += "<b>Citizenship</b>: <a href ='?_src_=prefs;preference=citizenship'>[citizenship]</a><br/>"
+					dat += "<b>Religion</b>: <a href ='?_src_=prefs;preference=religion'>[religion]</a><br/>"
+					dat += "<b>Corporate Relation:</b> <a href ='?_src_=prefs;preference=corporation'>[nanotrasen_relation]</a><br>"
+					dat += "<br>"
+				
+					dat += "<a href ='?_src_=prefs;preference=records'>Character Records</a><br>"
+				
+					dat += "<a href ='?_src_=prefs;preference=flavor_text'>Character Description</a><br>"
 
+				if(1) //Appearances
+					dat += "<b>Hair:</b> <a href='?_src_=prefs;preference=hairstyle'>[h_style]</a> | <a href='?_src_=prefs;preference=haircolor'>Color</a> <font face='fixedsys' size='3' color='#[num2hex(r_hair, 2)][num2hex(g_hair, 2)][num2hex(b_hair, 2)]'><table style='display:inline;' bgcolor='#[num2hex(r_hair, 2)][num2hex(g_hair, 2)][num2hex(b_hair)]'><tr><td>__</td></tr></table></font> "
+					dat += "<br>"
+					dat += "<b>Gradient:</b> <a href='?_src_=prefs;preference=grad_style'>[grad_style]</a> <a href='?_src_=prefs;preference=grad_color'>Color</a> <font face='fixedsys' size='3' color='#[num2hex(r_grad, 2)][num2hex(g_grad, 2)][num2hex(b_grad, 2)]'><table style='display:inline;' bgcolor='#[num2hex(r_grad, 2)][num2hex(g_grad, 2)][num2hex(b_grad)]'><tr><td>__</td></tr></table></font>"
+					dat += "<br>"
+					dat += "<b>Facial Hair:</b> <a href='?_src_=prefs;preference=facialstyle'>[f_style]</a> | <a href='?_src_=prefs;preference=facialcolor'>Color</a> <font face='fixedsys' size='3' color='#[num2hex(r_facial, 2)][num2hex(g_facial, 2)][num2hex(b_facial, 2)]'><table  style='display:inline;' bgcolor='#[num2hex(r_facial, 2)][num2hex(g_facial, 2)][num2hex(b_facial)]'><tr><td>__</td></tr></table></font> "
+					dat += "<br>"
+					dat += "<b>Eye:</b> <a href='?_src_=prefs;preference=eyecolor'>Color</a> <font face='fixedsys' size='3' color='#[num2hex(r_eyes, 2)][num2hex(g_eyes, 2)][num2hex(b_eyes, 2)]'><table  style='display:inline;' bgcolor='#[num2hex(r_eyes, 2)][num2hex(g_eyes, 2)][num2hex(b_eyes)]'><tr><td>__</td></tr></table></font><br>"
+					
+					dat += "<h3>Primary Color</h3>"
+					dat += "<a href='?_src_=prefs;preference=mutant_color'><span class='color_holder_box' style='background-color:#[features["mcolor"]]'></span></a><BR>"
 
-	dat += "<h2>Identity</h2>"
+					dat += "<h3>Secondary Color</h3>"
+					dat += "<a href='?_src_=prefs;preference=mutant_color2'><span class='color_holder_box' style='background-color:#[features["mcolor2"]]'></span></a><BR>"
 
-	if(is_banned_from(user.ckey, "Appearance"))
-		dat += "You are banned from using custom names and appearances.<br>"
-
-	dat += "<b>Name:</b> "
-	dat += "<a href='?_src_=prefs;preference=name_real'><b>[real_name]</b></a>"
-	dat += "<a href='?_src_=prefs;preference=randomize_name'>(R)</a>"
-	dat += "<br>"
-	dat += "Always Pick Random Name: <a href='?_src_=prefs;preference=random_name'>[random_name ? "Yes" : "No"]</a>"
-	dat += "<br><br>"
-	dat += "<b>Synthetic Name:</b>"
-	dat += "<a href='?_src_=prefs;preference=synth_name'>[synthetic_name]</a>"
-	dat += "<br>"
-	dat += "<b>Synthetic Type:</b>"
-	dat += "<a href='?_src_=prefs;preference=synth_type'>[synthetic_type]</a>"
-	dat += "<br>"
-	dat += "<b>Xenomorph name:</b>"
-	dat += "<a href='?_src_=prefs;preference=xeno_name'>[xeno_name]</a>"
-	dat += "<br>"
-	dat += "<b>AI name:</b>"
-	dat += "<a href='?_src_=prefs;preference=ai_name'>[ai_name]</a>"
-	dat += "<br><br>"
-
-
-
-	dat += "<h2>Body</h2>"
-
-	dat += "<b>Age:</b> <a href='?_src_=prefs;preference=age'>[age]</a><br>"
-	dat += "<b>Gender:</b> <a href='?_src_=prefs;preference=gender'>[gender == MALE ? MALE : FEMALE]</a><br>"
-	dat += "<b>Ethnicity:</b> <a href='?_src_=prefs;preference=ethnicity'>[ethnicity]</a><br>"
-	dat += "<b>Species:</b> <a href='?_src_=prefs;preference=species'>[species]</a><br>"
-	dat += "<b>Body Type:</b> <a href='?_src_=prefs;preference=body_type'>[body_type]</a><br>"
-	dat += "<b>Good Eyesight:</b> <a href='?_src_=prefs;preference=eyesight'>[good_eyesight ? "Yes" : "No"]</a><br>"
-	dat += "<br>"
-	dat += "<b>Hair:</b> <a href='?_src_=prefs;preference=hairstyle'>[h_style]</a> | <a href='?_src_=prefs;preference=haircolor'>Color</a> <font face='fixedsys' size='3' color='#[num2hex(r_hair, 2)][num2hex(g_hair, 2)][num2hex(b_hair, 2)]'><table style='display:inline;' bgcolor='#[num2hex(r_hair, 2)][num2hex(g_hair, 2)][num2hex(b_hair)]'><tr><td>__</td></tr></table></font> "
-	dat += "<br>"
-	dat += "<b>Gradient:</b> <a href='?_src_=prefs;preference=grad_style'>[grad_style]</a> <a href='?_src_=prefs;preference=grad_color'>Color</a> <font face='fixedsys' size='3' color='#[num2hex(r_grad, 2)][num2hex(g_grad, 2)][num2hex(b_grad, 2)]'><table style='display:inline;' bgcolor='#[num2hex(r_grad, 2)][num2hex(g_grad, 2)][num2hex(b_grad)]'><tr><td>__</td></tr></table></font>"
-	dat += "<br>"
-	dat += "<b>Facial Hair:</b> <a href='?_src_=prefs;preference=facialstyle'>[f_style]</a> | <a href='?_src_=prefs;preference=facialcolor'>Color</a> <font face='fixedsys' size='3' color='#[num2hex(r_facial, 2)][num2hex(g_facial, 2)][num2hex(b_facial, 2)]'><table  style='display:inline;' bgcolor='#[num2hex(r_facial, 2)][num2hex(g_facial, 2)][num2hex(b_facial)]'><tr><td>__</td></tr></table></font> "
-	dat += "<br>"
-	dat += "<b>Eye:</b> <a href='?_src_=prefs;preference=eyecolor'>Color</a> <font face='fixedsys' size='3' color='#[num2hex(r_eyes, 2)][num2hex(g_eyes, 2)][num2hex(b_eyes, 2)]'><table  style='display:inline;' bgcolor='#[num2hex(r_eyes, 2)][num2hex(g_eyes, 2)][num2hex(b_eyes)]'><tr><td>__</td></tr></table></font><br>"
-
-	var/datum/species/current_species = GLOB.all_species[species]
-	if(current_species.preferences)
-		for(var/preference_id in current_species.preferences)
-			dat += "<b>[current_species.preferences[preference_id]]:</b> <a href='?_src_=prefs;preference=[preference_id]'><b>[vars[preference_id]]</b></a><br>"
-
-	dat += "<a href='?_src_=prefs;preference=random'>Randomize</a>"
-
-
-
-	dat += "<h2>Occupation Choices:</h2>"
-
-	for(var/role in BE_SPECIAL_FLAGS)
-		var/n = BE_SPECIAL_FLAGS[role]
-		var/ban_check_name
-
-		switch(role)
-			if("Xenomorph")
-				ban_check_name = ROLE_XENOMORPH
-
-			if("Xeno Queen")
-				ban_check_name = ROLE_XENO_QUEEN
-
-		if(is_banned_from(user.ckey, ban_check_name))
-			dat += "<b>[role]:</b> <a href='?_src_=prefs;preference=bancheck;role=[role]'>BANNED</a><br>"
-		else
-			dat += "<b>[role]:</b> <a href='?_src_=prefs;preference=be_special;flag=[n]'>[CHECK_BITFIELD(be_special, n) ? "Yes" : "No"]</a><br>"
-
-	dat += "<br><b>Preferred Squad:</b> <a href ='?_src_=prefs;preference=squad'>[preferred_squad]</a><br>"
-
-
-
-
-	dat += "</div>"
-	dat += "<div class='column'>"
-
-
-
-
-	dat += "<h2>Marine Gear:</h2>"
-	if(gender == MALE)
-		dat += "<b>Underwear:</b> <a href ='?_src_=prefs;preference=underwear'>[GLOB.underwear_m[underwear]]</a><br>"
-	else
-		dat += "<b>Underwear:</b> <a href ='?_src_=prefs;preference=underwear'>[GLOB.underwear_f[underwear]]</a><br>"
-
-	dat += "<b>Undershirt:</b> <a href='?_src_=prefs;preference=undershirt'>[GLOB.undershirt_t[undershirt]]</a><br>"
-
-	dat += "<b>Backpack Type:</b> <a href ='?_src_=prefs;preference=backpack'>[GLOB.backpacklist[backpack]]</a><br>"
-
-	dat += "<b>Custom Loadout:</b> "
-	var/total_cost = 0
-
-	if(!islist(gear))
-		gear = list()
-
-	if(length(gear))
-		dat += "<br>"
-		for(var/i in GLOB.gear_datums)
-			var/datum/gear/G = GLOB.gear_datums[i]
-			if(!G || !gear.Find(i))
-				continue
-			total_cost += G.cost
-			dat += "[i] ([G.cost] points) <a href ='?_src_=prefs;preference=loadoutremove;gear=[i]'>\[remove\]</a><br>"
-
-		dat += "<b>Used:</b> [total_cost] points."
-	else
-		dat += "None"
-
-	if(total_cost < MAX_GEAR_COST)
-		dat += " <a href ='?_src_=prefs;preference=loadoutadd'>\[add\]</a>"
-		if(length(gear))
-			dat += " <a href ='?_src_=prefs;preference=loadoutclear'>\[clear\]</a>"
-
-
-
-	dat += "<h2>Background Information:</h2>"
-
-	dat += "<b>Citizenship</b>: <a href ='?_src_=prefs;preference=citizenship'>[citizenship]</a><br/>"
-	dat += "<b>Religion</b>: <a href ='?_src_=prefs;preference=religion'>[religion]</a><br/>"
-	dat += "<b>Corporate Relation:</b> <a href ='?_src_=prefs;preference=corporation'>[nanotrasen_relation]</a><br>"
-	dat += "<br>"
-
-	dat += "<a href ='?_src_=prefs;preference=records'>Character Records</a><br>"
-
-	dat += "<a href ='?_src_=prefs;preference=flavor_text'>Character Description</a><br>"
-
-
-
-	dat += "<h2>Game Settings:</h2>"
-	dat += "<b>Window Flashing:</b> <a href='?_src_=prefs;preference=windowflashing'>[windowflashing ? "Yes" : "No"]</a><br>"
-	dat += "<b>Focus chat:</b> <a href='?_src_=prefs;preference=focus_chat'>[(focus_chat) ? "Enabled" : "Disabled"]</a><br>"
-	dat += "<b>Tooltips:</b> <a href='?_src_=prefs;preference=tooltips'>[(tooltips) ? "Shown" : "Hidden"]</a><br>"
-	dat += "<b>FPS:</b> <a href='?_src_=prefs;preference=clientfps'>[clientfps]</a><br>"
-	dat += "<b>Fit Viewport:</b> <a href='?_src_=prefs;preference=auto_fit_viewport'>[auto_fit_viewport ? "Auto" : "Manual"]</a><br>"
-
-	dat += "<h2>Chat Message Settings:</h2>"
-	dat += "<b>Mute self combat messages:</b> <a href='?_src_=prefs;preference=mute_self_combat_messages'>[mute_self_combat_messages ? "Enabled" : "Disabled"]</a><br>"
-	dat += "<b>Mute others combat messages:</b> <a href='?_src_=prefs;preference=mute_others_combat_messages'>[mute_others_combat_messages ? "Enabled" : "Disabled"]</a><br>"
-	dat += "<b>Mute xeno health alert messages:</b> <a href='?_src_=prefs;preference=mute_xeno_health_alert_messages'>[mute_xeno_health_alert_messages ? "Enabled" : "Disabled"]</a><br>"
-
-	dat += "<h2>Runechat Settings:</h2>"
-	dat += "<b>Show Runechat Chat Bubbles:</b> <a href='?_src_=prefs;preference=chat_on_map'>[chat_on_map ? "Enabled" : "Disabled"]</a><br>"
-	dat += "<b>Runechat message char limit:</b> <a href='?_src_=prefs;preference=max_chat_length;task=input'>[max_chat_length]</a><br>"
-	dat += "<b>See Runechat for non-mobs:</b> <a href='?_src_=prefs;preference=see_chat_non_mob'>[see_chat_non_mob ? "Enabled" : "Disabled"]</a><br>"
-	dat += "<b>See Runechat emotes:</b> <a href='?_src_=prefs;preference=see_rc_emotes'>[see_rc_emotes ? "Enabled" : "Disabled"]</a><br>"
-
-	dat += "<h2>UI Customization:</h2>"
-	dat += "<b>Style:</b> <a href='?_src_=prefs;preference=ui'>[ui_style]</a><br>"
-	dat += "<b>Color</b>: <a href='?_src_=prefs;preference=uicolor'>[ui_style_color]</a> <table style='display:inline;' bgcolor='[ui_style_color]'><tr><td>__</td></tr></table><br>"
-	dat += "<b>Alpha</b>: <a href='?_src_=prefs;preference=uialpha'>[ui_style_alpha]</a>"
+					dat += "<h3>Tertiary Color</h3>"
+					dat += "<a href='?_src_=prefs;preference=mutant_color3'><span class='color_holder_box' style='background-color:#[features["mcolor3"]]'></span></a><BR>"
+				
+		if(1) //Game Preferences
+			dat += "<h2>Game Settings:</h2>"
+			dat += "<b>Window Flashing:</b> <a href='?_src_=prefs;preference=windowflashing'>[windowflashing ? "Yes" : "No"]</a><br>"
+			dat += "<b>Focus chat:</b> <a href='?_src_=prefs;preference=focus_chat'>[(focus_chat) ? "Enabled" : "Disabled"]</a><br>"
+			dat += "<b>Tooltips:</b> <a href='?_src_=prefs;preference=tooltips'>[(tooltips) ? "Shown" : "Hidden"]</a><br>"
+			dat += "<b>FPS:</b> <a href='?_src_=prefs;preference=clientfps'>[clientfps]</a><br>"
+			dat += "<b>Fit Viewport:</b> <a href='?_src_=prefs;preference=auto_fit_viewport'>[auto_fit_viewport ? "Auto" : "Manual"]</a><br>"
+		
+			dat += "<h2>Chat Message Settings:</h2>"
+			dat += "<b>Mute self combat messages:</b> <a href='?_src_=prefs;preference=mute_self_combat_messages'>[mute_self_combat_messages ? "Enabled" : "Disabled"]</a><br>"
+			dat += "<b>Mute others combat messages:</b> <a href='?_src_=prefs;preference=mute_others_combat_messages'>[mute_others_combat_messages ? "Enabled" : "Disabled"]</a><br>"
+			dat += "<b>Mute xeno health alert messages:</b> <a href='?_src_=prefs;preference=mute_xeno_health_alert_messages'>[mute_xeno_health_alert_messages ? "Enabled" : "Disabled"]</a><br>"
+		
+			dat += "<h2>Runechat Settings:</h2>"
+			dat += "<b>Show Runechat Chat Bubbles:</b> <a href='?_src_=prefs;preference=chat_on_map'>[chat_on_map ? "Enabled" : "Disabled"]</a><br>"
+			dat += "<b>Runechat message char limit:</b> <a href='?_src_=prefs;preference=max_chat_length;task=input'>[max_chat_length]</a><br>"
+			dat += "<b>See Runechat for non-mobs:</b> <a href='?_src_=prefs;preference=see_chat_non_mob'>[see_chat_non_mob ? "Enabled" : "Disabled"]</a><br>"
+			dat += "<b>See Runechat emotes:</b> <a href='?_src_=prefs;preference=see_rc_emotes'>[see_rc_emotes ? "Enabled" : "Disabled"]</a><br>"
+		
+			dat += "<h2>UI Customization:</h2>"
+			dat += "<b>Style:</b> <a href='?_src_=prefs;preference=ui'>[ui_style]</a><br>"
+			dat += "<b>Color</b>: <a href='?_src_=prefs;preference=uicolor'>[ui_style_color]</a> <table style='display:inline;' bgcolor='[ui_style_color]'><tr><td>__</td></tr></table><br>"
+			dat += "<b>Alpha</b>: <a href='?_src_=prefs;preference=uialpha'>[ui_style_alpha]</a>"
 
 
 
@@ -621,6 +650,27 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		return
 
 	switch(href_list["preference"])
+		if("mutant_color")
+			var/new_mutantcolor = input(user, "Choose your character's primary color:", "Character Preference","#"+features["mcolor"]) as color|null
+			if(new_mutantcolor)
+				features["mcolor"] = sanitize_hexcolor(new_mutantcolor, 6)
+
+		if("mutant_color2")
+			var/new_mutantcolor = input(user, "Choose your character's secondary color:", "Character Preference","#"+features["mcolor2"]) as color|null
+			if(new_mutantcolor)
+				features["mcolor2"] = sanitize_hexcolor(new_mutantcolor, 6)
+
+		if("mutant_color3")
+			var/new_mutantcolor = input(user, "Choose your character's tertiary color:", "Character Preference","#"+features["mcolor3"]) as color|null
+			if(new_mutantcolor)
+				features["mcolor3"] = sanitize_hexcolor(new_mutantcolor, 6)
+
+		if("tab")
+			current_tab = text2num(href_list["tab"])
+
+		if("character_tab")
+			character_tab = text2num(href_list["tab"])
+
 		if("changeslot")
 			if(!load_character(text2num(href_list["num"])))
 				random_character()

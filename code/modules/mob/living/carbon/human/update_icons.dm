@@ -183,6 +183,9 @@ GLOBAL_LIST_EMPTY(damage_icon_parts)
 		else
 			icon_key = "[icon_key]1"
 
+	if(species.species_flags & HAS_SKIN_COLOR)
+		icon_key += "-[features["mcolor"]]"
+
 	icon_key = "[icon_key][0][0][0][0][ethnicity]"
 
 	var/icon/base_icon
@@ -265,11 +268,9 @@ GLOBAL_LIST_EMPTY(damage_icon_parts)
 
 	stand_icon.Blend(base_icon,ICON_OVERLAY)
 
-	/*
 	//Skin colour. Not in cache because highly variable (and relatively benign).
 	if (species.species_flags & HAS_SKIN_COLOR)
-		stand_icon.Blend(rgb(r_skin, g_skin, b_skin), ICON_ADD)
-	*/
+		stand_icon.Blend("#"+features["mcolor"], ICON_ADD)
 
 	if(has_head)
 		//Eyes
@@ -630,18 +631,9 @@ GLOBAL_LIST_EMPTY(damage_icon_parts)
 	overlays_standing[L_HAND_LAYER] = l_hand.make_worn_icon(body_type = species.name, inhands = TRUE, slot_name = slot_l_hand_str, default_icon = 'icons/mob/items_lefthand_0.dmi', default_layer = L_HAND_LAYER)
 	apply_overlay(L_HAND_LAYER)
 
-
+//CHANGE THIS TO UPDATE MUTANT BODYPARTS LATER
 /mob/living/carbon/human/proc/update_tail_showing()
-	remove_overlay(TAIL_LAYER)
-
-	if(!species.tail)
-		return
-	if((wear_suit?.flags_inv_hide & HIDETAIL) && !istype(wear_suit, /obj/item/clothing/suit/space))
-		var/icon/tail_s = new/icon("icon" = 'icons/effects/species.dmi', "icon_state" = "[species.tail]_s")
-		tail_s.Blend(rgb(r_skin, g_skin, b_skin), ICON_ADD)
-		overlays_standing[TAIL_LAYER]	= image(tail_s, layer = -TAIL_LAYER)
-
-		apply_overlay(TAIL_LAYER)
+	return
 
 
 // Used mostly for creating head items

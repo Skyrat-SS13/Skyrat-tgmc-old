@@ -119,6 +119,12 @@
 	if(unarmed_type) unarmed = new unarmed_type()
 	if(secondary_unarmed_type) secondary_unarmed = new secondary_unarmed_type()
 
+/datum/species/proc/get_random_features()
+	return MANDATORY_FEATURE_LIST
+
+/datum/species/proc/get_random_mutant_bodyparts(list/features)
+	return list()
+
 /datum/species/proc/create_organs(mob/living/carbon/human/H) //Handles creation of mob organs and limbs.
 
 	H.limbs = list()
@@ -434,6 +440,8 @@
 	reagent_tag = IS_UNATHI
 	base_color = "#066000"
 
+	joinable_roundstart = TRUE
+
 /datum/species/tajaran
 	name = "Tajara"
 	name_plural = "Tajaran"
@@ -457,6 +465,8 @@
 
 	flesh_color = "#AFA59E"
 	base_color = "#333333"
+
+	joinable_roundstart = TRUE
 
 /datum/species/skrell
 	name = "Skrell"
@@ -484,7 +494,6 @@
 	count_human = TRUE
 
 	species_flags = HAS_LIPS|HAS_NO_HAIR
-	preferences = list("moth_wings" = "Wings")
 
 	screams = list("neuter" = 'sound/voice/moth_scream.ogg')
 	paincries = list("neuter" = 'sound/voice/human_male_pain_3.ogg')
@@ -498,39 +507,7 @@
 
 	namepool = /datum/namepool/moth
 
-/datum/species/moth/handle_fire(mob/living/carbon/human/H)
-	if(H.moth_wings != "Burnt Off" && H.bodytemperature >= 400 && H.fire_stacks > 0)
-		to_chat(H, "<span class='danger'>Your precious wings burn to a crisp!</span>")
-		H.moth_wings = "Burnt Off"
-		H.update_body()
-
-/datum/species/moth/proc/update_moth_wings(mob/living/carbon/human/H)
-	H.remove_overlay(MOTH_WINGS_LAYER)
-	H.remove_underlay(MOTH_WINGS_BEHIND_LAYER)
-
-	var/datum/sprite_accessory/moth_wings/wings = GLOB.moth_wings_list[H.moth_wings]
-
-	if(wings)
-		H.overlays_standing[MOTH_WINGS_LAYER] = image(wings.icon, icon_state = "m_moth_wings_[wings.icon_state]_FRONT")
-		H.underlays_standing[MOTH_WINGS_BEHIND_LAYER] = image(wings.icon, icon_state = "m_moth_wings_[wings.icon_state]_BEHIND")
-		H.apply_overlay(MOTH_WINGS_LAYER)
-		H.apply_underlay(MOTH_WINGS_BEHIND_LAYER)
-
-/datum/species/moth/update_body(mob/living/carbon/human/H)
-	update_moth_wings(H)
-
-/datum/species/moth/update_inv_head(mob/living/carbon/human/H)
-	update_moth_wings(H)
-
-/datum/species/moth/update_inv_w_uniform(mob/living/carbon/human/H)
-	update_moth_wings(H)
-
-/datum/species/moth/update_inv_wear_suit(mob/living/carbon/human/H)
-	update_moth_wings(H)
-
-/datum/species/moth/post_species_loss(mob/living/carbon/human/H)
-	H.remove_overlay(MOTH_WINGS_LAYER)
-	H.remove_underlay(MOTH_WINGS_BEHIND_LAYER)
+	joinable_roundstart = TRUE
 
 /datum/species/sectoid
 	name = "Sectoid"

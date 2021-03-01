@@ -162,11 +162,7 @@ GLOBAL_LIST_EMPTY(damage_icon_parts)
 	//CACHING: Generate an index key from visible bodyparts.
 	//0 = destroyed, 1 = normal, 2 = robotic, 3 = necrotic.
 
-	//Create a new, blank icon for our mob to use.
-	if(stand_icon)
-		qdel(stand_icon)
-
-	stand_icon = new(species.icon_template ? species.icon_template : 'icons/mob/human.dmi',"blank")
+	var/icon/stand_icon = new(species.icon_template ? species.icon_template : 'icons/mob/human.dmi',"blank")
 
 	var/icon_key = "[species.race_key][g][ethnicity]"
 	for(var/datum/limb/part in limbs)
@@ -187,6 +183,8 @@ GLOBAL_LIST_EMPTY(damage_icon_parts)
 		icon_key += "-[features["mcolor"]]"
 
 	icon_key = "[icon_key][0][0][0][0][ethnicity]"
+
+	remove_overlay(BODYPARTS_LAYER)
 
 	var/icon/base_icon
 	if(!force_cache_update && GLOB.human_icon_cache[icon_key])
@@ -265,12 +263,11 @@ GLOBAL_LIST_EMPTY(damage_icon_parts)
 		//log_debug("Generated new cached mob icon ([icon_key] \icon[GLOB.human_icon_cache[icon_key]]) for [src]. [GLOB.human_icon_cache.len] cached mob icons.")
 
 	//END CACHED ICON GENERATION.
-
 	stand_icon.Blend(base_icon,ICON_OVERLAY)
 
-	//Skin colour. Not in cache because highly variable (and relatively benign).
+	//Skin colour. Is in cache
 	if (species.species_flags & HAS_SKIN_COLOR)
-		stand_icon.Blend("#"+features["mcolor"], ICON_ADD)
+		stand_icon.Blend("#"+features["mcolor"], ICON_MULTIPLY)
 
 	if(has_head)
 		//Eyes
@@ -295,7 +292,9 @@ GLOBAL_LIST_EMPTY(damage_icon_parts)
 		else if(undershirt > 0 && undershirt < 7)
 			stand_icon.Blend(new /icon('icons/mob/human.dmi', "cryoshirt[undershirt]_s"), ICON_OVERLAY)
 
-	icon = stand_icon
+	icon = null
+	overlays_standing[BODYPARTS_LAYER] = image(stand_icon, layer = -BODYPARTS_LAYER)
+	apply_overlay(BODYPARTS_LAYER)
 
 	species?.update_body(src)
 	update_tail_showing()

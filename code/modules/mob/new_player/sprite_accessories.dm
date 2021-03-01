@@ -1477,7 +1477,7 @@
 /datum/sprite_accessory/skin/tajaran
 	name = "Default tajaran skin"
 	icon_state = "default"
-	icon = 'icons/mob/human_races/r_tajaran.dmi'
+	icon = 'icons/mob/human_races/r_mammal.dmi'
 	species_allowed = list("Tajara")
 
 /datum/sprite_accessory/skin/unathi

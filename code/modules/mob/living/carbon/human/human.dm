@@ -991,7 +991,6 @@
 		citizenship = pref_load.citizenship
 		religion = pref_load.religion
 
-		moth_wings = pref_load.moth_wings
 		underwear = pref_load.underwear
 		undershirt = pref_load.undershirt
 		backpack = pref_load.backpack

@@ -445,8 +445,8 @@
 /datum/species/tajaran
 	name = "Tajara"
 	name_plural = "Tajaran"
-	icobase = 'icons/mob/human_races/r_tajaran.dmi'
-	deform = 'icons/mob/human_races/r_def_tajaran.dmi'
+	icobase = 'icons/mob/human_races/r_mammal.dmi'
+	deform = 'icons/mob/human_races/r_def_mammal.dmi'
 	default_language_holder = /datum/language_holder/tajaran
 	tail = "tajtail"
 	unarmed_type = /datum/unarmed_attack/claws
@@ -460,6 +460,60 @@
 	heat_level_3 = 800 //Default 1000
 
 	primitive = /mob/living/carbon/monkey/tajara
+
+	species_flags = HAS_LIPS|HAS_UNDERWEAR|HAS_SKIN_COLOR
+
+	flesh_color = "#AFA59E"
+	base_color = "#333333"
+
+	joinable_roundstart = TRUE
+
+/datum/species/vulpkanin
+	name = "Vulpkanin"
+	name_plural = "Vulpkanin"
+	icobase = 'icons/mob/human_races/r_mammal.dmi'
+	deform = 'icons/mob/human_races/r_def_mammal.dmi'
+	unarmed_type = /datum/unarmed_attack/claws
+
+	species_flags = HAS_LIPS|HAS_UNDERWEAR|HAS_SKIN_COLOR
+
+	flesh_color = "#AFA59E"
+	base_color = "#333333"
+
+	joinable_roundstart = TRUE
+
+/datum/species/mammal
+	name = "Anthropomorph"
+	name_plural = "Anthropomorph"
+	icobase = 'icons/mob/human_races/r_mammal.dmi'
+	deform = 'icons/mob/human_races/r_def_mammal.dmi'
+	unarmed_type = /datum/unarmed_attack/claws
+
+	species_flags = HAS_LIPS|HAS_UNDERWEAR|HAS_SKIN_COLOR
+
+	flesh_color = "#AFA59E"
+	base_color = "#333333"
+
+	joinable_roundstart = TRUE
+
+/datum/species/akula
+	name = "Akula"
+	name_plural = "Akulan"
+	icobase = 'icons/mob/human_races/r_akula.dmi'
+	deform = 'icons/mob/human_races/r_def_akula.dmi'
+
+	species_flags = HAS_LIPS|HAS_UNDERWEAR|HAS_SKIN_COLOR
+
+	flesh_color = "#AFA59E"
+	base_color = "#333333"
+
+	joinable_roundstart = TRUE
+
+/datum/species/aquatic
+	name = "Aquatic"
+	name_plural = "Aquatic"
+	icobase = 'icons/mob/human_races/r_akula.dmi'
+	deform = 'icons/mob/human_races/r_def_akula.dmi'
 
 	species_flags = HAS_LIPS|HAS_UNDERWEAR|HAS_SKIN_COLOR
 
@@ -483,6 +537,8 @@
 
 	reagent_tag = IS_SKRELL
 
+	joinable_roundstart = TRUE
+
 /datum/species/moth
 	name = "Moth"
 	name_plural = "Moth"
@@ -493,7 +549,7 @@
 	speech_verb_override = "flutters"
 	count_human = TRUE
 
-	species_flags = HAS_LIPS|HAS_NO_HAIR
+	species_flags = HAS_LIPS|HAS_NO_HAIR|HAS_SKIN_COLOR
 
 	screams = list("neuter" = 'sound/voice/moth_scream.ogg')
 	paincries = list("neuter" = 'sound/voice/human_male_pain_3.ogg')

@@ -214,7 +214,7 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
-		ghost.icon = H.stand_icon
+		ghost.icon = null
 		ghost.overlays = H.overlays_standing
 		ghost.underlays = H.underlays_standing
 	else

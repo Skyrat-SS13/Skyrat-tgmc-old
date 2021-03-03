@@ -3,7 +3,7 @@
 	generic = "Snout"
 	icon = 'icons/mob/mutant_accessory/snouts.dmi'
 	var/use_muzzled_sprites = TRUE
-	recommended_species = list("mammal", "lizard", "unathi", "ashlizard")
+	allowed_species = list("Anthropomorph" = TRUE, "Lizardperson" = TRUE, "Unathi" = TRUE)
 	relevent_layers = list(BODY_ADJ_LAYER, BODY_FRONT_LAYER)
 
 /datum/mutant_accessory/snouts/is_hidden(mob/living/carbon/human/H, obj/item/bodypart/HD)
@@ -16,6 +16,7 @@
 	icon_state = "none"
 	use_muzzled_sprites = FALSE
 	factual = FALSE
+	allowed_species = list("Anthropomorph" = TRUE)
 
 /datum/mutant_accessory/snouts/sharp
 	name = "Sharp"
@@ -35,16 +36,16 @@
 
 /datum/mutant_accessory/snouts/mammal
 	color_src = USE_MATRIXED_COLORS
-	recommended_species = list("mammal", "humanoid")
+	allowed_species = list("Anthropomorph" = TRUE)
 
 /datum/mutant_accessory/snouts/mammal/vulpkanin
-	recommended_species = list("mammal", "vulpkanin", "humanoid")
+	allowed_species = list("Anthropomorph" = TRUE, "Vulpkanin" = TRUE)
 
 /datum/mutant_accessory/snouts/mammal/tajaran
-	recommended_species = list("mammal", "tajaran", "humanoid")
+	allowed_species = list("Anthropomorph" = TRUE, "Tajaran" = TRUE)
 
 /datum/mutant_accessory/snouts/mammal/akula
-	recommended_species = list("mammal", "akula", "aquatic", "humanoid")
+	allowed_species = list("Anthropomorph" = TRUE, "Akula" = TRUE, "Aquatic" = TRUE)
 
 /datum/mutant_accessory/snouts/mammal/bird
 	name = "Beak"

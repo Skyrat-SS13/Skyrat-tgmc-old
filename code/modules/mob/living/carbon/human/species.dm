@@ -448,7 +448,7 @@
 
 	joinable_roundstart = TRUE
 
-	default_mutant_bodyparts = list("frills" = "Simple", "horns" = ACC_RANDOM)
+	default_mutant_bodyparts = list("frills" = "Simple", "horns" = ACC_RANDOM, "snout" = ACC_RANDOM, "body_markings" = ACC_RANDOM, "tail" = ACC_RANDOM, "spines" = ACC_RANDOM)
 
 /datum/species/tajaran
 	name = "Tajara"

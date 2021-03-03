@@ -110,6 +110,9 @@
 	var/special_death_message = "You have perished." // Special death message that gets overwritten if possible.
 	var/joinable_roundstart = FALSE
 
+	var/list/default_mutant_bodyparts = list()
+	var/specific_alpha = 255
+
 /datum/species/New()
 	if(hud_type)
 		hud = new hud_type()
@@ -123,7 +126,10 @@
 	return MANDATORY_FEATURE_LIST
 
 /datum/species/proc/get_random_mutant_bodyparts(list/features)
-	return list()
+	var/list/compiled = list()
+	for(var/key in default_mutant_bodyparts)
+		compiled[key] = GetDefaultMutantpart(src, key, features)
+	return compiled
 
 /datum/species/proc/create_organs(mob/living/carbon/human/H) //Handles creation of mob organs and limbs.
 
@@ -441,6 +447,8 @@
 	base_color = "#066000"
 
 	joinable_roundstart = TRUE
+
+	default_mutant_bodyparts = list("frills" = "Simple", "horns" = ACC_RANDOM)
 
 /datum/species/tajaran
 	name = "Tajara"

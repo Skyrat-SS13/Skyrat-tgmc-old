@@ -128,6 +128,8 @@
 
 	if(!previewJob)
 		var/mob/living/carbon/human/dummy/mannequin = generate_or_wait_for_human_dummy(DUMMY_HUMAN_SLOT_PREFERENCES)
+		mannequin.bodyparts_render_key = ""
+		mannequin.mutant_parts_render_key = ""
 		copy_to(mannequin)
 		COMPILE_OVERLAYS(mannequin)
 		parent.show_character_previews(new /mutable_appearance(mannequin))
@@ -145,13 +147,17 @@
 		mannequin.job = previewJob
 		previewJob.equip_dummy(mannequin, preference_source = parent)
 
+	mannequin.bodyparts_render_key = ""
+	mannequin.mutant_parts_render_key = ""
 	COMPILE_OVERLAYS(mannequin)
 	parent.show_character_previews(new /mutable_appearance(mannequin))
 	unset_busy_human_dummy(DUMMY_HUMAN_SLOT_PREFERENCES)
 
 
 /datum/preferences/proc/randomize_species_specific()
-	moth_wings = pick(GLOB.moth_wings_list - "Burnt Off")
+	var/datum/species/S = GLOB.all_species[species]
+	features = S.get_random_features()
+	mutant_bodyparts = S.get_random_mutant_bodyparts(features)
 
 
 /datum/preferences/proc/copy_to(mob/living/carbon/human/character, safety = FALSE)

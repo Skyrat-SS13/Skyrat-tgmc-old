@@ -995,8 +995,8 @@
 		undershirt = pref_load.undershirt
 		backpack = pref_load.backpack
 
-		features = pref_load.features.Copy()
-		mutant_bodyparts = pref_load.mutant_bodyparts.Copy()
+		dna.features = pref_load.features.Copy()
+		dna.mutant_bodyparts = pref_load.mutant_bodyparts.Copy()
 	else
 		if(species.default_language_holder)
 			language_holder = new species.default_language_holder(src)
@@ -1016,11 +1016,17 @@
 			g_hair = hex2num(copytext(species.hair_color, 4, 6))
 			b_hair = hex2num(copytext(species.hair_color, 6, 8))
 
-		features = species.get_random_features()
-		mutant_bodyparts = species.get_random_mutant_bodyparts(features)
+		dna.features = species.get_random_features()
+		dna.mutant_bodyparts = species.get_random_mutant_bodyparts(features)
 
-	dna.features = features.Copy()
-	dna.mutant_bodyparts = mutant_bodyparts.Copy()
+	features = dna.features.Copy()
+	var/list/finalized_mutantparts = list()
+	for(var/key in dna.mutant_bodyparts)
+		var/datum/mutant_accessory/MA = GLOB.mutant_accessories[key][dna.mutant_bodyparts[key][MUTANT_INDEX_NAME]]
+		if(!MA.factual)
+			continue
+		finalized_mutantparts[key] = dna.mutant_bodyparts[key].Copy()
+	mutant_bodyparts = finalized_mutantparts
 
 
 /mob/living/carbon/human/reagent_check(datum/reagent/R)

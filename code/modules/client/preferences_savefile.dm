@@ -343,8 +343,6 @@
 	READ_FILE(S["g_eyes"], g_eyes)
 	READ_FILE(S["b_eyes"], b_eyes)
 
-	READ_FILE(S["moth_wings"], moth_wings)
-
 	READ_FILE(S["citizenship"], citizenship)
 	READ_FILE(S["religion"], religion)
 	READ_FILE(S["nanotrasen_relation"], nanotrasen_relation)
@@ -404,8 +402,6 @@
 	g_eyes			= sanitize_integer(g_eyes, 0, 255, initial(g_eyes))
 	b_eyes			= sanitize_integer(b_eyes, 0, 255, initial(b_eyes))
 
-	moth_wings		= sanitize_inlist(moth_wings, GLOB.moth_wings_list, initial(moth_wings))
-
 	citizenship		= sanitize_inlist(citizenship, CITIZENSHIP_CHOICES, initial(citizenship))
 	religion		= sanitize_inlist(religion, RELIGION_CHOICES, initial(religion))
 	nanotrasen_relation = sanitize_inlist(nanotrasen_relation, CORP_RELATIONS, initial(nanotrasen_relation))
@@ -432,6 +428,12 @@
 			features[key] = MANDATORY_FEATURE_LIST[key]
 
 	mutant_bodyparts = SANITIZE_LIST(mutant_bodyparts)
+	//Validate bodyparts
+	var/datum/species/current_species = GLOB.all_species[species]
+	for(var/key in current_species.default_mutant_bodyparts)
+		if(!mutant_bodyparts[key])
+			mutant_bodyparts[key] = GetDefaultMutantpart(current_species, key, features)
+		validate_color_keys_for_part(key)
 
 	return TRUE
 
@@ -495,8 +497,6 @@
 	g_eyes			= sanitize_integer(g_eyes, 0, 255, initial(g_eyes))
 	b_eyes			= sanitize_integer(b_eyes, 0, 255, initial(b_eyes))
 
-	moth_wings		= sanitize_inlist(moth_wings, GLOB.moth_wings_list, initial(moth_wings))
-
 	citizenship		= sanitize_inlist(citizenship, CITIZENSHIP_CHOICES, initial(citizenship))
 	religion		= sanitize_inlist(religion, RELIGION_CHOICES, initial(religion))
 	nanotrasen_relation = sanitize_inlist(nanotrasen_relation, CORP_RELATIONS, initial(nanotrasen_relation))
@@ -549,8 +549,6 @@
 	WRITE_FILE(S["r_eyes"], r_eyes)
 	WRITE_FILE(S["g_eyes"], g_eyes)
 	WRITE_FILE(S["b_eyes"], b_eyes)
-
-	WRITE_FILE(S["moth_wings"], moth_wings)
 
 	WRITE_FILE(S["citizenship"], citizenship)
 	WRITE_FILE(S["religion"], religion)

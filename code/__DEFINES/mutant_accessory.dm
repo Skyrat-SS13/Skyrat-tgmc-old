@@ -2,6 +2,9 @@
 #define MUTCOLORS2			2
 #define MUTCOLORS3			3
 #define MUTCOLOR_MATRIXED	4
+#define HAIR				5
+#define FACEHAIR				5
+#define EYECOLOR				5
 // Defines for whether an accessory should have one or three colors to choose for
 #define USE_ONE_COLOR		5
 #define USE_MATRIXED_COLORS	6

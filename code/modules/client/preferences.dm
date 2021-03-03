@@ -1,5 +1,7 @@
 GLOBAL_LIST_EMPTY(preferences_datums)
 
+#define APPEARANCE_CATEGORY_COLUMN "<td valign='top' width='14%'>"
+#define MAX_MUTANT_ROWS 4
 
 /datum/preferences
 	var/client/parent
@@ -99,9 +101,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/g_eyes = 0
 	var/b_eyes = 0
 
-	//Species specific
-	var/moth_wings = "Plain"
-
 	//Lore
 	var/citizenship = "TerraGov"
 	var/religion = "None"
@@ -141,6 +140,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	var/list/mutant_bodyparts = list()
 
+	var/color_customization = TRUE
+	var/mismatched_parts = FALSE 
+
 
 /datum/preferences/New(client/C)
 	if(!istype(C))
@@ -154,6 +156,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			return
 
 	// We don't have a savefile or we failed to load them
+	SetSpecies("Human")
 	random_character()
 	menuoptions = list()
 	key_bindings = deepCopyList(GLOB.hotkey_keybinding_list_by_key) // give them default keybinds and update their movement keys
@@ -374,6 +377,25 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					dat += "<h3>Tertiary Color</h3>"
 					dat += "<a href='?_src_=prefs;preference=mutant_color3'><span class='color_holder_box' style='background-color:#[features["mcolor3"]]'></span></a><BR>"
 				
+					var/mutant_category = 0
+					var/list/generic_cache = GLOB.generic_accessories
+					for(var/key in mutant_bodyparts)
+						if(!generic_cache[key]) //This means that we have a mutant bodypart that shouldnt be bundled here (genitals)
+							continue
+						if(!mutant_category)
+							dat += APPEARANCE_CATEGORY_COLUMN
+
+						dat += "<h3>[generic_cache[key]]</h3>"
+
+						dat += print_bodypart_change_line(key)
+
+						dat += "<BR>"
+
+						mutant_category++
+						if(mutant_category >= MAX_MUTANT_ROWS)
+							dat += "</td>"
+							mutant_category = 0
+
 		if(1) //Game Preferences
 			dat += "<h2>Game Settings:</h2>"
 			dat += "<b>Window Flashing:</b> <a href='?_src_=prefs;preference=windowflashing'>[windowflashing ? "Yes" : "No"]</a><br>"
@@ -650,20 +672,64 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		return
 
 	switch(href_list["preference"])
+		if("change_bodypart")
+			var/datum/species/current_species = GLOB.all_species[species]
+			switch(href_list["task"])
+				if("change_color")
+					var/key = href_list["key"]
+					if(!mutant_bodyparts[key])
+						return
+					var/list/colorlist = mutant_bodyparts[key][MUTANT_INDEX_COLOR_LIST]
+					var/index = text2num(href_list["color_index"])
+					if(colorlist.len < index)
+						return
+					var/new_color = input(user, "Choose your character's [key] color:", "Character Preference","#[colorlist[index]]") as color|null
+					if(new_color)
+						colorlist[index] = sanitize_hexcolor(new_color)
+				if("reset_color")
+					var/key = href_list["key"]
+					if(!mutant_bodyparts[key])
+						return
+					var/datum/mutant_accessory/SA = GLOB.mutant_accessories[key][mutant_bodyparts[key][MUTANT_INDEX_NAME]]
+					mutant_bodyparts[key][MUTANT_INDEX_COLOR_LIST] = SA.get_default_color(features, current_species)
+				if("reset_all_colors")
+					var/action = alert(user, "Are you sure you want to reset all colors?", "", "Yes", "No")
+					if(action == "Yes")
+						reset_mutantparts_colors()
+				if("change_name")
+					var/key = href_list["key"]
+					if(!mutant_bodyparts[key])
+						return
+					var/new_name
+					new_name = tgui_input_list(user, "Choose your character's [key]:", "Character Preference", GetMutantpartList(current_species, key, mismatched_parts))
+					if(new_name && mutant_bodyparts[key])
+						mutant_bodyparts[key][MUTANT_INDEX_NAME] = new_name
+						if(!color_customization)
+							var/datum/mutant_accessory/SA = GLOB.mutant_accessories[key][new_name]
+							mutant_bodyparts[key][MUTANT_INDEX_COLOR_LIST] = SA.get_default_color(features, current_species)
+						else
+							validate_color_keys_for_part(key)
+
 		if("mutant_color")
 			var/new_mutantcolor = input(user, "Choose your character's primary color:", "Character Preference","#"+features["mcolor"]) as color|null
 			if(new_mutantcolor)
 				features["mcolor"] = sanitize_hexcolor(new_mutantcolor, 6)
+			if(!color_customization)
+				reset_mutantparts_colors()
 
 		if("mutant_color2")
 			var/new_mutantcolor = input(user, "Choose your character's secondary color:", "Character Preference","#"+features["mcolor2"]) as color|null
 			if(new_mutantcolor)
 				features["mcolor2"] = sanitize_hexcolor(new_mutantcolor, 6)
+			if(!color_customization)
+				reset_mutantparts_colors()
 
 		if("mutant_color3")
 			var/new_mutantcolor = input(user, "Choose your character's tertiary color:", "Character Preference","#"+features["mcolor3"]) as color|null
 			if(new_mutantcolor)
 				features["mcolor3"] = sanitize_hexcolor(new_mutantcolor, 6)
+			if(!color_customization)
+				reset_mutantparts_colors()
 
 		if("tab")
 			current_tab = text2num(href_list["tab"])
@@ -758,7 +824,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			var/new_species = tgui_input_list(user, "Choose your species:", "Species", GLOB.roundstart_species)
 			if(!new_species)
 				return
-			species = new_species
+			SetSpecies(new_species)
 
 		if("body_type")
 			var/new_body_type = tgui_input_list(user, "Choose your character's body type:", "Body Type", GLOB.body_types_list)
@@ -768,14 +834,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 		if("eyesight")
 			good_eyesight = !good_eyesight
-
-		if("moth_wings")
-			if(species != "Moth")
-				return
-			var/new_wings = tgui_input_list(user, "Choose your character's wings: ", "Moth Wings", GLOB.moth_wings_list)
-			if(!new_wings)
-				return
-			moth_wings = new_wings
 
 		if("be_special")
 			var/flag = text2num(href_list["flag"])
@@ -1218,3 +1276,49 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	job_preferences[job.title] = level
 	return TRUE
+
+/datum/preferences/proc/SetSpecies(new_species)
+	species = new_species
+	var/datum/species/current_species = GLOB.all_species[species]
+	var/list/new_features = current_species.get_random_features() //We do this to keep unrelated features persistant
+	for(var/key in new_features)
+		features[key] = new_features[key]
+	mutant_bodyparts = current_species.get_random_mutant_bodyparts(features)
+
+/datum/preferences/proc/reset_mutantparts_colors()
+	var/datum/species/current_species = GLOB.all_species[species]
+	for(var/key in mutant_bodyparts)
+		var/datum/mutant_accessory/MA = GLOB.mutant_accessories[key][mutant_bodyparts[key][MUTANT_INDEX_NAME]]
+		mutant_bodyparts[key][MUTANT_INDEX_COLOR_LIST] = MA.get_default_color(features, current_species)
+
+/datum/preferences/proc/print_bodypart_change_line(key)
+	var/acc_name = mutant_bodyparts[key][MUTANT_INDEX_NAME]
+	var/shown_colors = 0
+	var/datum/mutant_accessory/SA = GLOB.mutant_accessories[key][acc_name]
+	var/dat = ""
+	if(SA.color_src == USE_MATRIXED_COLORS)
+		shown_colors = 3
+	else if (SA.color_src == USE_ONE_COLOR)
+		shown_colors = 1
+	if((color_customization || SA.always_color_customizable) && shown_colors)
+		dat += "<a href='?_src_=prefs;key=[key];task=reset_color;preference=change_bodypart'>R</a>"
+	dat += "<a href='?_src_=prefs;key=[key];task=change_name;preference=change_bodypart'>[acc_name]</a>"
+	if(color_customization || SA.always_color_customizable)
+		if(shown_colors)
+			dat += "<BR>"
+			var/list/colorlist = mutant_bodyparts[key][MUTANT_INDEX_COLOR_LIST]
+			for(var/i in 1 to shown_colors)
+				dat += "<a href='?_src_=prefs;key=[key];color_index=[i];task=change_color;preference=change_bodypart'><span class='color_holder_box' style='background-color:["#[colorlist[i]]"]'></span></a>"
+	return dat
+
+/datum/preferences/proc/validate_color_keys_for_part(key)
+	var/datum/species/current_species = GLOB.all_species[species]
+	var/datum/mutant_accessory/SA = GLOB.mutant_accessories[key][mutant_bodyparts[key][MUTANT_INDEX_NAME]]
+	var/list/colorlist = mutant_bodyparts[key][MUTANT_INDEX_COLOR_LIST]
+	if(SA.color_src == USE_MATRIXED_COLORS && colorlist.len != 3)
+		mutant_bodyparts[key][MUTANT_INDEX_COLOR_LIST] = SA.get_default_color(features, current_species)
+	else if (SA.color_src == USE_ONE_COLOR && colorlist.len != 1)
+		mutant_bodyparts[key][MUTANT_INDEX_COLOR_LIST] = SA.get_default_color(features, current_species)
+
+#undef APPEARANCE_CATEGORY_COLUMN
+#undef MAX_MUTANT_ROWS

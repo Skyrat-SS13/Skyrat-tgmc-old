@@ -135,3 +135,8 @@
 	var/list/mutant_bodyparts = list()
 
 	var/datum/dna/dna
+
+	var/bodyparts_render_key = ""
+	var/mutant_parts_render_key = ""
+
+	var/try_hide_mutant_parts = FALSE

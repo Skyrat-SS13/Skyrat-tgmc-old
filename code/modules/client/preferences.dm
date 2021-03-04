@@ -360,14 +360,18 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					dat += "<a href ='?_src_=prefs;preference=flavor_text'>Character Description</a><br>"
 
 				if(1) //Appearances
-					dat += "<b>Hair:</b> <a href='?_src_=prefs;preference=hairstyle'>[h_style]</a> | <a href='?_src_=prefs;preference=haircolor'>Color</a> <font face='fixedsys' size='3' color='#[num2hex(r_hair, 2)][num2hex(g_hair, 2)][num2hex(b_hair, 2)]'><table style='display:inline;' bgcolor='#[num2hex(r_hair, 2)][num2hex(g_hair, 2)][num2hex(b_hair)]'><tr><td>__</td></tr></table></font> "
-					dat += "<br>"
-					dat += "<b>Gradient:</b> <a href='?_src_=prefs;preference=grad_style'>[grad_style]</a> <a href='?_src_=prefs;preference=grad_color'>Color</a> <font face='fixedsys' size='3' color='#[num2hex(r_grad, 2)][num2hex(g_grad, 2)][num2hex(b_grad, 2)]'><table style='display:inline;' bgcolor='#[num2hex(r_grad, 2)][num2hex(g_grad, 2)][num2hex(b_grad)]'><tr><td>__</td></tr></table></font>"
-					dat += "<br>"
-					dat += "<b>Facial Hair:</b> <a href='?_src_=prefs;preference=facialstyle'>[f_style]</a> | <a href='?_src_=prefs;preference=facialcolor'>Color</a> <font face='fixedsys' size='3' color='#[num2hex(r_facial, 2)][num2hex(g_facial, 2)][num2hex(b_facial, 2)]'><table  style='display:inline;' bgcolor='#[num2hex(r_facial, 2)][num2hex(g_facial, 2)][num2hex(b_facial)]'><tr><td>__</td></tr></table></font> "
-					dat += "<br>"
-					dat += "<b>Eye:</b> <a href='?_src_=prefs;preference=eyecolor'>Color</a> <font face='fixedsys' size='3' color='#[num2hex(r_eyes, 2)][num2hex(g_eyes, 2)][num2hex(b_eyes, 2)]'><table  style='display:inline;' bgcolor='#[num2hex(r_eyes, 2)][num2hex(g_eyes, 2)][num2hex(b_eyes)]'><tr><td>__</td></tr></table></font><br>"
-					
+					dat += "<table width='100%'><tr><td width='17%' valign='top'>"
+
+					dat += "<h3>Hair</h3> <a href='?_src_=prefs;preference=hairstyle'>[h_style]</a><BR><a href='?_src_=prefs;preference=haircolor'><span class='color_holder_box' style='background-color:#[num2hex(r_hair, 2)][num2hex(g_hair, 2)][num2hex(b_hair)]'></span></a><BR>"
+
+					dat += "<h3>Gradient</h3> <a href='?_src_=prefs;preference=grad_style'>[grad_style]</a><BR><a href='?_src_=prefs;preference=grad_color'><span class='color_holder_box' style='background-color:#[num2hex(r_grad, 2)][num2hex(g_grad, 2)][num2hex(b_grad)]'></span></a><BR>"
+
+					dat += "<h3>Facial Hair</h3> <a href='?_src_=prefs;preference=facialstyle'>[f_style]</a><BR><a href='?_src_=prefs;preference=facialcolor'><span class='color_holder_box' style='background-color:#[num2hex(r_facial, 2)][num2hex(g_facial, 2)][num2hex(b_facial)]'></span></a><BR>"
+
+					dat += "<h3>Eyes</h3> <a href='?_src_=prefs;preference=eyecolor'><span class='color_holder_box' style='background-color:#[num2hex(r_eyes, 2)][num2hex(g_eyes, 2)][num2hex(b_eyes)]'></span></a><BR>"
+
+					dat += APPEARANCE_CATEGORY_COLUMN
+
 					dat += "<h3>Primary Color</h3>"
 					dat += "<a href='?_src_=prefs;preference=mutant_color'><span class='color_holder_box' style='background-color:#[features["mcolor"]]'></span></a><BR>"
 
@@ -376,11 +380,11 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 					dat += "<h3>Tertiary Color</h3>"
 					dat += "<a href='?_src_=prefs;preference=mutant_color3'><span class='color_holder_box' style='background-color:#[features["mcolor3"]]'></span></a><BR>"
-				
+
 					var/mutant_category = 0
 					var/list/generic_cache = GLOB.generic_accessories
 					for(var/key in mutant_bodyparts)
-						if(!generic_cache[key]) //This means that we have a mutant bodypart that shouldnt be bundled here (genitals)
+						if(!generic_cache[key]) //This means that we have a mutant bodypart that shouldnt be bundled here
 							continue
 						if(!mutant_category)
 							dat += APPEARANCE_CATEGORY_COLUMN
@@ -395,6 +399,11 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						if(mutant_category >= MAX_MUTANT_ROWS)
 							dat += "</td>"
 							mutant_category = 0
+					dat += "</tr></table>"
+
+					dat += "<table width='100%'><tr><td width='24%' valign='top'>"
+					dat += "</td>"
+					dat += "</tr></table>"
 
 		if(1) //Game Preferences
 			dat += "<h2>Game Settings:</h2>"

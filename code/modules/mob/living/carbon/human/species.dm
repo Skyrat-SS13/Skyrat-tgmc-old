@@ -498,6 +498,33 @@
 
 	default_mutant_bodyparts = list("frills" = "Simple", "horns" = ACC_RANDOM, "snout" = ACC_RANDOM, "body_markings" = ACC_RANDOM, "tail" = ACC_RANDOM, "spines" = ACC_RANDOM)
 
+/datum/species/unathi/get_random_features()
+	var/list/returned = MANDATORY_FEATURE_LIST
+	var/main_color
+	var/second_color
+	var/random = rand(1,5)
+	//Choose from a variety of green or brown colors, with a darker secondary and tertiary
+	switch(random)
+		if(1)
+			main_color = "11CC00"
+			second_color = "118800"
+		if(2)
+			main_color = "55CC11"
+			second_color = "55AA11"
+		if(3)
+			main_color = "77AA11"
+			second_color = "668711"
+		if(4)
+			main_color = "886622"
+			second_color = "774411"
+		if(5)
+			main_color = "33BB11"
+			second_color = "339911"
+	returned["mcolor"] = main_color
+	returned["mcolor2"] = second_color
+	returned["mcolor3"] = second_color
+	return returned
+
 /datum/species/lizardperson
 	name = "Lizardperson"
 	name_plural = "lizardperson"
@@ -530,6 +557,33 @@
 
 	default_mutant_bodyparts = list("frills" = "Simple", "horns" = ACC_RANDOM, "snout" = ACC_RANDOM, "body_markings" = ACC_RANDOM, "tail" = ACC_RANDOM, "spines" = ACC_RANDOM)
 
+/datum/species/lizardperson/get_random_features()
+	var/list/returned = MANDATORY_FEATURE_LIST
+	var/main_color
+	var/second_color
+	var/random = rand(1,5)
+	//Choose from a variety of green or brown colors, with a darker secondary and tertiary
+	switch(random)
+		if(1)
+			main_color = "11CC00"
+			second_color = "118800"
+		if(2)
+			main_color = "55CC11"
+			second_color = "55AA11"
+		if(3)
+			main_color = "77AA11"
+			second_color = "668711"
+		if(4)
+			main_color = "886622"
+			second_color = "774411"
+		if(5)
+			main_color = "33BB11"
+			second_color = "339911"
+	returned["mcolor"] = main_color
+	returned["mcolor2"] = second_color
+	returned["mcolor3"] = second_color
+	return returned
+
 /datum/species/tajaran
 	name = "Tajara"
 	name_plural = "Tajaran"
@@ -558,6 +612,33 @@
 
 	default_mutant_bodyparts = list("tail" = ACC_RANDOM, "snout" = ACC_RANDOM, "ears" = ACC_RANDOM)
 
+/datum/species/tajaran/get_random_features()
+	var/list/returned = MANDATORY_FEATURE_LIST
+	var/main_color
+	var/second_color
+	var/random = rand(1,5)
+	//Choose from a variety of mostly coldish, animal, matching colors
+	switch(random)
+		if(1)
+			main_color = "BBAA88"
+			second_color = "AAAA99"
+		if(2)
+			main_color = "777766"
+			second_color = "888877"
+		if(3)
+			main_color = "AA9988"
+			second_color = "AAAA99"
+		if(4)
+			main_color = "EEEEDD"
+			second_color = "FFEEEE"
+		if(5)
+			main_color = "DDCC99"
+			second_color = "DDCCAA"
+	returned["mcolor"] = main_color
+	returned["mcolor2"] = second_color
+	returned["mcolor3"] = second_color
+	return returned
+
 /datum/species/vulpkanin
 	name = "Vulpkanin"
 	name_plural = "Vulpkanins"
@@ -573,6 +654,33 @@
 	joinable_roundstart = TRUE
 
 	default_mutant_bodyparts = list("tail" = ACC_RANDOM, "snout" = ACC_RANDOM, "ears" = ACC_RANDOM)
+
+/datum/species/vulpkanin/get_random_features()
+	var/list/returned = MANDATORY_FEATURE_LIST
+	var/main_color
+	var/second_color
+	var/random = rand(1,5)
+	//Choose from a variety of mostly brightish, animal, matching colors
+	switch(random)
+		if(1)
+			main_color = "FFAA00"
+			second_color = "FFDD44"
+		if(2)
+			main_color = "FF8833"
+			second_color = "FFAA33"
+		if(3)
+			main_color = "FFCC22"
+			second_color = "FFDD88"
+		if(4)
+			main_color = "FF8800"
+			second_color = "FFFFFF"
+		if(5)
+			main_color = "999999"
+			second_color = "EEEEEE"
+	returned["mcolor"] = main_color
+	returned["mcolor2"] = second_color
+	returned["mcolor3"] = second_color
+	return returned
 
 /datum/species/mammal
 	name = "Anthropomorph"
@@ -590,6 +698,42 @@
 
 	default_mutant_bodyparts = list("tail" = ACC_RANDOM, "snout" = ACC_RANDOM, "horns" = "None", "ears" = ACC_RANDOM, "wings" = "None", "neck_fluff" = "None", "moth_antennae" = "None")
 
+/datum/species/mammal/get_random_features()
+	var/list/returned = MANDATORY_FEATURE_LIST
+	var/main_color
+	var/second_color
+	var/third_color
+	var/random = rand(1,6)
+	switch(random)
+		if(1)
+			main_color = "FFFFFF"
+			second_color = "333333"
+			third_color = "333333"
+		if(2)
+			main_color = "FFFFDD"
+			second_color = "DD6611"
+			third_color = "AA5522"
+		if(3)
+			main_color = "DD6611"
+			second_color = "FFFFFF"
+			third_color = "DD6611"
+		if(4)
+			main_color = "CCCCCC"
+			second_color = "FFFFFF"
+			third_color = "FFFFFF"
+		if(5)
+			main_color = "AA5522"
+			second_color = "CC8833"
+			third_color = "FFFFFF"
+		if(6)
+			main_color = "FFFFDD"
+			second_color = "FFEECC"
+			third_color = "FFDDBB"
+	returned["mcolor"] = main_color
+	returned["mcolor2"] = second_color
+	returned["mcolor3"] = third_color
+	return returned
+
 /datum/species/akula
 	name = "Akula"
 	name_plural = "Akulan"
@@ -605,6 +749,33 @@
 
 	default_mutant_bodyparts = list("tail" = ACC_RANDOM, "snout" = ACC_RANDOM, "ears" = ACC_RANDOM)
 
+/datum/species/akula/get_random_features()
+	var/list/returned = MANDATORY_FEATURE_LIST
+	var/main_color
+	var/second_color
+	var/random = rand(1,5)
+	//Choose from a variety of sharkish colors, with a whiter secondary and tertiary
+	switch(random)
+		if(1)
+			main_color = "668899"
+			second_color = "BBCCDD"
+		if(2)
+			main_color = "334455"
+			second_color = "DDDDEE"
+		if(3)
+			main_color = "445566"
+			second_color = "DDDDEE"
+		if(4)
+			main_color = "666655"
+			second_color = "DDDDEE"
+		if(5)
+			main_color = "444444"
+			second_color = "DDDDEE"
+	returned["mcolor"] = main_color
+	returned["mcolor2"] = second_color
+	returned["mcolor3"] = second_color
+	return returned
+
 /datum/species/aquatic
 	name = "Aquatic"
 	name_plural = "Aquatics"
@@ -619,6 +790,33 @@
 	joinable_roundstart = TRUE
 
 	default_mutant_bodyparts = list("tail" = ACC_RANDOM, "snout" = ACC_RANDOM, "horns" = "None", "ears" = ACC_RANDOM, "wings" = "None", "neck_fluff" = "None", "moth_antennae" = "None")
+
+/datum/species/aquatic/get_random_features()
+	var/list/returned = MANDATORY_FEATURE_LIST
+	var/main_color
+	var/second_color
+	var/random = rand(1,5)
+	//Choose from a variety of sharkish colors, with a whiter secondary and tertiary
+	switch(random)
+		if(1)
+			main_color = "668899"
+			second_color = "BBCCDD"
+		if(2)
+			main_color = "334455"
+			second_color = "DDDDEE"
+		if(3)
+			main_color = "445566"
+			second_color = "DDDDEE"
+		if(4)
+			main_color = "666655"
+			second_color = "DDDDEE"
+		if(5)
+			main_color = "444444"
+			second_color = "DDDDEE"
+	returned["mcolor"] = main_color
+	returned["mcolor2"] = second_color
+	returned["mcolor3"] = second_color
+	return returned
 
 /datum/species/skrell
 	name = "Skrell"
@@ -639,6 +837,29 @@
 	joinable_roundstart = TRUE
 
 	default_mutant_bodyparts = list("skrell_hair" = ACC_RANDOM)
+
+/datum/species/skrell/get_random_features()
+	var/list/returned = MANDATORY_FEATURE_LIST
+	var/main_color
+	var/random = rand(1,6)
+	//Choose from a range of green-blue colors
+	switch(random)
+		if(1)
+			main_color = "44FF77"
+		if(2)
+			main_color = "22FF88"
+		if(3)
+			main_color = "22FFBB"
+		if(4)
+			main_color = "22FFFF"
+		if(5)
+			main_color = "22BBFF"
+		if(6)
+			main_color = "2266FF"
+	returned["mcolor"] = main_color
+	returned["mcolor2"] = main_color
+	returned["mcolor3"] = main_color
+	return returned
 
 /datum/species/moth
 	name = "Moth"
@@ -667,6 +888,13 @@
 	joinable_roundstart = TRUE
 
 	default_mutant_bodyparts = list("wings" = ACC_RANDOM, "neck_fluff" = ACC_RANDOM, "moth_antennae" = ACC_RANDOM)
+
+/datum/species/moth/get_random_features()
+	var/list/returned = MANDATORY_FEATURE_LIST
+	returned["mcolor"] = "FFE8A7"
+	returned["mcolor2"] = "FFE8A7"
+	returned["mcolor3"] = "FFE8A7"
+	return returned
 
 /datum/species/Insectoid
 	name = "Insectoid"

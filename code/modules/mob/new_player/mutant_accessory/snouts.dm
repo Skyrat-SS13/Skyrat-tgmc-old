@@ -48,6 +48,9 @@
 /datum/mutant_accessory/snouts/mammal/akula
 	allowed_species = list(FLEXIBLE_SPECIES, AQUATIC_SPECIES)
 
+/datum/mutant_accessory/snouts/mammal/tajavulp
+	allowed_species = list(FLEXIBLE_SPECIES, VULPINE_SPECIES, FELINE_SPECIES)
+
 /datum/mutant_accessory/snouts/mammal/bird
 	name = "Beak"
 	icon_state = "bird"
@@ -99,19 +102,19 @@
 	name = "Mammal, Long, Striped ALT"
 	icon_state = "lcanidstripealt"
 
-/datum/mutant_accessory/snouts/mammal/tajaran/scanid
+/datum/mutant_accessory/snouts/mammal/tajavulp/scanid
 	name = "Mammal, Short"
 	icon_state = "scanid"
 
-/datum/mutant_accessory/snouts/mammal/tajaran/scanidalt
+/datum/mutant_accessory/snouts/mammal/tajavulp/scanidalt
 	name = "Mammal, Short ALT"
 	icon_state = "scanidalt"
 
-/datum/mutant_accessory/snouts/mammal/tajaran/scanidalt2
+/datum/mutant_accessory/snouts/mammal/tajavulp/scanidalt2
 	name = "Mammal, Short ALT 2"
 	icon_state = "scanidalt2"
 
-/datum/mutant_accessory/snouts/mammal/tajaran/scanidalt3
+/datum/mutant_accessory/snouts/mammal/tajavulp/scanidalt3
 	name = "Mammal, Short ALT 3"
 	icon_state = "scanidalt3"
 

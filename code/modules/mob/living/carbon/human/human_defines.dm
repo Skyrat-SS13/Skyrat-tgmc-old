@@ -140,3 +140,5 @@
 	var/mutant_parts_render_key = ""
 
 	var/try_hide_mutant_parts = FALSE
+
+	var/show_underwear = TRUE

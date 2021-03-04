@@ -141,7 +141,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/list/mutant_bodyparts = list()
 
 	var/color_customization = TRUE
-	var/mismatched_parts = FALSE 
+	var/mismatched_parts = FALSE
+
+	var/preview_pref = PREVIEW_PREF_JOB
 
 
 /datum/preferences/New(client/C)

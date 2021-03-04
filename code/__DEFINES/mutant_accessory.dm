@@ -35,7 +35,7 @@
 #define MAXIMUM_MARKINGS_PER_LIMB 3
 
 #define PREVIEW_PREF_JOB "Job"
-#define PREVIEW_PREF_LOADOUT "Loadout"
+#define PREVIEW_PREF_UNDERWEAR "Underwear"
 #define PREVIEW_PREF_NAKED "Naked"
 
 #define FLEXIBLE_SPECIES "Anthropomorph" = TRUE, "Humanoid" = TRUE, "Genemodder" = TRUE, "Insectoid" = TRUE

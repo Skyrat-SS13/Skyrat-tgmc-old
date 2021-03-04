@@ -3,6 +3,7 @@
 	key = "body_markings"
 	generic = "Body Markings"
 	default_color = DEFAULT_TERTIARY
+	relevent_layers = list(BODY_ADJ_LAYER)
 
 /datum/mutant_accessory/body_markings/none
 	name = "None"
@@ -22,4 +23,3 @@
 	name = "Light Belly"
 	icon_state = "lbelly"
 	gender_specific = TRUE
-

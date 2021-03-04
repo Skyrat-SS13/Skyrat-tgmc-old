@@ -371,13 +371,14 @@ GLOBAL_LIST_INIT(xenoupgradetiers, list(XENO_UPGRADE_BASETYPE, XENO_UPGRADE_INVA
 
 
 // Human Overlay Indexes
-#define HEADBITE_LAYER			30
-#define LASER_LAYER				29 //For sniper targeting laser27
-#define MUTATIONS_LAYER			28
-#define BODY_BEHIND_LAYER		27 //certain mutantrace features (tail when looking south) that must appear behind the body parts
-#define BODYPARTS_LAYER 		26
-#define BODY_ADJ_LAYER			25 //certain mutantrace features (snout, body markings) that must appear above the body parts
-#define DAMAGE_LAYER			24
+#define HEADBITE_LAYER			31
+#define LASER_LAYER				30 //For sniper targeting laser27
+#define MUTATIONS_LAYER			29
+#define BODY_BEHIND_LAYER		28 //certain mutantrace features (tail when looking south) that must appear behind the body parts
+#define BODYPARTS_LAYER 		27
+#define BODY_ADJ_LAYER			26 //certain mutantrace features (snout, body markings) that must appear above the body parts
+#define DAMAGE_LAYER			25
+#define UNDERWEAR_LAYER			24
 #define UNIFORM_LAYER			23
 #define ID_LAYER				22
 #define SHOES_LAYER				21
@@ -402,7 +403,7 @@ GLOBAL_LIST_INIT(xenoupgradetiers, list(XENO_UPGRADE_BASETYPE, XENO_UPGRADE_INVA
 #define TARGETED_LAYER			2 //for target sprites when held at gun point, and holo cards.
 #define FIRE_LAYER				1 //If you're on fire
 
-#define TOTAL_LAYERS			30
+#define TOTAL_LAYERS			31
 
 #define TOTAL_UNDERLAYS			0
 

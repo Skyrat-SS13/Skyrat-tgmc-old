@@ -292,25 +292,30 @@ GLOBAL_LIST_EMPTY(damage_icon_parts)
 			if(lip_style && (species?.species_flags & HAS_LIPS))	//skeletons are allowed to wear lipstick no matter what you think, agouri.
 				stand_icon.Blend(new/icon('icons/mob/human_face.dmi', "camo_[lip_style]_s"), ICON_OVERLAY)
 	
-	
-		if(species.species_flags & HAS_UNDERWEAR)
-	
-			//Underwear
-			if(underwear >0 && underwear < 3)
-				stand_icon.Blend(new /icon('icons/mob/human.dmi', "cryo[underwear]_[g]_s"), ICON_OVERLAY)
-	
-			if(ismarinejob(job)) //undoing override
-				if(undershirt>0 && undershirt < 5)
-					stand_icon.Blend(new /icon('icons/mob/human.dmi', "cryoshirt[undershirt]_s"), ICON_OVERLAY)
-			else if(undershirt > 0 && undershirt < 7)
-				stand_icon.Blend(new /icon('icons/mob/human.dmi', "cryoshirt[undershirt]_s"), ICON_OVERLAY)
-	
 		icon = null
 		overlays_standing[BODYPARTS_LAYER] = image(stand_icon, layer = -BODYPARTS_LAYER)
 		apply_overlay(BODYPARTS_LAYER)
 
 	species?.update_body(src)
 	update_mutant_bodyparts()
+	update_underwear()
+
+/mob/living/carbon/human/proc/update_underwear()
+	remove_overlay(UNDERWEAR_LAYER)
+	if(species.species_flags & HAS_UNDERWEAR && show_underwear)
+		//Underwear
+		var/g = (gender == FEMALE) ? "f" : "m"
+		var/icon/stand_icon = new('icons/mob/human.dmi',"blank")
+		if(underwear >0 && underwear < 3)
+			stand_icon.Blend(new /icon('icons/mob/human.dmi', "cryo[underwear]_[g]_s"), ICON_OVERLAY)
+
+		if(ismarinejob(job)) //undoing override
+			if(undershirt>0 && undershirt < 5)
+				stand_icon.Blend(new /icon('icons/mob/human.dmi', "cryoshirt[undershirt]_s"), ICON_OVERLAY)
+		else if(undershirt > 0 && undershirt < 7)
+			stand_icon.Blend(new /icon('icons/mob/human.dmi', "cryoshirt[undershirt]_s"), ICON_OVERLAY)
+		overlays_standing[UNDERWEAR_LAYER] = image(stand_icon, layer = -UNDERWEAR_LAYER)
+		apply_overlay(UNDERWEAR_LAYER)
 
 /mob/living/carbon/human/proc/update_mutant_bodyparts(forced_colour)
 	if(!mutant_bodyparts)
@@ -567,6 +572,8 @@ GLOBAL_LIST_EMPTY(damage_icon_parts)
 	UpdateDamageIcon()
 	update_transform()
 	update_headbite()
+	update_underwear()
+	update_mutant_bodyparts()
 
 
 /* --------------------------------------- */

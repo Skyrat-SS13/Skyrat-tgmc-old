@@ -53,7 +53,7 @@
 	return null
 */
 
-/datum/mutant_accessory/tails/is_hidden(mob/living/carbon/human/H, obj/item/bodypart/HD)
+/datum/mutant_accessory/tails/is_hidden(mob/living/carbon/human/H)
 	/*
 	if(H.wear_suit)
 		if(H.try_hide_mutant_parts)
@@ -69,7 +69,7 @@
 
 
 /datum/mutant_accessory/tails/lizard
-	allowed_species = list("Lizardperson" = TRUE, "Anthropomorph" = TRUE, "Unathi" = TRUE)
+	allowed_species = list(FLEXIBLE_SPECIES, LIZARD_SPECIES)
 	//organ_type = /obj/item/organ/tail/lizard
 	general_type = "lizard"
 
@@ -90,7 +90,7 @@
 	icon_state = "spikes"
 
 /datum/mutant_accessory/tails/human
-	allowed_species = list("human", "felinid", "mammal")
+	allowed_species = list(FLEXIBLE_SPECIES)
 	//organ_type = /obj/item/organ/tail/cat
 
 /datum/mutant_accessory/tails/human/cat
@@ -101,20 +101,20 @@
 /datum/mutant_accessory/tails/monkey/default
 	name = "Monkey"
 	icon_state = "monkey"
-	allowed_species = list("human", "felinid", "mammal", "monkey")
+	allowed_species = list(FLEXIBLE_SPECIES)
 	color_src = FALSE
 	//organ_type = /obj/item/organ/tail/monkey
 
 /datum/mutant_accessory/tails/none
 	name = "None"
 	icon_state = "none"
-	allowed_species = list("mammal", "human", "humanoid")
+	allowed_species = list(FLEXIBLE_SPECIES)
 	color_src = null
 	factual = FALSE
 
 /datum/mutant_accessory/tails/mammal
 	icon_state = "none"
-	allowed_species = list("mammal", "human", "humanoid")
+	allowed_species = list(FLEXIBLE_SPECIES)
 	//organ_type = /obj/item/organ/tail/fluffy/no_wag
 	color_src = USE_MATRIXED_COLORS
 
@@ -122,15 +122,15 @@
 	//organ_type = /obj/item/organ/tail/fluffy
 
 /datum/mutant_accessory/tails/mammal/wagging/vulpkanin
-	allowed_species = list("Anthropomorph" = TRUE, "Vulpkanin" = TRUE)
+	allowed_species = list(FLEXIBLE_SPECIES, VULPINE_SPECIES)
 	general_type = "vulpine"
 
 /datum/mutant_accessory/tails/mammal/wagging/tajaran
-	allowed_species = list("Anthropomorph" = TRUE, "Tajaran" = TRUE)
+	allowed_species = list(FLEXIBLE_SPECIES, FELINE_SPECIES)
 	general_type = "feline"
 
 /datum/mutant_accessory/tails/mammal/wagging/akula
-	allowed_species = list("Anthropomorph" = TRUE, "Akula" = TRUE, "Aquatic" = TRUE)
+	allowed_species = list(FLEXIBLE_SPECIES, AQUATIC_SPECIES)
 	general_type = "marine"
 
 /datum/mutant_accessory/tails/mammal/wagging/axolotl

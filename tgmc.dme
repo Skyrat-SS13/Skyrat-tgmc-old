@@ -1428,6 +1428,7 @@
 #include "code\modules\mob\new_player\sprite_accessories.dm"
 #include "code\modules\mob\new_player\mutant_accessory\_mutant_accessory.dm"
 #include "code\modules\mob\new_player\mutant_accessory\antenna.dm"
+#include "code\modules\mob\new_player\mutant_accessory\ears.dm"
 #include "code\modules\mob\new_player\mutant_accessory\frills.dm"
 #include "code\modules\mob\new_player\mutant_accessory\horns.dm"
 #include "code\modules\mob\new_player\mutant_accessory\lizard_body_markings.dm"

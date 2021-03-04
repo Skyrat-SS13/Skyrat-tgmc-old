@@ -107,11 +107,13 @@
 	var/see_in_dark
 
 	var/datum/namepool/namepool = /datum/namepool
-	var/special_death_message = "You have perished." // Special death message that gets overwritten if possible.
+	var/special_death_message = "<big>You have perished.</big><br><small>But it is not the end of you yet... if you still have your body or an unbursted corpse, wait until somebody can resurrect you...</small>" // Special death message that gets overwritten if possible.
 	var/joinable_roundstart = FALSE
 
 	var/list/default_mutant_bodyparts = list()
 	var/specific_alpha = 255
+
+	var/uses_ethnic_sprites = FALSE
 
 /datum/species/New()
 	if(hud_type)
@@ -307,11 +309,55 @@
 	coughs = list(MALE = "male_cough", FEMALE = "female_cough")
 	burstscreams = list(MALE = "male_preburst", FEMALE = "female_preburst")
 	warcries = list(MALE = "male_warcry", FEMALE = "female_warcry")
-	special_death_message = "<big>You have perished.</big><br><small>But it is not the end of you yet... if you still have your body or an unbursted corpse, wait until somebody can resurrect you...</small>"
 	joinable_roundstart = TRUE
+
+	uses_ethnic_sprites = TRUE
 
 	//If you wanted to add a species-level ability:
 	/*abilities = list(/client/proc/test_ability)*/
+
+/datum/species/genemodder
+	name = "Genemodder"
+	name_plural = "Genemodders"
+	primitive = /mob/living/carbon/monkey
+	unarmed_type = /datum/unarmed_attack/punch
+	species_flags = HAS_SKIN_TONE|HAS_LIPS|HAS_UNDERWEAR
+	count_human = TRUE
+
+	screams = list(MALE = "male_scream", FEMALE = "female_scream")
+	paincries = list(MALE = "male_pain", FEMALE = "female_pain")
+	goredcries = list(MALE = "male_gored", FEMALE = "female_gored")
+	gasps = list(MALE = "male_gasp", FEMALE = "female_gasp")
+	coughs = list(MALE = "male_cough", FEMALE = "female_cough")
+	burstscreams = list(MALE = "male_preburst", FEMALE = "female_preburst")
+	warcries = list(MALE = "male_warcry", FEMALE = "female_warcry")
+	joinable_roundstart = TRUE
+
+	uses_ethnic_sprites = TRUE
+
+	default_mutant_bodyparts = list("tail" = "None", "snout" = "None", "horns" = "None", "ears" = "None", "wings" = "None", "neck_fluff" = "None", "moth_antennae" = "None")
+
+/datum/species/humanoid
+	name = "Humanoid"
+	name_plural = "Humanoids"
+	primitive = /mob/living/carbon/monkey
+	unarmed_type = /datum/unarmed_attack/punch
+	species_flags = HAS_SKIN_COLOR|HAS_LIPS|HAS_UNDERWEAR
+	count_human = TRUE
+
+	icobase = 'icons/mob/human_races/r_mammal.dmi'
+	deform = 'icons/mob/human_races/r_def_mammal.dmi'
+
+	screams = list(MALE = "male_scream", FEMALE = "female_scream")
+	paincries = list(MALE = "male_pain", FEMALE = "female_pain")
+	goredcries = list(MALE = "male_gored", FEMALE = "female_gored")
+	gasps = list(MALE = "male_gasp", FEMALE = "female_gasp")
+	coughs = list(MALE = "male_cough", FEMALE = "female_cough")
+	burstscreams = list(MALE = "male_preburst", FEMALE = "female_preburst")
+	warcries = list(MALE = "male_warcry", FEMALE = "female_warcry")
+	joinable_roundstart = TRUE
+
+	default_mutant_bodyparts = list("tail" = "None", "snout" = "None", "horns" = "None", "ears" = "None", "wings" = "None", "neck_fluff" = "None", "moth_antennae" = "None")
 
 /datum/species/human/vatborn
 	name = "Vatborn"
@@ -320,6 +366,8 @@
 	deform = 'icons/mob/human_races/r_vatborn.dmi'
 
 	namepool = /datum/namepool/vatborn
+
+	joinable_roundstart = FALSE //Currently has some sprite issues
 
 //Slightly tougher humans.
 /datum/species/human/hero
@@ -450,6 +498,38 @@
 
 	default_mutant_bodyparts = list("frills" = "Simple", "horns" = ACC_RANDOM, "snout" = ACC_RANDOM, "body_markings" = ACC_RANDOM, "tail" = ACC_RANDOM, "spines" = ACC_RANDOM)
 
+/datum/species/lizardperson
+	name = "Lizardperson"
+	name_plural = "lizardperson"
+	icobase = 'icons/mob/human_races/r_lizard.dmi'
+	deform = 'icons/mob/human_races/r_def_lizard.dmi'
+	default_language_holder = /datum/language_holder/unathi
+	tail = "sogtail"
+	unarmed_type = /datum/unarmed_attack/claws
+	secondary_unarmed_type = /datum/unarmed_attack/bite/strong
+	primitive = /mob/living/carbon/monkey/unathi
+	taste_sensitivity = TASTE_SENSITIVE
+	gluttonous = 1
+
+	cold_level_1 = 280 //Default 260 - Lower is better
+	cold_level_2 = 220 //Default 200
+	cold_level_3 = 130 //Default 120
+
+	heat_level_1 = 420 //Default 360 - Higher is better
+	heat_level_2 = 480 //Default 400
+	heat_level_3 = 1100 //Default 1000
+
+	species_flags = HAS_LIPS|HAS_UNDERWEAR|HAS_SKIN_COLOR
+
+	flesh_color = "#34AF10"
+
+	reagent_tag = IS_UNATHI
+	base_color = "#066000"
+
+	joinable_roundstart = TRUE
+
+	default_mutant_bodyparts = list("frills" = "Simple", "horns" = ACC_RANDOM, "snout" = ACC_RANDOM, "body_markings" = ACC_RANDOM, "tail" = ACC_RANDOM, "spines" = ACC_RANDOM)
+
 /datum/species/tajaran
 	name = "Tajara"
 	name_plural = "Tajaran"
@@ -476,9 +556,11 @@
 
 	joinable_roundstart = TRUE
 
+	default_mutant_bodyparts = list("tail" = ACC_RANDOM, "snout" = ACC_RANDOM, "ears" = ACC_RANDOM)
+
 /datum/species/vulpkanin
 	name = "Vulpkanin"
-	name_plural = "Vulpkanin"
+	name_plural = "Vulpkanins"
 	icobase = 'icons/mob/human_races/r_mammal.dmi'
 	deform = 'icons/mob/human_races/r_def_mammal.dmi'
 	unarmed_type = /datum/unarmed_attack/claws
@@ -489,6 +571,8 @@
 	base_color = "#333333"
 
 	joinable_roundstart = TRUE
+
+	default_mutant_bodyparts = list("tail" = ACC_RANDOM, "snout" = ACC_RANDOM, "ears" = ACC_RANDOM)
 
 /datum/species/mammal
 	name = "Anthropomorph"
@@ -504,6 +588,8 @@
 
 	joinable_roundstart = TRUE
 
+	default_mutant_bodyparts = list("tail" = ACC_RANDOM, "snout" = ACC_RANDOM, "horns" = "None", "ears" = ACC_RANDOM, "wings" = "None", "neck_fluff" = "None", "moth_antennae" = "None")
+
 /datum/species/akula
 	name = "Akula"
 	name_plural = "Akulan"
@@ -517,9 +603,11 @@
 
 	joinable_roundstart = TRUE
 
+	default_mutant_bodyparts = list("tail" = ACC_RANDOM, "snout" = ACC_RANDOM, "ears" = ACC_RANDOM)
+
 /datum/species/aquatic
 	name = "Aquatic"
-	name_plural = "Aquatic"
+	name_plural = "Aquatics"
 	icobase = 'icons/mob/human_races/r_akula.dmi'
 	deform = 'icons/mob/human_races/r_def_akula.dmi'
 
@@ -530,9 +618,12 @@
 
 	joinable_roundstart = TRUE
 
+	default_mutant_bodyparts = list("tail" = ACC_RANDOM, "snout" = ACC_RANDOM, "horns" = "None", "ears" = ACC_RANDOM, "wings" = "None", "neck_fluff" = "None", "moth_antennae" = "None")
+
 /datum/species/skrell
 	name = "Skrell"
 	name_plural = "Skrell"
+	eyes = "eyes_skrell"
 	icobase = 'icons/mob/human_races/r_skrell.dmi'
 	deform = 'icons/mob/human_races/r_def_skrell.dmi'
 	default_language_holder = /datum/language_holder/skrell
@@ -546,6 +637,8 @@
 	reagent_tag = IS_SKRELL
 
 	joinable_roundstart = TRUE
+
+	default_mutant_bodyparts = list("skrell_hair" = ACC_RANDOM)
 
 /datum/species/moth
 	name = "Moth"
@@ -572,6 +665,36 @@
 	namepool = /datum/namepool/moth
 
 	joinable_roundstart = TRUE
+
+	default_mutant_bodyparts = list("wings" = ACC_RANDOM, "neck_fluff" = ACC_RANDOM, "moth_antennae" = ACC_RANDOM)
+
+/datum/species/Insectoid
+	name = "Insectoid"
+	name_plural = "Insectoids"
+	icobase = 'icons/mob/human_races/r_moth.dmi'
+	deform = 'icons/mob/human_races/r_moth.dmi'
+	default_language_holder = /datum/language_holder/moth
+	eyes = "blank_eyes"
+	speech_verb_override = "flutters"
+	count_human = TRUE
+
+	species_flags = HAS_LIPS|HAS_NO_HAIR|HAS_SKIN_COLOR
+
+	screams = list("neuter" = 'sound/voice/moth_scream.ogg')
+	paincries = list("neuter" = 'sound/voice/human_male_pain_3.ogg')
+	goredcries = list("neuter" = 'sound/voice/moth_scream.ogg')
+	burstscreams = list("neuter" = 'sound/voice/moth_scream.ogg')
+	warcries = list("neuter" = 'sound/voice/moth_scream.ogg')
+
+	flesh_color = "#E5CD99"
+
+	reagent_tag = IS_MOTH
+
+	namepool = /datum/namepool/moth
+
+	joinable_roundstart = TRUE
+
+	default_mutant_bodyparts = list("tail" = "None", "snout" = "None", "horns" = "None", "ears" = ACC_RANDOM, "wings" = ACC_RANDOM, "neck_fluff" = ACC_RANDOM, "moth_antennae" = ACC_RANDOM)
 
 /datum/species/sectoid
 	name = "Sectoid"

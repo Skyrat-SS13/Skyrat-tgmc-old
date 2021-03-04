@@ -13,6 +13,7 @@
 /datum/mutant_accessory/horns/none
 	name = "None"
 	icon_state = "none"
+	color_src = null
 
 /datum/mutant_accessory/horns/simple
 	name = "Simple"

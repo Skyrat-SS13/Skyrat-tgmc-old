@@ -3,8 +3,8 @@
 #define MUTCOLORS3			3
 #define MUTCOLOR_MATRIXED	4
 #define HAIR				5
-#define FACEHAIR				5
-#define EYECOLOR				5
+#define FACEHAIR			6
+#define EYECOLOR			7
 // Defines for whether an accessory should have one or three colors to choose for
 #define USE_ONE_COLOR		5
 #define USE_MATRIXED_COLORS	6
@@ -37,3 +37,13 @@
 #define PREVIEW_PREF_JOB "Job"
 #define PREVIEW_PREF_LOADOUT "Loadout"
 #define PREVIEW_PREF_NAKED "Naked"
+
+#define FLEXIBLE_SPECIES "Anthropomorph" = TRUE, "Humanoid" = TRUE, "Genemodder" = TRUE, "Insectoid" = TRUE
+#define LIZARD_SPECIES "Unathi" = TRUE, "Lizardperson" = TRUE
+#define AQUATIC_SPECIES "Akula" = TRUE, "Aquatic" = TRUE
+#define VULPINE_SPECIES "Vulpkanin" = TRUE
+#define FELINE_SPECIES "Tajara" = TRUE
+#define MOTH_SPECIES "Moth" = TRUE
+
+#define SKYRAT_HAIR_ELIGIBLE_SPECIES "Anthropomorph", "Humanoid", "Genemodder", "Insectoid", "Vulpkanin", "Lizardperson", "Unathi", "Akula", "Aquatic"
+#define SKYRAT_FACE_HAIR_ELIGIBLE_SPECIES SKYRAT_HAIR_ELIGIBLE_SPECIES

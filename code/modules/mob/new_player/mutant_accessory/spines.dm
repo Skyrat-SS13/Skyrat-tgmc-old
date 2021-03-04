@@ -6,7 +6,7 @@
 	default_color = DEFAULT_SECONDARY
 	relevent_layers = list(BODY_BEHIND_LAYER, BODY_ADJ_LAYER)
 
-/datum/mutant_accessory/spines/is_hidden(mob/living/carbon/human/H, obj/item/bodypart/HD)
+/datum/mutant_accessory/spines/is_hidden(mob/living/carbon/human/H)
 	/*
 	var/obj/item/organ/tail/T = H.getorganslot(ORGAN_SLOT_TAIL)
 	if(!T || (H.wear_suit && (H.try_hide_mutant_parts || H.wear_suit.flags_inv & HIDEJUMPSUIT)))
@@ -26,6 +26,7 @@
 /datum/mutant_accessory/spines/none
 	name = "None"
 	icon_state = "none"
+	color_src = null
 
 /datum/mutant_accessory/spines/short
 	name = "Short"

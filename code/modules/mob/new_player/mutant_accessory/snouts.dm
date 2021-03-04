@@ -3,10 +3,10 @@
 	generic = "Snout"
 	icon = 'icons/mob/mutant_accessory/snouts.dmi'
 	var/use_muzzled_sprites = TRUE
-	allowed_species = list("Anthropomorph" = TRUE, "Lizardperson" = TRUE, "Unathi" = TRUE)
+	allowed_species = list(FLEXIBLE_SPECIES, LIZARD_SPECIES)
 	relevent_layers = list(BODY_ADJ_LAYER, BODY_FRONT_LAYER)
 
-/datum/mutant_accessory/snouts/is_hidden(mob/living/carbon/human/H, obj/item/bodypart/HD)
+/datum/mutant_accessory/snouts/is_hidden(mob/living/carbon/human/H)
 	if((H.wear_mask && (H.wear_mask.flags_inv_hide & HIDEFACE)) || (H.head && (H.head.flags_inv_hide & HIDEFACE)))
 		return TRUE
 	return FALSE
@@ -16,7 +16,8 @@
 	icon_state = "none"
 	use_muzzled_sprites = FALSE
 	factual = FALSE
-	allowed_species = list("Anthropomorph" = TRUE)
+	allowed_species = list(FLEXIBLE_SPECIES)
+	color_src = null
 
 /datum/mutant_accessory/snouts/sharp
 	name = "Sharp"
@@ -36,16 +37,16 @@
 
 /datum/mutant_accessory/snouts/mammal
 	color_src = USE_MATRIXED_COLORS
-	allowed_species = list("Anthropomorph" = TRUE)
+	allowed_species = list(FLEXIBLE_SPECIES)
 
 /datum/mutant_accessory/snouts/mammal/vulpkanin
-	allowed_species = list("Anthropomorph" = TRUE, "Vulpkanin" = TRUE)
+	allowed_species = list(FLEXIBLE_SPECIES, VULPINE_SPECIES)
 
 /datum/mutant_accessory/snouts/mammal/tajaran
-	allowed_species = list("Anthropomorph" = TRUE, "Tajaran" = TRUE)
+	allowed_species = list(FLEXIBLE_SPECIES, FELINE_SPECIES)
 
 /datum/mutant_accessory/snouts/mammal/akula
-	allowed_species = list("Anthropomorph" = TRUE, "Akula" = TRUE, "Aquatic" = TRUE)
+	allowed_species = list(FLEXIBLE_SPECIES, AQUATIC_SPECIES)
 
 /datum/mutant_accessory/snouts/mammal/bird
 	name = "Beak"

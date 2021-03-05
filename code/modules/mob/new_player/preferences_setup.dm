@@ -128,6 +128,10 @@
 
 	if(!previewJob)
 		var/mob/living/carbon/human/dummy/mannequin = generate_or_wait_for_human_dummy(DUMMY_HUMAN_SLOT_PREFERENCES)
+		if(preview_pref == PREVIEW_PREF_NAKED)
+			mannequin.show_underwear = FALSE
+		else
+			mannequin.show_underwear = TRUE
 		mannequin.bodyparts_render_key = ""
 		mannequin.mutant_parts_render_key = ""
 		copy_to(mannequin)
@@ -143,9 +147,14 @@
 	var/mob/living/carbon/human/dummy/mannequin = generate_or_wait_for_human_dummy(DUMMY_HUMAN_SLOT_PREFERENCES)
 	copy_to(mannequin)
 
-	if(previewJob)
+	if(previewJob && preview_pref == PREVIEW_PREF_JOB)
 		mannequin.job = previewJob
 		previewJob.equip_dummy(mannequin, preference_source = parent)
+
+	if(preview_pref == PREVIEW_PREF_NAKED)
+		mannequin.show_underwear = FALSE
+	else
+		mannequin.show_underwear = TRUE
 
 	mannequin.bodyparts_render_key = ""
 	mannequin.mutant_parts_render_key = ""

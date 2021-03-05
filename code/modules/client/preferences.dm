@@ -140,7 +140,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	var/list/mutant_bodyparts = list()
 
-	var/color_customization = TRUE
+	var/color_customization = FALSE
 	var/mismatched_parts = FALSE
 
 	var/preview_pref = PREVIEW_PREF_JOB
@@ -227,7 +227,29 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		if(0) //Character Settings
 			dat += "<center><a href='?_src_=prefs;preference=character_tab;tab=0' [character_tab == 0 ? "class='linkOn'" : ""]>General</a>"
 			dat += "<a href='?_src_=prefs;preference=character_tab;tab=1' [character_tab == 1 ? "class='linkOn'" : ""]>Appearances</a>"
-			dat += "</center><HR>"
+			dat += "<HR>"
+			dat += "<table width='100%'>"
+			dat += "<tr>"
+			dat += "<td width=35%>"
+			dat += "Preview:"
+			dat += "<a href='?_src_=prefs;preference=character_preview;tab=[PREVIEW_PREF_JOB]' [preview_pref == PREVIEW_PREF_JOB ? "class='linkOn'" : ""]>[PREVIEW_PREF_JOB]</a>"
+			dat += "<a href='?_src_=prefs;preference=character_preview;tab=[PREVIEW_PREF_UNDERWEAR]' [preview_pref == PREVIEW_PREF_UNDERWEAR ? "class='linkOn'" : ""]>[PREVIEW_PREF_UNDERWEAR]</a>"
+			dat += "<a href='?_src_=prefs;preference=character_preview;tab=[PREVIEW_PREF_NAKED]' [preview_pref == PREVIEW_PREF_NAKED ? "class='linkOn'" : ""]>[PREVIEW_PREF_NAKED]</a>"
+			dat += "</td>"
+			dat += "<td width=35%>"
+			dat += "<b>Mismatched parts:</b> <a href='?_src_=prefs;preference=mismatch'>[(mismatched_parts) ? "Enabled" : "Disabled"]</a>"
+			dat += "</td>"
+
+			dat += "<td width=30%>"
+			dat += "<b> Color customization:</b> <a href='?_src_=prefs;preference=adv_colors'>[(color_customization) ? "Enabled" : "Disabled"]</a>"
+			if(color_customization)
+				dat += "<a href='?_src_=prefs;preference=change_bodypart;task=reset_all_colors'>Reset colors</a><BR>"
+			dat += "</td>"
+
+			dat += "</tr>"
+			dat += "</table>"
+			dat += "</center>"
+			dat += "<HR>"
 			switch(character_tab)
 				if(0) //General
 					dat += "<center>"
@@ -683,6 +705,18 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		return
 
 	switch(href_list["preference"])
+		if("mismatch")
+			mismatched_parts = !mismatched_parts
+		if("character_preview")
+			preview_pref = href_list["tab"]
+		if("adv_colors")
+			if(color_customization)
+				var/action = alert(user, "Are you sure you want to disable color customization (This will reset your colors back to default)?", "", "Yes", "No")
+				if(action && action != "Yes")
+					return
+			color_customization = !color_customization
+			if(!color_customization)
+				reset_mutantparts_colors()
 		if("change_bodypart")
 			var/datum/species/current_species = GLOB.all_species[species]
 			switch(href_list["task"])

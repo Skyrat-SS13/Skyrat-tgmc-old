@@ -133,6 +133,7 @@
 	//Current features and mutant bodyparts, those can change if for example your tail gets cut off. For original information check the DNA datum
 	var/list/features = MANDATORY_FEATURE_LIST
 	var/list/mutant_bodyparts = list()
+	var/list/body_markings = list()
 
 	var/datum/dna/dna
 

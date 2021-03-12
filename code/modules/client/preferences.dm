@@ -139,6 +139,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/list/features = MANDATORY_FEATURE_LIST
 
 	var/list/mutant_bodyparts = list()
+	var/list/body_markings = list()
 
 	var/color_customization = FALSE
 	var/mismatched_parts = FALSE
@@ -227,6 +228,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		if(0) //Character Settings
 			dat += "<center><a href='?_src_=prefs;preference=character_tab;tab=0' [character_tab == 0 ? "class='linkOn'" : ""]>General</a>"
 			dat += "<a href='?_src_=prefs;preference=character_tab;tab=1' [character_tab == 1 ? "class='linkOn'" : ""]>Appearances</a>"
+			dat += "<a href='?_src_=prefs;preference=character_tab;tab=2' [character_tab == 2 ? "class='linkOn'" : ""]>Body Markings</a>"
 			dat += "<HR>"
 			dat += "<table width='100%'>"
 			dat += "<tr>"
@@ -427,6 +429,85 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 					dat += "<table width='100%'><tr><td width='24%' valign='top'>"
 					dat += "</td>"
+					dat += "</tr></table>"
+				if(2) //Body Markings
+					dat += "Use a <b>markings preset</b>: <a href='?_src_=prefs;preference=change_marking;task=use_preset'>Choose</a>  "
+					dat += "<table width='100%' align='center'>"
+					dat += " Primary:<span style='border: 1px solid #161616; background-color: #[features["mcolor"]];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=mutant_color'>Change</a>"
+					dat += " Secondary:<span style='border: 1px solid #161616; background-color: #[features["mcolor2"]];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=mutant_color2'>Change</a>"
+					dat += " Tertiary:<span style='border: 1px solid #161616; background-color: #[features["mcolor3"]];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=mutant_color3'>Change</a>"
+					dat += "</table>"
+					dat += "<table width='100%'>"
+					dat += "<td valign='top' width='50%'>"
+					var/iterated_markings = 0
+					for(var/zone in GLOB.marking_zones)
+						var/named_zone = " "
+						switch(zone)
+							if(BODY_ZONE_R_ARM)
+								named_zone = "Right Arm"
+							if(BODY_ZONE_L_ARM)
+								named_zone = "Left Arm"
+							if(BODY_ZONE_HEAD)
+								named_zone = "Head"
+							if(BODY_ZONE_CHEST)
+								named_zone = "Chest"
+							if(BODY_ZONE_R_LEG)
+								named_zone = "Right Leg"
+							if(BODY_ZONE_L_LEG)
+								named_zone = "Left Leg"
+							if(BODY_ZONE_PRECISE_R_HAND)
+								named_zone = "Right Hand"
+							if(BODY_ZONE_PRECISE_L_HAND)
+								named_zone = "Left Hand"
+						dat += "<center><h3>[named_zone]</h3></center>"
+						dat += "<table align='center'; width='100%'; height='100px'; style='background-color:#13171C'>"
+						dat += "<tr style='vertical-align:top'>"
+						dat += "<td width=10%><font size=2> </font></td>"
+						dat += "<td width=6%><font size=2> </font></td>"
+						dat += "<td width=25%><font size=2> </font></td>"
+						dat += "<td width=44%><font size=2> </font></td>"
+						dat += "<td width=15%><font size=2> </font></td>"
+						dat += "</tr>"
+
+						if(body_markings[zone])
+							for(var/key in body_markings[zone])
+								var/datum/body_marking/BD = GLOB.body_markings[key]
+								var/can_move_up = " "
+								var/can_move_down = " "
+								var/color_line = " "
+								var/current_index = LAZYFIND(body_markings[zone], key)
+								if(BD.always_color_customizable || color_customization)
+									var/color = body_markings[zone][key]
+									color_line = "<a href='?_src_=prefs;name=[key];key=[zone];preference=change_marking;task=reset_color'>R</a>"
+									color_line += "<a href='?_src_=prefs;name=[key];key=[zone];preference=change_marking;task=change_color'><span class='color_holder_box' style='background-color:["#[color]"]'></span></a>"
+								if(current_index < length(body_markings[zone]))
+									can_move_down = "<a href='?_src_=prefs;name=[key];key=[zone];preference=change_marking;task=marking_move_down'>Down</a>"
+								if(current_index > 1)
+									can_move_up = "<a href='?_src_=prefs;name=[key];key=[zone];preference=change_marking;task=marking_move_up'>Up</a>"
+								dat += "<tr style='vertical-align:top;'>"
+								dat += "<td>[can_move_up]</td>"
+								dat += "<td>[can_move_down]</td>"
+								dat += "<td><a href='?_src_=prefs;name=[key];key=[zone];preference=change_marking;task=change_marking'>[key]</a></td>"
+								dat += "<td>[color_line]</td>"
+								dat += "<td><a href='?_src_=prefs;name=[key];key=[zone];preference=change_marking;task=remove_marking'>Remove</a></td>"
+								dat += "</tr>"
+
+						if(!(body_markings[zone]) || body_markings[zone].len < MAXIMUM_MARKINGS_PER_LIMB)
+							dat += "<tr style='vertical-align:top;'>"
+							dat += "<td> </td>"
+							dat += "<td> </td>"
+							dat += "<td> </td>"
+							dat += "<td> </td>"
+							dat += "<td><a href='?_src_=prefs;key=[zone];preference=change_marking;task=add_marking'>Add</a></td>"
+							dat += "</tr>"
+
+						dat += "</table>"
+
+						iterated_markings += 1
+						if(iterated_markings >= 4)
+							dat += "<td valign='top' width='50%'>"
+							iterated_markings = 0
+
 					dat += "</tr></table>"
 
 		if(1) //Game Preferences
@@ -705,6 +786,111 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		return
 
 	switch(href_list["preference"])
+		if("change_marking")
+			var/datum/species/current_species = GLOB.all_species[species]
+			switch(href_list["task"])
+				if("use_preset")
+					var/action = alert(user, "Are you sure you want to use a preset (This will clear your existing markings)?", "", "Yes", "No")
+					if(action && action == "Yes")
+						var/list/candidates = get_body_marking_sets_for_species(current_species, mismatched_parts)
+						if(length(candidates) == 0)
+							return
+						var/desired_set = input(user, "Choose your new body markings:", "Character Preference") as null|anything in candidates
+						if(desired_set)
+							var/datum/body_marking_set/BMS = GLOB.body_marking_sets[desired_set]
+							body_markings = assemble_body_markings_from_set(BMS, features, current_species)
+
+				if("reset_color")
+					var/zone = href_list["key"]
+					var/name = href_list["name"]
+					if(!body_markings[zone] || !body_markings[zone][name])
+						return
+					var/datum/body_marking/BM = GLOB.body_markings[name]
+					body_markings[zone][name] = BM.get_default_color(features, current_species)
+				if("change_color")
+					var/zone = href_list["key"]
+					var/name = href_list["name"]
+					if(!body_markings[zone] || !body_markings[zone][name])
+						return
+					var/color = body_markings[zone][name]
+					var/new_color = input(user, "Choose your markings color:", "Character Preference","#[color]") as color|null
+					if(new_color)
+						if(!body_markings[zone] || !body_markings[zone][name])
+							return
+						body_markings[zone][name] = sanitize_hexcolor(new_color, 6)
+				if("marking_move_up")
+					var/zone = href_list["key"]
+					var/name = href_list["name"]
+					var/list/marking_list = LAZYACCESS(body_markings, zone)
+					var/current_index = LAZYFIND(marking_list, name)
+					if(!current_index || --current_index < 1)
+						return
+					var/marking_content = marking_list[name]
+					marking_list -= name
+					marking_list.Insert(current_index, name)
+					marking_list[name] = marking_content
+				if("marking_move_down")
+					var/zone = href_list["key"]
+					var/name = href_list["name"]
+					var/list/marking_list = LAZYACCESS(body_markings, zone)
+					var/current_index = LAZYFIND(marking_list, name)
+					if(!current_index || ++current_index > length(marking_list))
+						return
+					var/marking_content = marking_list[name]
+					marking_list -= name
+					marking_list.Insert(current_index, name)
+					marking_list[name] = marking_content
+				if("add_marking")
+					var/zone = href_list["key"]
+					if(!GLOB.body_markings_per_limb[zone])
+						return
+					var/list/possible_candidates = get_limb_markings_for_species(current_species, zone, mismatched_parts)
+					if(body_markings[zone])
+						//To prevent exploiting hrefs to bypass the marking limit
+						if(body_markings[zone].len >= MAXIMUM_MARKINGS_PER_LIMB)
+							return
+						//Remove already used markings from the candidates
+						for(var/list/this_list in body_markings[zone])
+							possible_candidates -= this_list[MUTANT_INDEX_NAME]
+
+					if(possible_candidates.len == 0)
+						return
+					var/desired_marking = input(user, "Choose your new marking to add:", "Character Preference") as null|anything in possible_candidates
+					if(desired_marking)
+						var/datum/body_marking/BD = GLOB.body_markings[desired_marking]
+						if(!body_markings[zone])
+							body_markings[zone] = list()
+						body_markings[zone][BD.name] = BD.get_default_color(features, current_species)
+
+				if("remove_marking")
+					var/zone = href_list["key"]
+					var/name = href_list["name"]
+					if(!body_markings[zone] || !body_markings[zone][name])
+						return
+					body_markings[zone] -= name
+					if(body_markings[zone].len == 0)
+						body_markings -= zone
+				if("change_marking")
+					var/zone = href_list["key"]
+					var/changing_name = href_list["name"]
+
+					var/list/possible_candidates = get_limb_markings_for_species(current_species, zone, mismatched_parts)
+					if(body_markings[zone])
+						//Remove already used markings from the candidates
+						for(var/keyed_name in body_markings[zone])
+							possible_candidates -= keyed_name
+					if(possible_candidates.len == 0)
+						return
+					var/desired_marking = input(user, "Choose a marking to change the current one to:", "Character Preference") as null|anything in possible_candidates
+					if(desired_marking)
+						if(!body_markings[zone] || !body_markings[zone][changing_name])
+							return
+						var/held_index = LAZYFIND(body_markings[zone], changing_name)
+						body_markings[zone] -= changing_name
+						var/datum/body_marking/BD = GLOB.body_markings[desired_marking]
+						var/marking_content = BD.get_default_color(features, current_species)
+						body_markings[zone].Insert(held_index, desired_marking)
+						body_markings[zone][desired_marking] = marking_content
 		if("mismatch")
 			mismatched_parts = !mismatched_parts
 		if("character_preview")
@@ -1329,6 +1515,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	for(var/key in new_features)
 		features[key] = new_features[key]
 	mutant_bodyparts = current_species.get_random_mutant_bodyparts(features)
+	body_markings = current_species.get_random_body_markings(features)
 
 /datum/preferences/proc/reset_mutantparts_colors()
 	var/datum/species/current_species = GLOB.all_species[species]

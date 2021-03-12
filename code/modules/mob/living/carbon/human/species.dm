@@ -114,6 +114,7 @@
 	var/specific_alpha = 255
 
 	var/uses_ethnic_sprites = FALSE
+	var/gets_random_bodymarkings = FALSE
 
 /datum/species/New()
 	if(hud_type)
@@ -132,6 +133,17 @@
 	for(var/key in default_mutant_bodyparts)
 		compiled[key] = GetDefaultMutantpart(src, key, features)
 	return compiled
+
+/datum/species/proc/get_random_body_markings(list/features)
+	if(!gets_random_bodymarkings)
+		return list()
+	else
+		var/list/candidates = get_body_marking_sets_for_species(src)
+		if(!length(candidates))
+			return list()
+		var/name = pick(candidates)
+		var/datum/body_marking_set/BMS = GLOB.body_marking_sets[name]
+		return assemble_body_markings_from_set(BMS, features, src)
 
 /datum/species/proc/create_organs(mob/living/carbon/human/H) //Handles creation of mob organs and limbs.
 
@@ -609,6 +621,7 @@
 	base_color = "#333333"
 
 	joinable_roundstart = TRUE
+	gets_random_bodymarkings = TRUE
 
 	default_mutant_bodyparts = list("tail" = ACC_RANDOM, "snout" = ACC_RANDOM, "ears" = ACC_RANDOM)
 
@@ -652,6 +665,7 @@
 	base_color = "#333333"
 
 	joinable_roundstart = TRUE
+	gets_random_bodymarkings = TRUE
 
 	default_mutant_bodyparts = list("tail" = ACC_RANDOM, "snout" = ACC_RANDOM, "ears" = ACC_RANDOM)
 
@@ -695,6 +709,7 @@
 	base_color = "#333333"
 
 	joinable_roundstart = TRUE
+	gets_random_bodymarkings = TRUE
 
 	default_mutant_bodyparts = list("tail" = ACC_RANDOM, "snout" = ACC_RANDOM, "horns" = "None", "ears" = ACC_RANDOM, "wings" = "None", "neck_fluff" = "None", "moth_antennae" = "None")
 
@@ -788,6 +803,7 @@
 	base_color = "#333333"
 
 	joinable_roundstart = TRUE
+	gets_random_bodymarkings = TRUE
 
 	default_mutant_bodyparts = list("tail" = ACC_RANDOM, "snout" = ACC_RANDOM, "horns" = "None", "ears" = ACC_RANDOM, "wings" = "None", "neck_fluff" = "None", "moth_antennae" = "None")
 
@@ -886,6 +902,7 @@
 	namepool = /datum/namepool/moth
 
 	joinable_roundstart = TRUE
+	gets_random_bodymarkings = TRUE
 
 	default_mutant_bodyparts = list("wings" = ACC_RANDOM, "neck_fluff" = ACC_RANDOM, "moth_antennae" = ACC_RANDOM)
 
@@ -921,6 +938,7 @@
 	namepool = /datum/namepool/moth
 
 	joinable_roundstart = TRUE
+	gets_random_bodymarkings = TRUE
 
 	default_mutant_bodyparts = list("tail" = "None", "snout" = "None", "horns" = "None", "ears" = ACC_RANDOM, "wings" = ACC_RANDOM, "neck_fluff" = ACC_RANDOM, "moth_antennae" = ACC_RANDOM)
 

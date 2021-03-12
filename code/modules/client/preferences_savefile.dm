@@ -355,6 +355,7 @@
 
 	READ_FILE(S["features"], features)
 	READ_FILE(S["mutant_bodyparts"], mutant_bodyparts)
+	READ_FILE(S["body_markings"], body_markings)
 
 
 	be_special		= sanitize_integer(be_special, NONE, MAX_BITFLAG, initial(be_special))
@@ -434,6 +435,13 @@
 		if(!mutant_bodyparts[key])
 			mutant_bodyparts[key] = GetDefaultMutantpart(current_species, key, features)
 		validate_color_keys_for_part(key)
+
+	//validating body markings
+	body_markings = SANITIZE_LIST(body_markings)
+	for(var/zone in body_markings)
+		for(var/name in body_markings[zone])
+			if(!(name in GLOB.body_markings_per_limb[zone]))
+				body_markings[zone] -= name
 
 	return TRUE
 
@@ -562,6 +570,7 @@
 
 	WRITE_FILE(S["features"], features)
 	WRITE_FILE(S["mutant_bodyparts"], mutant_bodyparts)
+	WRITE_FILE(S["body_markings"], body_markings)
 
 	return TRUE
 

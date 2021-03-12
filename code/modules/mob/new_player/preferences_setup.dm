@@ -167,6 +167,7 @@
 	var/datum/species/S = GLOB.all_species[species]
 	features = S.get_random_features()
 	mutant_bodyparts = S.get_random_mutant_bodyparts(features)
+	body_markings = S.get_random_body_markings(features)
 
 
 /datum/preferences/proc/copy_to(mob/living/carbon/human/character, safety = FALSE)

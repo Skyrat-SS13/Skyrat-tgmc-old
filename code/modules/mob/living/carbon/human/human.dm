@@ -997,6 +997,7 @@
 
 		dna.features = pref_load.features.Copy()
 		dna.mutant_bodyparts = pref_load.mutant_bodyparts.Copy()
+		dna.body_markings = pref_load.body_markings.Copy()
 	else
 		if(species.default_language_holder)
 			language_holder = new species.default_language_holder(src)
@@ -1018,6 +1019,7 @@
 
 		dna.features = species.get_random_features()
 		dna.mutant_bodyparts = species.get_random_mutant_bodyparts(features)
+		dna.body_markings = species.get_random_body_markings(features)
 
 	features = dna.features.Copy()
 	var/list/finalized_mutantparts = list()
@@ -1027,6 +1029,7 @@
 			continue
 		finalized_mutantparts[key] = dna.mutant_bodyparts[key].Copy()
 	mutant_bodyparts = finalized_mutantparts
+	body_markings = dna.body_markings.Copy()
 
 
 /mob/living/carbon/human/reagent_check(datum/reagent/R)

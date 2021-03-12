@@ -138,8 +138,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	var/list/features = MANDATORY_FEATURE_LIST
 
-	var/list/mutant_bodyparts = list()
-	var/list/body_markings = list()
+	var/list/list/mutant_bodyparts = list()
+	var/list/list/body_markings = list()
 
 	var/color_customization = FALSE
 	var/mismatched_parts = FALSE

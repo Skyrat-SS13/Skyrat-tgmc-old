@@ -1,5 +1,5 @@
 GLOBAL_LIST_EMPTY(generic_accessories)
-GLOBAL_LIST_INIT(mutant_accessories, InitMutantAccessories())
+GLOBAL_LIST_INIT_TYPED(mutant_accessories, /list, InitMutantAccessories())
 
 /proc/InitMutantAccessories()
 	var/list/compiled = list()

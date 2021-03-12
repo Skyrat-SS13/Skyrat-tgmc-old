@@ -57,7 +57,7 @@
 	//organ_type = /obj/item/organ/wings/moth
 	relevent_layers = list(BODY_BEHIND_LAYER, BODY_FRONT_LAYER)
 
-/datum/mutant_accessory/wings/moth/is_hidden(mob/living/carbon/human/H, obj/item/bodypart/HD)
+/datum/mutant_accessory/wings/moth/is_hidden(mob/living/carbon/human/H)
 	if((H.wear_suit && (H.try_hide_mutant_parts || (H.wear_suit.flags_inv_hide & HIDEJUMPSUIT))))
 		return TRUE
 	return FALSE

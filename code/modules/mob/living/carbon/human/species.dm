@@ -341,7 +341,6 @@
 /datum/species/genemodder
 	name = "Genemodder"
 	name_plural = "Genemodders"
-	primitive = /mob/living/carbon/monkey
 	unarmed_type = /datum/unarmed_attack/punch
 	species_flags = HAS_SKIN_TONE|HAS_LIPS|HAS_UNDERWEAR
 	count_human = TRUE
@@ -362,7 +361,6 @@
 /datum/species/humanoid
 	name = "Humanoid"
 	name_plural = "Humanoids"
-	primitive = /mob/living/carbon/monkey
 	unarmed_type = /datum/unarmed_attack/punch
 	species_flags = HAS_SKIN_COLOR|HAS_LIPS|HAS_UNDERWEAR
 	count_human = TRUE
@@ -642,7 +640,6 @@
 	tail = "sogtail"
 	unarmed_type = /datum/unarmed_attack/claws
 	secondary_unarmed_type = /datum/unarmed_attack/bite/strong
-	primitive = /mob/living/carbon/monkey/unathi
 	taste_sensitivity = TASTE_SENSITIVE
 	gluttonous = 1
 

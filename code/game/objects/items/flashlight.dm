@@ -83,7 +83,7 @@
 		user.visible_message("<span class='notice'>[user] directs [src] to [M]'s eyes.</span>", \
 							"<span class='notice'>You direct [src] to [M]'s eyes.</span>")
 
-		if(ishuman(M) || ismonkey(M))	//robots and aliens are unaffected
+		if(ishuman(M))	//robots and aliens are unaffected
 			var/mob/living/carbon/C = M
 			if(C.stat == DEAD || C.disabilities & BLIND)	//mob is dead or fully blind
 				to_chat(user, "<span class='notice'>[C] pupils does not react to the light!</span>")
@@ -153,6 +153,8 @@
 		attack_self(usr)
 
 /obj/item/flashlight/lamp/attack_alien(mob/living/carbon/xenomorph/X, damage_amount = X.xeno_caste.melee_damage, damage_type = BRUTE, damage_flag = "", effects = TRUE, armor_penetration = 0, isrightclick = FALSE)
+	if(X.status_flags & INCORPOREAL)
+		return FALSE
 	X.do_attack_animation(src, ATTACK_EFFECT_SMASH)
 	playsound(loc, 'sound/effects/metalhit.ogg', 20, TRUE)
 	X.visible_message("<span class='danger'>\The [X] smashes [src]!</span>", \

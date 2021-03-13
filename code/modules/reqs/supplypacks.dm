@@ -157,6 +157,13 @@ OPERATIONS
 	contains = list(/obj/structure/ob_ammo/ob_fuel)
 	cost = 10
 	containertype = null
+
+/datum/supply_packs/operations/cas_voucher
+	name = "100 dropship fabricator points"
+	contains = list(/obj/item/dropship_points_voucher)
+	cost = 40
+	containertype = null
+
 /*******************************************************************************
 WEAPONS
 *******************************************************************************/
@@ -168,12 +175,12 @@ WEAPONS
 /datum/supply_packs/weapons/sentry
 	name = "UA 571-C Base Defense Sentry"
 	contains = list(/obj/item/storage/box/sentry)
-	cost = 120
+	cost = 100
 
 /datum/supply_packs/weapons/minisentry
 	name = "UA-580 Portable Sentry"
 	contains = list(/obj/item/storage/box/minisentry)
-	cost = 60
+	cost = 40
 
 /datum/supply_packs/weapons/m56d_emplacement
 	name = "TL-102 Mounted Heavy Smartgun"
@@ -195,10 +202,10 @@ WEAPONS
 	cost = 40
 
 
-/datum/supply_packs/weapons/specgrenadier
-	name = "Grenadier Specialist kit"
-	contains = list(/obj/item/weapon/gun/launcher/m92)
-	cost = 80
+/datum/supply_packs/weapons/railgun
+	name = "TX-220 Railgun"
+	contains = list(/obj/item/weapon/gun/rifle/railgun)
+	cost = 130
 
 /datum/supply_packs/weapons/specscoutm4ra
 	name = "Scout Specialist kit (M4RA)"
@@ -226,8 +233,8 @@ WEAPONS
 	cost = MINIGUN_PRICE
 
 /datum/supply_packs/weapons/smartgun
-	name = "T-29 Smart Machinegun"
-	contains = list(/obj/item/weapon/gun/rifle/standard_smartmachinegun)
+	name = "T-29 Smart Machinegun kit"
+	contains = list(/obj/item/storage/box/t26_system)
 	cost = 40
 
 /datum/supply_packs/weapons/flamethrower
@@ -424,7 +431,7 @@ AMMO
 		/obj/item/cell/lasgun/tesla,
 		/obj/item/cell/lasgun/tesla,
 	)
-	cost = 30
+	cost = 10
 
 /datum/supply_packs/ammo/boxslug
 	name = "Slug Ammo Box"
@@ -516,6 +523,11 @@ AMMO
 	contains = list(/obj/item/ammo_magazine/sniper)
 	cost = 10
 
+/datum/supply_packs/ammo/railgun
+	name = "Railgun round"
+	contains = list(/obj/item/ammo_magazine/railgun)
+	cost = 4
+
 /datum/supply_packs/ammo/shotguntracker
 	name = "12 Gauge Tracker Shells"
 	contains = list(/obj/item/ammo_magazine/shotgun/tracker)
@@ -589,7 +601,7 @@ AMMO
 /datum/supply_packs/ammo/minisentry
 	name = "UA-580 point defense sentry ammo"
 	contains = list(/obj/item/ammo_magazine/minisentry)
-	cost = 10
+	cost = 5
 
 /datum/supply_packs/ammo/m56d
 	name = "TL-102 mounted heavy smartgun ammo"

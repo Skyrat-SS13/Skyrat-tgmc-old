@@ -79,6 +79,8 @@
 	ignore_weed_destruction = TRUE
 
 /obj/effect/alien/resin/sticky/attack_alien(mob/living/carbon/xenomorph/X, damage_amount = X.xeno_caste.melee_damage, damage_type = BRUTE, damage_flag = "", effects = TRUE, armor_penetration = 0, isrightclick = FALSE)
+	if(X.status_flags & INCORPOREAL)
+		return FALSE
 
 	if(X.a_intent == INTENT_HARM) //Clear it out on hit; no need to double tap.
 		X.do_attack_animation(src, ATTACK_EFFECT_CLAW) //SFX
@@ -196,6 +198,9 @@
 	hugger = null
 
 /obj/effect/alien/resin/trap/attack_alien(mob/living/carbon/xenomorph/X, damage_amount = X.xeno_caste.melee_damage, damage_type = BRUTE, damage_flag = "", effects = TRUE, armor_penetration = 0, isrightclick = FALSE)
+	if(X.status_flags & INCORPOREAL)
+		return FALSE
+
 	if(X.a_intent == INTENT_HARM)
 		return ..()
 	if(!(X.xeno_caste.caste_flags & CASTE_CAN_HOLD_FACEHUGGERS))
@@ -262,7 +267,7 @@
 	new /obj/structure/mineral_door/resin/thick(oldloc)
 	return TRUE
 
-/obj/structure/mineral_door/resin/attack_paw(mob/living/carbon/monkey/user)
+/obj/structure/mineral_door/resin/attack_paw(mob/living/carbon/human/user)
 	if(user.a_intent == INTENT_HARM)
 		user.visible_message("<span class='xenowarning'>\The [user] claws at \the [src].</span>", \
 		"<span class='xenowarning'>You claw at \the [src].</span>")
@@ -447,6 +452,8 @@
 	Burst(TRUE)//any explosion destroys the egg.
 
 /obj/effect/alien/egg/attack_alien(mob/living/carbon/xenomorph/M, damage_amount = M.xeno_caste.melee_damage, damage_type = BRUTE, damage_flag = "", effects = TRUE, armor_penetration = 0, isrightclick = FALSE)
+	if(M.status_flags & INCORPOREAL)
+		return FALSE
 
 	if(!istype(M))
 		return attack_hand(M)
@@ -662,6 +669,9 @@ TUNNEL
 	if(creator)
 		creator.tunnels -= src
 
+	for(var/datum/atom_hud/xeno_tactical/xeno_tac_hud in GLOB.huds) //HUD clean up
+		xeno_tac_hud.remove_from_hud(src)
+
 	return ..()
 
 /obj/structure/tunnel/examine(mob/user)
@@ -690,7 +700,7 @@ TUNNEL
 	attack_alien(user)
 
 /obj/structure/tunnel/attack_alien(mob/living/carbon/xenomorph/X, damage_amount = X.xeno_caste.melee_damage, damage_type = BRUTE, damage_flag = "", effects = TRUE, armor_penetration = 0, isrightclick = FALSE)
-	if(!istype(X) || X.stat || X.lying_angle)
+	if(!istype(X) || X.stat || X.lying_angle || X.status_flags & INCORPOREAL)
 		return
 
 	if(X.a_intent == INTENT_HARM && X == creator)
@@ -717,6 +727,10 @@ TUNNEL
 		return FALSE
 
 	pick_a_tunnel(X)
+
+/obj/structure/tunnel/attack_larva(mob/living/carbon/xenomorph/larva/L) //So larvas can actually use tunnels
+	attack_alien(L)
+
 
 ///Here we pick a tunnel to go to, then travel to that tunnel and peep out, confirming whether or not we want to emerge or go to another tunnel.
 /obj/structure/tunnel/proc/pick_a_tunnel(mob/living/carbon/xenomorph/M)
@@ -967,6 +981,9 @@ TUNNEL
 		return PROCESS_KILL
 
 /obj/structure/resin_jelly_pod/attack_alien(mob/living/carbon/xenomorph/X, damage_amount = X.xeno_caste.melee_damage, damage_type = BRUTE, damage_flag = "", effects = TRUE, armor_penetration = 0, isrightclick = FALSE)
+	if(X.status_flags & INCORPOREAL)
+		return FALSE
+
 	if(X.a_intent == INTENT_HARM && isxenohivelord(X))
 		to_chat(X, "<span class='xenowarning'>We begin tearing at the [src]...</span>")
 		if(do_after(X, HIVELORD_TUNNEL_DISMANTLE_TIME, FALSE, src, BUSY_ICON_BUILD))
@@ -991,6 +1008,9 @@ TUNNEL
 	var/immune_time = 15 SECONDS
 
 /obj/item/resin_jelly/attack_alien(mob/living/carbon/xenomorph/X, damage_amount = X.xeno_caste.melee_damage, damage_type = BRUTE, damage_flag = "", effects = TRUE, armor_penetration = 0, isrightclick = FALSE)
+	if(X.status_flags & INCORPOREAL)
+		return FALSE
+
 	if(X.xeno_caste.caste_flags & CASTE_CAN_HOLD_JELLY)
 		return attack_hand(X)
 	if(X.do_actions)

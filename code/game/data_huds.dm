@@ -19,12 +19,6 @@
 		hud.add_to_hud(src)
 
 
-/mob/living/carbon/monkey/add_to_all_mob_huds()
-	for(var/h in GLOB.huds)
-		var/datum/atom_hud/hud = h
-		hud.add_to_hud(src)
-
-
 /mob/living/carbon/xenomorph/add_to_all_mob_huds()
 	for(var/h in GLOB.huds)
 		if(!istype(h, /datum/atom_hud/xeno))
@@ -43,13 +37,6 @@
 			continue
 		var/datum/atom_hud/hud = h
 		hud.remove_from_hud(src)
-
-
-/mob/living/carbon/monkey/remove_from_all_mob_huds()
-	for(var/h in GLOB.huds)
-		var/datum/atom_hud/hud = h
-		hud.add_to_hud(src)
-
 
 /mob/living/carbon/xenomorph/remove_from_all_mob_huds()
 	for(var/h in GLOB.huds)
@@ -191,20 +178,6 @@
 	hud_set_pheromone()
 
 
-/mob/living/carbon/monkey/med_hud_set_status()
-	var/image/holder = hud_list[XENO_EMBRYO_HUD]
-	if(status_flags & XENO_HOST)
-		var/obj/item/alien_embryo/E = locate(/obj/item/alien_embryo) in src
-		if(E)
-			holder.icon_state = "infected[E.stage]"
-		else if(locate(/mob/living/carbon/xenomorph/larva) in src)
-			holder.icon_state = "infected5"
-	else if(stat == DEAD)
-		holder.icon_state = "huddead"
-	else
-		holder.icon_state = ""
-
-
 /mob/living/carbon/human/med_hud_set_status()
 	var/image/status_hud = hud_list[STATUS_HUD] //Status for med-hud.
 	var/image/infection_hud = hud_list[XENO_EMBRYO_HUD] //State of the xeno embryo.
@@ -243,8 +216,10 @@
 	switch(stat)
 		if(DEAD)
 			simple_status_hud.icon_state = ""
-			infection_hud.icon_state = "huddead" //Xenos sense dead hosts, and no longer their larvas inside, which fall into stasis and no longer grow.
-			if(undefibbable)
+			infection_hud.icon_state = "huddead"
+			if(!HAS_TRAIT(src, TRAIT_PSY_DRAINED))
+				infection_hud.icon_state = "psy_drain"
+			if(HAS_TRAIT(src, TRAIT_UNDEFIBBABLE ))
 				status_hud.icon_state = "huddead"
 				return TRUE
 			if(!client)
@@ -547,5 +522,19 @@
 		holder.icon_state = "plasma0"
 		return
 
+	var/amount = round(rounds * 100 / rounds_max, 10)
+	holder.icon_state = "plasma[amount]"
+
+///Makes tl-102 ammo visible
+/obj/machinery/standard_hmg/proc/hud_set_hsg_ammo()
+	var/image/holder = hud_list[SENTRY_AMMO_HUD]
+
+	if(!holder)
+		return
+
+	if(!rounds)
+		holder.icon_state = "plasma0"
+		return
+	
 	var/amount = round(rounds * 100 / rounds_max, 10)
 	holder.icon_state = "plasma[amount]"

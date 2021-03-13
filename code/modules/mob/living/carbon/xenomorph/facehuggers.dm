@@ -75,6 +75,9 @@
 
 //Deal with picking up facehuggers. "attack_alien" is the universal 'xenos click something while unarmed' proc.
 /obj/item/clothing/mask/facehugger/attack_alien(mob/living/carbon/xenomorph/X, damage_amount = X.xeno_caste.melee_damage, damage_type = BRUTE, damage_flag = "", effects = TRUE, armor_penetration = 0, isrightclick = FALSE)
+	if(X.status_flags & INCORPOREAL)
+		return
+
 	if(!issamexenohive(X) && stat != DEAD)
 		X.do_attack_animation(src, ATTACK_EFFECT_SMASH)
 		X.visible_message("<span class='xenowarning'>[X] crushes \the [src]",
@@ -275,30 +278,6 @@
 //////////////////////
 /mob/proc/can_be_facehugged(obj/item/clothing/mask/facehugger/F, check_death = TRUE, check_mask = TRUE, provoked = FALSE)
 	return FALSE
-
-/mob/living/carbon/monkey/can_be_facehugged(obj/item/clothing/mask/facehugger/F, check_death = TRUE, check_mask = TRUE, provoked = FALSE)
-	if(!istype(F))
-		return FALSE
-
-	if((status_flags & (XENO_HOST|GODMODE)) || F.stat == DEAD)
-		return FALSE
-
-	if(check_death && stat == DEAD)
-		return FALSE
-
-	if(check_mask)
-		if(wear_mask)
-			var/obj/item/W = wear_mask
-			if(W.flags_item & NODROP)
-				return FALSE
-			if(istype(W, /obj/item/clothing/mask/facehugger))
-				var/obj/item/clothing/mask/facehugger/hugger = W
-				if(hugger.stat != DEAD)
-					return FALSE
-	else if (wear_mask && wear_mask != F)
-		return FALSE
-
-	return TRUE
 
 /mob/living/carbon/human/can_be_facehugged(obj/item/clothing/mask/facehugger/F, check_death = TRUE, check_mask = TRUE, provoked = FALSE)
 	if((status_flags & (XENO_HOST|GODMODE)) || F.stat == DEAD)

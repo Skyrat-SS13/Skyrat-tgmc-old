@@ -65,7 +65,7 @@
 					return FALSE
 			return TRUE
 	*/
-	if(H.wear_suit.flags_inv_hide & HIDEJUMPSUIT)
+	if(H.wear_suit && H.wear_suit.flags_inv_hide & HIDEJUMPSUIT)
 		return TRUE
 	return FALSE
 

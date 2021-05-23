@@ -1,6 +1,7 @@
 /obj/item
 	name = "item"
 	icon = 'icons/obj/items/items.dmi'
+	blocks_emissive = EMISSIVE_BLOCK_GENERIC
 	mouse_drag_pointer = MOUSE_ACTIVE_POINTER
 	materials = list(/datum/material/metal = 50)
 
@@ -12,6 +13,8 @@
 	var/item_state = null //if you don't want to use icon_state for onmob inhand/belt/back/ear/suitstorage/glove sprite.
 						//e.g. most headsets have different icon_state but they all use the same sprite when shown on the mob's ears.
 						//also useful for items with many icon_state values when you don't want to make an inhand sprite for each value.
+	///The icon state used to represent this image in "icons/obj/items/items_mini.dmi" Used in /obj/item/storage/box/visual to display tiny items in the box
+	var/icon_state_mini = "item"
 	var/force = 0
 	var/damtype = BRUTE
 	///Byond tick delay between left click attacks
@@ -305,7 +308,7 @@
 
 	var/equipped_to_slot = flags_equip_slot & slotdefine2slotbit(slot)
 	if(equipped_to_slot) // flags_equip_slot is a bitfield
-		SEND_SIGNAL(src, COMSIG_ITEM_EQUIPPED_TO_SLOT, user)
+		SEND_SIGNAL(src, COMSIG_ITEM_EQUIPPED_TO_SLOT, user, slot)
 	else
 		SEND_SIGNAL(src, COMSIG_ITEM_EQUIPPED_NOT_IN_SLOT, user, slot)
 
@@ -351,9 +354,19 @@
 /obj/item/proc/item_action_slot_check(mob/user, slot)
 	return TRUE
 
-// Anything unique the item can do, like pumping a shotgun, spin or whatever.
+///Anything unique the item can do, like pumping a shotgun, spin or whatever.
 /obj/item/proc/unique_action(mob/user)
 	return FALSE
+
+///Used to enable/disable an item's bump attack. Grouped in a proc to make sure the signal or flags aren't missed
+/obj/item/proc/toggle_item_bump_attack(mob/user, enable_bump_attack)
+	SEND_SIGNAL(user, COMSIG_ITEM_TOGGLE_BUMP_ATTACK, enable_bump_attack)
+	if(flags_item & CAN_BUMP_ATTACK && enable_bump_attack)
+		return
+	if(enable_bump_attack)
+		flags_item |= CAN_BUMP_ATTACK
+		return
+	flags_item &= ~CAN_BUMP_ATTACK
 
 // The mob M is attempting to equip this item into the slot passed through as 'slot'. Return 1 if it can do this and 0 if it can't.
 // If you are making custom procs but would like to retain partial or complete functionality of this one, include a 'return ..()' to where you want this to happen.

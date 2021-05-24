@@ -97,7 +97,7 @@
 			hsrc = holder
 		if("usr")
 			hsrc = mob
-		if("prefs") //Preference enabling
+		if("prefs")
 			if(inprefs)
 				return
 			inprefs = TRUE

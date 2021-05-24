@@ -46,6 +46,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	// Custom Keybindings
 	var/list/key_bindings = null
 
+	//CUSTOM EMOTES LIST
+	var/list/custom_emotes = list()
+
 	///Saves chemical recipes based on client so they persist through games
 	var/list/chem_macros = list()
 
@@ -133,14 +136,13 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	var/auto_fit_viewport = TRUE
 
-	var/current_tab = 0
-	var/character_tab = 0
-
-		/// New TGUI Preference preview
+	/// New TGUI Preference preview
 	var/map_name = "player_pref_map"
 	var/obj/screen/map_view/screen_main
 	var/obj/screen/background/screen_bg
-	var/list/custom_emotes = list()
+
+	var/current_tab = 0
+	var/character_tab = 0
 
 	var/list/features = MANDATORY_FEATURE_LIST
 
@@ -158,6 +160,19 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		return
 
 	parent = C
+
+	// Initialize map objects
+	screen_main = new
+	screen_main.name = "screen"
+	screen_main.assigned_map = map_name
+	screen_main.del_on_map_removal = FALSE
+	screen_main.screen_loc = "[map_name]:1,1"
+
+	screen_bg = new
+	screen_bg.assigned_map = map_name
+	screen_bg.del_on_map_removal = FALSE
+	screen_bg.icon_state = "clear"
+	screen_bg.fill_rect(1, 1, 4, 1)
 
 	if(!IsGuestKey(C.key))
 		load_path(C.ckey)

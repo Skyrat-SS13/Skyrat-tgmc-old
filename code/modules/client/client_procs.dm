@@ -97,8 +97,9 @@
 			hsrc = holder
 		if("usr")
 			hsrc = mob
-		if("prefs")
+		/*if("prefs")
 			stack_trace("This code path is no longer valid, migrate this to new TGUI prefs")
+		*/
 		if("vars")
 			return view_var_Topic(href, href_list, hsrc)
 		if("vote")

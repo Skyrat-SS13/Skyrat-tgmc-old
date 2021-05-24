@@ -485,7 +485,7 @@
 			screen |= O
 		O.appearance = MA
 		O.dir = D
-		O.screen_loc = "player_pref_map:[pos],1"
+		O.screen_loc = "character_preview_map:0,[pos]"
 
 
 /client/proc/clear_character_previews()

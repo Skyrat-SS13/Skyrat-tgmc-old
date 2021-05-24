@@ -38,7 +38,7 @@
 #define PREVIEW_PREF_UNDERWEAR "Underwear"
 #define PREVIEW_PREF_NAKED "Naked"
 
-#define FLEXIBLE_SPECIES "Anthropomorph" = TRUE, "Humanoid" = TRUE, "Genemodder" = TRUE, "Insectoid" = TRUE
+#define FLEXIBLE_SPECIES "Anthropomorph" = TRUE, "Humanoid" = TRUE, "Genemodder" = TRUE, "Insectoid" = TRUE, "Lizardperson" = TRUE
 #define LIZARD_SPECIES "Unathi" = TRUE, "Lizardperson" = TRUE
 #define AQUATIC_SPECIES "Akula" = TRUE, "Aquatic" = TRUE
 #define VULPINE_SPECIES "Vulpkanin" = TRUE

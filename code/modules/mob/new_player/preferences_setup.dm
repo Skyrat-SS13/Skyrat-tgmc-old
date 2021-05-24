@@ -169,7 +169,6 @@
 	parent.show_character_previews(new /mutable_appearance(mannequin))
 	unset_busy_human_dummy(DUMMY_HUMAN_SLOT_PREFERENCES)
 
-
 /datum/preferences/proc/randomize_species_specific()
 	var/datum/species/S = GLOB.all_species[species]
 	features = S.get_random_features()

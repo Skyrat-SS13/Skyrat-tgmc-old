@@ -203,12 +203,11 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 				SSticker.mode.attempt_to_join_as_larva(ghost)
 		return
 
-	/*else if(href_list["preference"])
+	else if(href_list["preference"])
 		if(!client?.prefs)
 			return
-		stack_trace("This code path is no longer valid, migrate this to new TGUI prefs")
-		return
-	*/
+		client.prefs.process_link(src, href_list)
+
 	else if(href_list["track_xeno_name"])
 		var/xeno_name = href_list["track_xeno_name"]
 		for(var/Y in GLOB.hive_datums[XENO_HIVE_NORMAL].get_all_xenos())

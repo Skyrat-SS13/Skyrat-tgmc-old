@@ -97,9 +97,13 @@
 			hsrc = holder
 		if("usr")
 			hsrc = mob
-		/*if("prefs")
-			stack_trace("This code path is no longer valid, migrate this to new TGUI prefs")
-		*/
+		if("prefs") //Preference enabling
+			if(inprefs)
+				return
+			inprefs = TRUE
+			. = prefs.process_link(usr, href_list)
+			inprefs = FALSE
+			return
 		if("vars")
 			return view_var_Topic(href, href_list, hsrc)
 		if("vote")

@@ -46,7 +46,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	// Custom Keybindings
 	var/list/key_bindings = null
 
-	// Custom emotes list
+	//CUSTOM EMOTES LIST
 	var/list/custom_emotes = list()
 
 	///Saves chemical recipes based on client so they persist through games
@@ -74,7 +74,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/preferred_squad = "None"
 	var/alternate_option = RETURN_TO_LOBBY
 	var/preferred_slot = SLOT_S_STORE
-	var/list/gear
+	var/list/gear = list()
 	var/list/job_preferences = list()
 
 	//Clothing
@@ -136,7 +136,11 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	var/auto_fit_viewport = TRUE
 
-	//SKYRAT EDIT
+	/// New TGUI Preference preview
+	var/map_name = "player_pref_map"
+	var/obj/screen/map_view/screen_main
+	var/obj/screen/background/screen_bg
+
 	var/current_tab = 0
 	var/character_tab = 0
 
@@ -149,12 +153,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/mismatched_parts = FALSE
 
 	var/preview_pref = PREVIEW_PREF_JOB
-	//SKYRAT EDIT END
-
-	/// New TGUI Preference preview
-	var/map_name = "player_pref_map"
-	var/obj/screen/map_view/screen_main
-	var/obj/screen/background/screen_bg
 
 
 /datum/preferences/New(client/C)
@@ -202,7 +200,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		return
 
 	update_preview_icon()
-	/*
+
 	var/dat
 
 	dat += {"
@@ -1236,10 +1234,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		if("grad_style")
 			var/list/valid_grads = list()
 			for(var/grad in GLOB.hair_gradients_list)
-				var/datum/sprite_accessory/S = GLOB.hair_gradients_list[grad]
-				if(!(species in S.species_allowed))
-					continue
-
 				valid_grads[grad] = GLOB.hair_gradients_list[grad]
 
 			var/new_grad_style = tgui_input_list(user, "Choose a color pattern for your hair:", "Character Preference", valid_grads)
@@ -1506,9 +1500,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	save_character()
 	ShowChoices(user)
 	return TRUE
-	*/
 
-	ui_interact(user)
 
 /datum/preferences/proc/UpdateJobPreference(mob/user, role, desiredLvl)
 	if(!length(SSjob?.joinable_occupations))
@@ -1517,9 +1509,12 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/datum/job/job = SSjob.GetJob(role)
 
 	if(!job)
+		user << browse(null, "window=mob_occupation")
+		ShowChoices(user)
 		return
 
 	SetJobPreferenceLevel(job, desiredLvl)
+	SetChoices(user)
 
 	return TRUE
 

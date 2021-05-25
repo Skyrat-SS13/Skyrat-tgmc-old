@@ -1234,10 +1234,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		if("grad_style")
 			var/list/valid_grads = list()
 			for(var/grad in GLOB.hair_gradients_list)
-				var/datum/sprite_accessory/S = GLOB.hair_gradients_list[grad]
-				if(!(species in S.species_allowed))
-					continue
-
 				valid_grads[grad] = GLOB.hair_gradients_list[grad]
 
 			var/new_grad_style = tgui_input_list(user, "Choose a color pattern for your hair:", "Character Preference", valid_grads)

@@ -46,7 +46,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	// Custom Keybindings
 	var/list/key_bindings = null
 
-	//CUSTOM EMOTES LIST
+	// Custom emotes list
 	var/list/custom_emotes = list()
 
 	///Saves chemical recipes based on client so they persist through games
@@ -74,7 +74,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/preferred_squad = "None"
 	var/alternate_option = RETURN_TO_LOBBY
 	var/preferred_slot = SLOT_S_STORE
-	var/list/gear = list()
+	var/list/gear
 	var/list/job_preferences = list()
 
 	//Clothing
@@ -1509,12 +1509,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/datum/job/job = SSjob.GetJob(role)
 
 	if(!job)
-		user << browse(null, "window=mob_occupation")
-		ShowChoices(user)
 		return
 
 	SetJobPreferenceLevel(job, desiredLvl)
-	SetChoices(user)
 
 	return TRUE
 

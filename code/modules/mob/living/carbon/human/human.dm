@@ -45,7 +45,6 @@
 	AddComponent(/datum/component/footstep, FOOTSTEP_MOB_HUMAN)
 	AddComponent(/datum/component/bump_attack, FALSE, FALSE)
 
-
 /mob/living/carbon/human/proc/human_z_changed(datum/source, old_z, new_z)
 	SIGNAL_HANDLER
 	LAZYREMOVE(GLOB.humans_by_zlevel["[old_z]"], src)

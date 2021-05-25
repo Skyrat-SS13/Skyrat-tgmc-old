@@ -3,6 +3,7 @@
 	real_name = "unknown"
 	icon = 'icons/mob/human.dmi'
 	icon_state = "body_m_s"
+	blocks_emissive = EMISSIVE_BLOCK_UNIQUE
 	hud_possible = list(HEALTH_HUD, STATUS_HUD_SIMPLE, STATUS_HUD, XENO_EMBRYO_HUD, XENO_REAGENT_HUD, WANTED_HUD, SQUAD_HUD, ORDER_HUD, PAIN_HUD)
 	health_threshold_crit = -50
 	melee_damage = 5
@@ -87,7 +88,7 @@
 
 
 	//Life variables
-	
+
 	///How long the human is dead, in life ticks, which is 2 seconds
 	var/dead_ticks = 0
 
@@ -126,8 +127,7 @@
 	///Amount of deciseconds gained from the braindeath timer, usually by CPR.
 	var/revive_grace_time = 0
 
-	COOLDOWN_DECLARE(xeno_push_delay)
-
+	//SKYRAT EDIT
 	//Current features and mutant bodyparts, those can change if for example your tail gets cut off. For original information check the DNA datum
 	var/list/features = MANDATORY_FEATURE_LIST
 	var/list/list/mutant_bodyparts = list()
@@ -141,3 +141,9 @@
 	var/try_hide_mutant_parts = FALSE
 
 	var/show_underwear = TRUE
+	//SKYRAT EDIT END
+
+	COOLDOWN_DECLARE(xeno_push_delay)
+
+	/// This is the cooldown on suffering additional effects for when shock gets high
+	COOLDOWN_DECLARE(last_shock_effect)

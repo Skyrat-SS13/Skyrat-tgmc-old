@@ -70,24 +70,30 @@ There are several things that need to be remembered:
 
 
 /mob/living/carbon/human/apply_overlay(cache_index)
+	var/list/to_add = list()
+	SEND_SIGNAL(src, COMSIG_HUMAN_APPLY_OVERLAY, cache_index, to_add)
 	if(islist(overlays_standing[cache_index]))
 		for(var/i in overlays_standing[cache_index])
 			var/image/I = i
-			overlays += I
+			to_add += I
 	else
 		var/image/I = overlays_standing[cache_index]
 		if(I)
-			overlays += I
+			to_add += I
+	overlays += to_add
 
 /mob/living/carbon/human/remove_overlay(cache_index)
+	var/list/to_remove = list()
+	SEND_SIGNAL(src, COMSIG_HUMAN_REMOVE_OVERLAY, cache_index, to_remove)
 	if(overlays_standing[cache_index])
 		if(islist(overlays_standing[cache_index]))
 			for(var/i in overlays_standing[cache_index])
 				var/image/I = i
-				overlays -= I
+				to_remove += I
 		else
-			overlays -= overlays_standing[cache_index]
+			to_remove += overlays_standing[cache_index]
 		overlays_standing[cache_index] = null
+	overlays -= to_remove
 
 /mob/living/carbon/human/apply_underlay(cache_index)
 	var/image/I = underlays_standing[cache_index]

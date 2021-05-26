@@ -359,3 +359,17 @@
   - code_imp: Tail Sweep cosmetics/sound improved.
   - bugfix: Evasion now fails as it should if the runner is targeted by flamethrower
       projectiles, or hasn't moved in the past 0.5 seconds.
+2021-05-26:
+  Alterist:
+  - bugfix: Fixes Theseus Issues
+  BraveMole:
+  - balance: Psy drain from 60 psy points to 40
+  - balance: Cocoon now only works for 5 minutes, so it produces 80 points rather
+      than 160 but is less risky to make
+  - balance: Psy points generated from generators are reduced by 25%
+  jroinc:
+  - rscadd: Nanoblood
+  - rscadd: Medic Blood vendor access
+  - rscdel: Removed QC+ and peri+ from the wrenchable vendor. Medics, quiver in fear!
+  - balance: rebalanced many chems, and changed a few autoinjectors, details in main
+      PR body

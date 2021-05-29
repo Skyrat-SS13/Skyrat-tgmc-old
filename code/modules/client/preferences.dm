@@ -969,24 +969,24 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		if("mutant_color")
 			var/new_mutantcolor = input(user, "Choose your character's primary color:", "Character Preference","#"+features["mcolor"]) as color|null
 			if(new_mutantcolor)
-				features["mcolor"] = sanitize_hexcolor(new_mutantcolor, 6)
+				features["mcolor"] = sanitize_hexcolor(new_mutantcolor)
 			if(!color_customization)
 				reset_mutantparts_colors()
 
 		if("mutant_color2")
 			var/new_mutantcolor = input(user, "Choose your character's secondary color:", "Character Preference","#"+features["mcolor2"]) as color|null
 			if(new_mutantcolor)
-				features["mcolor2"] = sanitize_hexcolor(new_mutantcolor, 6)
+				features["mcolor2"] = sanitize_hexcolor(new_mutantcolor)
 			if(!color_customization)
 				reset_mutantparts_colors()
 
 		if("mutant_color3")
 			var/new_mutantcolor = input(user, "Choose your character's tertiary color:", "Character Preference","#"+features["mcolor3"]) as color|null
 			if(new_mutantcolor)
-				features["mcolor3"] = sanitize_hexcolor(new_mutantcolor, 6)
+				features["mcolor3"] = sanitize_hexcolor(new_mutantcolor)
 			if(!color_customization)
 				reset_mutantparts_colors()
-
+				
 		if("tab")
 			current_tab = text2num(href_list["tab"])
 

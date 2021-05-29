@@ -941,7 +941,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						return
 					var/new_color = input(user, "Choose your character's [key] color:", "Character Preference","#[colorlist[index]]") as color|null
 					if(new_color)
-						colorlist[index] = sanitize_hexcolor(new_color)
+						colorlist[index] = sanitize_hexcolor(new_color,6)
 				if("reset_color")
 					var/key = href_list["key"]
 					if(!mutant_bodyparts[key])

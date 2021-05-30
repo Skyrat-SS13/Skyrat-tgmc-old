@@ -94,7 +94,7 @@ a.popt {text-decoration: none;}
 .headminmsay			{color: #402A14;	font-weight: bold;}
 
 .admin					{color: #386aff;	font-weight: bold;}
-.asay					{color: #9611D4;	font-weight: bold;}
+.asay					{color: #d4571e;	font-weight: bold;}
 .headminasay			{color: #5A0A7F;	font-weight: bold;}
 .boldannounce			{color: #ff0000;	font-weight: bold;}
 

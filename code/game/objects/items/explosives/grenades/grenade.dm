@@ -41,7 +41,8 @@
 
 	user.visible_message("<span class='warning'>[user] primes \a [name]!</span>", \
 	"<span class='warning'>You prime \a [name]!</span>")
-	if(initial(dangerous) && ishumanbasic(user))
+	// if(initial(dangerous) && ishumanbasic(user)) Skyrat edit -- original
+	if(initial(dangerous)
 		var/nade_sound = user.gender == FEMALE ? get_sfx("female_fragout") : get_sfx("male_fragout")
 
 		for(var/mob/living/carbon/human/H in hearers(6,user))

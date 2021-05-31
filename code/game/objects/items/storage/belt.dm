@@ -496,11 +496,21 @@
 	if(!draw_mode || !ishuman(user) && !contents.len)
 		open(user)
 
+	// Skyrat Edit - Runtimes are bad
+	if(!contents.len)
+		return
+	// Skyrat Edit End
+
 	var/obj/item/I = contents[contents.len]
 	if(!istype(I, /obj/item/ammo_magazine/handful))
 		return
 
 	var/obj/item/ammo_magazine/handful/existing_handful = I
+	// Skyrat Edit - Resolves Fix Me sprites from taking the last round from a martini belt
+	if(existing_handful.current_rounds == 1)
+		user.put_in_hands(existing_handful)
+		return
+	// Skyrat Edit End
 	existing_handful.create_handful(user, 1)
 	update_icon()
 
@@ -683,12 +693,12 @@
 	if(!istype(I, /obj/item/weapon/gun/pistol))
 		return ..()
 	var/obj/item/weapon/gun/pistol/gun = I
-	for(var/obj/item/ammo_magazine/mag in contents) 
+	for(var/obj/item/ammo_magazine/mag in contents)
 		if(!istype(gun, mag.gun_type))
 			continue
 		if(user.l_hand && user.r_hand || gun.current_mag)
 			gun.tactical_reload(mag, user)
-		else 
+		else
 			gun.reload(user, mag)
 		orient2hud()
 		return

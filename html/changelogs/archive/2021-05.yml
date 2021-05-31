@@ -371,6 +371,7 @@
   - code_imp: Squad hud support for factions
   - code_imp: Overwatch support for factions
   - bugfix: Fix minimap being duplicated when changing job/squad
+  BraveMole:
   - balance: Psy drain from 60 psy points to 40
   - balance: Cocoon now only works for 5 minutes, so it produces 80 points rather
       than 160 but is less risky to make

@@ -178,7 +178,9 @@
 
 
 /datum/preferences/proc/copy_to(mob/living/carbon/human/character, safety = FALSE)
-	character.set_species(species, pref_load = src)
+	// Do not modify the species for either of these as they should not be changed.
+	if(character.GetJob() != GLOB.jobs_regular_all[SYNTHETIC] && character.GetJob() != GLOB.jobs_regular_all[SILICON_AI])
+		character.set_species(species, pref_load = src)
 
 	if(random_name)
 		character.real_name = character.species.random_name(gender)

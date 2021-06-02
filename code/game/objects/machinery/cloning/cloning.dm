@@ -230,7 +230,7 @@ These act as a respawn mechanic growning a body and offering it up to ghosts.
 	occupant = new(src)
 	var/datum/job/job_instance = SSjob.GetJobType(/datum/job/terragov/squad/vatgrown)
 	occupant.apply_assigned_role_to_spawn(job_instance)
-	occupant.set_species("Early Vat-Grown Human")
+	occupant.set_species("Human") // Skyrat Edit - Try to fix cloning - original: occupant.set_species("Early Vat-Grown Human")
 	occupant.fully_replace_character_name(occupant.real_name, occupant.species.random_name(occupant.gender))
 	occupant.disabilities |= (BLIND & DEAF)
 	occupant.set_blindness(10) // Temp fix until blindness is fixed.

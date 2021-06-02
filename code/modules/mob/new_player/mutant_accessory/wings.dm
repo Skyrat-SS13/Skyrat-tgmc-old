@@ -40,15 +40,6 @@
 	dimension_y = 32
 	color_src = USE_ONE_COLOR
 
-/datum/mutant_accessory/wings/wide/megamoth
-	name = "Megamoth"
-	icon_state = "megamoth"
-	dimension_x = 96
-	center = TRUE
-	dimension_y = 32
-	color_src = USE_ONE_COLOR
-	default_color = "FFFFFF"
-
 //TODO: seperate moth wings from moth fluff
 /datum/mutant_accessory/wings/moth
 	icon = 'icons/mob/mutant_accessory/moth_wings.dmi' //Needs new icon to suit new naming convention

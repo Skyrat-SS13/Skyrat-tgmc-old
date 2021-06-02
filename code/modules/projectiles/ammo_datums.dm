@@ -363,6 +363,7 @@ GLOBAL_LIST_INIT(no_sticky_resin, typecacheof(list(/obj/item/clothing/mask/faceh
 /datum/ammo/bullet/revolver/highimpact
 	name = "high-impact revolver bullet"
 	hud_state = "revolver_impact"
+	flags_ammo_behavior = AMMO_BALLISTIC|AMMO_SUNDERING // Skyrat Edit - Matebas can still sunder
 	accuracy_var_high = 10
 	damage = 50
 	penetration = 20

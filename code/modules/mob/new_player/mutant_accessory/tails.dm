@@ -135,6 +135,16 @@
 	allowed_species = list(FLEXIBLE_SPECIES, AQUATIC_SPECIES)
 	general_type = "marine"
 
+/datum/mutant_accessory/tails/mammal/wagging/avian1
+	name = "Avian (alt 1)"
+	icon_state = "avian1"
+	general_type = "avian"
+
+/datum/mutant_accessory/tails/mammal/wagging/avian2
+	name = "Avian (alt 2)"
+	icon_state = "avian2"
+	general_type = "avian"
+
 /datum/mutant_accessory/tails/mammal/wagging/axolotl
 	name = "Axolotl"
 	icon_state = "axolotl"
@@ -153,6 +163,10 @@
 /datum/mutant_accessory/tails/mammal/wagging/bee
 	name = "Bee"
 	icon_state = "bee"
+
+/datum/mutant_accessory/tails/mammal/wagging/cable
+	name = "Cable"
+	icon_state = "cable"
 
 /datum/mutant_accessory/tails/mammal/wagging/tajaran/catbig
 	name = "Cat, Big"
@@ -193,6 +207,16 @@
 	icon_state = "fox"
 	general_type = "vulpine"
 
+/datum/mutant_accessory/tails/mammal/wagging/vulpkanin/fox2
+	name = "Fox (Alt 2)"
+	icon_state = "fox2"
+	general_type = "vulpine"
+
+/datum/mutant_accessory/tails/mammal/wagging/vulpkanin/fox3
+	name = "Fox (Alt 3)"
+	icon_state = "fox3"
+	general_type = "vulpine"
+
 /datum/mutant_accessory/tails/mammal/wagging/hawk
 	name = "Hawk"
 	icon_state = "hawk"
@@ -226,6 +250,11 @@
 /datum/mutant_accessory/tails/mammal/wagging/lab
 	name = "Lab"
 	icon_state = "lab"
+
+/datum/mutant_accessory/tails/mammal/wagging/leopard
+	name = "Leopard"
+	icon_state = "leopard"
+	general_type = "feline"
 
 /datum/mutant_accessory/tails/mammal/wagging/murid
 	name = "Murid"

@@ -532,3 +532,13 @@ GLOBAL_LIST_INIT(body_marking_sets, make_body_marking_set_references())
 	name = "Tattoo - Tiger (Foot)"
 	icon_state = "tat_tiger_foot"
 	affected_bodyparts = LEG_RIGHT | LEG_LEFT
+
+/datum/body_marking/secondary/leopard1
+	name = "Leopard"
+	icon_state = "leopard1"
+	affected_bodyparts = CHEST | ARM_LEFT | ARM_RIGHT | HAND_LEFT | HAND_RIGHT | LEG_RIGHT | LEG_LEFT
+
+/datum/body_marking/secondary/leopard2
+	name = "Leopard (alt)"
+	icon_state = "leopard2"
+	affected_bodyparts = CHEST

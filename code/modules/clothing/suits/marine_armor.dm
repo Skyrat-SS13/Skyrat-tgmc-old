@@ -3,7 +3,7 @@
 
 /obj/item/clothing/suit/storage/marine
 	name = "\improper M3 pattern marine armor"
-	desc = "A standard TerraGov Marine Corps M3 Pattern Chestplate. Protects the chest from ballistic rounds, bladed objects and accidents. It has a small leather pouch strapped to it for limited storage."
+	desc = "A standard SolFed Marine Corps M3 Pattern Chestplate. Protects the chest from ballistic rounds, bladed objects and accidents. It has a small leather pouch strapped to it for limited storage."
 	icon = 'icons/obj/clothing/cm_suits.dmi'
 	icon_state = "3"
 	item_state = "armor"
@@ -188,7 +188,7 @@
 
 /obj/item/clothing/suit/storage/marine/MP
 	name = "\improper PAS-N2 pattern MA armor"
-	desc = "A standard TerraGov Navy N2 Personal Armor System. Protects the chest from ballistic rounds, bladed objects and accidents. It has a small leather pouch strapped to it for limited storage."
+	desc = "A standard SolFed Navy N2 Personal Armor System. Protects the chest from ballistic rounds, bladed objects and accidents. It has a small leather pouch strapped to it for limited storage."
 	icon_state = "mp"
 	soft_armor = list("melee" = 40, "bullet" = 60, "laser" = 60, "energy" = 45, "bomb" = 45, "bio" = 45, "rad" = 45, "fire" = 45, "acid" = 50)
 	slowdown = 0.5
@@ -330,14 +330,14 @@
 
 /obj/item/clothing/suit/storage/marine/M3S
 	name = "\improper M3-S light armor"
-	desc = "A custom set of M3 armor designed for TGMC Scouts."
+	desc = "A custom set of M3 armor designed for SFMC Scouts."
 	icon_state = "scout_armor"
 	soft_armor = list("melee" = 55, "bullet" = 65, "laser" = 65, "energy" = 25, "bomb" = 35, "bio" = 30, "rad" = 10, "fire" = 25, "acid" = 30)
 	slowdown = SLOWDOWN_ARMOR_LIGHT
 
 /obj/item/clothing/suit/storage/marine/M35
 	name = "\improper M35 armor"
-	desc = "A custom set of M35 armor designed for use by TGMC Pyrotechnicians. Contains thick kevlar shielding, partial environmental shielding and thermal dissipators."
+	desc = "A custom set of M35 armor designed for use by SFMC Pyrotechnicians. Contains thick kevlar shielding, partial environmental shielding and thermal dissipators."
 	icon_state = "pyro_armor"
 	hard_armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 0)
 	soft_armor = list("melee" = 60, "bullet" = 60, "laser" = 60, "energy" = 60, "bomb" = 30, "bio" = 30, "rad" = 50, "fire" = 90, "acid" = 45)
@@ -366,9 +366,9 @@
 	flags_cold_protection = CHEST|GROIN|ARMS|LEGS|FEET|HANDS
 	flags_heat_protection =CHEST|GROIN|ARMS|LEGS|FEET|HANDS
 
-/obj/item/clothing/suit/storage/marine/veteran/PMC
-	name = "\improper M4 pattern PMC armor"
-	desc = "A common armor vest that is designed for high-profile security operators and corporate mercenaries in mind."
+/obj/item/clothing/suit/storage/marine/veteran/PMC       //SKYRAT EDIT - FTU (BEGIN)
+	name = "\improper FTM-5L armor"
+	desc = "A lightweight composite vest that is designed for high-profile security operators and mercenaries in mind."
 	icon_state = "pmc_armor"
 	soft_armor = list("melee" = 45, "bullet" = 60, "laser" = 60, "energy" = 38, "bomb" = 40, "bio" = 15, "rad" = 15, "fire" = 38, "acid" = 45)
 	slowdown = SLOWDOWN_ARMOR_LIGHT
@@ -390,34 +390,35 @@
 
 
 /obj/item/clothing/suit/storage/marine/veteran/PMC/leader
-	name = "\improper M4 pattern PMC leader armor"
-	desc = "A modification of the M4 body armor, it is designed for high-profile security operators and corporate mercenaries in mind. This particular suit looks like it belongs to a high-ranking officer."
+	name = "\improper FTM-7B mercenary coat"
+	desc = "A modification of the FTM-7A vest worn over a reinforced genuine kangaroo leather coat. It is designed for high-profile security operators and mercenaries in mind. This particular one looks like it belongs to a high-ranking officer."
 	icon_state = "officer_armor"
 	soft_armor = list("melee" = 50, "bullet" = 65, "laser" = 65, "energy" = 65, "bomb" = 50, "bio" = 50, "rad" = 50, "fire" = 50, "acid" = 45)
 
 
 /obj/item/clothing/suit/storage/marine/veteran/PMC/sniper
-	name = "\improper M4 pattern PMC sniper armor"
+	name = "\improper FTM-7A armor"
+	desc = "A custom armor vest optimized for sniper ops. Has a 'F T U' tag on the middle, and its structure has a rough scaled texture with smooth lines around it."
 	icon_state = "pmc_sniper"
 	soft_armor = list("melee" = 45, "bullet" = 55, "laser" = 55, "energy" = 60, "bomb" = 65, "bio" = 10, "rad" = 10, "fire" = 60, "acid" = 60)
 	flags_inventory = BLOCKSHARPOBJ
 	flags_inv_hide = HIDELOWHAIR
 
 /obj/item/clothing/suit/storage/marine/smartgunner/veteran/PMC
-	name = "\improper PMC gunner armor"
-	desc = "A modification of the standard M4 body armor. Hooked up with harnesses and straps allowing the user to carry a smartgun."
+	name = "\improper FTM-7H suit"
+	desc = "Composite plasteel and titanium plates layered on a full hyper-threaded kevlar bodysuit, has straps and belts designed to carry a smartgun."
 	icon_state = "pmc_heavyarmor"
 	slowdown = SLOWDOWN_ARMOR_HEAVY
 	soft_armor = list("melee" = 55, "bullet" = 70, "laser" = 70, "energy" = 70, "bomb" = 70, "bio" = 30, "rad" = 20, "fire" = 65, "acid" = 65)
 	flags_item_map_variant = NONE
 
 /obj/item/clothing/suit/storage/marine/veteran/PMC/commando
-	name = "\improper PMC commando armor"
-	desc = "A heavily armored suit built by who-knows-what for elite operations. It is a fully self-contained system and is heavily corrosion resistant."
+	name = "\improper FTM-7H5 commando suit"
+	desc = "Composite plasteel and titanium plates coated in super-hydrophobic materials layered on a full hyper-threaded kevlar bodysuit that has been adicionally reinforced with graphene."
 	icon_state = "commando_armor"
 	slowdown = SLOWDOWN_ARMOR_VERY_HEAVY
 	soft_armor = list("melee" = 90, "bullet" = 120, "laser" = 200, "energy" = 90, "bomb" = 90, "bio" = 100, "rad" = 100, "fire" = 90, "acid" = 90)
-	resistance_flags = UNACIDABLE
+	resistance_flags = UNACIDABLE   //SKYRAT EDIT - FREE TRADE UNION (END)
 
 /*===========================DISTRESS================================*/
 

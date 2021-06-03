@@ -6,15 +6,15 @@
 	faction = FACTION_NANOTRASEN
 
 
-//PMC Standard
+//PMC Standard    //SKYRAT EDIT - FREE TRADE UNION (BEGIN)
 /datum/job/pmc/standard
-	title = "PMC Standard"
+	title = "FTU Standard"
 	paygrade = "PMC1"
 	outfit = /datum/outfit/job/pmc/standard
 
 
 /datum/outfit/job/pmc/standard
-	name = "PMC Standard"
+	name = "FTU Standard"
 	jobtype = /datum/job/pmc/standard
 
 	id = /obj/item/card/id/silver
@@ -51,14 +51,14 @@
 
 //PMC Gunner
 /datum/job/pmc/gunner
-	title = "PMC Gunner"
+	title = "FTU Smartgunner"
 	paygrade = "PMC2"
 	skills_type = /datum/skills/smartgunner/pmc
 	outfit = /datum/outfit/job/pmc/gunner
 
 
 /datum/outfit/job/pmc/gunner
-	name = "PMC Gunner"
+	name = "FTU Smartgunner"
 	jobtype = /datum/job/pmc/gunner
 
 	id = /obj/item/card/id/silver
@@ -101,14 +101,14 @@
 
 //PMC Sniper
 /datum/job/pmc/sniper
-	title = "PMC Sniper"
+	title = "FTU Marksman"
 	paygrade = "PMC3"
 	skills_type = /datum/skills/specialist/pmc
 	outfit = /datum/outfit/job/pmc/sniper
 
 
 /datum/outfit/job/pmc/sniper
-	name = "PMC Sniper"
+	name = "FTU Marksman"
 	jobtype = /datum/job/pmc/sniper
 
 	id = /obj/item/card/id/silver
@@ -146,14 +146,14 @@
 //PMC Leader
 /datum/job/pmc/leader
 	job_category = JOB_CAT_COMMAND
-	title = "PMC Leader"
+	title = "FTU Fireteam Leader"
 	paygrade = "PMC4"
 	skills_type = /datum/skills/SL/pmc
 	outfit = /datum/outfit/job/pmc/leader
 
 
 /datum/outfit/job/pmc/leader
-	name = "PMC Leader"
+	name = "FTU Fireteam Leader"
 	jobtype = /datum/job/pmc/leader
 
 	id = /obj/item/card/id/silver

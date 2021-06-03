@@ -434,6 +434,8 @@ GLOBAL_LIST_INIT(xenoupgradetiers, list(XENO_UPGRADE_BASETYPE, XENO_UPGRADE_INVA
 #define XENO_DEADHUMAN_DRAG_SLOWDOWN 2
 #define XENO_EXPLOSION_RESIST_3_MODIFIER	0.25 //multiplies top level explosive damage by this amount.
 
+#define KING_SUMMON_TIMER_DURATION 10 MINUTES
+
 #define SPIT_UPGRADE_BONUS(Xenomorph) (( max(0,Xenomorph.upgrade_as_number()) * 0.15 )) //increase damage by 15% per upgrade level; compensates for the loss of insane attack speed.
 
 #define PLASMA_TRANSFER_AMOUNT 100
@@ -600,6 +602,7 @@ GLOBAL_LIST_INIT(xenoupgradetiers, list(XENO_UPGRADE_BASETYPE, XENO_UPGRADE_INVA
 
 #define WRAITH_TELEPORT_DEBUFF_STACKS			1 //Stagger and slow stacks applied to adjacent living hostiles before/after a teleport
 
+#define DEFILER_TRANSVITOX_CAP					180 //Max toxin damage transvitox will allow
 
 //misc
 
@@ -610,16 +613,16 @@ GLOBAL_LIST_INIT(xenoupgradetiers, list(XENO_UPGRADE_BASETYPE, XENO_UPGRADE_INVA
 #define GAS_INHALE_REAGENT_TRANSFER_AMOUNT	7
 
 // Squad ID defines moved from game\jobs\job\squad.dm
-#define NO_SQUAD 0
-#define ALPHA_SQUAD 1
-#define BRAVO_SQUAD 2
-#define CHARLIE_SQUAD 3
-#define DELTA_SQUAD 4
+#define NO_SQUAD "no_squad"
+#define ALPHA_SQUAD "alpha_squad"
+#define BRAVO_SQUAD "bravo_squad"
+#define CHARLIE_SQUAD "charlie_squad"
+#define DELTA_SQUAD "delta_squad"
 
-#define ALPHA_SQUAD_REBEL 5
-#define BRAVO_SQUAD_REBEL 6
-#define CHARLIE_SQUAD_REBEL 7
-#define DELTA_SQUAD_REBEL 8
+#define ALPHA_SQUAD_REBEL "alpha_squad_rebel"
+#define BRAVO_SQUAD_REBEL "bravo_squad_rebel"
+#define CHARLIE_SQUAD_REBEL "charlie_squad_rebel"
+#define DELTA_SQUAD_REBEL "delta_squad_rebel"
 
 #define TYPING_INDICATOR_LIFETIME 3 SECONDS	//Grace period after which typing indicator disappears regardless of text in chatbar.
 

@@ -41,6 +41,9 @@ SUBSYSTEM_DEF(ticker)
 
 /datum/controller/subsystem/ticker/Initialize(timeofday)
 	load_mode()
+	
+	GLOB.respawntime = CONFIG_GET(number/marine_respawn)
+	GLOB.xenorespawntime = CONFIG_GET(number/xeno_respawn)
 
 	GLOB.respawntime = CONFIG_GET(number/marine_respawn)
 	GLOB.xenorespawntime = CONFIG_GET(number/xeno_respawn)

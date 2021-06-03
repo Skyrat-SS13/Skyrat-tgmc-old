@@ -153,7 +153,7 @@
 
 
 /datum/outfit/job/pmc/leader
-	name = "FTU Fireteam Leader"
+	name = "FTU Fireteam Leader"         //SKYRAT EDIT - FREE TRADE UNION (END)
 	jobtype = /datum/job/pmc/leader
 
 	id = /obj/item/card/id/silver

@@ -7,7 +7,7 @@ shopt -s globstar
 st=0
 
 curl --output ./pcregrep.deb http://archive.ubuntu.com/ubuntu/pool/universe/p/pcre3/pcregrep_8.39-12build1_amd64.deb
-sudo apt -qq install -y ./pcregrep.deb
+sudo apt -qq install -y ./pcregrep.deb > /dev/null
 
 echo "Checking for TGM formatting"
 if grep -El '^\".+\" = \(.+\)' _maps/**/*.dmm;	then

@@ -953,6 +953,52 @@
 	species.on_species_gain(src, oldspecies) //todo move most of the stuff in this proc to here
 	return TRUE
 
+/mob/living/carbon/human/proc/make_synth_fake()
+	var/datum/species/new_spec = new species.type()
+	for(var/nvar in species.vars)
+		if(nvar in list("type", "parent_type", "vars"))
+			continue
+		new_spec.vars[nvar] = species.vars[nvar]
+	new_spec.name = "Synthetic [species.name]"
+	new_spec.name_plural = "synthetic [species.name_plural]"
+	new_spec.special_death_message = "You have been shut down.<br><small>But it is not the end of you yet... if you still have your body, wait until somebody can resurrect you...</small>"
+	new_spec.default_language_holder = /datum/language_holder/synthetic
+	new_spec.unarmed_type = /datum/unarmed_attack/punch
+	new_spec.rarity_value = 2
+	new_spec.total_health = 125
+	new_spec.brute_mod = 0.70
+	new_spec.burn_mod = 0.70
+	new_spec.cold_level_1 = -1
+	new_spec.cold_level_2 = -1
+	new_spec.cold_level_3 = -1
+	new_spec.heat_level_1 = 500
+	new_spec.heat_level_2 = 1000
+	new_spec.heat_level_3 = 2000
+	new_spec.body_temperature = 350
+	new_spec.species_flags = NO_BREATHE|NO_SCAN|NO_BLOOD|NO_POISON|NO_PAIN|IS_SYNTHETIC|NO_CHEM_METABOLIZATION|NO_STAMINA|DETACHABLE_HEAD|HAS_UNDERWEAR
+	new_spec.blood_color = "#EEEEEE"
+	new_spec.has_organ = list("heart" = /datum/internal_organ/heart/prosthetic, "brain" = /datum/internal_organ/brain/prosthetic )
+	new_spec.lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE
+	new_spec.see_in_dark = 8
+	species.remove_inherent_verbs(src)
+	species.post_species_loss(src)
+	new_spec.create_organs(src)
+	dextrous = new_spec.has_fine_manipulation
+	INVOKE_ASYNC(src, .proc/regenerate_icons)
+	INVOKE_ASYNC(src, .proc/update_body)
+	INVOKE_ASYNC(src, .proc/restore_blood)
+	new_spec.handle_post_spawn(src)
+	var/datum/atom_hud/synth_hud = GLOB.huds[DATA_HUD_MEDICAL_ADVANCED_SYNTH]
+	synth_hud.add_hud_to(src)
+	if(!(new_spec.species_flags & NO_STAMINA))
+		AddComponent(/datum/component/stamina_behavior)
+		max_stamina_buffer = new_spec.max_stamina_buffer
+		setStaminaLoss(-max_stamina_buffer)
+	add_movespeed_modifier(MOVESPEED_ID_SPECIES, TRUE, 0, NONE, TRUE, new_spec.slowdown)
+	new_spec.on_species_gain(src)
+	species = new_spec
+	return TRUE
+
 /mob/living/carbon/human/proc/set_appearances(default_colour, datum/preferences/pref_load)
 	if(pref_load)
 		real_name = pref_load.real_name

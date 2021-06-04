@@ -177,7 +177,7 @@
 	body_markings = S.get_random_body_markings(features)
 
 
-/datum/preferences/proc/copy_to(mob/living/carbon/human/character, safety = FALSE)
+/datum/preferences/proc/copy_to(mob/living/carbon/human/character, safety = FALSE, is_synth = FALSE)
 	character.set_species(species, pref_load = src)
 
 	if(random_name)
@@ -190,6 +190,8 @@
 	character.update_body()
 	character.update_hair()
 
+	if(is_synth)
+		character.make_synth_fake()
 
 /datum/preferences/proc/random_character()
 	gender = pick(MALE, FEMALE)

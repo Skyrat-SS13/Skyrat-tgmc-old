@@ -213,6 +213,10 @@ These act as a respawn mechanic growning a body and offering it up to ghosts.
 
 
 /obj/machinery/cloning/vats/proc/grow_human(instant = FALSE)
+	// SKYRAT EDIT - DISABLE CLONING UNTIL FIXED
+	visible_message("<b>Whirrs before flashing an error message: 'Cloning has been disabled remotely by SFMC Administration.</b>")
+	return
+	/**
 	// Ensure we cleanup the beaker contents
 	if(beaker)
 		beaker.reagents.remove_all(biomass_required)
@@ -224,6 +228,7 @@ These act as a respawn mechanic growning a body and offering it up to ghosts.
 	visible_message("[icon2html(src, viewers(src))] <span><b>[src]</b> whirls as it starts to create a new clone.</span>")
 	timerid = addtimer(CALLBACK(src, .proc/finish_growing_human), grow_timer, TIMER_STOPPABLE)
 	update_icon()
+	**/// SKYRAT EDIT END
 
 
 /obj/machinery/cloning/vats/proc/finish_growing_human()

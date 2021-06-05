@@ -446,6 +446,8 @@
 	emote_type = EMOTE_AUDIBLE
 
 
+
+/* skyrat edit - scream moved to scream_emote
 /datum/emote/living/carbon/human/scream
 	key = "scream"
 	key_third_person = "screams"
@@ -468,7 +470,7 @@
 		return
 	var/image/scream = image('icons/mob/talk.dmi', user, icon_state = "scream")
 	user.add_emote_overlay(scream)
-
+*/
 
 /datum/emote/living/carbon/human/medic
 	key = "medic"

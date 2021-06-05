@@ -132,6 +132,7 @@
 	var/list/features = MANDATORY_FEATURE_LIST
 	var/list/list/mutant_bodyparts = list()
 	var/list/list/body_markings = list()
+	var/datum/scream_type/selected_scream
 
 	var/datum/dna/dna
 

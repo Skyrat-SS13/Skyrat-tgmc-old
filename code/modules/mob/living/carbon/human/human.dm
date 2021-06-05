@@ -1046,6 +1046,7 @@
 		dna.features = pref_load.features.Copy()
 		dna.mutant_bodyparts = pref_load.mutant_bodyparts.Copy()
 		dna.body_markings = pref_load.body_markings.Copy()
+		selected_scream = pref_load.pref_scream
 	else
 		if(species.default_language_holder)
 			language_holder = new species.default_language_holder(src)

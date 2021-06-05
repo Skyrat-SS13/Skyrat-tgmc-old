@@ -365,6 +365,7 @@
 	READ_FILE(S["features"], features)
 	READ_FILE(S["mutant_bodyparts"], mutant_bodyparts)
 	READ_FILE(S["body_markings"], body_markings)
+	READ_FILE(S["scream"], scream_id)
 
 
 	be_special		= sanitize_integer(be_special, NONE, MAX_BITFLAG, initial(be_special))
@@ -451,6 +452,16 @@
 		for(var/name in body_markings[zone])
 			if(!(name in GLOB.body_markings_per_limb[zone]))
 				body_markings[zone] -= name
+
+	//Custom screams
+	if(scream_id)
+		var/new_type = GLOB.scream_types[scream_id]
+		if(new_type)
+			pref_scream = new new_type
+		else
+			pref_scream = new /datum/scream_type/human
+	else
+		pref_scream = new /datum/scream_type/human
 
 	return TRUE
 
@@ -580,6 +591,7 @@
 	WRITE_FILE(S["features"], features)
 	WRITE_FILE(S["mutant_bodyparts"], mutant_bodyparts)
 	WRITE_FILE(S["body_markings"], body_markings)
+	WRITE_FILE(S["scream"], pref_scream.name)
 
 	return TRUE
 

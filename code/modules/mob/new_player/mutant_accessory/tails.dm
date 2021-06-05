@@ -202,6 +202,11 @@
 	icon_state = "fish"
 	general_type = "marine"
 
+/datum/mutant_accessory/tails/mammal/wagging/fishalt
+	name = "Fish (alt 1)"
+	icon_state = "fishalt"
+	general_type = "marine"
+
 /datum/mutant_accessory/tails/mammal/wagging/vulpkanin/fox
 	name = "Fox"
 	icon_state = "fox"
@@ -293,6 +298,11 @@
 	icon_state = "shark"
 	general_type = "marine"
 
+/datum/mutant_accessory/tails/mammal/wagging/akula/sharkalt
+	name = "Shark (alt 1)"
+	icon_state = "sharkalt"
+	general_type = "marine"
+
 /datum/mutant_accessory/tails/mammal/wagging/shepherd
 	name = "Shepherd"
 	icon_state = "shepherd"
@@ -344,6 +354,11 @@
 /datum/mutant_accessory/tails/mammal/wagging/akula/sharknofin
 	name = "Shark no fin"
 	icon_state = "sharknofin"
+	general_type = "marine"
+
+/datum/mutant_accessory/tails/mammal/wagging/akula/sharknofinalt
+	name = "Shark no fin (alt 1)"
+	icon_state = "sharknofinalt"
 	general_type = "marine"
 
 /datum/mutant_accessory/tails/mammal/raptor

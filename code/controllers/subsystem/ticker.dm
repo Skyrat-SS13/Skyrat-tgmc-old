@@ -41,7 +41,7 @@ SUBSYSTEM_DEF(ticker)
 
 /datum/controller/subsystem/ticker/Initialize(timeofday)
 	load_mode()
-	
+
 	GLOB.respawntime = CONFIG_GET(number/marine_respawn)
 	GLOB.xenorespawntime = CONFIG_GET(number/xeno_respawn)
 
@@ -281,6 +281,8 @@ SUBSYSTEM_DEF(ticker)
 			to_chat(world, "<span class='boldnotice'>Killing Dream Daemon</span>")
 			world.Reboot(FALSE, force_dd_kill = TRUE)
 			return
+	else if(tgui_alert(usr, "Are you sure?", "Restart", list("Yes", "Cancel"), 1 MINUTES) != "Yes")
+		return
 
 	if(istype(GLOB.tgs, /datum/tgs_api/v3210))
 		var/datum/tgs_api/v3210/API = GLOB.tgs

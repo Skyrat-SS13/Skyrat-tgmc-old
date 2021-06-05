@@ -155,6 +155,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/mismatched_parts = FALSE
 
 	var/preview_pref = PREVIEW_PREF_JOB
+	var/datum/scream_type/pref_scream = new /datum/scream_type/human() //Scream type
+	var/scream_id
 
 
 /datum/preferences/New(client/C)
@@ -326,6 +328,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					dat += "<b>Gender:</b> <a href='?_src_=prefs;preference=gender'>[gender == MALE ? MALE : FEMALE]</a><br>"
 					dat += "<b>Ethnicity:</b> <a href='?_src_=prefs;preference=ethnicity'>[ethnicity]</a><br>"
 					dat += "<b>Species:</b> <a href='?_src_=prefs;preference=species'>[species]</a><br>"
+					dat += "<b>Scream:</b><a href='?_src_=prefs;preference=scream;task=input'>[pref_scream.name]</a><BR>"
 					dat += "<b>Body Type:</b> <a href='?_src_=prefs;preference=body_type'>[body_type]</a><br>"
 					dat += "<b>Good Eyesight:</b> <a href='?_src_=prefs;preference=eyesight'>[good_eyesight ? "Yes" : "No"]</a><br>"
 					dat += "<br>"
@@ -1080,6 +1083,26 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			if(!new_ethnicity)
 				return
 			ethnicity = new_ethnicity
+
+		if("scream")
+			var/list/available_screams = list()
+			var/datum/species/current_species = GLOB.all_species[species]
+			for(var/spath in subtypesof(/datum/scream_type)) //We need to build a custom list of available screams! //this could be global but I cba to change it
+				var/datum/scream_type/scream = spath
+				if(initial(scream.restricted_species_type))
+					if(!istype(current_species, initial(scream.restricted_species_type)))
+						continue
+				/* no donator only stuff thx
+				if(initial(scream.donator_only) && !GLOB.donator_list[parent.ckey] && !check_rights(R_ADMIN, FALSE))
+					continue no donator only stuff thx
+				*/
+				available_screams[initial(scream.name)] = spath
+			var/new_scream_id = input(user, "Choose your character's scream:", "Character Scream")  as null|anything in available_screams
+			var/datum/scream_type/scream = available_screams[new_scream_id]
+			if(scream)
+				pref_scream = new scream
+				SEND_SOUND(user, pick(pref_scream.male_screamsounds))
+
 
 		if("species")
 			var/new_species = tgui_input_list(user, "Choose your species:", "Species", GLOB.roundstart_species)

@@ -132,7 +132,7 @@
 
 /datum/mutant_accessory/wings/mammal
 	default_color = DEFAULT_PRIMARY
-	allowed_species = list(FLEXIBLE_SPECIES)
+	allowed_species = list(ALL_CUSTOMISH_SPECIES)
 	relevent_layers = list(BODY_BEHIND_LAYER, BODY_FRONT_LAYER)
 
 /datum/mutant_accessory/wings/mammal/bat
@@ -147,6 +147,52 @@
 	name = "Feathery"
 	icon_state = "feathery"
 
+
+/datum/mutant_accessory/wings/mammal/featheryalt1
+	name = "Feathery (alt 1)"
+	icon_state = "featheryalt1"
+	color_src = USE_MATRIXED_COLORS
+
+/datum/mutant_accessory/wings/mammal/featheryalt2
+	name = "Feathery (alt 2)"
+	icon_state = "featheryalt2"
+	color_src = USE_MATRIXED_COLORS
+
 /datum/mutant_accessory/wings/mammal/bee
 	name = "Bee"
 	icon_state = "bee"
+
+/datum/mutant_accessory/wings/mammal/succubus
+	name = "Succubus"
+	icon_state = "succubus"
+	color_src = USE_MATRIXED_COLORS
+
+/datum/mutant_accessory/wings/mammal/dragon_synth
+	name = "Dragon (synthetic alt)"
+	icon_state = "dragonsynth"
+	color_src = USE_MATRIXED_COLORS
+
+/datum/mutant_accessory/wings/mammal/dragon_alt1
+	name = "Dragon (alt 1)"
+	icon_state = "dragonalt1"
+	color_src = USE_MATRIXED_COLORS
+
+/datum/mutant_accessory/wings/mammal/dragon_alt2
+	name = "Dragon (alt 2)"
+	icon_state = "dragonalt2"
+	color_src = USE_MATRIXED_COLORS
+
+/datum/mutant_accessory/wings/mammal/harpywings
+	name = "Harpy"
+	icon_state = "harpy"
+	color_src = USE_ONE_COLOR
+
+/datum/mutant_accessory/wings/mammal/harpywingsalt1
+	name = "Harpy (alt 1)"
+	icon_state = "harpyalt"
+	color_src = USE_ONE_COLOR
+
+/datum/mutant_accessory/wings/mammal/harpywingsalt2
+	name = "Harpy (Bat)"
+	icon_state = "harpybat"
+	color_src = USE_ONE_COLOR

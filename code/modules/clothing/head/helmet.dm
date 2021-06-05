@@ -456,7 +456,7 @@ obj/item/clothing/head/helmet/marine/pilot/green
 	desc = "A fully enclosed, armored helmet made for Nanotrasen elite commandos."
 	icon_state = "commando_helmet"
 	flags_armor_protection = HEAD|FACE|EYES
-	soft_armor = list("melee" = 95, "bullet" = 120, "laser" = 200, "energy" = 200, "bomb" = 90, "bio" = 100, "rad" = 100, "fire" = 90, "acid" = 95)
+	soft_armor = list("melee" = 80, "bullet" = 80, "laser" = 80, "energy" = 80, "bomb" = 80, "bio" = 80, "rad" = 80, "fire" = 80, "acid" = 80)
 	flags_inventory = COVEREYES|COVERMOUTH|BLOCKSHARPOBJ|BLOCKGASEFFECT
 	flags_inv_hide = HIDEEARS|HIDEEYES|HIDEFACE|HIDEMASK|HIDEALLHAIR
 	flags_marine_helmet = HELMET_DAMAGE_OVERLAY

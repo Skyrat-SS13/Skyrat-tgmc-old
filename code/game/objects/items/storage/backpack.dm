@@ -275,21 +275,6 @@
 	desc = "The standard-issue pack of the TGMC forces. Designed to slug gear into the battlefield."
 	icon_state = "marinepack"
 
-// SKYRAT ADDITION - REMOVING GUNS TAKES TIME
-/obj/item/storage/backpack/marine/remove_from_storage(obj/item/I, atom/new_location)
-	if(istype(I, /obj/item/weapon/gun))
-		var/mob/user = usr
-		if(!istype(user))
-			return ..()
-		to_chat(user, "<span class='notice'>You begin drawing [I].</span>")
-		if(do_after(user, 0.5 SECONDS, TRUE, src))
-			return ..()
-		else
-			to_chat(user, "<span class='warning'>You fumble with the [I] and it drops to the ground!</span>")
-			..()
-			return FALSE
-	return ..()
-// SKYRAT ADDITION END
 /obj/item/storage/backpack/marine/standard
 	name = "\improper lightweight IMP backpack"
 	desc = "The standard-issue pack of the TGMC forces. Designed to slug gear into the battlefield."

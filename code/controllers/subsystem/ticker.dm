@@ -271,6 +271,7 @@ SUBSYSTEM_DEF(ticker)
 	if(usr && !check_rights(R_SERVER))
 		return
 
+#ifndef UNIT_TESTS
 	if(world.TgsAvailable())
 		var/resp = tgui_input_list(usr, "Restart Type","Reboot World", list("Hardest (Kill DD)", "Hard", "Normal"), 1 MINUTES)
 		if(resp == "Hard")
@@ -283,6 +284,7 @@ SUBSYSTEM_DEF(ticker)
 			return
 	else if(tgui_alert(usr, "Are you sure?", "Restart", list("Yes", "Cancel"), 1 MINUTES) != "Yes")
 		return
+#endif
 
 	if(istype(GLOB.tgs, /datum/tgs_api/v3210))
 		var/datum/tgs_api/v3210/API = GLOB.tgs

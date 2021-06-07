@@ -127,7 +127,6 @@
 	var/list/http = world.Export("http://www.byond.com/members/[ckey]?format=text")
 	if("CONTENT" in http)
 		var/resp = file2text(http["CONTENT"])
-		world.log << resp
 		var/j_pos = findtext(resp, "joined")
 		var/joined = splittext(copytext(resp, j_pos + 10, j_pos + 20), "-")
 		return convert_to_epoch(text2num(joined[3]), text2num(joined[2]), text2num(joined[1]))
@@ -224,17 +223,13 @@
 
 	// SKYRAT EDIT ADDITION - ACCOUNT AGE RESTRICTION
 	if(CONFIG_GET(flag/account_age_restriction))
-		world.log << "We check age"
 		var/account_epoch = get_ckey_creation(ckey) // Epoch of account creation
 		var/today_epoch = (world.realtime / 10) + (30 * EPOCH_YEAR) // Epoch of today
 		var/diff_epoch = today_epoch - account_epoch // Epoch between creation and today
 		var/want_days = CONFIG_GET(number/account_age_restriction_days)
 		var/want_months = CONFIG_GET(number/account_age_restriction_months)
 		var/want_years = CONFIG_GET(number/account_age_restriction_years)
-		world.log << "Wanted: [want_days] / [want_months] / [want_years]"
 		var needed_epoch = convert_to_epoch(want_days, want_months, want_years, TRUE) // Epoch we need to clear the age requirement
-		world.log << "We want [needed_epoch]"
-		world.log << "They have [diff_epoch]"
 		if(diff_epoch - needed_epoch < 0)
 			var/want_string = ""
 			if(want_years)

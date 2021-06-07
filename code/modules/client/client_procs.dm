@@ -229,7 +229,7 @@
 		var/want_days = CONFIG_GET(number/account_age_restriction_days)
 		var/want_months = CONFIG_GET(number/account_age_restriction_months)
 		var/want_years = CONFIG_GET(number/account_age_restriction_years)
-		var needed_epoch = convert_to_epoch(want_days, want_months, want_years, TRUE) // Epoch we need to clear the age requirement
+		var/needed_epoch = convert_to_epoch(want_days, want_months, want_years, TRUE) // Epoch we need to clear the age requirement
 		if(diff_epoch - needed_epoch < 0)
 			var/want_string = ""
 			if(want_years)

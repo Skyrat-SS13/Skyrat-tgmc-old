@@ -146,8 +146,9 @@
 	supply_pad.visible_message("<span class='warning'>\The [supply_pad] whirrs as it beings to load the supply drop into a launch tube. Stand clear!</span>")
 	for(var/obj/C in supplies)
 		C.anchored = TRUE //to avoid accidental pushes
-	playsound(supply_pad.loc, 'sound/effects/bamf.ogg', 50, TRUE) 
-	visible_message("[icon2html(supply_beacon, viewers(supply_beacon))] <span class='boldnotice'>The [supply_pad.name] begins to beep!</span>")
+	message_squad("Supply Drop Incoming!")
+	playsound(drop_pad.loc, 'sound/effects/bamf.ogg', 50, TRUE)
+	sbeacon.visible_message("[icon2html(sbeacon, viewers(sbeacon))] <span class='boldnotice'>The [sbeacon.name] begins to beep!</span>")
 	addtimer(CALLBACK(src, .proc/fire_supplydrop, supplies, x_offset, y_offset), 10 SECONDS)
 
 ///Make the supplies teleport

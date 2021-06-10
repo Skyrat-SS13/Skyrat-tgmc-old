@@ -100,7 +100,8 @@ These act as a respawn mechanic growning a body and offering it up to ghosts.
 	icon = 'icons/obj/machines/cloning.dmi'
 	icon_state = "cell_0"
 	use_power = IDLE_POWER_USE
-	idle_power_usage = 30000
+	idle_power_usage = 3000
+	active_power_usage = 30000
 
 	var/timerid
 	var/mob/living/carbon/human/occupant
@@ -217,6 +218,7 @@ These act as a respawn mechanic growning a body and offering it up to ghosts.
 	visible_message("<b>Whirrs before flashing an error message: 'Cloning has been disabled remotely by SFMC Administration.</b>")
 	return
 	/**
+	use_power = ACTIVE_POWER_USE
 	// Ensure we cleanup the beaker contents
 	if(beaker)
 		beaker.reagents.remove_all(biomass_required)
@@ -232,6 +234,7 @@ These act as a respawn mechanic growning a body and offering it up to ghosts.
 
 
 /obj/machinery/cloning/vats/proc/finish_growing_human()
+	use_power = IDLE_POWER_USE
 	occupant = new(src)
 	var/datum/job/job_instance = SSjob.GetJobType(/datum/job/terragov/squad/vatgrown)
 	occupant.apply_assigned_role_to_spawn(job_instance)

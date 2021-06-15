@@ -40,15 +40,7 @@
 	if(!do_after(H, delay, TRUE, src, BUSY_ICON_GENERIC))
 		return FALSE
 	GLOB.active_orbital_beacons += src
-<<<<<<< HEAD
-	var/cam_name = ""
-	cam_name += H.get_paygrade()
-	cam_name += H.name
-	cam_name += " [src]"
-	var/obj/machinery/camera/beacon_cam/BC = new(src, cam_name)
-=======
 	var/obj/machinery/camera/beacon_cam/BC = new(src, "[H.get_paygrade()] [H.name] [src]")
->>>>>>> 532edda3c (Fix supply beacon + you can use antenna to call for supply drops (#7023))
 	H.transferItemToLoc(src, H.loc)
 	beacon_cam = BC
 	message_admins("[ADMIN_TPMONTY(usr)] set up an orbital strike beacon.")
@@ -100,7 +92,6 @@
 	icon_activated = "motion1"
 	///The squad this OB beacon belongs to
 	var/datum/squad/squad = null
-<<<<<<< HEAD
 
 /obj/item/beacon/orbital_bombardment_beacon/activate(mob/living/carbon/human/H)
 	. = ..()
@@ -118,25 +109,6 @@
 	squad?.squad_orbital_beacons -= src
 	squad = null
 
-=======
-
-/obj/item/beacon/orbital_bombardment_beacon/activate(mob/living/carbon/human/H)
-	. = ..()
-	if(!.)
-		return
-	if(H.assigned_squad)
-		squad = H.assigned_squad
-		name += " ([squad.name])"
-		squad.squad_orbital_beacons += src
-
-/obj/item/beacon/orbital_bombardment_beacon/deactivate(mob/living/carbon/human/H)
-	. = ..()
-	if(!.)
-		return
-	squad?.squad_orbital_beacons -= src
-	squad = null
-
->>>>>>> 532edda3c (Fix supply beacon + you can use antenna to call for supply drops (#7023))
 /obj/item/beacon/orbital_bombardment_beacon/Destroy()
 	squad?.squad_orbital_beacons -= src
 	squad = null
@@ -154,12 +126,7 @@
 /obj/item/beacon/supply_beacon/Destroy()
 	if(beacon_datum)
 		UnregisterSignal(beacon_datum, COMSIG_PARENT_QDELETING)
-<<<<<<< HEAD
-		beacon_datum.unregister()
-		beacon_datum = null
-=======
 		QDEL_NULL(beacon_datum)
->>>>>>> 532edda3c (Fix supply beacon + you can use antenna to call for supply drops (#7023))
 	return ..()
 
 /// Signal handler to nullify beacon datum
@@ -180,12 +147,7 @@
 	if(!.)
 		return
 	UnregisterSignal(beacon_datum, COMSIG_PARENT_QDELETING)
-<<<<<<< HEAD
-	beacon_datum.unregister()
-	beacon_datum = null
-=======
 	QDEL_NULL(beacon_datum)
->>>>>>> 532edda3c (Fix supply beacon + you can use antenna to call for supply drops (#7023))
 
 /datum/supply_beacon
 	/// Name printed on the supply console
@@ -196,23 +158,14 @@
 	var/faction = ""
 
 /datum/supply_beacon/New(_name, turf/_drop_location, _faction, life_time = 0 SECONDS)
-	name= _name 
-	drop_location = _drop_location	
+	name= _name
+	drop_location = _drop_location
 	faction = _faction
 	GLOB.supply_beacon[name] = src
 	if(life_time)
-<<<<<<< HEAD
-		addtimer(CALLBACK(src, .proc/unregister), life_time)
-
-/// Remove that beacon from the list of glob supply beacon 
-/datum/supply_beacon/proc/unregister()
-	GLOB.supply_beacon[name] = null
-	qdel(src)
-=======
 		addtimer(CALLBACK(src, .proc/qdel), life_time)
 
-/// Remove that beacon from the list of glob supply beacon 
+/// Remove that beacon from the list of glob supply beacon
 /datum/supply_beacon/Destroy()
 	GLOB.supply_beacon[name] = null
 	return ..()
->>>>>>> 532edda3c (Fix supply beacon + you can use antenna to call for supply drops (#7023))

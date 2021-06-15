@@ -146,11 +146,7 @@
 	supply_pad.visible_message("<span class='warning'>\The [supply_pad] whirrs as it beings to load the supply drop into a launch tube. Stand clear!</span>")
 	for(var/obj/C in supplies)
 		C.anchored = TRUE //to avoid accidental pushes
-<<<<<<< HEAD
 	playsound(supply_pad.loc, 'sound/effects/bamf.ogg', 50, TRUE)
-=======
-	playsound(supply_pad.loc, 'sound/effects/bamf.ogg', 50, TRUE) 
->>>>>>> 532edda3c (Fix supply beacon + you can use antenna to call for supply drops (#7023))
 	visible_message("[icon2html(supply_beacon, viewers(supply_beacon))] <span class='boldnotice'>The [supply_pad.name] begins to beep!</span>")
 	addtimer(CALLBACK(src, .proc/fire_supplydrop, supplies, x_offset, y_offset), 10 SECONDS)
 

@@ -258,7 +258,7 @@
 	var/atom/movable/target = owner.pulling
 	var/fling_distance = 3
 	var/stagger_slow_stacks = 3
-	var/stun_duration = 0.5 SECONDS
+	var/stun_duration = 0.5 SECONDS // // Skyrat Edit - Warrior Toss Nerf - original: 1 SECONDS
 	var/big_mob_message
 
 	X.face_atom(A)

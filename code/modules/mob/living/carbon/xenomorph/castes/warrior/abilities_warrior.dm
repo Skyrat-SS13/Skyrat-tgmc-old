@@ -106,7 +106,8 @@
 	RegisterSignal(X, COMSIG_MOVABLE_POST_THROW, .proc/clean_lunge_target)
 	succeed_activate()
 	add_cooldown()
-	X.throw_at(get_step_towards(A, X), 4, 4, X)
+	//original: X.throw_at(get_step_towards(A, X), 6, 2, X)
+	X.throw_at(get_step_towards(A, X), 4, 4, X) // Skyrat Edit - Warrior Toss Nerf
 	return TRUE
 
 ///Check if we are close enough to lunge, and if yes, grab neck

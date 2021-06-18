@@ -257,7 +257,7 @@
 /datum/action/xeno_action/activable/toss/use_ability(atom/A)
 	var/mob/living/carbon/xenomorph/X = owner
 	var/atom/movable/target = owner.pulling
-	var/fling_distance = 3
+	var/fling_distance = 3 // Skyrat Edit - Warrior Toss Nerf - original: 5
 	var/stagger_slow_stacks = 3
 	var/stun_duration = 0.5 SECONDS // // Skyrat Edit - Warrior Toss Nerf - original: 1 SECONDS
 	var/big_mob_message

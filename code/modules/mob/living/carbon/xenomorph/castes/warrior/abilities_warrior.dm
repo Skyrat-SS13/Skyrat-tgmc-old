@@ -106,7 +106,8 @@
 	RegisterSignal(X, COMSIG_MOVABLE_POST_THROW, .proc/clean_lunge_target)
 	succeed_activate()
 	add_cooldown()
-	X.throw_at(get_step_towards(A, X), 6, 2, X)
+	//original: X.throw_at(get_step_towards(A, X), 6, 2, X)
+	X.throw_at(get_step_towards(A, X), 4, 4, X) // Skyrat Edit - Warrior Toss Nerf
 	return TRUE
 
 ///Check if we are close enough to lunge, and if yes, grab neck
@@ -256,9 +257,9 @@
 /datum/action/xeno_action/activable/toss/use_ability(atom/A)
 	var/mob/living/carbon/xenomorph/X = owner
 	var/atom/movable/target = owner.pulling
-	var/fling_distance = 5
+	var/fling_distance = 3 // Skyrat Edit - Warrior Toss Nerf - original: 5
 	var/stagger_slow_stacks = 3
-	var/stun_duration = 1 SECONDS
+	var/stun_duration = 0.5 SECONDS // // Skyrat Edit - Warrior Toss Nerf - original: 1 SECONDS
 	var/big_mob_message
 
 	X.face_atom(A)

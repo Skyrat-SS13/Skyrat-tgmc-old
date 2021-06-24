@@ -337,10 +337,13 @@ GLOBAL_LIST_INIT(no_sticky_resin, typecacheof(list(/obj/item/clothing/mask/faceh
 	sundering = 3
 
 /datum/ammo/bullet/revolver/on_hit_mob(mob/M,obj/projectile/P)
-	if(SEND_SIGNAL(P.shot_from, COMSIG_REVOLVER_AMMO_HIT_MOB))
-		staggerstun(M, P, stagger = 1, slowdown = 0.5, knockback = 1)
+	staggerstun(M, P, stagger = 1, slowdown = 0.5, knockback = 1)
+
+/datum/ammo/bullet/revolver/tp44/on_hit_mob(mob/M,obj/projectile/P)
+	if(SEND_SIGNAL(P.shot_from, COMSIG_REVOLVER_AMMO_HIT_MOB) & COMSIG_REVOLVER_AMMO_SNUBNOSE_BARREL)
+		staggerstun(M, P, stagger = 1, slowdown = 0.5, knockback = 1, shake = 0)
 	else
-		staggerstun(M, P, slowdown = 0.5)
+		staggerstun(M, P, slowdown = 0.5, shake = 0)
 
 /datum/ammo/bullet/revolver/small
 	name = "small revolver bullet"

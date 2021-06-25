@@ -101,6 +101,10 @@
 		squad = H.assigned_squad
 		name += " ([squad.name])"
 		squad.squad_orbital_beacons += src
+		name += " ([H])"
+		return
+	else	//So we can just get a goshdarn name.
+		name += " ([H])"
 
 /obj/item/beacon/orbital_bombardment_beacon/deactivate(mob/living/carbon/human/H)
 	. = ..()

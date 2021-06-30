@@ -838,6 +838,10 @@
 /obj/structure/largecrate/supply/supplies/flares,
 /turf/open/floor/mainship/cargo,
 /area/shuttle/canterbury)
+"Bd" = (
+/obj/machinery/loadout_vendor,
+/turf/open/floor/mainship/mono,
+/area/shuttle/canterbury)
 "BZ" = (
 /obj/machinery/vending/cola,
 /turf/open/floor/mainship/mono,
@@ -1513,8 +1517,8 @@ Wk
 an
 ac
 FQ
-bG
-bG
+Bd
+Bd
 bG
 an
 ac

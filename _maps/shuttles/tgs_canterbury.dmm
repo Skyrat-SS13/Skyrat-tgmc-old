@@ -273,7 +273,7 @@
 /turf/open/floor/mainship/cargo,
 /area/shuttle/canterbury)
 "aO" = (
-/obj/machinery/vending/marine/shared,
+/obj/machinery/loadout_vendor,
 /turf/open/floor/mainship/cargo,
 /area/shuttle/canterbury)
 "aP" = (
@@ -857,6 +857,13 @@
 	},
 /turf/open/floor/mainship/red,
 /area/shuttle/canterbury)
+"xq" = (
+/obj/structure/window/reinforced/toughened{
+	dir = 4
+	},
+/obj/machinery/loadout_vendor,
+/turf/open/floor/mainship/cargo,
+/area/shuttle/canterbury)
 "zE" = (
 /obj/structure/window/framed/mainship/canterbury,
 /obj/structure/cable,
@@ -1088,7 +1095,7 @@ cP
 aJ
 cS
 aO
-bd
+xq
 bd
 aJ
 bJ

@@ -142,3 +142,12 @@
 #define COCOONED_DEATH "cocoon_death"
 #define SILO_DEATH "silo_death"
 #define HEADBITE_DEATH "headbite_death"
+<<<<<<< HEAD
+=======
+
+#define DISTRESS_LARVA_POINTS_NEEDED 8
+#define HUNT_LARVA_POINTS_NEEDED 8
+#define CRASH_LARVA_POINTS_NEEDED 7
+
+#define MAX_UNBALANCED_RATIO_TWO_HUMAN_FACTIONS 1.2
+>>>>>>> f107cae4f (Prevent joining a faction with too many players in HvH gamemode (#7183))

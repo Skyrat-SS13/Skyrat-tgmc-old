@@ -2391,9 +2391,9 @@
 "ckC" = (
 /obj/structure/table/mainship,
 /obj/item/stock_parts/matter_bin,
-/obj/item/tool/warning_cone,
-/obj/item/tool/warning_cone,
-/obj/item/tool/warning_cone,
+/obj/item/clothing/head/warning_cone,
+/obj/item/clothing/head/warning_cone,
+/obj/item/clothing/head/warning_cone,
 /obj/item/reagent_containers/spray/cleaner,
 /obj/item/tool/wirecutters,
 /turf/open/floor/mainship/mono,
@@ -7098,7 +7098,7 @@
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1{
 	dir = 5
 	},
-/obj/item/tool/warning_cone,
+/obj/item/clothing/head/warning_cone,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 5
 	},
@@ -12051,7 +12051,7 @@
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1{
 	dir = 5
 	},
-/obj/item/tool/warning_cone,
+/obj/item/clothing/head/warning_cone,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 5
 	},
@@ -21898,7 +21898,7 @@
 /area/mainship/squads/req)
 "tlV" = (
 /obj/structure/cable,
-/obj/item/tool/warning_cone,
+/obj/item/clothing/head/warning_cone,
 /turf/open/floor/mainship/sterile/plain,
 /area/mainship/hallways/hangar/rebel)
 "tmy" = (
@@ -22080,9 +22080,9 @@
 "trL" = (
 /obj/structure/table/mainship,
 /obj/item/stock_parts/matter_bin,
-/obj/item/tool/warning_cone,
-/obj/item/tool/warning_cone,
-/obj/item/tool/warning_cone,
+/obj/item/clothing/head/warning_cone,
+/obj/item/clothing/head/warning_cone,
+/obj/item/clothing/head/warning_cone,
 /obj/item/reagent_containers/spray/cleaner,
 /obj/item/tool/wirecutters,
 /turf/open/floor/mainship/mono,
@@ -23507,7 +23507,7 @@
 /area/mainship/hallways/hangar/rebel)
 "uza" = (
 /obj/structure/cable,
-/obj/item/tool/warning_cone,
+/obj/item/clothing/head/warning_cone,
 /turf/open/floor/mainship/sterile/plain,
 /area/mainship/hallways/hangar)
 "uzq" = (

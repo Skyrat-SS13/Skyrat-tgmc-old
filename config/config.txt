@@ -198,9 +198,26 @@ MAXIMUM_CLIENTS_FOR_GAMEMODE_VOTE 40
 #MARINE_RESPAWN 18000
 #XENO_RESPAWN 1200
 
+<<<<<<< HEAD
 ## Account Age Requirements
 ## If the flag is un-commented clients will not be allowed to connect if they do not meet the age requirements
 ACCOUNT_AGE_RESTRICTION
 ACCOUNT_AGE_RESTRICTION_DAYS 0
 ACCOUNT_AGE_RESTRICTION_MONTHS 0
 ACCOUNT_AGE_RESTRICTION_YEARS 0
+=======
+## Automatic balance system
+IS_AUTOMATIC_BALANCE_ON
+
+##Default view size, in tiles.
+##	By default, this is 15x15, which gets simplified to 7 by byond
+##  15x15 would be the standard square view. 21x15 is what goonstation uses for widescreen.
+##  Setting this to something different from DEFAULT_VIEW_SQUARE will enable widescreen toggles
+##	Do note that changing this value will affect the title screen. The title screen will have to be updated manually if this is changed.
+DEFAULT_VIEW 15x15
+
+##Default view size, in tiles. Should *always* be square.
+## The alternative square viewport size if you're using a widescreen view size
+## You probably shouldn't ever be changing this, but it's here if you want to.
+DEFAULT_VIEW_SQUARE 15x15
+>>>>>>> 7f7ea310c (Datumized view refactor and new view settings (#6748))

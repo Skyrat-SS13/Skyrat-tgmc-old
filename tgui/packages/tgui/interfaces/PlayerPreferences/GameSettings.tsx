@@ -3,8 +3,13 @@ import { Button, Section, LabeledList, Grid, ColorBox } from '../../components';
 import { ToggleFieldPreference, TextFieldPreference, SelectFieldPreference } from './FieldPreferences';
 
 export const GameSettings = (props, context) => {
+<<<<<<< HEAD
   const { act, data, config } = useBackend<PlayerPreferencesData>(context);
   const { ui_style_color } = data;
+=======
+  const { act, data } = useBackend<GameSettingData>(context);
+  const { ui_style_color, scaling_method, pixel_size } = data;
+>>>>>>> c444430d2 (Azerty support for keybinds + better perfs on game prefs ui (#7238))
   return (
     <Section title="Game Settings">
       <Grid>

@@ -601,6 +601,7 @@
 					if(!length(key_bindings[old_key]))
 						key_bindings -= old_key
 
+<<<<<<< HEAD
 			else
 				var/new_key = uppertext(params["key"])
 				var/AltMod = text2num(params["alt"]) ? "Alt" : ""
@@ -630,6 +631,27 @@
 				key_bindings[full_key] = sortList(key_bindings[full_key])
 
 				current_client.update_movement_keys()
+=======
+			key_bindings[full_key] += list(kb_name)
+			key_bindings[full_key] = sortList(key_bindings[full_key])
+			current_client.update_movement_keys()
+			save_keybinds()
+			return TRUE
+
+		if("clear_keybind")
+			var/kb_name = params["keybinding"]
+			for(var/key in key_bindings)
+				if(!(kb_name in key_bindings[key]))
+					continue
+				key_bindings[key] -= kb_name
+				if(!length(key_bindings[key]))
+					key_bindings -= key
+					continue
+				key_bindings[key] = sortList(key_bindings[key])
+			current_client.update_movement_keys()
+			save_keybinds()
+			return TRUE
+>>>>>>> d506a732f (Fix keybinds not being saved[CRITICAL] (#7290))
 
 		if("setCustomSentence")
 			var/kb_name = params["name"]
@@ -656,6 +678,7 @@
 		if("reset-keybindings")
 			key_bindings = GLOB.hotkey_keybinding_list_by_key
 			current_client.update_movement_keys()
+			save_keybinds()
 
 		if("bancheck")
 			var/list/ban_details = is_banned_from_with_details(user.ckey, user.client.address, user.client.computer_id, params["role"])
@@ -683,6 +706,7 @@
 
 	save_preferences()
 	save_character()
+	save_keybinds()
 	update_preview_icon()
 	ui_interact(user, ui)
 	SEND_SIGNAL(current_client, COMSIG_CLIENT_PREFERENCES_UIACTED)

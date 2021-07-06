@@ -228,9 +228,16 @@
 	show_typing		= sanitize_integer(show_typing, FALSE, TRUE, initial(show_typing))
 	ghost_hud 		= sanitize_integer(ghost_hud, NONE, MAX_BITFLAG, initial(ghost_hud))
 	windowflashing	= sanitize_integer(windowflashing, FALSE, TRUE, initial(windowflashing))
+<<<<<<< HEAD
 	auto_fit_viewport= sanitize_integer(auto_fit_viewport, FALSE, TRUE, initial(auto_fit_viewport))
 	key_bindings	= sanitize_islist(key_bindings, list())
 	custom_emotes   = sanitize_is_full_emote_list(custom_emotes)
+=======
+	auto_fit_viewport = sanitize_integer(auto_fit_viewport, FALSE, TRUE, initial(auto_fit_viewport))
+	widescreenpref = sanitize_integer(widescreenpref, FALSE, TRUE, initial(widescreenpref))
+	pixel_size = sanitize_float(pixel_size, PIXEL_SCALING_AUTO, PIXEL_SCALING_3X, 0.5, initial(pixel_size))
+	scaling_method  = sanitize_text(scaling_method, initial(scaling_method))
+>>>>>>> d506a732f (Fix keybinds not being saved[CRITICAL] (#7290))
 	chem_macros		= sanitize_islist(chem_macros, list())
 	ghost_vision	= sanitize_integer(ghost_vision, FALSE, TRUE, initial(ghost_vision))
 	ghost_orbit		= sanitize_inlist(ghost_orbit, GLOB.ghost_orbits, initial(ghost_orbit))

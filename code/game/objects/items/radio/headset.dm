@@ -180,6 +180,9 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 		wearer = user
 		squadhud = GLOB.huds[hud_type]
 		enable_squadhud()
+		RegisterSignal(user, COMSIG_MOB_REVIVE, .proc/update_minimap_icon)
+		RegisterSignal(user, COMSIG_MOB_DEATH, .proc/set_dead_on_minimap)
+		RegisterSignal(user, COMSIG_HUMAN_SET_UNDEFIBBABLE, .proc/set_undefibbable_on_minimap)
 	if(camera)
 		camera.c_tag = user.name
 		if(user.assigned_squad)
@@ -251,10 +254,31 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 	SSminimaps.remove_marker(wearer)
 	if(!wearer.job || !wearer.job.minimap_icon)
 		return
+<<<<<<< HEAD
+=======
+	var/marker_flags = initial(minimap_type.marker_flags)
+	if(wearer.job?.job_flags & JOB_FLAG_ALWAYS_VISIBLE_ON_MINIMAP || wearer.stat == DEAD) //We show to all marines if we have this flag, separated by faction
+		marker_flags = hud_type == DATA_HUD_SQUAD_TERRAGOV ? MINIMAP_FLAG_ALL_MARINES : MINIMAP_FLAG_ALL_MARINES_REBEL
+	if(HAS_TRAIT(wearer, TRAIT_UNDEFIBBABLE))
+		SSminimaps.add_marker(wearer, wearer.z, marker_flags, "undefibbable")
+		return
+	if(wearer.stat == DEAD)
+		SSminimaps.add_marker(wearer, wearer.z, marker_flags, "defibbable")
+		return
+>>>>>>> b8c1c363d (Fix undefibbable icons on minimap (#7276))
 	if(wearer.assigned_squad)
 		SSminimaps.add_marker(wearer, wearer.z, mini.marker_flags, lowertext(wearer.assigned_squad.name)+"_"+wearer.job.minimap_icon)
 		return
 	SSminimaps.add_marker(wearer, wearer.z, mini.marker_flags, wearer.job.minimap_icon)
+
+///Change the minimap icon to a undefibbable icon
+/obj/item/radio/headset/mainship/proc/set_undefibbable_on_minimap()
+	SIGNAL_HANDLER
+	SSminimaps.remove_marker(wearer)
+	if(!wearer.job || !wearer.job.minimap_icon)
+		return
+	var/marker_flags = hud_type == DATA_HUD_SQUAD_TERRAGOV ? MINIMAP_FLAG_ALL_MARINES : MINIMAP_FLAG_ALL_MARINES_REBEL
+	SSminimaps.add_marker(wearer, wearer.z, marker_flags, "undefibbable")
 
 ///Remove all action of type minimap from the wearer, and make him disappear from the minimap
 /obj/item/radio/headset/mainship/proc/remove_minimap()
@@ -386,7 +410,7 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 	icon_state = "cargo_headset"
 	keyslot = /obj/item/encryptionkey/req
 
-/obj/item/radio/headset/mainship/ct/rebel 
+/obj/item/radio/headset/mainship/ct/rebel
 	keyslot = /obj/item/encryptionkey/req/rebel
 	hud_type = DATA_HUD_SQUAD_REBEL
 	minimap_type = /datum/action/minimap/marine/rebel
@@ -398,7 +422,7 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 	use_command = TRUE
 	command = TRUE
 
-/obj/item/radio/headset/mainship/mcom/rebel 
+/obj/item/radio/headset/mainship/mcom/rebel
 	keyslot = /obj/item/encryptionkey/mcom/rebel
 	hud_type = DATA_HUD_SQUAD_REBEL
 	minimap_type = /datum/action/minimap/marine/rebel

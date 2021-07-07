@@ -542,6 +542,14 @@
 	for(var/obj/item/I in contents)
 		remove_from_storage(I, T, usr)
 
+<<<<<<< HEAD
+=======
+/// Delete everything that's inside the storage
+/obj/item/storage/proc/delete_contents()
+	for(var/obj/item/I AS in contents)
+		I.on_exit_storage(src)
+		qdel(I)
+>>>>>>> 43a666b78 (Replace outfit build mode by loadouts build mode (#7066))
 
 /obj/item/storage/Initialize(mapload, ...)
 	. = ..()

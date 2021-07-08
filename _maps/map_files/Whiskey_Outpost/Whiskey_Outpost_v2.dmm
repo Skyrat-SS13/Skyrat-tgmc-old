@@ -381,8 +381,12 @@
 /area/whiskey_outpost)
 "bE" = (
 /obj/structure/table/reinforced,
-/obj/machinery/door/window/northleft,
-/obj/machinery/door/window/westright,
+/obj/machinery/door/window/secure/req{
+	dir = 1
+	},
+/obj/machinery/door/window{
+	dir = 2
+	},
 /turf/open/floor/plating/asteroidfloor,
 /area/whiskey_outpost)
 "bF" = (
@@ -3992,9 +3996,6 @@
 	},
 /turf/open/floor/plating/asteroidfloor,
 /area/whiskey_outpost)
-"re" = (
-/turf/open/floor/plating/asteroidfloor,
-/area/whiskey_outpost)
 "rf" = (
 /obj/structure/window/reinforced{
 	dir = 8
@@ -4036,9 +4037,6 @@
 /turf/open/floor/mainship/sterile/corner{
 	dir = 4
 	},
-/area/whiskey_outpost)
-"rk" = (
-/turf/open/floor/plating/asteroidfloor,
 /area/whiskey_outpost)
 "rl" = (
 /obj/structure/rack,
@@ -4340,7 +4338,9 @@
 	},
 /area/whiskey_outpost/outside/north)
 "uw" = (
-/obj/machinery/door/window/westright,
+/obj/machinery/door/window/right{
+	dir = 8
+	},
 /turf/open/floor/mainship/blue,
 /area/whiskey_outpost)
 "uE" = (
@@ -4654,7 +4654,9 @@
 /area/whiskey_outpost/outside/north)
 "zw" = (
 /obj/structure/window/reinforced,
-/obj/machinery/door/window/westright,
+/obj/machinery/door/window/right{
+	dir = 8
+	},
 /turf/open/floor/mainship,
 /area/whiskey_outpost)
 "zz" = (
@@ -5687,7 +5689,7 @@
 	},
 /area/whiskey_outpost/outside/north)
 "Pc" = (
-/obj/machinery/door/window/eastleft,
+/obj/machinery/door/window,
 /turf/open/floor/mainship/cargo,
 /area/whiskey_outpost)
 "Pi" = (
@@ -5917,7 +5919,9 @@
 /turf/open/floor/plating/ground/dirt,
 /area/whiskey_outpost/outside/north)
 "Tv" = (
-/obj/machinery/door/window/westright,
+/obj/machinery/door/window/right{
+	dir = 8
+	},
 /turf/open/floor/mainship/orange,
 /area/whiskey_outpost)
 "Tx" = (
@@ -14714,7 +14718,7 @@ be
 bR
 Cp
 ac
-re
+bR
 bR
 bR
 bR
@@ -14867,7 +14871,7 @@ qy
 fm
 DW
 ac
-rk
+bR
 fm
 bR
 bR

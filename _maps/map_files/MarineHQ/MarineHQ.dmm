@@ -3844,7 +3844,9 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/machinery/door/window/southleft,
+/obj/machinery/door/window{
+	dir = 2
+	},
 /turf/open/floor/mainship/plate,
 /area/mainship/command/cic)
 "mO" = (
@@ -7974,9 +7976,6 @@
 /obj/structure/bed/stool,
 /turf/open/floor/mainship/sterile/dark,
 /area/centcom/practice/medical)
-"LZ" = (
-/turf/open/floor/mainship/red/full,
-/area/mainship/shipboard/weapon_room)
 "Ma" = (
 /obj/structure/window/reinforced/tinted/frosted{
 	dir = 8
@@ -35172,7 +35171,7 @@ sh
 Qo
 CC
 LC
-LZ
+xf
 RV
 bJ
 bb

@@ -357,6 +357,14 @@
 	if(!tooltips && prefs.tooltips)
 		tooltips = new /datum/tooltip(src)
 
+<<<<<<< HEAD
+=======
+	view_size = new(src, get_screen_size(prefs.widescreenpref))
+	view_size.update_pixel_format()
+	view_size.update_zoom_mode()
+
+	set_fullscreen(prefs.fullscreen_mode)
+>>>>>>> cd59f26ff (Fit viewport fix (#7329))
 
 	winset(src, null, "mainwindow.title='[CONFIG_GET(string/title)]'")
 

@@ -327,6 +327,14 @@ can cause issues with ammo types getting mixed up during the burst.
 		return
 	return TRUE
 
+<<<<<<< HEAD
+=======
+/obj/item/weapon/gun/shotgun/double/unload(mob/user)
+	if(flags_gun_features & GUN_BURST_FIRING)
+		return FALSE
+	return cock(user)
+
+>>>>>>> e4e7c8c66 (Fix DB's (#7341))
 /obj/item/weapon/gun/shotgun/double/add_to_tube(mob/user,selection) //Load it on the go, nothing chambered.
 	current_mag.chamber_position++
 	current_mag.chamber_contents[current_mag.chamber_position] = selection

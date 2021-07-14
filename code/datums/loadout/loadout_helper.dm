@@ -20,11 +20,47 @@
 /proc/buy_item_in_vendor(item_to_buy_type)
 	if(is_type_in_typecache(item_to_buy_type, GLOB.bypass_vendor_item))
 		return TRUE
+<<<<<<< HEAD
+=======
+
+	//If we can find it for in a shared vendor, we buy it
+>>>>>>> c4dc44b9d (fix bad loadout runtime (#7380))
 	for(var/type in GLOB.loadout_linked_vendor)
 		for(var/datum/vending_product/item_datum AS in GLOB.vending_records[type])
 			if(item_datum.product_path == item_to_buy_type && item_datum.amount != 0)
 				item_datum.amount--
 				return TRUE
+<<<<<<< HEAD
+=======
+
+	var/list/job_specific_list = GLOB.loadout_role_essential_set[user.job.title]
+
+	//If we still have our essential kit, and the item is in there, we take one from it
+	if(seller.buying_bitfield & MARINE_CAN_BUY_ESSENTIALS && islist(job_specific_list) && job_specific_list[item_to_buy_type] > seller.unique_items_list[item_to_buy_type])
+		seller.unique_items_list[item_to_buy_type]++
+		return TRUE
+
+	//If it's in a clothes vendor that uses buying bitfield, we check if we still have that field and we use it
+	job_specific_list = GLOB.job_specific_clothes_vendor[user.job.title]
+	if(!islist(job_specific_list))
+		return FALSE
+	var/list/item_info = job_specific_list[item_to_buy_type]
+	if(item_info && buy_category(item_info[1], seller))
+		return TRUE
+
+	//Lastly, we try to use points to buy from a job specific points vendor
+	var/list/listed_products = GLOB.job_specific_points_vendor[user.job.title]
+	if(!listed_products)
+		return FALSE
+	for(var/item_type in listed_products)
+		if(item_to_buy_type != item_type)
+			continue
+		item_info = listed_products[item_type]
+		if(seller.available_points < item_info[3])
+			return FALSE
+		seller.available_points -= item_info[3]
+		return TRUE
+>>>>>>> c4dc44b9d (fix bad loadout runtime (#7380))
 	return FALSE
 
 /// Will put back an item in a linked vendor
@@ -35,7 +71,7 @@
 				continue
 			if(item_datum.amount >= 0)
 				item_datum.amount++
-			return 
+			return
 
 ///Return wich type of item_representation should representate any item_type
 /proc/item2representation_type(item_type)
@@ -79,4 +115,57 @@
 		return
 	if(!user.assigned_squad)
 		return
+<<<<<<< HEAD
 	user.equip_to_slot_or_del(new /obj/item/radio/headset/mainship/marine(null, user.assigned_squad, user.job), SLOT_EARS, override_nodrop = TRUE)
+=======
+	user.equip_to_slot_or_del(new /obj/item/radio/headset/mainship/marine(null, user.assigned_squad, user.job.type), SLOT_EARS, override_nodrop = TRUE)
+
+/// Will check if the selected category can be bought according to the buying_bitfield
+/proc/can_buy_category(category, buying_bitfield)
+	var/selling_bitfield = NONE
+	for(var/i in GLOB.marine_selector_cats[category])
+		selling_bitfield |= i
+	return buying_bitfield & selling_bitfield
+
+/// Return true if you can buy this category, and also change the loadout seller buying bitfield
+/proc/buy_category(category, datum/loadout_seller/seller)
+	var/selling_bitfield = NONE
+	for(var/i in GLOB.marine_selector_cats[category])
+		selling_bitfield |= i
+	if(!(seller.buying_bitfield & selling_bitfield))
+		return FALSE
+	if(selling_bitfield == (MARINE_CAN_BUY_R_POUCH|MARINE_CAN_BUY_L_POUCH))
+		if(seller.buying_bitfield & MARINE_CAN_BUY_R_POUCH)
+			seller.buying_bitfield &= ~MARINE_CAN_BUY_R_POUCH
+		else
+			seller.buying_bitfield &= ~MARINE_CAN_BUY_L_POUCH
+		return TRUE
+	if(selling_bitfield == (MARINE_CAN_BUY_ATTACHMENT|MARINE_CAN_BUY_ATTACHMENT2))
+		if(seller.buying_bitfield & MARINE_CAN_BUY_ATTACHMENT)
+			seller.buying_bitfield &= ~MARINE_CAN_BUY_ATTACHMENT
+		else
+			seller.buying_bitfield &= ~MARINE_CAN_BUY_ATTACHMENT2
+		return TRUE
+	seller.buying_bitfield &= ~selling_bitfield
+	return TRUE
+
+/proc/load_player_loadout(player_ckey, loadout_job, loadout_name)
+	player_ckey = ckey(player_ckey)
+	if(!player_ckey)
+		return
+	var/path = "data/player_saves/[player_ckey[1]]/[player_ckey]/preferences.sav"
+	if(!path)
+		return
+	if(!fexists(path))
+		return
+	var/savefile/S = new /savefile(path)
+	if(!S)
+		return
+	S.cd = "/loadouts"
+	var/loadout_json = ""
+	READ_FILE(S["[loadout_name + loadout_job]"], loadout_json)
+	if(!loadout_json)
+		return
+	var/datum/loadout/loadout = jatum_deserialize(loadout_json)
+	return loadout
+>>>>>>> c4dc44b9d (fix bad loadout runtime (#7380))

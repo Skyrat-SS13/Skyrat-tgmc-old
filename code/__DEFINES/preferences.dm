@@ -71,6 +71,29 @@
 #define RADIAL_MEDICAL (1<<0)
 #define MIDDLESHIFTCLICKING (1<<1)
 
+<<<<<<< HEAD
+=======
+#define PARALLAX_INSANE -1 //for show offs
+#define PARALLAX_HIGH    0 //default.
+#define PARALLAX_MED     1
+#define PARALLAX_LOW     2
+#define PARALLAX_DISABLE 3 //this option must be the highest number
+
+#define PARALLAX_DELAY_DEFAULT world.tick_lag
+#define PARALLAX_DELAY_MED     1
+#define PARALLAX_DELAY_LOW     2
+
+#define PIXEL_SCALING_AUTO 0
+#define PIXEL_SCALING_1X 1
+#define PIXEL_SCALING_1_2X 1.5
+#define PIXEL_SCALING_2X 2
+#define PIXEL_SCALING_3X 3
+
+#define SCALING_METHOD_NORMAL "normal"
+#define SCALING_METHOD_DISTORT "distort"
+#define SCALING_METHOD_BLUR "blur"
+
+>>>>>>> 2f38b8452 (Ports parallax (#7426))
 #define TOGGLES_GAMEPLAY_DEFAULT (RADIAL_MEDICAL|MIDDLESHIFTCLICKING)
 
 #define CITIZENSHIP_CHOICES list(\

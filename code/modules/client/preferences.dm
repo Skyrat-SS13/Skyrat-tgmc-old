@@ -137,6 +137,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	var/auto_fit_viewport = TRUE
 
+	var/parallax
+
 	///The loadout manager
 	var/datum/loadout_manager/loadout_manager
 	/// New TGUI Preference preview

@@ -2,9 +2,38 @@ import { useBackend } from '../../backend';
 import { Button, Section, LabeledList, Grid, ColorBox } from '../../components';
 import { ToggleFieldPreference, TextFieldPreference, SelectFieldPreference } from './FieldPreferences';
 
+const ParallaxNumToString = (integer) => {
+  let returnval = "";
+  switch (integer) {
+    case -1:
+      returnval = "Insane";
+      break;
+    case 0:
+      returnval = "High";
+      break;
+    case 1:
+      returnval = "Medium";
+      break;
+    case 2:
+      returnval = "Low";
+      break;
+    case 3:
+      returnval = "Disabled";
+      break;
+    default:
+      returnval = "Error!";
+  }
+  return returnval;
+};
+
 export const GameSettings = (props, context) => {
+<<<<<<< HEAD
   const { act, data, config } = useBackend<PlayerPreferencesData>(context);
   const { ui_style_color } = data;
+=======
+  const { act, data } = useBackend<GameSettingData>(context);
+  const { ui_style_color, scaling_method, pixel_size, parallax } = data;
+>>>>>>> 2f38b8452 (Ports parallax (#7426))
   return (
     <Section title="Game Settings">
       <Grid>
@@ -155,6 +184,31 @@ export const GameSettings = (props, context) => {
                 value={'ui_style_alpha'}
                 action={'uialpha'}
               />
+<<<<<<< HEAD
+=======
+              <ToggleFieldPreference
+                label="Widescreen mode"
+                value="widescreenpref"
+                action="widescreenpref"
+                leftLabel={'Enabled'}
+                rightLabel={'Disabled'}
+              />
+              <LoopingSelectionPreference
+                label="Scaling Method"
+                value={scaling_method}
+                action="scaling_method"
+              />
+              <LoopingSelectionPreference
+                label="Pixel Size Scaling"
+                value={pixel_size}
+                action="pixel_size"
+              />
+              <LoopingSelectionPreference
+                label="Parallax"
+                value={ParallaxNumToString(parallax)}
+                action="parallax"
+              />
+>>>>>>> 2f38b8452 (Ports parallax (#7426))
             </LabeledList>
           </Section>
         </Grid.Column>

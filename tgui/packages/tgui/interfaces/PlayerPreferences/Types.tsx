@@ -28,14 +28,38 @@ type PlayerPreferencesData = {
   r_eyes: number,
   g_eyes: number,
   b_eyes: number,
+<<<<<<< HEAD
   citizenship: string,
   religion: string,
   nanotrasen_relation: string,
+=======
+
+}
+
+type BackgroundInformationData = {
+  slot: number,
+>>>>>>> 2f38b8452 (Ports parallax (#7426))
   flavor_text: string,
   med_record: string,
   gen_record: string,
   sec_record: string,
   exploit_record: string,
+<<<<<<< HEAD
+=======
+}
+
+type GameSettingData = {
+  ui_style_color: string,
+  scaling_method: string,
+  pixel_size: number,
+  parallax: number,
+}
+
+type GearCustomizationData = {
+  gearsets: PreferencesGearSets,
+  gear: string[],
+  clothing: PreferencesClothingTypeList,
+>>>>>>> 2f38b8452 (Ports parallax (#7426))
   underwear: number,
   undershirt: number,
   backpack: number,

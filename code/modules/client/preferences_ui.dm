@@ -123,7 +123,105 @@
 			continue
 		.["save_slot_names"]["[i]"] = name
 
+<<<<<<< HEAD
 
+=======
+	switch(tab_index)
+		if(CHARACTER_CUSTOMIZATION)
+			.["r_hair"] = r_hair
+			.["g_hair"] = g_hair
+			.["b_hair"] = b_hair
+			.["r_grad"] = r_grad
+			.["g_grad"] = g_grad
+			.["b_grad"] = b_grad
+			.["r_facial"] = r_facial
+			.["g_facial"] = g_facial
+			.["b_facial"] = b_facial
+			.["r_eyes"] = r_eyes
+			.["g_eyes"] = g_eyes
+			.["b_eyes"] = b_eyes
+			.["real_name"] = real_name
+			.["xeno_name"] = xeno_name
+			.["synthetic_name"] = synthetic_name
+			.["synthetic_type"] = synthetic_type
+			.["random_name"] = random_name
+			.["ai_name"] = ai_name
+			.["age"] = age
+			.["gender"] = gender
+			.["ethnicity"] = ethnicity
+			.["species"] = species || "Human"
+			.["body_type"] = body_type
+			.["good_eyesight"] = good_eyesight
+			.["citizenship"] = citizenship
+			.["religion"] = religion
+			.["nanotrasen_relation"] = nanotrasen_relation
+			.["h_style"] = h_style
+			.["grad_style"] = grad_style
+			.["f_style"] = f_style
+		if(BACKGROUND_INFORMATION)
+			.["slot"] = default_slot
+			.["flavor_text"] = flavor_text
+			.["med_record"] = med_record
+			.["gen_record"] = gen_record
+			.["sec_record"] = sec_record
+			.["exploit_record"] = exploit_record
+		if(GEAR_CUSTOMIZATION)
+			.["gearsets"] = list()
+			for(var/g in GLOB.gear_datums)
+				var/datum/gear/gearset = GLOB.gear_datums[g]
+				.["gearsets"][gearset.display_name] = list(
+					"name" = gearset.display_name,
+					"cost" = gearset.cost,
+					"slot" = gearset.slot,
+				)
+			.["gear"] = gear || list()
+			.["undershirt"] = undershirt
+			.["underwear"] = underwear
+			.["backpack"] = backpack
+			.["gender"] = gender
+		if(JOB_PREFERENCES)
+			.["job_preferences"] = job_preferences
+			.["preferred_squad"] = preferred_squad
+			.["alternate_option"] = alternate_option
+			.["special_occupation"] = be_special
+		if(GAME_SETTINGS)
+			.["ui_style_color"] = ui_style_color
+			.["ui_style"] = ui_style
+			.["ui_style_alpha"] = ui_style_alpha
+			.["windowflashing"] = windowflashing
+			.["auto_fit_viewport"] = auto_fit_viewport
+			.["focus_chat"] = focus_chat
+			.["mute_xeno_health_alert_messages"] = mute_xeno_health_alert_messages
+			.["tgui_fancy"] = tgui_fancy
+			.["tgui_lock"] = tgui_lock
+			.["clientfps"] = clientfps
+			.["chat_on_map"] = chat_on_map
+			.["max_chat_length"] = max_chat_length
+			.["see_chat_non_mob"] = see_chat_non_mob
+			.["see_rc_emotes"] = see_rc_emotes
+			.["mute_others_combat_messages"] = mute_others_combat_messages
+			.["mute_self_combat_messages"] = mute_self_combat_messages
+			.["show_typing"] = show_typing
+			.["tooltips"] = tooltips
+			.["widescreenpref"] = widescreenpref
+			.["scaling_method"] = scaling_method
+			.["pixel_size"] = pixel_size
+			.["parallax"] = parallax
+			.["fullscreen_mode"] = fullscreen_mode
+		if(KEYBIND_SETTINGS)
+			.["is_admin"] = user.client?.holder ? TRUE : FALSE
+			.["key_bindings"] = list()
+			for(var/key in key_bindings)
+				for(var/kb_name in key_bindings[key])
+					.["key_bindings"][kb_name] += list(key)
+			.["custom_emotes"] = list()
+			for(var/id in 1 to CUSTOM_EMOTE_SLOTS)
+				var/datum/custom_emote/emote = custom_emotes[id]
+				.["custom_emotes"]["Custom emote :[id]"] = list(
+					sentence = emote.message,
+					emote_type = (emote.spoken_emote ? "say" : "me"),
+					)
+>>>>>>> 2f38b8452 (Ports parallax (#7426))
 
 /datum/preferences/ui_static_data(mob/user)
 	update_preview_icon()
@@ -678,6 +776,42 @@
 		if("update-character-preview")
 			update_preview_icon()
 
+<<<<<<< HEAD
+=======
+		if("widescreenpref")
+			widescreenpref = !widescreenpref
+			user.client.view_size.set_default(get_screen_size(widescreenpref))
+
+		if("pixel_size")
+			switch(pixel_size)
+				if(PIXEL_SCALING_AUTO)
+					pixel_size = PIXEL_SCALING_1X
+				if(PIXEL_SCALING_1X)
+					pixel_size = PIXEL_SCALING_1_2X
+				if(PIXEL_SCALING_1_2X)
+					pixel_size = PIXEL_SCALING_2X
+				if(PIXEL_SCALING_2X)
+					pixel_size = PIXEL_SCALING_3X
+				if(PIXEL_SCALING_3X)
+					pixel_size = PIXEL_SCALING_AUTO
+			user.client.view_size.apply() //Let's winset() it so it actually works
+
+		if("parallax")
+			parallax = WRAP(parallax + 1, PARALLAX_INSANE, PARALLAX_DISABLE + 1)
+			if(parent && parent.mob && parent.mob.hud_used)
+				parent.mob.hud_used.update_parallax_pref(parent.mob)
+
+		if("scaling_method")
+			switch(scaling_method)
+				if(SCALING_METHOD_NORMAL)
+					scaling_method = SCALING_METHOD_DISTORT
+				if(SCALING_METHOD_DISTORT)
+					scaling_method = SCALING_METHOD_BLUR
+				if(SCALING_METHOD_BLUR)
+					scaling_method = SCALING_METHOD_NORMAL
+			user.client.view_size.update_zoom_mode()
+
+>>>>>>> 2f38b8452 (Ports parallax (#7426))
 		else //  Handle the unhandled cases
 			return
 

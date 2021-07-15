@@ -130,8 +130,15 @@
 
 #define INVOKE_KING_TIME_LOCK 1 HOURS
 
+<<<<<<< HEAD
 #define SMALL_SILO_MAXIMUM_PLAYER_COUNT 30
 
+=======
+/// How each alive marine contributes to burrower larva output per minute. So with one pool, 15 marines are giving 0.375 points per minute, so it's a new xeno every 22 minutes
+#define SILO_BASE_OUTPUT_PER_MARINE 0.03
+/// This is used to ponderate the number of silo, so to reduces the diminishing returns of having more and more silos
+#define SILO_OUTPUT_PONDERATION 1.75
+>>>>>>> d01c80148 (Prevent too many xeno at start (#7194))
 //Time (after round start) before siloless timer can start
 #define MINIMUM_TIME_SILO_LESS_COLLAPSE 1 HOURS
 
@@ -142,3 +149,14 @@
 #define COCOONED_DEATH "cocoon_death"
 #define SILO_DEATH "silo_death"
 #define HEADBITE_DEATH "headbite_death"
+<<<<<<< HEAD
+=======
+
+#define DISTRESS_LARVA_POINTS_NEEDED 8
+#define HUNT_LARVA_POINTS_NEEDED 8
+#define CRASH_LARVA_POINTS_NEEDED 10
+
+#define FREE_XENO_AT_START 2
+
+#define MAX_UNBALANCED_RATIO_TWO_HUMAN_FACTIONS 1.2
+>>>>>>> d01c80148 (Prevent too many xeno at start (#7194))

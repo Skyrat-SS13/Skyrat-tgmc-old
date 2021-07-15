@@ -17,7 +17,13 @@
 
 	// *** Plasma *** //
 	plasma_max = 600
+<<<<<<< HEAD
 	plasma_gain = 20
+=======
+	plasma_gain = 5
+	plasma_regen_limit = 0.5
+	plasma_icon_state = "fury"
+>>>>>>> e90520af0 (Ravager gains fury when attacked. (#7349))
 
 	// *** Health *** //
 	max_health = 290
@@ -63,7 +69,11 @@
 
 	// *** Plasma *** //
 	plasma_max = 700 //Enables using either both abilities at once or one after another
+<<<<<<< HEAD
 	plasma_gain = 30
+=======
+	plasma_gain = 5
+>>>>>>> e90520af0 (Ravager gains fury when attacked. (#7349))
 
 	// *** Health *** //
 	max_health = 310
@@ -88,7 +98,12 @@
 
 	// *** Plasma *** //
 	plasma_max = 750
+<<<<<<< HEAD
 	plasma_gain = 35
+=======
+	plasma_gain = 10
+	plasma_regen_limit = 0.6
+>>>>>>> e90520af0 (Ravager gains fury when attacked. (#7349))
 
 	// *** Health *** //
 	max_health = 330
@@ -113,7 +128,11 @@
 
 	// *** Plasma *** //
 	plasma_max = 800
+<<<<<<< HEAD
 	plasma_gain = 40
+=======
+	plasma_gain = 15
+>>>>>>> e90520af0 (Ravager gains fury when attacked. (#7349))
 
 	// *** Health *** //
 	max_health = 350

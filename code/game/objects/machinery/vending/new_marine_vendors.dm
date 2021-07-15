@@ -1308,14 +1308,6 @@ GLOBAL_LIST_INIT(available_specialist_sets, list("Scout Set", "Sniper Set", "Dem
 		/obj/item/facepaint/green,
 	)
 
-/obj/effect/essentials_set/basic_commander
-	spawned_gear_list = list(
-		/obj/item/clothing/glasses/hud/health,
-		/obj/item/clothing/under/marine,
-		/obj/item/clothing/shoes/marine/full,
-		/obj/item/storage/box/MRE,
-	)
-
 /obj/effect/essentials_set/medic
 	spawned_gear_list = list(
 		/obj/item/bodybag/cryobag,
@@ -1353,6 +1345,7 @@ GLOBAL_LIST_INIT(available_specialist_sets, list("Scout Set", "Sniper Set", "Dem
 		/obj/item/motiondetector,
 		/obj/item/binoculars/tactical,
 		/obj/item/pinpointer/pool,
+		/obj/item/clothing/glasses/hud/health,
 	)
 
 /obj/effect/essentials_set/commander

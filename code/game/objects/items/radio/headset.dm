@@ -156,6 +156,7 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 	item_state = "headset"
 	frequency = FREQ_COMMON
 	flags_atom = CONDUCT | PREVENT_CONTENTS_EXPLOSION
+	freerange = TRUE
 	var/obj/machinery/camera/camera
 	var/datum/atom_hud/squadhud = null
 	var/mob/living/carbon/human/wearer = null
@@ -366,6 +367,7 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 	keyslot2 = /obj/item/encryptionkey/engi
 
 /obj/item/radio/headset/mainship/st/rebel
+	frequency = FREQ_COMMON_REBEL
 	keyslot = /obj/item/encryptionkey/req/rebel
 	keyslot2 = /obj/item/encryptionkey/engi/rebel
 	hud_type = DATA_HUD_SQUAD_REBEL
@@ -377,6 +379,7 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 	keyslot = /obj/item/encryptionkey/med
 
 /obj/item/radio/headset/mainship/doc/rebel
+	frequency = FREQ_COMMON_REBEL
 	keyslot = /obj/item/encryptionkey/med/rebel
 	hud_type = DATA_HUD_SQUAD_REBEL
 	minimap_type = /datum/action/minimap/marine/rebel
@@ -386,7 +389,12 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 	icon_state = "cargo_headset"
 	keyslot = /obj/item/encryptionkey/req
 
+<<<<<<< HEAD
 /obj/item/radio/headset/mainship/ct/rebel 
+=======
+/obj/item/radio/headset/mainship/ct/rebel
+	frequency = FREQ_COMMON_REBEL
+>>>>>>> bbfcf529d (Fix hvh comms (#7272))
 	keyslot = /obj/item/encryptionkey/req/rebel
 	hud_type = DATA_HUD_SQUAD_REBEL
 	minimap_type = /datum/action/minimap/marine/rebel
@@ -398,7 +406,12 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 	use_command = TRUE
 	command = TRUE
 
+<<<<<<< HEAD
 /obj/item/radio/headset/mainship/mcom/rebel 
+=======
+/obj/item/radio/headset/mainship/mcom/rebel
+	frequency = FREQ_COMMON_REBEL
+>>>>>>> bbfcf529d (Fix hvh comms (#7272))
 	keyslot = /obj/item/encryptionkey/mcom/rebel
 	hud_type = DATA_HUD_SQUAD_REBEL
 	minimap_type = /datum/action/minimap/marine/rebel
@@ -408,15 +421,16 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 	keyslot = /obj/item/encryptionkey/mcom/ai
 
 /obj/item/radio/headset/mainship/mcom/silicon/rebel
+	frequency = FREQ_COMMON_REBEL
 	keyslot = /obj/item/encryptionkey/mcom/ai/rebel
 	hud_type = DATA_HUD_SQUAD_REBEL
 	minimap_type = /datum/action/minimap/marine/rebel
 
 /obj/item/radio/headset/mainship/marine
 	keyslot = /obj/item/encryptionkey/general
-	freerange = TRUE
 
 /obj/item/radio/headset/mainship/marine/rebel
+	frequency = FREQ_COMMON_REBEL
 	keyslot = /obj/item/encryptionkey/general/rebel
 	hud_type = DATA_HUD_SQUAD_REBEL
 	minimap_type = /datum/action/minimap/marine/rebel

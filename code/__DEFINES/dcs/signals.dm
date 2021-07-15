@@ -624,7 +624,11 @@
 
 // human signals for keybindings
 #define COMSIG_KB_QUICKEQUIP "keybinding_quickequip"
+<<<<<<< HEAD
 #define COMSIG_KB_HOLSTER "keybinding_holster"
+=======
+#define COMSIG_KB_GUN_SAFETY "keybinding_gun_safety"
+>>>>>>> 93f17f6d6 (safety keybind (#7422))
 #define COMSIG_KB_UNIQUEACTION "keybinding_uniqueaction"
 #define COMSIG_KB_RAILATTACHMENT "keybinding_railattachment"
 #define COMSIG_KB_UNDERRAILATTACHMENT "keybinding_underrailattachment"

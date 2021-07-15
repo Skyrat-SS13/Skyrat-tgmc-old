@@ -206,7 +206,11 @@
 		RegisterSignal(gun_user, COMSIG_KB_FIREMODE, .proc/do_toggle_firemode)
 		return ..()
 	if(gun_user)
+<<<<<<< HEAD
 		UnregisterSignal(gun_user, list(COMSIG_MOB_MOUSEDOWN, COMSIG_MOB_MOUSEUP, COMSIG_MOB_MOUSEDRAG, COMSIG_KB_RAILATTACHMENT, COMSIG_KB_UNDERRAILATTACHMENT, COMSIG_KB_UNLOADGUN, COMSIG_KB_FIREMODE))
+=======
+		UnregisterSignal(gun_user, list(COMSIG_MOB_MOUSEDOWN, COMSIG_MOB_MOUSEUP, COMSIG_MOB_MOUSEDRAG, COMSIG_KB_RAILATTACHMENT, COMSIG_KB_UNDERRAILATTACHMENT, COMSIG_KB_UNLOADGUN, COMSIG_KB_FIREMODE, COMSIG_KB_GUN_SAFETY, COMSIG_PARENT_QDELETING))
+>>>>>>> 93f17f6d6 (safety keybind (#7422))
 		gun_user.client.mouse_pointer_icon = initial(gun_user.client.mouse_pointer_icon)
 		gun_user = null
 	return ..()
@@ -214,9 +218,28 @@
 /obj/item/weapon/gun/removed_from_inventory(mob/user)
 	if(!gun_user)
 		return
+<<<<<<< HEAD
 	UnregisterSignal(gun_user, list(COMSIG_MOB_MOUSEDOWN, COMSIG_MOB_MOUSEUP, COMSIG_MOB_MOUSEDRAG, COMSIG_KB_RAILATTACHMENT, COMSIG_KB_UNDERRAILATTACHMENT, COMSIG_KB_UNLOADGUN, COMSIG_KB_FIREMODE))
 	gun_user.client?.mouse_pointer_icon = initial(gun_user.client.mouse_pointer_icon)
 	gun_user = null
+=======
+	gun_user = user
+	if(!CHECK_BITFIELD(flags_item, IS_DEPLOYED))
+		RegisterSignal(gun_user, COMSIG_MOB_MOUSEDOWN, .proc/start_fire)
+		RegisterSignal(gun_user, COMSIG_MOB_MOUSEDRAG, .proc/change_target)
+	RegisterSignal(gun_user, COMSIG_PARENT_QDELETING, .proc/clean_gun_user)
+	RegisterSignal(gun_user, COMSIG_MOB_MOUSEUP, .proc/stop_fire)
+	RegisterSignal(gun_user, COMSIG_KB_RAILATTACHMENT, .proc/activate_rail_attachment)
+	RegisterSignal(gun_user, COMSIG_KB_UNDERRAILATTACHMENT, .proc/activate_underrail_attachment)
+	RegisterSignal(gun_user, COMSIG_KB_UNLOADGUN, .proc/unload_gun)
+	RegisterSignal(gun_user, COMSIG_KB_FIREMODE, .proc/do_toggle_firemode)
+	RegisterSignal(gun_user, COMSIG_KB_GUN_SAFETY, .proc/toggle_gun_safety_keybind)
+
+///Null out gun user to prevent hard del
+/obj/item/weapon/gun/proc/clean_gun_user()
+	SIGNAL_HANDLER
+	set_gun_user(null)
+>>>>>>> 93f17f6d6 (safety keybind (#7422))
 
 /obj/item/weapon/gun/update_icon(mob/user)
 	if(!current_mag || current_mag.current_rounds <= 0)
@@ -267,6 +290,13 @@
 		to_chat(user, "[dat.Join(" ")]")
 
 /obj/item/weapon/gun/wield(mob/user)
+<<<<<<< HEAD
+=======
+	if(CHECK_BITFIELD(flags_gun_features, GUN_DEPLOYED_FIRE_ONLY))
+		to_chat(user, "<span class='notice'>[src] cannot be fired by hand and must be deployed.</span>")
+		return
+
+>>>>>>> 93f17f6d6 (safety keybind (#7422))
 	. = ..()
 	if(!.)
 		return

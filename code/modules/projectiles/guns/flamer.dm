@@ -499,9 +499,13 @@
 
 
 /obj/item/weapon/gun/flamer/marinestandard/unique_action(mob/user)
+<<<<<<< HEAD
+=======
+	. = ..()
+>>>>>>> d34bf1988 (Improve unique action and unload gun keybind (#7277))
 	var/obj/item/attachable/hydro_cannon/hydro = LAZYACCESS(attachments, ATTACHMENT_SLOT_UNDER)
 	if(!istype(hydro))
-		return
+		return FALSE
 	playsound(user, hydro.activation_sound, 15, 1)
 	if (hydro.activate_attachment(user))
 		hydro_active = TRUE
@@ -513,6 +517,7 @@
 	var/obj/screen/ammo/A = user.hud_used.ammo
 	A.update_hud(user)
 	SEND_SIGNAL(src, COMSIG_ITEM_HYDRO_CANNON_TOGGLED)
+	return TRUE
 
 /obj/item/weapon/gun/flamer/marinestandard/attach_fueltank(mob/user, obj/item/ammo_magazine/flamer_tank/backtank/fueltank)
 	if (!istype(fueltank))

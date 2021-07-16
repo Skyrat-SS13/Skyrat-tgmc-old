@@ -199,6 +199,10 @@
 	return TRUE
 
 /obj/item/weapon/gun/revolver/unique_action(mob/user)
+<<<<<<< HEAD
+=======
+	. = ..()
+>>>>>>> d34bf1988 (Improve unique action and unload gun keybind (#7277))
 	if(catchworking)
 		return unload(user)
 	else

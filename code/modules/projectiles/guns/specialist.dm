@@ -104,6 +104,10 @@
 
 
 /obj/item/weapon/gun/rifle/sniper/antimaterial/unique_action(mob/user)
+<<<<<<< HEAD
+=======
+	. = ..()
+>>>>>>> d34bf1988 (Improve unique action and unload gun keybind (#7277))
 	if(!targetmarker_primed && !targetmarker_on)
 		return laser_on(user)
 	else
@@ -391,6 +395,10 @@
 	to_chat(user, "The restriction system is [restriction_toggled ? "<B>on</b>" : "<B>off</b>"].")
 
 /obj/item/weapon/gun/smartgun/unique_action(mob/living/carbon/user)
+<<<<<<< HEAD
+=======
+	. = ..()
+>>>>>>> d34bf1988 (Improve unique action and unload gun keybind (#7277))
 	var/obj/item/smartgun_powerpack/power_pack = user.back
 	if(!istype(power_pack))
 		return FALSE

@@ -37,6 +37,10 @@
 
 
 /obj/item/weapon/gun/pistol/unique_action(mob/user)
+<<<<<<< HEAD
+=======
+	. = ..()
+>>>>>>> d34bf1988 (Improve unique action and unload gun keybind (#7277))
 	return cock(user)
 
 /obj/item/weapon/gun/pistol/get_ammo_type()

@@ -148,6 +148,13 @@
 	upper_akimbo_accuracy = 5
 	lower_akimbo_accuracy = 3
 
+<<<<<<< HEAD
+=======
+/obj/item/weapon/gun/energy/lasgun/unique_action(mob/user)
+	. = ..()
+	return cock(user)
+
+>>>>>>> d34bf1988 (Improve unique action and unload gun keybind (#7277))
 /obj/item/weapon/gun/energy/lasgun/tesla
 	name = "\improper M43-T tesla shock rifle"
 	desc = "A prototype TGMC energy rifle that fires balls of elecricity that shock all those near them, it is meant to drain the plasma of unidentified creatures from within, limiting their abilities. Handle only with insulated clothing. Reloaded with power cells."

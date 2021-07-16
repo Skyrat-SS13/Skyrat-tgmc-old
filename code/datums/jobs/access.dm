@@ -65,7 +65,11 @@
 		if(5)
 			return list(ACCESS_MARINE_WO, ACCESS_MARINE_ARMORY, ACCESS_MARINE_BRIG)//security
 		if(6)
+<<<<<<< HEAD
 			return list(ACCESS_IFF_MARINE, ACCESS_MARINE_PREP, ACCESS_MARINE_MEDPREP, ACCESS_MARINE_ENGPREP, ACCESS_MARINE_SMARTPREP, ACCESS_MARINE_LEADER, ACCESS_MARINE_SPECPREP)//spess mahreens
+=======
+			return list(ACCESS_MARINE_PREP, ACCESS_MARINE_MEDPREP, ACCESS_MARINE_ENGPREP, ACCESS_MARINE_SMARTPREP, ACCESS_MARINE_LEADER,)//spess mahreens
+>>>>>>> 33ac67d29 (Killing specialist code (#7424))
 		if(7)
 			return list(ACCESS_MARINE_ALPHA, ACCESS_MARINE_BRAVO, ACCESS_MARINE_CHARLIE, ACCESS_MARINE_DELTA)//squads
 		if(8)
@@ -130,8 +134,6 @@
 			return "Marine Squad Engineering"
 		if(ACCESS_MARINE_MEDPREP)
 			return "Marine Squad Medical"
-		if(ACCESS_MARINE_SPECPREP)
-			return "Marine Specialist"
 		if(ACCESS_MARINE_SMARTPREP)
 			return "Marine Smartgunner"
 		if(ACCESS_MARINE_LEADER)

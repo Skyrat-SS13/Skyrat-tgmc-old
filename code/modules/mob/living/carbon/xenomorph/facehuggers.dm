@@ -73,6 +73,11 @@
 	remove_danger_overlay() //Remove the danger overlay
 	lifetimer = null
 	jumptimer = null
+<<<<<<< HEAD
+=======
+	if(source)
+		clear_hugger_source()
+>>>>>>> 611ee8404 (Lets defilers inject other gasses into eggs, cleans up gas eggs (#7469))
 
 /obj/item/clothing/mask/facehugger/update_icon()
 	if(stat == DEAD)

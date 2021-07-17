@@ -614,8 +614,12 @@
 		/obj/item/ammo_magazine/flamer_tank,
 		/obj/item/ammo_magazine/handful,
 		/obj/item/ammo_magazine/m412l1_hpr,
+<<<<<<< HEAD
 		/obj/item/ammo_magazine/magnum,
 		/obj/item/ammo_magazine/minigun,
+=======
+		/obj/item/ammo_magazine/packet/magnum,
+>>>>>>> dffd42796 (minigun rework makes it work off powerpacks, also deletes old sg (#7431))
 		/obj/item/ammo_magazine/pistol,
 		/obj/item/ammo_magazine/railgun,
 		/obj/item/ammo_magazine/revolver,

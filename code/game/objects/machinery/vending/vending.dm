@@ -563,7 +563,16 @@
 /obj/machinery/vending/proc/vend(datum/vending_product/R, mob/user)
 	if(!allowed(user) && (!wires.is_cut(WIRE_IDSCAN) || hacking_safety)) //For SECURE VENDING MACHINES YEAH
 		to_chat(user, "<span class='warning'>Access denied.</span>")
+<<<<<<< HEAD
 		flick(src.icon_deny,src)
+=======
+		flick(icon_deny, src)
+		return
+
+	if(SSticker.mode?.flags_round_type & MODE_HUMAN_ONLY && is_type_in_typecache(R.product_path, GLOB.hvh_restricted_items_list))
+		to_chat(user, "<span class='warning'>This item is banned by the Space Geneva Convention.</span>")
+		flick(icon_deny, src)
+>>>>>>> dffd42796 (minigun rework makes it work off powerpacks, also deletes old sg (#7431))
 		return
 
 	if(R.category == CAT_HIDDEN && !extended_inventory)
@@ -656,8 +665,8 @@
 			if(A.current_rounds < A.max_rounds)
 				to_chat(user, "<span class='warning'>[A] isn't full. Fill it before you can restock it.</span>")
 				return
-		else if(istype(item_to_stock, /obj/item/smartgun_powerpack))
-			var/obj/item/smartgun_powerpack/P = item_to_stock
+		else if(istype(item_to_stock, /obj/item/minigun_powerpack))
+			var/obj/item/minigun_powerpack/P = item_to_stock
 			if(!P.pcell)
 				to_chat(user, "<span class='warning'>The [P] doesn't have a cell. You must put one in before you can restock it.</span>")
 				return

@@ -83,18 +83,13 @@
 	icon_state_mini = "mag_rifle_big_blue"
 
 //-------------------------------------------------------
-//SMARTGUN
-/obj/item/ammo_magazine/internal/smartgun
-	name = "integrated smartgun belt"
-	caliber = CALIBER_10X28
+//MINIGUN-Powerpack edition
+/obj/item/ammo_magazine/internal/minigun
+	name = "integrated minigun belt"
+	icon_state = "minigun"
+	caliber = CALIBER_762X51
 	max_rounds = 100
-	default_ammo = /datum/ammo/bullet/smartgun
-
-
-/obj/item/ammo_magazine/internal/smartgun/dirty
-	default_ammo = /datum/ammo/bullet/smartgun/dirty
-	gun_type = /obj/item/weapon/gun/smartgun/dirty
-
+	default_ammo = /datum/ammo/bullet/minigun
 
 //-------------------------------------------------------
 //M5 RPG
@@ -260,6 +255,7 @@
 	default_ammo = /datum/ammo/rocket/wp/quad
 	max_rounds = 4
 
+<<<<<<< HEAD
 //-------------------------------------------------------
 //Minigun
 
@@ -274,6 +270,10 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	gun_type = /obj/item/weapon/gun/minigun
 	icon_state_mini = "mag_minigun"
+=======
+/obj/item/ammo_magazine/internal/launcher/rocket/m57a4/ds
+	default_ammo = /datum/ammo/rocket/wp/quad/ds
+>>>>>>> dffd42796 (minigun rework makes it work off powerpacks, also deletes old sg (#7431))
 
 // railgun
 

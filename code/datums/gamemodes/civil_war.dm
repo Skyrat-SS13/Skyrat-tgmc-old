@@ -20,6 +20,7 @@
 		/datum/job/terragov/silicon/synthetic = 1,
 		/datum/job/terragov/squad/engineer = 8,
 		/datum/job/terragov/squad/corpsman = 8,
+		/datum/job/terragov/squad/smartgunner = 1,
 		/datum/job/terragov/squad/leader = 4,
 		/datum/job/terragov/squad/standard = -1,
 		/datum/job/terragov/command/captain/rebel = 1,
@@ -35,6 +36,7 @@
 		/datum/job/terragov/silicon/synthetic/rebel = 1,
 		/datum/job/terragov/squad/engineer/rebel = 8,
 		/datum/job/terragov/squad/corpsman/rebel = 8,
+		/datum/job/terragov/squad/smartgunner/rebel = 1,
 		/datum/job/terragov/squad/leader/rebel = 4,
 		/datum/job/terragov/squad/standard/rebel = -1
 	)

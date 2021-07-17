@@ -2,6 +2,11 @@
 #define LAST_UPDATE "last_update" //last time the season changed
 #define CURRENT_SEASON "current_season" //current season of the section
 
+//Current season info defines
+#define CURRENT_SEASON_NUMBER "current_season_number"
+#define CURRENT_SEASON_NAME "current_season_name"
+#define CURRENT_SEASON_DESC "current_season_description"
+
 //Season names
 #define SEASONAL_GUNS "seasonal_guns"
 
@@ -38,6 +43,61 @@ SUBSYSTEM_DEF(persistence)
 /datum/controller/subsystem/persistence/proc/CollectData()
 	return
 
+<<<<<<< HEAD
+=======
+///Loads the list of custom outfits names
+/datum/controller/subsystem/persistence/proc/load_custom_loadouts_list()
+	var/json_file = file("data/custom_loadouts.json")
+	if(!fexists(json_file))
+		initialize_custom_loadouts_file()
+	custom_loadouts = json_decode(file2text(json_file))
+
+///Load a loadout from the persistence loadouts savefile
+/datum/controller/subsystem/persistence/proc/load_loadout(loadout_name)
+	var/savefile/S = new /savefile("data/persistence.sav")
+	if(!S)
+		return FALSE
+	S.cd = "/loadouts"
+	var/loadout_json = ""
+	READ_FILE(S[loadout_name], loadout_json)
+	if(!loadout_json)
+		return FALSE
+	var/datum/loadout/loadout = jatum_deserialize(loadout_json)
+	return loadout
+
+///Saves the list of custom outfits names
+/datum/controller/subsystem/persistence/proc/save_custom_loadouts_list()
+	var/json_file = file("data/custom_loadouts.json")
+	fdel(json_file)
+	WRITE_FILE(json_file, json_encode(custom_loadouts))
+
+///Save a loadout into the persistence savefile
+/datum/controller/subsystem/persistence/proc/save_loadout(datum/loadout/loadout)
+	var/savefile/S = new /savefile("data/persistence.sav")
+	if(!S)
+		return FALSE
+	S.cd = "/loadouts"
+	loadout.loadout_vendor = null
+	var/loadout_json = jatum_serialize(loadout)
+	WRITE_FILE(S["[loadout.name]"], loadout_json)
+	custom_loadouts += loadout.name
+	return TRUE
+
+///Constructs a message with information about the active seasons and their current buckets
+/datum/controller/subsystem/persistence/proc/seasons_info_message()
+	var/message = ""
+	for(var/season_entry in season_progress)
+		var/season_name = jointext(splittext("[season_entry]", "_"), " ")
+		var/season_name_first_letter = uppertext(copytext(season_name, 1, 2))
+		var/season_name_remainder = copytext(season_name, 2, length(season_name) + 1)
+		season_name = season_name_first_letter + season_name_remainder
+		message += "<span class='seasons_announce'><b>[season_name]</b> - season [season_progress[season_entry][CURRENT_SEASON_NUMBER]]<br></span>"
+		message += "<span class='season_additional_info'><b>Title:</b> [season_progress[season_entry][CURRENT_SEASON_NAME]]<br></span>"
+		message += "<span class='season_additional_info'><b>Description:</b> [season_progress[season_entry][CURRENT_SEASON_DESC]]<br></span>"
+
+	return message
+
+>>>>>>> 5bbfc151b (Adds seasonal system roundstart announcement (#7440))
 ///Loads seasons data, advances seasons and saves the data
 /datum/controller/subsystem/persistence/proc/LoadSeasonalItems()
 	var/json_file = file("data/seasonal_items.json")
@@ -68,12 +128,15 @@ SUBSYSTEM_DEF(persistence)
 		seasons_file_info[season_class][CURRENT_SEASON]++
 
 	//Initializes the season datum that is chosen based on the current season
-	season_progress[season_class] = seasons_file_info[season_class][CURRENT_SEASON]
-	var/seasons_buckets_list_index = season_progress[season_class] % length(seasons_buckets[season_class]) + 1
+	season_progress[season_class] = list()
+	season_progress[season_class][CURRENT_SEASON_NUMBER] = seasons_file_info[season_class][CURRENT_SEASON]
+	var/seasons_buckets_list_index = season_progress[season_class][CURRENT_SEASON_NUMBER] % length(seasons_buckets[season_class]) + 1
 	var/season_typepath = seasons_buckets[season_class][seasons_buckets_list_index]
 	var/datum/season_datum/season_instance = new season_typepath
 
 	//Does stuff with the initialized season datum
+	season_progress[season_class][CURRENT_SEASON_NAME] = season_instance.name
+	season_progress[season_class][CURRENT_SEASON_DESC] = season_instance.description
 	season_items[season_class] = season_instance.item_list
 
 	//returns the updated season file data to write over the stored season file information
@@ -95,7 +158,7 @@ SUBSYSTEM_DEF(persistence)
 	var/list/item_list = list()
 
 /datum/season_datum/weapons/guns/rifle_seasonal_one
-	name = "rifles bucket 1"
+	name = "AK47 and M16"
 	description = "Rifle guns, previously at import"
 	item_list = list(
 		/obj/item/weapon/gun/rifle/ak47 = -1,
@@ -105,16 +168,16 @@ SUBSYSTEM_DEF(persistence)
 		)
 
 /datum/season_datum/weapons/guns/rifle_seasonal_two
-	name = "rifles bucket 2"
-	description = "Rifle guns, previously at import"
+	name = "UZI"
+	description = "Uzi guns at vendors, get your uzi today!"
 	item_list = list(
 		/obj/item/weapon/gun/smg/uzi = -1,
 		/obj/item/ammo_magazine/smg/uzi = -1,
 		)
 
 /datum/season_datum/weapons/guns/pistol_seasonal_one
-	name = "pistols bucket 1"
-	description = "Pistol guns, previously at import"
+	name = "Small revolver and average revolver"
+	description = "Additional revolvers available at vendors."
 	item_list = list(
 		/obj/item/weapon/gun/revolver/small = -1,
 		/obj/item/ammo_magazine/revolver/small = -1,
@@ -123,8 +186,8 @@ SUBSYSTEM_DEF(persistence)
 		)
 
 /datum/season_datum/weapons/guns/pistol_seasonal_two
-	name = "pistols bucket 2"
-	description = "Pistol guns, previously at import"
+	name = "G22 and a heavy pistol"
+	description = "More pistols for the pistol mains."
 	item_list = list(
 		/obj/item/weapon/gun/pistol/g22 = -1,
 		/obj/item/ammo_magazine/pistol/g22 = -1,
@@ -133,8 +196,8 @@ SUBSYSTEM_DEF(persistence)
 		)
 
 /datum/season_datum/weapons/guns/pistol_seasonal_three
-	name = "pistols bucket 3"
-	description = "Pistol guns, previously at import"
+	name = "Hiph-power pistols"
+	description = "More pistols in the vendors, why not?"
 	item_list = list(
 		/obj/item/weapon/gun/pistol/vp78 = -1,
 		/obj/item/ammo_magazine/pistol/vp78 = -1,

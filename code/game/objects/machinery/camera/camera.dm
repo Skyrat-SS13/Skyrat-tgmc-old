@@ -198,6 +198,17 @@
 			M.reset_perspective(null)
 			to_chat(M, "The screen bursts into static.")
 
+<<<<<<< HEAD
+=======
+	if(!powered())
+		return
+
+	for(var/mob/living/silicon/ai/AI in GLOB.silicon_mobs)
+		if(!AI.client)
+			continue
+		to_chat(AI, "<span class='notice'>[src] has been desactived at [myarea]</span>")
+
+>>>>>>> d686d618c (Make it so cameras check for power before notifying the AI (#7466))
 
 /obj/machinery/camera/update_icon()
 	if(obj_integrity <= 0)

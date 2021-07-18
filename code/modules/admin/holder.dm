@@ -359,10 +359,14 @@ GLOBAL_PROTECT(admin_verbs_asay)
 	/datum/admins/proc/reestablish_db_connection,
 	/datum/admins/proc/view_runtimes,
 	/datum/admins/proc/spatial_agent,
+<<<<<<< HEAD
 #ifdef REFERENCE_TRACKING
 	/datum/admins/proc/view_refs,
 	/datum/admins/proc/view_del_failures,
 #endif
+=======
+	/datum/admins/proc/set_xeno_stat_buffs,
+>>>>>>> f0feca706 (Hard del tracking, disabling and handling changes (#7432))
 	/datum/admins/proc/check_bomb_impacts,
 	/client/proc/toggle_cdn
 	)

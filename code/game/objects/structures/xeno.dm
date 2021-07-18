@@ -12,8 +12,18 @@
 	resistance_flags = UNACIDABLE
 	obj_flags = CAN_BE_HIT
 	var/on_fire = FALSE
-	var/ignore_weed_destruction = FALSE //Set this to true if this object isn't destroyed when the weeds under it is.
+	///Set this to true if this object isn't destroyed when the weeds under it is.
+	var/ignore_weed_destruction = FALSE
 
+/obj/effect/alien/Initialize()
+	. = ..()
+	if(!ignore_weed_destruction)
+		RegisterSignal(loc, COMSIG_TURF_WEED_REMOVED, .proc/weed_removed)
+
+/// Destroy the alien effect when the weed it was on is destroyed
+/obj/effect/alien/proc/weed_removed()
+	SIGNAL_HANDLER
+	obj_destruction(damage_flag = "melee")
 
 /obj/effect/alien/attackby(obj/item/I, mob/user, params)
 	. = ..()
@@ -115,132 +125,6 @@
 	slow_amt = 4
 
 	ignore_weed_destruction = FALSE
-
-
-//Carrier trap
-/obj/structure/xeno/trap
-	desc = "It looks like a hiding hole."
-	name = "resin hole"
-	icon = 'icons/Xeno/Effects.dmi'
-	icon_state = "trap0"
-	density = FALSE
-	opacity = FALSE
-	anchored = TRUE
-	max_integrity = 5
-	layer = RESIN_STRUCTURE_LAYER
-	var/obj/item/clothing/mask/facehugger/hugger = null
-
-/obj/structure/xeno/trap/Initialize(mapload)
-	. = ..()
-	RegisterSignal(src, COMSIG_MOVABLE_SHUTTLE_CRUSH, .proc/shuttle_crush)
-	RegisterSignal(src, COMSIG_MOVABLE_CROSSED_BY, .proc/trigger_hugger_trap) //Set up the trap signal on our turf
-
-/obj/structure/xeno/trap/ex_act(severity)
-	switch(severity)
-		if(EXPLODE_DEVASTATE)
-			take_damage(400)
-		if(EXPLODE_HEAVY)
-			take_damage(200)
-		if(EXPLODE_LIGHT)
-			take_damage(100)
-
-
-/obj/structure/xeno/trap/obj_destruction(damage_amount, damage_type, damage_flag)
-	if(damage_amount && hugger && loc)
-		drop_hugger()
-
-	return ..()
-
-///Ensures that no huggies will be released when the trap is crushed by a shuttle; no more trapping shuttles with huggies
-/obj/structure/xeno/trap/proc/shuttle_crush()
-	SIGNAL_HANDLER
-	qdel(src)
-
-
-/obj/structure/xeno/trap/examine(mob/user)
-	. = ..()
-	if(isxeno(user))
-		to_chat(user, "A hole for a little one to hide in ambush.")
-		if(hugger)
-			to_chat(user, "There's a little one inside.")
-		else
-			to_chat(user, "It's empty.")
-
-
-/obj/structure/xeno/trap/flamer_fire_act()
-	if(hugger)
-		hugger.forceMove(loc)
-		hugger.kill_hugger()
-		hugger = null
-		icon_state = "trap0"
-	..()
-
-/obj/structure/xeno/trap/fire_act()
-	if(hugger)
-		hugger.forceMove(loc)
-		hugger.kill_hugger()
-		hugger = null
-		icon_state = "trap0"
-	..()
-
-///Triggers the hugger trap
-/obj/structure/xeno/trap/proc/trigger_hugger_trap(datum/source, atom/movable/AM, oldloc)
-	SIGNAL_HANDLER
-	if(!iscarbon(AM) || !hugger)
-		return
-	var/mob/living/carbon/C = AM
-	if(!C.can_be_facehugged(hugger))
-		return
-	playsound(src, "alien_resin_break", 25)
-	C.visible_message("<span class='warning'>[C] trips on [src]!</span>",\
-						"<span class='danger'>You trip on [src]!</span>")
-	C.Paralyze(4 SECONDS)
-	xeno_message("A facehugger trap at [AREACOORD_NO_Z(src)] has been triggered!", "xenoannounce", 5, hugger.hivenumber,  FALSE, get_turf(src), 'sound/voice/alien_talk2.ogg', FALSE, null, /obj/screen/arrow/attack_order_arrow, COLOR_ORANGE, TRUE) //Follow the trend of hive wide alerts for important events
-	drop_hugger()
-
-/obj/structure/xeno/trap/proc/drop_hugger()
-	hugger.forceMove(loc)
-	hugger.go_active(TRUE, TRUE) //Removes stasis
-	icon_state = "trap0"
-	visible_message("<span class='warning'>[hugger] gets out of [src]!</span>")
-	hugger = null
-
-/obj/structure/xeno/trap/attack_alien(mob/living/carbon/xenomorph/X, damage_amount = X.xeno_caste.melee_damage, damage_type = BRUTE, damage_flag = "", effects = TRUE, armor_penetration = 0, isrightclick = FALSE)
-	if(X.status_flags & INCORPOREAL)
-		return FALSE
-
-	if(X.a_intent == INTENT_HARM)
-		return ..()
-	if(!(X.xeno_caste.caste_flags & CASTE_CAN_HOLD_FACEHUGGERS))
-		return
-	if(!hugger)
-		to_chat(X, "<span class='warning'>[src] is empty.</span>")
-		return
-	icon_state = "trap0"
-	X.put_in_active_hand(hugger)
-	hugger.go_active(TRUE)
-	hugger = null
-	to_chat(X, "<span class='xenonotice'>We remove the facehugger from [src].</span>")
-
-
-/obj/structure/xeno/trap/attackby(obj/item/I, mob/user, params)
-	. = ..()
-
-	if(istype(I, /obj/item/clothing/mask/facehugger) && isxeno(user))
-		var/obj/item/clothing/mask/facehugger/FH = I
-		if(hugger)
-			to_chat(user, "<span class='warning'>There is already a facehugger in [src].</span>")
-			return
-
-		if(FH.stat == DEAD)
-			to_chat(user, "<span class='warning'>You can't put a dead facehugger in [src].</span>")
-			return
-
-		user.transferItemToLoc(FH, src)
-		FH.go_idle(TRUE)
-		hugger = FH
-		icon_state = "trap1"
-		to_chat(user, "<span class='xenonotice'>You place a facehugger in [src].</span>")
 
 //Resin Doors
 /obj/structure/mineral_door/resin
@@ -615,6 +499,7 @@
 		return FALSE
 	Burst(FALSE)
 	return TRUE
+<<<<<<< HEAD
 /*
 TUNNEL
 */
@@ -1039,6 +924,20 @@ TUNNEL
 	chargesleft--
 	if(!(datum_flags & DF_ISPROCESSING) && (chargesleft < maxcharges))
 		START_PROCESSING(SSslowprocess, src)
+=======
+
+/obj/effect/alien/egg/gas/attack_alien(mob/living/carbon/xenomorph/M, damage_amount = M.xeno_caste.melee_damage, damage_type = BRUTE, damage_flag = "", effects = TRUE, armor_penetration = 0, isrightclick = FALSE)
+	if(status != EGG_GROWN)
+		return ..()
+
+	if(!issamexenohive(M) || M.a_intent != INTENT_HELP)
+		M.do_attack_animation(src, ATTACK_EFFECT_SMASH)
+		M.visible_message("<span class='xenowarning'>[M] crushes \the [src].","<span class='xenowarning'>We crush \the [src].")
+		Burst(TRUE)
+		return
+
+	to_chat(M, "<span class='warning'>That egg is filled with gas and has no child to retrieve.</span>")
+>>>>>>> 083af6d69 (Carrier traps and acid wells are destroyed when weeds below them is removed (#7401))
 
 /obj/item/resin_jelly
 	name = "resin jelly"

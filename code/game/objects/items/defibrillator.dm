@@ -276,6 +276,10 @@
 	REMOVE_TRAIT(H, TRAIT_PSY_DRAINED, TRAIT_PSY_DRAINED)
 	to_chat(H, "<span class='notice'>You suddenly feel a spark and your consciousness returns, dragging you back to the mortal plane.</span>")
 
+	if(CHECK_BITFIELD(H.status_flags, XENO_HOST))
+		var/obj/item/alien_embryo/friend = locate() in H
+		START_PROCESSING(SSobj, friend)
+
 	notify_ghosts("<b>[user]</b> has brought <b>[H.name]</b> back to life!", source = H, action = NOTIFY_ORBIT)
 
 /obj/item/defibrillator/civi

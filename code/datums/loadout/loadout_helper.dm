@@ -57,6 +57,13 @@
 		return /datum/item_representation/tie
 	if(ispath(item_type, /obj/item/ammo_magazine/handful))
 		return /datum/item_representation/handful_representation
+<<<<<<< HEAD
+=======
+	if(ispath(item_type, /obj/item/stack))
+		return /datum/item_representation/stack
+	if(ispath(item_type, /obj/item/card/id))
+		return /datum/item_representation/id
+>>>>>>> 23b5ec6ce (fix jobs (#7480))
 	return /datum/item_representation
 
 /// Return TRUE if this handful should be savable, aka if it's corresponding aka box is in a linked vendor

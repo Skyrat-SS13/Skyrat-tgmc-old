@@ -82,3 +82,63 @@
 			continue
 		if(storage.can_be_inserted(item_to_insert))
 			storage.handle_item_insertion(item_to_insert)
+<<<<<<< HEAD
+=======
+			continue
+		item_to_insert.forceMove(get_turf(user))
+
+
+/**
+ * Allow to representate stacks of item of type /obj/item/stack
+ */
+/datum/item_representation/stack
+	///Amount of items in the stack
+	var/amount = 0
+
+/datum/item_representation/stack/New(obj/item/item_to_copy)
+	if(!item_to_copy)
+		return
+	if(!isitemstack(item_to_copy))
+		CRASH("/datum/item_representation/stack created from an item that is not a stack of items")
+	..()
+	var/obj/item/stack/stack_to_copy = item_to_copy
+	amount = stack_to_copy.amount
+
+/datum/item_representation/stack/instantiate_object(datum/loadout_seller/seller, master = null, mob/living/user)
+	if(seller && !bypass_vendor_check && !buy_stack(item_type, seller, user, amount) && !buy_item_in_vendor(item_type, seller, user))
+		return
+	var/obj/item/stack/stack = new item_type(master)
+	stack.amount = amount
+	stack.update_weight()
+	stack.update_icon()
+	return stack
+
+/**
+ * Allow to representate an id card (/obj/item/card/id)
+ */
+/datum/item_representation/id
+	/// the access of the id
+	var/list/access = list()
+	/// the iff signal registered on the id
+	var/iff_signal = NONE
+
+/datum/item_representation/id/New(obj/item/item_to_copy)
+	if(!item_to_copy)
+		return
+	if(!isidcard(item_to_copy))
+		CRASH("/datum/item_representation/id created from an item that is not an id card")
+	..()
+	var/obj/item/card/id/id_to_copy = item_to_copy
+	access = id_to_copy.access
+	iff_signal = id_to_copy.iff_signal
+
+/datum/item_representation/id/instantiate_object(datum/loadout_seller/seller, master = null, mob/living/user)
+	. = ..()
+	if(!.)
+		return
+	var/obj/item/card/id/id = .
+	id.access = access
+	id.iff_signal = iff_signal
+	return id
+
+>>>>>>> 23b5ec6ce (fix jobs (#7480))

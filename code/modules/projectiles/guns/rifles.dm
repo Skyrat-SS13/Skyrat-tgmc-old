@@ -1119,3 +1119,6 @@
 	scatter = -10
 	scatter_unwielded = 30
 	aim_slowdown = 0.45
+
+/obj/item/weapon/gun/rifle/tx11/scopeless
+	starting_attachment_types = list(/obj/item/attachable/stock/irremoveable/tx11)

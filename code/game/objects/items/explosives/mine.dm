@@ -118,10 +118,16 @@ Stepping directly on the mine will also blow it up
 		return FALSE
 	if((L.status_flags & INCORPOREAL))
 		return FALSE
+<<<<<<< HEAD
 	if(ishuman(L))
 		var/mob/living/carbon/human/H = L
 		if(H.get_target_lock(iff_signal))
 			return FALSE
+=======
+	var/obj/item/card/id/id = L.get_idcard()
+	if(id?.iff_signal & iff_signal)
+		return FALSE
+>>>>>>> d1052d4e5 (fix mine not blowing up (#7525))
 
 	L.visible_message("<span class='danger'>[icon2html(src, viewers(L))] \The [src] clicks as [L] moves in front of it.</span>", \
 	"<span class='danger'>[icon2html(src, viewers(L))] \The [src] clicks as you move in front of it.</span>", \

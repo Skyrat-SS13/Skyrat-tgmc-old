@@ -37,7 +37,12 @@
 	"}
 	minimap_icon = "captain"
 
+<<<<<<< HEAD
 /datum/job/terragov/command/captain/rebel 
+=======
+/datum/job/terragov/command/captain/rebel
+	title = REBEL_CAPTAIN
+>>>>>>> ebec0f36a (This Rebellion starts today. (#7514))
 	faction = FACTION_TERRAGOV_REBEL
 	access = ALL_MARINE_REBEL_ACCESS
 	minimal_access = ALL_MARINE_REBEL_ACCESS
@@ -126,7 +131,12 @@ Godspeed, captain! And remember, you are not above the law."})
 	"}
 	minimap_icon = "fieldcommander"
 
+<<<<<<< HEAD
 /datum/job/terragov/command/fieldcommander/rebel 
+=======
+/datum/job/terragov/command/fieldcommander/rebel
+	title = REBEL_FIELD_COMMANDER
+>>>>>>> ebec0f36a (This Rebellion starts today. (#7514))
 	faction = FACTION_TERRAGOV_REBEL
 	access = ALL_MARINE_REBEL_ACCESS
 	minimal_access = ALL_MARINE_REBEL_ACCESS
@@ -219,7 +229,12 @@ Make the TGMC proud!"})
 
 	minimap_icon = "staffofficer"
 
+<<<<<<< HEAD
 /datum/job/terragov/command/staffofficer/rebel 
+=======
+/datum/job/terragov/command/staffofficer/rebel
+	title = REBEL_STAFF_OFFICER
+>>>>>>> ebec0f36a (This Rebellion starts today. (#7514))
 	faction = FACTION_TERRAGOV_REBEL
 	access = list(ACCESS_IFF_MARINE_REBEL, ACCESS_MARINE_BRIDGE_REBEL, ACCESS_MARINE_BRIG_REBEL, ACCESS_MARINE_CARGO_REBEL, ACCESS_MARINE_DROPSHIP_REBEL, ACCESS_MARINE_LOGISTICS_REBEL, ACCESS_MARINE_ALPHA_REBEL, ACCESS_MARINE_BRAVO_REBEL, ACCESS_MARINE_CHARLIE_REBEL, ACCESS_MARINE_DELTA_REBEL)
 	minimal_access = ALL_MARINE_REBEL_ACCESS
@@ -296,6 +311,7 @@ You are in charge of logistics and the overwatch system. You are also in line to
 	"}
 
 /datum/job/terragov/command/pilot/rebel
+	title = REBEL_PILOT_OFFICER
 	faction = FACTION_TERRAGOV_REBEL
 	access = list(ACCESS_IFF_MARINE_REBEL, ACCESS_MARINE_BRIDGE_REBEL, ACCESS_MARINE_DROPSHIP_REBEL, ACCESS_MARINE_PILOT_REBEL)
 	minimal_access = list(ACCESS_IFF_MARINE_REBEL, ACCESS_MARINE_BRIDGE_REBEL, ACCESS_MARINE_DROPSHIP_REBEL, ACCESS_MARINE_PILOT_REBEL, ACCESS_MARINE_LOGISTICS_REBEL, ACCESS_MARINE_CARGO_REBEL, ACCESS_MARINE_RO_REBEL, ACCESS_MARINE_MEDBAY_REBEL)
@@ -391,7 +407,12 @@ If you are not piloting, there is an autopilot fallback for command, but don't l
 	"}
 	minimap_icon = "cse"
 
+<<<<<<< HEAD
 /datum/job/terragov/engineering/chief/rebel 
+=======
+/datum/job/terragov/engineering/chief/rebel
+	title = REBEL_CHIEF_SHIP_ENGINEER
+>>>>>>> ebec0f36a (This Rebellion starts today. (#7514))
 	faction = FACTION_TERRAGOV_REBEL
 	access = list(ACCESS_IFF_MARINE_REBEL, ACCESS_MARINE_CE_REBEL, ACCESS_MARINE_ENGINEERING_REBEL, ACCESS_MARINE_BRIDGE_REBEL, ACCESS_CIVILIAN_ENGINEERING, ACCESS_MARINE_CARGO_REBEL, ACCESS_MARINE_DROPSHIP_REBEL, ACCESS_MARINE_PREP_REBEL)
 	minimal_access = list(ACCESS_IFF_MARINE_REBEL, ACCESS_MARINE_CE_REBEL, ACCESS_MARINE_ENGINEERING_REBEL, ACCESS_MARINE_BRIDGE_REBEL, ACCESS_CIVILIAN_ENGINEERING, ACCESS_MARINE_CARGO_REBEL, ACCESS_MARINE_DROPSHIP_REBEL, ACCESS_MARINE_LOGISTICS_REBEL, ACCESS_MARINE_PREP_REBEL, ACCESS_MARINE_RO_REBEL, ACCESS_MARINE_MEDBAY_REBEL)
@@ -474,6 +495,7 @@ You are also next in the chain of command, should the bridge crew fall in the li
 	"}
 
 /datum/job/terragov/engineering/tech/rebel
+	title = REBEL_SHIP_TECH
 	faction = FACTION_TERRAGOV_REBEL
 	access = list(ACCESS_IFF_MARINE_REBEL, ACCESS_MARINE_ENGINEERING_REBEL, ACCESS_MARINE_PREP_REBEL, ACCESS_MARINE_MEDBAY_REBEL, ACCESS_MARINE_CARGO_REBEL, ACCESS_CIVILIAN_ENGINEERING)
 	minimal_access = list(ACCESS_IFF_MARINE_REBEL, ACCESS_MARINE_ENGINEERING_REBEL, ACCESS_MARINE_PREP_REBEL, ACCESS_MARINE_MEDBAY_REBEL, ACCESS_MARINE_DROPSHIP_REBEL, ACCESS_MARINE_CARGO_REBEL, ACCESS_CIVILIAN_ENGINEERING)
@@ -566,7 +588,12 @@ requisitions line and later on to be ready to send supplies for marines who are 
 		Requisition supplies to the battlefield. Ensure that the marines are reparing miners for more points. Supply the marines with deluxe equipment to ensure success.
 	"}
 
+<<<<<<< HEAD
 /datum/job/terragov/requisitions/officer/rebel 
+=======
+/datum/job/terragov/requisitions/officer/rebel
+	title = REBEL_REQUISITIONS_OFFICER
+>>>>>>> ebec0f36a (This Rebellion starts today. (#7514))
 	faction = FACTION_TERRAGOV_REBEL
 	access = list(ACCESS_IFF_MARINE_REBEL, ACCESS_MARINE_DROPSHIP_REBEL, ACCESS_MARINE_CARGO_REBEL, ACCESS_MARINE_RO_REBEL, ACCESS_MARINE_BRIDGE_REBEL, ACCESS_MARINE_PREP_REBEL, ACCESS_MARINE_ALPHA_REBEL, ACCESS_MARINE_BRAVO_REBEL, ACCESS_MARINE_CHARLIE_REBEL, ACCESS_MARINE_DELTA_REBEL)
 	minimal_access = list(ACCESS_IFF_MARINE_REBEL, ACCESS_MARINE_CARGO_REBEL, ACCESS_MARINE_RO_REBEL, ACCESS_MARINE_BRIDGE_REBEL, ACCESS_MARINE_PREP_REBEL, ACCESS_MARINE_ALPHA_REBEL, ACCESS_MARINE_BRAVO_REBEL, ACCESS_MARINE_CHARLIE_REBEL, ACCESS_MARINE_DELTA_REBEL, ACCESS_MARINE_MEDBAY_REBEL, ACCESS_MARINE_DROPSHIP_REBEL, ACCESS_MARINE_LOGISTICS_REBEL)
@@ -660,6 +687,7 @@ A happy ship is a well-functioning ship."})
 	"}
 
 /datum/job/terragov/medical/professor/rebel
+	title = REBEL_CHIEF_MEDICAL_OFFICER
 	faction = FACTION_TERRAGOV_REBEL
 	access = list(ACCESS_IFF_MARINE_REBEL, ACCESS_MARINE_DROPSHIP_REBEL, ACCESS_MARINE_CMO_REBEL, ACCESS_MARINE_MEDBAY_REBEL, ACCESS_MARINE_RESEARCH_REBEL, ACCESS_MARINE_BRIDGE_REBEL, ACCESS_MARINE_CHEMISTRY_REBEL)
 	minimal_access = list(ACCESS_IFF_MARINE_REBEL, ACCESS_MARINE_CMO_REBEL, ACCESS_MARINE_MEDBAY_REBEL, ACCESS_MARINE_RESEARCH_REBEL, ACCESS_MARINE_BRIDGE_REBEL, ACCESS_MARINE_CHEMISTRY_REBEL, ACCESS_MARINE_CARGO_REBEL, ACCESS_MARINE_DROPSHIP_REBEL, ACCESS_MARINE_LOGISTICS_REBEL)
@@ -733,7 +761,12 @@ Make sure that the doctors and nurses are doing their jobs and keeping the marin
 		<b>Duty</b>: Tend severely wounded patients to your aid in the form of surgery, repair broken bones and damaged organs, fix internal bleeding and prevent the birth of a xenomorph larva. Develop superior healing medicines.
 	"}
 
+<<<<<<< HEAD
 /datum/job/terragov/medical/medicalofficer/rebel 
+=======
+/datum/job/terragov/medical/medicalofficer/rebel
+	title = REBEL_MEDICAL_DOCTOR
+>>>>>>> ebec0f36a (This Rebellion starts today. (#7514))
 	faction = FACTION_TERRAGOV_REBEL
 	access = list(ACCESS_IFF_MARINE_REBEL, ACCESS_MARINE_MEDBAY_REBEL, ACCESS_MARINE_CHEMISTRY_REBEL)
 	minimal_access = list(ACCESS_IFF_MARINE_REBEL, ACCESS_MARINE_MEDBAY_REBEL, ACCESS_MARINE_CHEMISTRY_REBEL, ACCESS_MARINE_CARGO_REBEL, ACCESS_MARINE_DROPSHIP_REBEL)
@@ -804,7 +837,7 @@ You are also an expert when it comes to medication and treatment. If you do not 
 	access = list(ACCESS_IFF_MARINE, ACCESS_MARINE_MEDBAY, ACCESS_MARINE_RESEARCH, ACCESS_MARINE_CHEMISTRY)
 	minimal_access = list(ACCESS_IFF_MARINE, ACCESS_MARINE_MEDBAY, ACCESS_MARINE_RESEARCH, ACCESS_MARINE_CHEMISTRY, ACCESS_MARINE_CARGO, ACCESS_MARINE_DROPSHIP)
 	skills_type = /datum/skills/doctor
-	display_order = JOB_DISPLAY_ORDER_MEDIAL_RESEARCHER
+	display_order = JOB_DISPLAY_ORDER_MEDICAL_RESEARCHER
 	outfit = /datum/outfit/job/medical/researcher
 	job_flags = JOB_FLAG_LATEJOINABLE|JOB_FLAG_ROUNDSTARTJOINABLE|JOB_FLAG_ALLOWS_PREFS_GEAR|JOB_FLAG_PROVIDES_BANK_ACCOUNT|JOB_FLAG_ADDTOMANIFEST|JOB_FLAG_PROVIDES_SQUAD_HUD
 	jobworth = list(
@@ -822,6 +855,7 @@ You are also an expert when it comes to medication and treatment. If you do not 
 	"}
 
 /datum/job/terragov/medical/researcher/rebel
+	title = REBEL_MEDICAL_RESEARCHER
 	faction = FACTION_TERRAGOV_REBEL
 	access = list(ACCESS_IFF_MARINE_REBEL, ACCESS_MARINE_MEDBAY_REBEL, ACCESS_MARINE_RESEARCH_REBEL, ACCESS_MARINE_CHEMISTRY_REBEL)
 	minimal_access = list(ACCESS_IFF_MARINE_REBEL, ACCESS_MARINE_MEDBAY_REBEL, ACCESS_MARINE_RESEARCH_REBEL, ACCESS_MARINE_CHEMISTRY_REBEL, ACCESS_MARINE_CARGO_REBEL, ACCESS_MARINE_DROPSHIP_REBEL)
@@ -951,6 +985,7 @@ Use your office fax machine to communicate with corporate headquarters or to acq
 	"}
 
 /datum/job/terragov/silicon/synthetic/rebel
+	title = REBEL_SYNTHETIC
 	faction = FACTION_TERRAGOV_REBEL
 	outfit = /datum/outfit/job/civilian/synthetic/rebel
 	jobworth = list(
@@ -1042,7 +1077,12 @@ In addition, being a Synthetic gives you knowledge in every field and specializa
 		<b>Duty</b>: Assist the crew whenever you’re needed, be the doorknob of the ship. Recon the areas for threats via cameras, report your findings to the crew at various communication channels. Follow your laws.
 	"}
 
+<<<<<<< HEAD
 /datum/job/terragov/silicon/ai/rebel 
+=======
+/datum/job/terragov/silicon/ai/rebel
+	title = REBEL_SILICON_AI
+>>>>>>> ebec0f36a (This Rebellion starts today. (#7514))
 	faction = FACTION_TERRAGOV_REBEL
 	jobworth = list(
 		/datum/job/xenomorph = LARVA_POINTS_SHIPSIDE,

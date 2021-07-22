@@ -67,7 +67,11 @@
 		return
 
 	var/static/list/create_object_forms = list(
+<<<<<<< HEAD
 	/obj, /obj/structure, /obj/machinery, /obj/effect, /obj/item, /obj/item/clothing, /obj/item/stack, /obj/item, /obj/item/weapon)
+=======
+	/obj, /obj/structure, /obj/structure/dropship_equipment, /obj/structure/ship_ammo, /obj/machinery, /obj/effect, /obj/item, /obj/item/reagent_containers, /obj/item/clothing, /obj/item/stack, /obj/item, /obj/item/explosive, /obj/item/weapon, /obj/item/weapon/gun, /obj/item/ammo_magazine)
+>>>>>>> feb23d6a6 (Add dropship equipement to the quick create menu (#7536))
 
 	var/path = input("Select the path of the object you wish to create.", "Path", /obj) in create_object_forms
 	var/html_form = create_object_forms[path]

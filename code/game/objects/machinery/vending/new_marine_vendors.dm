@@ -1079,6 +1079,7 @@ GLOBAL_LIST_INIT(marine_selector_cats, list(
 	vendor_role = /datum/job/terragov/squad/smartgunner
 	req_access = list(ACCESS_MARINE_SMARTPREP)
 
+<<<<<<< HEAD
 	listed_products = list(
 		/obj/item/storage/box/t26_system = list(CAT_ESS, "Essential Smartgunner Set", 0, "white"),
 
@@ -1094,6 +1095,11 @@ GLOBAL_LIST_INIT(marine_selector_cats, list(
 		/obj/item/attachable/stock/t35stock = list(CAT_ATT, "T-35 stock", 0, "black"),
 		/obj/item/attachable/stock/t19stock = list(CAT_ATT, "T-19 machine pistol stock", 0, "black"),
 	)
+=======
+/obj/machinery/marine_selector/gear/smartgun/Initialize()
+	. = ..()
+	listed_products = GLOB.smartgunner_gear_listed_products
+>>>>>>> 5ec9ca484 (fix sg loadouts (#7562))
 
 /obj/machinery/marine_selector/gear/smartgun/rebel
 	vendor_role = /datum/job/terragov/squad/smartgunner/rebel

@@ -261,11 +261,19 @@
 
 
 /obj/item/mortar_kit/attack_self(mob/user)
+<<<<<<< HEAD:code/game/objects/structures/mortar.dm
 	if(!is_ground_level(user.z))
 		to_chat(user, "<span class='warning'>You cannot deploy [src] here.</span>")
 		return
 	var/area/A = get_area(src)
 	if(A.ceiling >= CEILING_METAL)
+=======
+	unique_action(user)
+
+/obj/item/mortar_kit/unique_action(mob/user)
+	var/area/current_area = get_area(src)
+	if(current_area.ceiling >= CEILING_METAL)
+>>>>>>> 3c2722fd5 (Make it possible to put down the mortar using the activate hotkey (#7568)):code/game/objects/machinery/mortar.dm
 		to_chat(user, "<span class='warning'>You probably shouldn't deploy [src] indoors.</span>")
 		return
 	user.visible_message("<span class='notice'>[user] starts deploying [src].",

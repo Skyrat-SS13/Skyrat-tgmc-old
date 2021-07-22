@@ -390,8 +390,47 @@
 	to_chat(user, "[current_mag?.current_rounds ? "Ammo counter shows [current_mag.current_rounds] round\s remaining." : "It's dry."]")
 	to_chat(user, "The restriction system is [restriction_toggled ? "<B>on</b>" : "<B>off</b>"].")
 
+<<<<<<< HEAD
 /obj/item/weapon/gun/smartgun/unique_action(mob/living/carbon/user)
 	var/obj/item/smartgun_powerpack/power_pack = user.back
+=======
+//The minigun needs to wind up to fire.
+/obj/item/weapon/gun/minigun/Fire()
+	if(!able_to_fire(gun_user))
+		return
+	if(windup_checked == WEAPON_WINDUP_NOT_CHECKED)
+		playsound(get_turf(src), 'sound/weapons/guns/fire/tank_minigun_start.ogg', 30)
+		INVOKE_ASYNC(src, .proc/do_windup)
+		return
+	else if (windup_checked == WEAPON_WINDUP_CHECKING)//We are already in windup, continue
+		return
+	. = ..()
+	if(!.)
+		windup_checked = WEAPON_WINDUP_NOT_CHECKED
+
+///Windup before firing
+/obj/item/weapon/gun/minigun/proc/do_windup()
+	windup_checked = WEAPON_WINDUP_CHECKING
+	if(!do_after(gun_user, 0.4 SECONDS, TRUE, src, BUSY_ICON_DANGER, BUSY_ICON_DANGER, ignore_turf_checks = TRUE))
+		windup_checked = WEAPON_WINDUP_NOT_CHECKED
+		return
+	windup_checked = WEAPON_WINDUP_CHECKED
+	SEND_SIGNAL(src, COMSIG_GUN_FIRE)
+
+/obj/item/weapon/gun/minigun/get_ammo_type()
+	if(!ammo)
+		return list("unknown", "unknown")
+	return list(ammo.hud_state, ammo.hud_state_empty)
+
+/obj/item/weapon/gun/minigun/get_ammo_count()
+	if(!current_mag)
+		return in_chamber ? 1 : 0
+	return in_chamber ? (current_mag.current_rounds + 1) : current_mag.current_rounds
+
+/obj/item/weapon/gun/minigun/unique_action(mob/living/carbon/user)
+	. = ..()
+	var/obj/item/minigun_powerpack/power_pack = user.back
+>>>>>>> ca3066fc4 (Fix minigun safety (#7575))
 	if(!istype(power_pack))
 		return FALSE
 	return power_pack.attack_self(user)

@@ -166,8 +166,13 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	if(!IsGuestKey(C.key))
 		load_path(C.ckey)
+<<<<<<< HEAD
 		if(!load_loadout_manager())
 			loadout_manager = new 
+=======
+		loadout_manager = new
+		loadout_manager.loadouts_data = load_loadout_list()
+>>>>>>> 65ff761ff (Loadouts list save system change (#7381))
 		if(load_preferences() && load_character())
 			return
 

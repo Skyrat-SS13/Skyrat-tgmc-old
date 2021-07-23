@@ -28,12 +28,15 @@ GLOBAL_LIST_INIT(bypass_vendor_item, typecacheof(list(
 	/obj/item/ammo_magazine/handful,
 	)))
 
+<<<<<<< HEAD
 #define MARINE_LOADOUT "marine"
 #define ENGINEER_LOADOUT "engie"
 #define MEDIC_LOADOUT "medic"
 #define SMARTGUNNER_LOADOUT "smartgunner"
 #define LEADER_LOADOUT "leader"
 
+=======
+>>>>>>> 65ff761ff (Loadouts list save system change (#7381))
 //Defines use for the visualisation of loadouts
 #define NO_OFFSET "0%"
 #define NO_SCALING 1
@@ -42,3 +45,11 @@ GLOBAL_LIST_INIT(bypass_vendor_item, typecacheof(list(
 
 ///The maximum number of loadouts one player can have
 #define MAXIMUM_LOADOUT 50
+<<<<<<< HEAD
+=======
+
+/// The current loadout version
+#define CURRENT_LOADOUT_VERSION 6
+
+GLOBAL_LIST_INIT(accepted_loadout_versions, list(5,6))
+>>>>>>> 65ff761ff (Loadouts list save system change (#7381))

@@ -977,6 +977,15 @@ GLOBAL_LIST_INIT(no_sticky_resin, typecacheof(list(/obj/item/clothing/mask/faceh
 	penetration = 15
 	sundering = 2
 
+<<<<<<< HEAD
+=======
+/datum/ammo/bullet/smartgun/smartrifle
+	name = "smartrifle bullet"
+	damage = 25
+	penetration = 15
+	sundering = 1
+
+>>>>>>> b92831da6 (Increases smartrifle damage (#7539))
 /datum/ammo/bullet/smartgun/lethal
 	flags_ammo_behavior = AMMO_BALLISTIC|AMMO_SUNDERING
 	icon_state 	= "bullet"

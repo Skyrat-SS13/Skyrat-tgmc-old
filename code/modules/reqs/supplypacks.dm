@@ -236,7 +236,11 @@ WEAPONS
 /datum/supply_packs/weapons/antimaterial
 	name = "T-26 Antimaterial rifle kit"
 	contains = list(/obj/item/weapon/gun/rifle/sniper/antimaterial)
+<<<<<<< HEAD
 	cost = 70
+=======
+	cost = 75
+>>>>>>> f72609399 (Increases price of T-26 to 75 points (#7583))
 	available_against_xeno_only = TRUE
 
 /datum/supply_packs/weapons/specminigun

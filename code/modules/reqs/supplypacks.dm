@@ -596,6 +596,11 @@ AMMO
 	contains = list(/obj/item/ammo_magazine/standard_hmg)
 	cost = 10
 
+/datum/supply_packs/ammo/hmg
+	name = "MG-08/495 heavy machinegun ammo"
+	contains = list(/obj/item/ammo_magazine/heavymachinegun)
+	cost = 7
+
 /datum/supply_packs/ammo/lasguncharger
 	name = "ColMarTech Lasrifle Field Charger"
 	contains = list(/obj/machinery/vending/lasgun)

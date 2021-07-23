@@ -155,6 +155,13 @@
 		"Specialized" = list(
 			/obj/item/weapon/gun/launcher/m92/standardmarine = -1,
 			/obj/item/weapon/gun/launcher/m81 = -1,
+<<<<<<< HEAD
+=======
+			/obj/item/weapon/gun/heavymachinegun = 1,
+			/obj/item/ammo_magazine/heavymachinegun = 4,
+			/obj/item/weapon/gun/rifle/pepperball = 4,
+			/obj/item/ammo_magazine/rifle/pepperball = 40,
+>>>>>>> 9c462b6fe (Adds the HMG to marine vendors, HSG rebalance. (#7442))
 			/obj/item/storage/box/recoilless_system = 2,
 			/obj/item/weapon/gun/flamer/marinestandard = 4,
 			/obj/item/ammo_magazine/flamer_tank/backtank = 4,

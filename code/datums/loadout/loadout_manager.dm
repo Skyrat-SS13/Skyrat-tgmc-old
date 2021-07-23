@@ -80,8 +80,13 @@
 	TIMER_COOLDOWN_START(ui.user, COOLDOWN_LOADOUT_VISUALIZATION, 1 SECONDS)//Anti spam cooldown
 	switch(action)
 		if("saveLoadout")
+<<<<<<< HEAD
 			if(length(loadouts_list) >= MAXIMUM_LOADOUT)
 				to_chat(ui.user, "<span class='warning'>You've reached the maximum number of loadouts saved, please delete some before saving new ones</span>")
+=======
+			if(length(loadouts_data) >= MAXIMUM_LOADOUT * 2)
+				to_chat(ui.user, span_warning("You've reached the maximum number of loadouts saved, please delete some before saving new ones"))
+>>>>>>> ec36d1d9c (Replaced all span class by span macros (#7429))
 				return
 			var/job = params["loadout_job"]
 			var/loadout_name = params["loadout_name"]
@@ -89,18 +94,58 @@
 				return
 			var/datum/loadout/loadout = create_empty_loadout(loadout_name, job)
 			loadout.save_mob_loadout(ui.user)
+<<<<<<< HEAD
 			loadouts_list += loadout
 			add_loadout_data(loadout)
 			open_loadout(loadout, ui.user)
+=======
+			ui.user.client.prefs.save_loadout(loadout)
+			add_loadout(loadout)
+			update_static_data(ui.user, ui)
+			loadout.loadout_vendor = loadout_vendor
+			loadout.ui_interact(ui.user)
+		if("importLoadout")
+			var/loadout_id = params["loadout_id"]
+			if(isnull(loadout_id))
+				return
+			var/list/items = splittext(loadout_id, "//")
+			if(length(items) != 3)
+				to_chat(ui.user, span_warning("Wrong format!"))
+				return
+			var/datum/loadout/loadout = load_player_loadout(items[1], items[2], items[3])
+			if(!istype(loadout))
+				to_chat(ui.user, span_warning("Loadout not found!"))
+				return
+			if(!(loadout.version in GLOB.accepted_loadout_versions))
+				to_chat(ui.user, span_warning("The loadouts was found but is from a past version, and cannot be imported."))
+				return
+			if(loadout.version != CURRENT_LOADOUT_VERSION)
+				loadout.version = CURRENT_LOADOUT_VERSION
+			ui.user.client.prefs.save_loadout(loadout)
+			add_loadout(loadout)
+			update_static_data(ui.user, ui)
+			loadout.loadout_vendor = loadout_vendor
+			loadout.ui_interact(ui.user)
+>>>>>>> ec36d1d9c (Replaced all span class by span macros (#7429))
 		if("selectLoadout")
 			var/job = params["loadout_job"]
 			var/name = params["loadout_name"]
 			if(isnull(name))
 				return
+<<<<<<< HEAD
 			for(var/datum/loadout/next_loadout AS in loadouts_list)
 				if(next_loadout.name == name && next_loadout.job == job)
 					open_loadout(next_loadout, ui.user)
 					return
+=======
+			var/datum/loadout/loadout = ui.user.client.prefs.load_loadout(name, job)
+			if(!loadout)
+				to_chat(ui.user, span_warning("Error when loading this loadout"))
+				delete_loadout(ui.user, name, job)
+				CRASH("Fail to load loadouts")
+			loadout.loadout_vendor = loadout_vendor
+			loadout.ui_interact(ui.user)
+>>>>>>> ec36d1d9c (Replaced all span class by span macros (#7429))
 
 /// Set the loadout gave in argument as the current loadout and open it
 /datum/loadout_manager/proc/open_loadout(datum/loadout/loadout, mob/user)

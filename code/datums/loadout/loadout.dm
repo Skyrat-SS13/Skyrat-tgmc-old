@@ -131,7 +131,7 @@
 	switch(action)
 		if("equipLoadout")
 			if(TIMER_COOLDOWN_CHECK(ui.user, COOLDOWN_LOADOUT_EQUIPPED))
-				to_chat(ui.user, "<span class='warning'>The vendor is still reloading</span>")
+				to_chat(ui.user, span_warning("The vendor is still reloading"))
 				return
 			TIMER_COOLDOWN_START(ui.user, COOLDOWN_LOADOUT_EQUIPPED, 30 SECONDS)
 			if(!ui.user.client.prefs.loadout_manager.seller)

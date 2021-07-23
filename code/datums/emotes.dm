@@ -136,22 +136,28 @@
 			return FALSE
 
 		if(sound || get_sound(user))
+<<<<<<< HEAD
+=======
+			if(HAS_TRAIT(user, TRAIT_MUTED))
+				to_chat(user, span_danger("You're muted, and can't make any sounds!") )
+				return FALSE
+>>>>>>> ec36d1d9c (Replaced all span class by span macros (#7429))
 			if(TIMER_COOLDOWN_CHECK(user, COOLDOWN_EMOTE))
-				to_chat(user, "<span class='notice'>You just did an audible emote. Wait a while.</span>")
+				to_chat(user, span_notice("You just did an audible emote. Wait a while."))
 				return FALSE
 			else
 				TIMER_COOLDOWN_START(user, COOLDOWN_EMOTE, 8 SECONDS)
 
 		if(user.client)
 			if(user.client.prefs.muted & MUTE_IC)
-				to_chat(user, "<span class='warning'>You cannot send emotes (muted).</span>")
+				to_chat(user, span_warning("You cannot send emotes (muted)."))
 				return FALSE
 
 			if(user.client.handle_spam_prevention(message, MUTE_IC))
 				return FALSE
 
 			if(is_banned_from(user.ckey, "Emote"))
-				to_chat(user, "<span class='warning'>You cannot send emotes (banned).</span>")
+				to_chat(user, span_warning("You cannot send emotes (banned)."))
 				return FALSE
 
 	if(status_check && !is_type_in_typecache(user, mob_type_ignore_stat_typecache))
@@ -161,9 +167,9 @@
 
 			switch(user.stat)
 				if(UNCONSCIOUS)
-					to_chat(user, "<span class='notice'>You cannot [key] while unconscious.</span>")
+					to_chat(user, span_notice("You cannot [key] while unconscious."))
 				if(DEAD)
-					to_chat(user, "<span class='notice'>You cannot [key] while dead.</span>")
+					to_chat(user, span_notice("You cannot [key] while dead."))
 
 			return FALSE
 
@@ -173,11 +179,11 @@
 				if(L.incapacitated())
 					if(!intentional)
 						return FALSE
-					to_chat(user, "<span class='notice'>You cannot [key] while stunned.</span>")
+					to_chat(user, span_notice("You cannot [key] while stunned."))
 					return FALSE
 
 		if((flags_emote & EMOTE_RESTRAINT_CHECK) && user.restrained())
 			if(!intentional)
 				return FALSE
-			to_chat(user, "<span class='notice'>You cannot [key] while restrained.</span>")
+			to_chat(user, span_notice("You cannot [key] while restrained."))
 			return FALSE

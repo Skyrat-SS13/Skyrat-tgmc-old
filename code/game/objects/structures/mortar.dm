@@ -31,10 +31,10 @@
 		return
 
 	if(busy)
-		to_chat(user, "<span class='warning'>Someone else is currently using [src].</span>")
+		to_chat(user, span_warning("Someone else is currently using [src]."))
 		return
 	if(firing)
-		to_chat(user, "<span class='warning'>[src]'s barrel is still steaming hot. Wait a few seconds and stop firing it.</span>")
+		to_chat(user, span_warning("[src]'s barrel is still steaming hot. Wait a few seconds and stop firing it."))
 		return
 
 	ui_interact(user)
@@ -97,8 +97,8 @@
 			new_name = params["name"]
 			last_three_inputs["coords_three"]["name"] = new_name
 	if((coords["targ_x"] != 0 && coords["targ_y"] != 0))
-		usr.visible_message("<span class='notice'>[usr] adjusts [src]'s firing angle and distance.</span>",
-		"<span class='notice'>You adjust [src]'s firing angle and distance to match the new coordinates.</span>")
+		usr.visible_message(span_notice("[usr] adjusts [src]'s firing angle and distance."),
+		span_notice("You adjust [src]'s firing angle and distance to match the new coordinates."))
 		playsound(loc, 'sound/items/ratchet.ogg', 25, 1)
 		// allows for offsetting using the dial, I had accidentally misplaced this.
 		var/offset_x_max = round(abs((coords["targ_x"] + coords["dial_x"]) - x)/offset_per_turfs) //Offset of mortar shot, grows by 1 every 10 tiles travelled
@@ -140,38 +140,38 @@
 		var/obj/item/mortal_shell/mortar_shell = I
 
 		if(issynth(user) && !CONFIG_GET(flag/allow_synthetic_gun_use))
-			to_chat(user, "<span class='warning'>Your programming restricts operating heavy weaponry.</span>")
+			to_chat(user, span_warning("Your programming restricts operating heavy weaponry."))
 			return
 
 		if(busy)
-			to_chat(user, "<span class='warning'>Someone else is currently using [src].</span>")
+			to_chat(user, span_warning("Someone else is currently using [src]."))
 			return
 
 		if(!is_ground_level(z))
-			to_chat(user, "<span class='warning'>You cannot fire [src] here.</span>")
+			to_chat(user, span_warning("You cannot fire [src] here."))
 			return
 
 		if(coords["targ_x"] == 0 && coords["targ_y"] == 0) //Mortar wasn't set
-			to_chat(user, "<span class='warning'>[src] needs to be aimed first.</span>")
+			to_chat(user, span_warning("[src] needs to be aimed first."))
 			return
 
 		var/turf/selfown = locate((coords["targ_x"] + coords["dial_x"]), (coords["targ_y"] + coords["dial_y"]), z)
 		if(get_dist(loc, selfown) < 7)
-			to_chat(usr, "<span class='warning'>You cannot target this coordinate, it is too close to your mortar.</span>")
+			to_chat(usr, span_warning("You cannot target this coordinate, it is too close to your mortar."))
 			return
 
 		var/turf/T = locate(coords["targ_x"] + coords["dial_x"] + offset_x, coords["targ_y"]  + coords["dial_x"] + offset_y, z)
 		if(!isturf(T))
-			to_chat(user, "<span class='warning'>You cannot fire [src] to this target.</span>")
+			to_chat(user, span_warning("You cannot fire [src] to this target."))
 			return
 
 		var/area/A = get_area(T)
 		if(istype(A) && A.ceiling >= CEILING_UNDERGROUND)
-			to_chat(user, "<span class='warning'>You cannot hit the target. It is probably underground.</span>")
+			to_chat(user, span_warning("You cannot hit the target. It is probably underground."))
 			return
 
-		user.visible_message("<span class='notice'>[user] starts loading \a [mortar_shell.name] into [src].</span>",
-		"<span class='notice'>You start loading \a [mortar_shell.name] into [src].</span>")
+		user.visible_message(span_notice("[user] starts loading \a [mortar_shell.name] into [src]."),
+		span_notice("You start loading \a [mortar_shell.name] into [src]."))
 		playsound(loc, 'sound/weapons/guns/interact/mortar_reload.ogg', 50, 1)
 		busy = TRUE
 		if(!do_after(user, 15, TRUE, src, BUSY_ICON_HOSTILE))
@@ -180,9 +180,9 @@
 
 		busy = FALSE
 
-		user.visible_message("<span class='notice'>[user] loads \a [mortar_shell.name] into [src].</span>",
-		"<span class='notice'>You load \a [mortar_shell.name] into [src].</span>")
-		visible_message("[icon2html(src, viewers(src))] <span class='danger'>The [name] fires!</span>")
+		user.visible_message(span_notice("[user] loads \a [mortar_shell.name] into [src]."),
+		span_notice("You load \a [mortar_shell.name] into [src]."))
+		visible_message("[icon2html(src, viewers(src))] [span_danger("The [name] fires!")]")
 		user.transferItemToLoc(mortar_shell, src)
 		playsound(loc, 'sound/weapons/guns/fire/mortar_fire.ogg', 50, 1)
 		firing = TRUE
@@ -203,7 +203,7 @@
 	var/obj/item/binoculars/tactical/binocs = I
 	playsound(src, 'sound/effects/binoctarget.ogg', 35)
 	if(binocs.set_mortar(src))
-		to_chat(user, "<span class='notice'>You link the mortar to the [binocs] allowing for remote targeting.</span>")
+		to_chat(user, span_notice("You link the mortar to the [binocs] allowing for remote targeting."))
 		return
 	to_chat(user, "<span class='notice'>You disconnect the [binocs] from their linked mortar.")
 
@@ -227,11 +227,11 @@
 		return
 
 	if(busy)
-		to_chat(user, "<span class='warning'>Someone else is currently using [src].</span>")
+		to_chat(user, span_warning("Someone else is currently using [src]."))
 		return
 
 	if(firing)
-		to_chat(user, "<span class='warning'>[src]'s barrel is still steaming hot. Wait a few seconds and stop firing it.</span>")
+		to_chat(user, span_warning("[src]'s barrel is still steaming hot. Wait a few seconds and stop firing it."))
 		return
 
 	playsound(loc, 'sound/items/ratchet.ogg', 25, 1)
@@ -261,12 +261,21 @@
 
 
 /obj/item/mortar_kit/attack_self(mob/user)
+<<<<<<< HEAD:code/game/objects/structures/mortar.dm
 	if(!is_ground_level(user.z))
 		to_chat(user, "<span class='warning'>You cannot deploy [src] here.</span>")
 		return
 	var/area/A = get_area(src)
 	if(A.ceiling >= CEILING_METAL)
 		to_chat(user, "<span class='warning'>You probably shouldn't deploy [src] indoors.</span>")
+=======
+	unique_action(user)
+
+/obj/item/mortar_kit/unique_action(mob/user)
+	var/area/current_area = get_area(src)
+	if(current_area.ceiling >= CEILING_METAL)
+		to_chat(user, span_warning("You probably shouldn't deploy [src] indoors."))
+>>>>>>> ec36d1d9c (Replaced all span class by span macros (#7429)):code/game/objects/machinery/mortar.dm
 		return
 	user.visible_message("<span class='notice'>[user] starts deploying [src].",
 	"<span class='notice'>You start deploying [src].")

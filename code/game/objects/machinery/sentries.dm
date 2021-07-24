@@ -1010,11 +1010,16 @@
 			continue
 		if(CHECK_BITFIELD(turret_flags, TURRET_SAFETY) && !isxeno(M)) //When safeties are on, Xenos only.
 			continue
+<<<<<<< HEAD
 		/*
 		I really, really need to replace this with some that isn't insane. You shouldn't have to fish for access like this.
 		This should be enough shortcircuiting, but it is possible for the code to go all over the possibilities and generally
 		slow down. It'll serve for now.
 		*/
+=======
+		if(HAS_TRAIT(M, TRAIT_TURRET_HIDDEN))
+			continue
+>>>>>>> f19a40a75 (Turrets don't detect people in stealth (#7578))
 		var/mob/living/carbon/human/H = M
 		if(istype(H) && H.get_target_lock(iff_signal))
 			continue

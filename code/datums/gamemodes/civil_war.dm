@@ -3,7 +3,11 @@
 	config_tag = "Civil War"
 	flags_round_type = MODE_LZ_SHUTTERS|MODE_TWO_HUMAN_FACTIONS|MODE_HUMAN_ONLY
 	flags_landmarks = MODE_LANDMARK_SPAWN_SPECIFIC_SHUTTLE_CONSOLE
+<<<<<<< HEAD
 	joinable_factions = list(FACTION_TERRAGOV, FACTION_TERRAGOV_REBEL)
+=======
+	respawn_time = 10 MINUTES
+>>>>>>> 41da358b9 (civil war spawn quicker (#7614))
 
 	valid_job_types = list(
 		/datum/job/terragov/command/captain = 1,

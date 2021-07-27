@@ -785,16 +785,26 @@ ARMOR
 	cost = 12
 
 /datum/supply_packs/armor/modular/attachments/mimir_environment_protection
+<<<<<<< HEAD
 	name = "Jaeger mimir module"
+=======
+	name = "Jaeger Mimir Mark 2 module set"
+>>>>>>> 296e764b1 (Bundles the Mimir Mark 2 modules in req, makes it slightly cheaper overall (#7586))
 	contains = list(
 		/obj/item/armor_module/attachable/mimir_environment_protection,
+		/obj/item/helmet_module/attachable/mimir_environment_protection,
 	)
+<<<<<<< HEAD
 	cost = 12
 
 /datum/supply_packs/armor/modular/attachments/mimir_helmet_protection
 	name = "Jaeger helmet mimir module"
 	contains = list(/obj/item/helmet_module/attachable/mimir_environment_protection)
 	cost = 5
+=======
+	cost = 15
+
+>>>>>>> 296e764b1 (Bundles the Mimir Mark 2 modules in req, makes it slightly cheaper overall (#7586))
 /datum/supply_packs/armor/modular/attachments/generic_helmet_modules
 	name = "Generic Jaeger helmet modules"
 	contains = list(

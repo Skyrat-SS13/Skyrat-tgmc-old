@@ -424,6 +424,8 @@ GLOBAL_LIST_INIT(xenoupgradetiers, list(XENO_UPGRADE_BASETYPE, XENO_UPGRADE_INVA
 
 //Xeno Defines
 
+#define XENO_DEFAULT_VENT_ENTER_TIME 4.5 SECONDS //Standard time for a xeno to enter a vent.
+#define XENO_DEFAULT_VENT_EXIT_TIME 2 SECONDS //Standard time for a xeno to exit a vent.
 #define XENO_DEFAULT_ACID_PUDDLE_DAMAGE 14 //Standard damage dealt by acid puddles
 #define XENO_ACID_WELL_FILL_TIME 2 SECONDS //How long it takes to add a charge to an acid pool
 #define XENO_ACID_WELL_FILL_COST 200 //Cost in plasma to apply a charge to an acid pool
@@ -516,8 +518,22 @@ GLOBAL_LIST_INIT(xenoupgradetiers, list(XENO_UPGRADE_BASETYPE, XENO_UPGRADE_INVA
 #define HUNTER_SNEAKATTACK_RUN_REDUCTION 0.2
 #define HUNTER_SNEAKATTACK_WALK_INCREASE 1
 #define HUNTER_SNEAKATTACK_MULTI_RECOVER_DELAY 10
+<<<<<<< HEAD
 #define HUNTER_MARK_WINDUP						1 SECONDS //Windup of the Hunter's Mark
 #define HUNTER_PSYCHIC_TRACE_COOLDOWN			5 SECONDS //Cooldown of the Hunter's Psychic Trace, and duration of its arrow
+=======
+#define HUNTER_MARK_WINDUP 1 SECONDS //Windup of the Hunter's Mark
+#define HUNTER_PSYCHIC_TRACE_COOLDOWN 5 SECONDS //Cooldown of the Hunter's Psychic Trace, and duration of its arrow
+#define HUNTER_SILENCE_STAGGER_STACKS 1 //Silence imposes this many stagger stacks
+#define HUNTER_SILENCE_SENSORY_STACKS 6 //Silence imposes this many eyeblur, mute and deafen stacks.
+#define HUNTER_SILENCE_DURATION 10 SECONDS //Removes mute from the Hunter's Silence after this delay.
+#define HUNTER_SILENCE_RANGE 5 //Range in tiles of the Hunter's Silence.
+#define HUNTER_SILENCE_AOE 2 //AoE size of Silence in tiles
+#define HUNTER_SILENCE_WINDUP 0.5 SECONDS //Windup of the Hunter's Silence
+#define HUNTER_SILENCE_MULTIPLIER 1.5 //Multiplier of stacks vs Hunter's Mark targets
+#define HUNTER_SILENCE_WHIFF_COOLDOWN 3 SECONDS //If we fail to target anyone with Silence, partial cooldown to prevent spam.
+#define HUNTER_VENT_CRAWL_TIME 2 SECONDS //Hunters can enter vents fast
+>>>>>>> 50f5f2eb5 (Minor Vent Crawl Buff; Hunters and Larva Can Vent Crawl Faster (#7501))
 
 //Ravager defines:
 #define RAV_CHARGESPEED 2
@@ -612,6 +628,9 @@ GLOBAL_LIST_INIT(xenoupgradetiers, list(XENO_UPGRADE_BASETYPE, XENO_UPGRADE_INVA
 
 #define WRAITH_TELEPORT_DEBUFF_STAGGER_STACKS 2 //Stagger and slow stacks applied to adjacent living hostiles before/after a teleport
 #define WRAITH_TELEPORT_DEBUFF_SLOWDOWN_STACKS 3 //Stagger and slow stacks applied to adjacent living hostiles before/after a teleport
+
+//Larva defines
+#define LARVA_VENT_CRAWL_TIME 1 SECONDS //Larva can crawl into vents fast
 
 #define DEFILER_TRANSVITOX_CAP 180 //Max toxin damage transvitox will allow
 

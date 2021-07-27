@@ -24,8 +24,16 @@
 	if(!.)
 		return
 	var/obj/item/clothing/head/modular/helmet = .
+<<<<<<< HEAD
 	module?.install_on_helmet(seller, helmet)
 	helmet.set_greyscale_colors(greyscale_colors)
+=======
+	module?.install_on_helmet(seller, helmet, user)
+	if(seller.faction == FACTION_NEUTRAL)
+		helmet.set_greyscale_colors(greyscale_colors)
+		return
+	helmet.limit_colorable_colors(seller.faction)
+>>>>>>> ffcf51879 (loadouts for hvh (#7619))
 
 /datum/item_representation/modular_helmet/get_tgui_data()
 	var/list/tgui_data = list()

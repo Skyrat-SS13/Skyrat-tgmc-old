@@ -20,13 +20,23 @@
 /proc/buy_item_in_vendor(item_to_buy_type)
 	if(is_type_in_typecache(item_to_buy_type, GLOB.bypass_vendor_item))
 		return TRUE
+<<<<<<< HEAD
 	for(var/type in GLOB.loadout_linked_vendor)
+=======
+
+	if(seller.faction != FACTION_NEUTRAL && is_type_in_typecache(item_to_buy_type, GLOB.hvh_restricted_items_list))
+		return FALSE
+
+	//If we can find it for in a shared vendor, we buy it
+	for(var/type in GLOB.loadout_linked_vendor[seller.faction])
+>>>>>>> ffcf51879 (loadouts for hvh (#7619))
 		for(var/datum/vending_product/item_datum AS in GLOB.vending_records[type])
 			if(item_datum.product_path == item_to_buy_type && item_datum.amount != 0)
 				item_datum.amount--
 				return TRUE
 	return FALSE
 
+<<<<<<< HEAD
 /// Will put back an item in a linked vendor
 /proc/sell_back_item_in_vendor(item_to_give_back_type)
 	for(var/type in GLOB.loadout_linked_vendor)
@@ -36,6 +46,29 @@
 			if(item_datum.amount >= 0)
 				item_datum.amount++
 			return 
+=======
+/**
+ * Check if that stack is buyable in a points vendor (currently, only metal, sandbags and plasteel)
+ */
+/proc/buy_stack(obj/item/stack/stack_to_buy_type, datum/loadout_seller/seller, mob/living/user, amount)
+	if(user.job.title != SQUAD_LEADER && user.job.title != SQUAD_ENGINEER)
+		return FALSE
+	var/base_amount = 0
+	var/base_price = 0
+	if(ispath(stack_to_buy_type, /obj/item/stack/sheet/metal) && user.job.title == SQUAD_ENGINEER)
+		base_amount = 10
+		base_price = METAL_PRICE_IN_GEAR_VENDOR
+	else if(ispath(stack_to_buy_type, /obj/item/stack/sheet/plasteel) && user.job.title == SQUAD_ENGINEER)
+		base_amount = 10
+		base_price = PLASTEEL_PRICE_IN_GEAR_VENDOR
+	else if(ispath(stack_to_buy_type, /obj/item/stack/sandbags_empty))
+		base_amount = 25
+		base_price = SANDBAG_PRICE_IN_GEAR_VENDOR
+	if(base_amount && (round(amount / base_amount) * base_price <= seller.available_points))
+		var/points_cost = round(amount / base_amount) * base_price
+		seller.available_points -= points_cost
+		return TRUE
+>>>>>>> ffcf51879 (loadouts for hvh (#7619))
 
 ///Return wich type of item_representation should representate any item_type
 /proc/item2representation_type(item_type)

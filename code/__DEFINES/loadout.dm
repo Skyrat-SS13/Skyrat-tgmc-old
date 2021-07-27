@@ -14,13 +14,41 @@ GLOBAL_LIST_INIT(visible_item_slot_list, list(
 	slot_r_store_str,
 ))
 
+<<<<<<< HEAD
 ///All the vendor types which the automated loadout vendor can take items from
+=======
+///List of all additional item slot used by the admin loadout build mode
+GLOBAL_LIST_INIT(additional_admin_item_slot_list, list(
+	slot_l_hand_str,
+	slot_r_hand_str,
+	slot_wear_id_str,
+	slot_ear_str,
+))
+
+///All the vendor types which the automated loadout vendor can take items from.
+>>>>>>> ffcf51879 (loadouts for hvh (#7619))
 GLOBAL_LIST_INIT(loadout_linked_vendor, list(
-	/obj/machinery/vending/marine/shared,
-	/obj/machinery/vending/uniform_supply,
-	/obj/machinery/vending/armor_supply,
-	/obj/machinery/vending/marineFood,
-	/obj/machinery/vending/MarineMed,
+	FACTION_NEUTRAL = list(
+		/obj/machinery/vending/marine/shared,
+		/obj/machinery/vending/uniform_supply,
+		/obj/machinery/vending/armor_supply,
+		/obj/machinery/vending/marineFood,
+		/obj/machinery/vending/MarineMed,
+	),
+	FACTION_TERRAGOV = list(
+		/obj/machinery/vending/marine/shared/hvh/team_one,
+		/obj/machinery/vending/uniform_supply,
+		/obj/machinery/vending/armor_supply/loyalist,
+		/obj/machinery/vending/marineFood,
+		/obj/machinery/vending/MarineMed,
+	),
+	FACTION_TERRAGOV_REBEL = list(
+		/obj/machinery/vending/marine/shared/hvh,
+		/obj/machinery/vending/uniform_supply,
+		/obj/machinery/vending/armor_supply/rebel,
+		/obj/machinery/vending/marineFood,
+		/obj/machinery/vending/MarineMed/rebel,
+	),
 ))
 
 ///All the items that once they are in loadouts, should not have stock checked when sold by the loadout vendor

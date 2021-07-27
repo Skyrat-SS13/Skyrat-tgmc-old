@@ -9,10 +9,17 @@
 	 * each item of the list is a datum/item_representation
 	 */
 	var/list/item_list
+<<<<<<< HEAD
 	/// The host of the loadout_manager, aka from which loadout vendor are you managing loadouts
 	var/loadout_vendor 
 	///The version of this loadout. This can allow in the future to erase loadouts that are too old to work with the loadout saver system
 	var/version = 1
+=======
+	///The host of the loadout_manager, aka from which loadout vendor are you managing loadouts
+	var/obj/machinery/loadout_vendor/loadout_vendor
+	///The version of this loadout
+	var/version = CURRENT_LOADOUT_VERSION
+>>>>>>> ffcf51879 (loadouts for hvh (#7619))
 
 ///Empty a slot of the loadout
 /datum/loadout/proc/empty_slot(slot)
@@ -133,10 +140,16 @@
 			if(TIMER_COOLDOWN_CHECK(ui.user, COOLDOWN_LOADOUT_EQUIPPED))
 				to_chat(ui.user, "<span class='warning'>The vendor is still reloading</span>")
 				return
+<<<<<<< HEAD
 			TIMER_COOLDOWN_START(ui.user, COOLDOWN_LOADOUT_EQUIPPED, 30 SECONDS)
 			if(!ui.user.client.prefs.loadout_manager.seller)
 				ui.user.client.prefs.loadout_manager.seller = new /datum/loadout_seller
 			ui.user.client.prefs.loadout_manager.seller.try_to_equip_loadout(src, ui.user)
+=======
+			var/datum/loadout_seller/seller = new (loadout_vendor.faction)
+			if(seller.try_to_equip_loadout(src, ui.user))
+				TIMER_COOLDOWN_START(ui.user, COOLDOWN_LOADOUT_EQUIPPED, 30 SECONDS)
+>>>>>>> ffcf51879 (loadouts for hvh (#7619))
 			ui.close()
 		if("deleteLoadout")
 			ui.user.client.prefs.loadout_manager.delete_loadout(src)

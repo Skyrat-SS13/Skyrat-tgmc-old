@@ -1,8 +1,8 @@
 
 
-/obj/item/storage/box/t26_system
-	name = "\improper T26 smart machinegun system"
-	desc = "A large case containing the full T-26 Machinegun System. Drag this sprite into you to open it up!\nNOTE: You cannot put items back inside this case."
+/obj/item/storage/box/t29_system
+	name = "\improper T-29 smart machinegun system"
+	desc = "A large case containing the full T-29 Machinegun System. Drag this sprite into you to open it up!\nNOTE: You cannot put items back inside this case."
 	icon = 'icons/Marine/marine-weapons.dmi'
 	icon_state = "smartgun_case"
 	w_class = WEIGHT_CLASS_HUGE
@@ -11,16 +11,40 @@
 	can_hold = list() //Nada. Once you take the stuff out it doesn't fit back in.
 	foldable = null
 
-/obj/item/storage/box/t26_system/Initialize(mapload, ...)
+/obj/item/storage/box/t29_system/Initialize(mapload, ...)
 	. = ..()
 	new /obj/item/clothing/glasses/night/m56_goggles(src)
 	new /obj/item/weapon/gun/rifle/standard_smartmachinegun(src)
 	new /obj/item/ammo_magazine/standard_smartmachinegun(src)
 	new /obj/item/ammo_magazine/standard_smartmachinegun(src)
 
+<<<<<<< HEAD
 /obj/item/smartgun_powerpack
 	name = "\improper M56 powerpack"
 	desc = "A heavy reinforced backpack with support equipment, power cells, and spare rounds for the M56 Smartgun System.\nClick the icon in the top left to reload your M56."
+=======
+/obj/item/storage/box/t25_system
+	name = "\improper T25 smart rifle system"
+	desc = "A large case containing the full T-25 Rifle System. Drag this sprite into you to open it up!\nNOTE: You cannot put items back inside this case."
+	icon = 'icons/Marine/marine-weapons.dmi'
+	icon_state = "smartgun_case"
+	w_class = WEIGHT_CLASS_HUGE
+	storage_slots = 5
+	slowdown = 1
+	can_hold = list() //Nada. Once you take the stuff out it doesn't fit back in.
+	foldable = null
+
+/obj/item/storage/box/t25_system/Initialize(mapload, ...)
+	. = ..()
+	new /obj/item/clothing/glasses/night/m56_goggles(src)
+	new /obj/item/weapon/gun/rifle/standard_smartrifle(src)
+	new /obj/item/storage/belt/marine/t25(src)
+	new /obj/item/ammo_magazine/rifle/standard_smartrifle(src)
+
+/obj/item/minigun_powerpack
+	name = "\improper T-100 powerpack"
+	desc = "A heavy reinforced backpack with support equipment, power cells, and spare rounds for the T-100 Minigun System.\nClick the icon in the top left to reload your M56."
+>>>>>>> f85353fbf (Fixes the T-29 being called the T-26, as well as the T-25 being called the T-26 (#7674))
 	icon = 'icons/obj/items/storage/storage.dmi'
 	icon_state = "powerpack"
 	flags_atom = CONDUCT

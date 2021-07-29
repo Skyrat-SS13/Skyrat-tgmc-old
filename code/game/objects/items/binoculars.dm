@@ -201,6 +201,9 @@
 		to_chat(user, "<span class='notice'>INITIATING LASER TARGETING. Stand still.</span>")
 		if(!do_after(user, max(1.5 SECONDS, target_acquisition_delay - (2.5 SECONDS * user.skills.getRating("leadership"))), TRUE, TU, BUSY_ICON_GENERIC) || world.time < laser_cooldown || laser)
 			return
+	if(targ_area.flags_area & OB_CAS_IMMUNE)
+		to_chat(user, span_warning("Our payload won't reach this target!"))
+		return
 	switch(mode)
 		if(MODE_CAS)
 			to_chat(user, "<span class='notice'>TARGET ACQUIRED. LASER TARGETING IS ONLINE. DON'T MOVE.</span>")

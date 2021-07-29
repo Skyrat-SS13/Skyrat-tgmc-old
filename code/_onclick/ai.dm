@@ -9,6 +9,7 @@
 
 	Note that AI have no need for the adjacency proc, and so this proc is a lot cleaner.
 */
+
 /mob/living/silicon/ai/DblClickOn(atom/A, params)
 	if(control_disabled || incapacitated())
 		return
@@ -140,20 +141,21 @@
 
 /* APC */
 /obj/machinery/power/apc/AICtrlClick(mob/living/silicon/ai/user) // turns off/on APCs.
+<<<<<<< HEAD
 	if(z != user.z)
 		return
 	toggle_breaker(usr)
+=======
+	toggle_breaker(user)
+>>>>>>> 52e2415c8 (This unifies the Alt and Ctrl click over fire alarms from the AI into one. (#7657))
 
 /* Firealarm */
-/obj/machinery/firealarm/AICtrlClick(mob/living/silicon/ai/user) // turn on the fire alarm
-	if(z != user.z)
-		return
-	alarm()
-
-/obj/machinery/firealarm/AICtrlShiftClick(mob/living/silicon/ai/user) // turn off the fire alarm
-	if(z != user.z)
-		return
-	reset()
+/obj/machinery/firealarm/AICtrlClick(mob/living/silicon/ai/user) // toggle the fire alarm
+	var/area/A = get_area(src)
+	if(A.flags_alarm_state & ALARM_WARNING_FIRE)
+		reset()
+	else
+		alarm()
 
 
 //

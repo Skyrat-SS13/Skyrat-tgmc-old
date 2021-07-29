@@ -4,10 +4,6 @@ SUBSYSTEM_DEF(monitor)
 	runlevels = RUNLEVEL_GAME
 	wait = 5 MINUTES
 	can_fire = TRUE
-
-
-	///The next world.time for wich the monitor subsystem refresh the state
-	var/scheduled = 0
 	///The current state
 	var/current_state = STATE_BALANCED
 	///The last state
@@ -50,11 +46,37 @@ SUBSYSTEM_DEF(monitor)
 	RegisterSignal(SSdcs, COMSIG_GLOB_DROPSHIP_HIJACKED, .proc/set_shipside_calculation)
 
 /datum/controller/subsystem/monitor/fire(resumed = 0)
-	current_points = calculate_state_points() / max(GLOB.alive_human_list.len + GLOB.alive_xeno_list.len, 10)//having less than 10 players gives bad results
+	var/total_living_players = GLOB.alive_human_list.len + GLOB.alive_xeno_list.len
+	current_points = calculate_state_points() / max(total_living_players, 10)//having less than 10 players gives bad results
 	if(gamestate == GROUNDSIDE)
 		process_human_positions()
 		FOB_hugging_check()
 	set_state(current_points)
+<<<<<<< HEAD
+=======
+
+	//Automatic buff system for the xeno, if they have too much burrowed yet are still losing
+	var/proposed_balance_buff = 1
+	var/datum/job/xeno_job = SSjob.GetJobType(/datum/job/xenomorph)
+	if(is_automatic_balance_on && current_state < STATE_BALANCED && ((xeno_job.total_positions - xeno_job.current_positions) > (length(GLOB.alive_xeno_list) * TOO_MUCH_BURROWED_PROPORTION)) && gamestate == GROUNDSIDE)
+		proposed_balance_buff = balance_xeno_team()
+	if(abs(proposed_balance_buff - GLOB.xeno_stat_multiplicator_buff) >= 0.05 || (proposed_balance_buff == 1 && GLOB.xeno_stat_multiplicator_buff != 1))
+		GLOB.xeno_stat_multiplicator_buff = proposed_balance_buff
+		apply_balance_changes()
+>>>>>>> 6050aa63d (Stalemate respawn buff (#7613))
+
+	//Automatic respawn buff, if a stalemate is detected and a lot of ghosts are waiting to play
+	if(state != STATE_BALANCED || !stalemate || GLOB.observer_list <= 0.5 * total_living_players)
+		SSsilo.larva_spawn_rate_temporary_buff = 0
+		return
+	for(var/mob/dead/observer/observer AS in GLOB.observer_list)
+		observer.timeofdeath -= 5 MINUTES //If we are in a constant stalemate, every 5 minutes we remove 5 minutes of respawn time to become a marine
+	message_admins("Stalemate detected, respawn buff system in action : 5 minutes were removed from the respawn time of everyone, xeno won : [length(GLOB.observer_list) * 0.75 * 5] larvas")
+	log_game("5 minutes were removed from the respawn time of everyone, xeno won : [length(GLOB.observer_list) * 0.75 * 5] larvas")
+	//This will be in effect for 5 SSsilo runs. For 30 ghosts that makes 1 new larva every 2.5 minutes
+	SSsilo.larva_spawn_rate_temporary_buff = length(GLOB.observer_list) * 0.75
+
+
 
 /datum/controller/subsystem/monitor/proc/set_groundside_calculation()
 	SIGNAL_HANDLER
@@ -129,8 +151,14 @@ SUBSYSTEM_DEF(monitor)
 		current_state = MARINES_LOSING
 	else
 		current_state = MARINES_DELAYING
+<<<<<<< HEAD
 	
 	if(!gamestate == GROUNDSIDE)
+=======
+
+	if(gamestate != GROUNDSIDE)
+		stalemate = FALSE
+>>>>>>> 6050aa63d (Stalemate respawn buff (#7613))
 		return
 	//We check for possible stalemate
 	if (current_state == last_state)

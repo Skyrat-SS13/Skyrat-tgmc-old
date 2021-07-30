@@ -1267,6 +1267,7 @@ inaccurate. Don't worry if force is ever negative, it won't runtime.
 
 /obj/item/attachable/attached_gun/grenade/unremovable/invisible
 	icon_state = "invisible"
+	attach_icon = "invisible"
 
 /obj/item/attachable/attached_gun/grenade/examine(mob/user)
 	..()

@@ -1264,17 +1264,24 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if (!disfigured)
 		if (brute_dam > 40)
 			if (prob(50))
-				disfigure("brute")
+				disfigure(BRUTE)
 		if (burn_dam > 40)
 			disfigure("burn")
 
-/datum/limb/head/proc/disfigure(type = "brute")
+/datum/limb/head/proc/disfigure(type = BRUTE)
 	if (disfigured)
 		return
+<<<<<<< HEAD
 	if(type == "brute")
 		owner.visible_message("<span class='warning'> You hear a sickening cracking sound coming from \the [owner]'s face.</span>",	\
 		"<span class='danger'>Your face becomes an unrecognizible mangled mess!</span>",	\
 		"<span class='warning'> You hear a sickening crack.</span>")
+=======
+	if(type == BRUTE)
+		owner.visible_message(span_warning(" You hear a sickening cracking sound coming from \the [owner]'s face."),	\
+		span_danger("Your face becomes an unrecognizible mangled mess!"),	\
+		span_warning(" You hear a sickening crack."))
+>>>>>>> 26951e295 (Proper damage define (#7673))
 	else
 		owner.visible_message("<span class='warning'> [owner]'s face melts away, turning into a mangled mess!</span>",	\
 		"<span class='danger'>Your face melts off!</span>",	\

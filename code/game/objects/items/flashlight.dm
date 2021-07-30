@@ -223,7 +223,7 @@
 		user.visible_message("<span class='notice'>[user] activates the flare.</span>", "<span class='notice'>You pull the cord on the flare, activating it!</span>")
 		force = on_damage
 		heat = 1500
-		damtype = "fire"
+		damtype = BURN
 		addtimer(CALLBACK(src, .proc/turn_off), fuel)
 		if(iscarbon(user))
 			var/mob/living/carbon/C = usr
@@ -235,7 +235,7 @@
 	heat = 1500
 	turn_light(null, TRUE)
 	force = on_damage
-	damtype = "fire"
+	damtype = BURN
 	addtimer(CALLBACK(src, .proc/turn_off), fuel)
 
 /obj/item/flashlight/slime

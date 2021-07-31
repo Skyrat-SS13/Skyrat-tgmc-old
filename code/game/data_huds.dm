@@ -525,6 +525,7 @@
 		amount = 1 //don't want the 'zero health' icon when we still have 4% of our health
 	holder.icon_state = "xenohealth[amount]"
 
+<<<<<<< HEAD
 ///Makes sentry ammo visible
 /obj/machinery/marine_turret/proc/hud_set_sentry_ammo()
 	var/image/holder = hud_list[SENTRY_AMMO_HUD]
@@ -541,6 +542,10 @@
 
 ///Makes tl-102 ammo visible
 /obj/machinery/standard_hmg/proc/hud_set_hsg_ammo()
+=======
+///Makes mounted guns ammo visible
+/obj/machinery/deployable/mounted/proc/hud_set_gun_ammo()
+>>>>>>> ce3ae7c72 (Sentry Rework (#7404))
 	var/image/holder = hud_list[SENTRY_AMMO_HUD]
 
 	if(!holder)

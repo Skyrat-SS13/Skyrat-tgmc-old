@@ -76,6 +76,12 @@
 #define GUN_IS_AIMING (1<<16)
 #define AUTO_AIM_MODE (1<<17)
 #define GUN_WIELDED_STABLE_FIRING_ONLY (1<<18)
+<<<<<<< HEAD
+=======
+#define GUN_IFF (1<<19)
+#define GUN_DEPLOYED_FIRE_ONLY (1<<20)
+#define GUN_IS_SENTRY (1<<21)
+>>>>>>> ce3ae7c72 (Sentry Rework (#7404))
 
 #define GUN_FIREMODE_SEMIAUTO "semi-auto fire mode"
 #define GUN_FIREMODE_BURSTFIRE "burst-fire mode"

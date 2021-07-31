@@ -335,12 +335,18 @@
 	desc = "The standard-issue backpack worn by TGMC technicians. Specially equipped to hold sentry gun and M56D emplacement parts."
 	icon_state = "marinepackt"
 	bypass_w_limit = list(
+<<<<<<< HEAD
 		/obj/item/standard_hmg,
 		/obj/item/ammo_magazine/standard_hmg,
 		/obj/item/turret_top,
+=======
+		/obj/item/weapon/gun/sentry/big_sentry,
+		/obj/item/weapon/gun/sentry/mini,
+		/obj/item/weapon/gun/tl102,
+		/obj/item/ammo_magazine/tl102,
+>>>>>>> ce3ae7c72 (Sentry Rework (#7404))
 		/obj/item/ammo_magazine/sentry,
 		/obj/item/ammo_magazine/minisentry,
-		/obj/item/marine_turret/mini,
 		/obj/item/mortal_shell,
 		/obj/item/mortar_kit,
 		/obj/item/stack/razorwire,

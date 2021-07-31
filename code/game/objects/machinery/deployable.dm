@@ -4,6 +4,12 @@
 	icon = 'icons/obj/objects.dmi'
 
 
+<<<<<<< HEAD
+=======
+/obj/machinery/deployable/Initialize(mapload, _internal_item, deployer)
+	. = ..()
+	internal_item = _internal_item
+>>>>>>> ce3ae7c72 (Sentry Rework (#7404))
 
 /obj/machinery/deployable/barrier
 	name = "deployable barrier"

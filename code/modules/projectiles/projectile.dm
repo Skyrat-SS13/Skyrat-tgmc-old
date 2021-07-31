@@ -618,6 +618,7 @@ So if we are on the 32th absolute pixel coordinate we are on tile 1, but if we a
 		return FALSE
 	return TRUE
 
+<<<<<<< HEAD
 /obj/machinery/marine_turret/projectile_hit(obj/projectile/proj, cardinal_move, uncrossing)
 	for(var/access_tag in proj.projectile_iff)
 		if(access_tag in iff_signal) //Checks IFF
@@ -631,6 +632,14 @@ So if we are on the 32th absolute pixel coordinate we are on tile 1, but if we a
 			proj.damage += proj.damage*proj.damage_marine_falloff
 			return FALSE
 	return src == proj.original_target
+=======
+/obj/machinery/deployable/mounted/projectile_hit(obj/projectile/proj, cardinal_move, uncrossing)
+	if(operator?.wear_id.iff_signal & proj.iff_signal)
+		return FALSE
+	if(isxeno(proj.firer))
+		return TRUE
+	return	src == proj.original_target
+>>>>>>> ce3ae7c72 (Sentry Rework (#7404))
 
 /obj/machinery/door/poddoor/railing/projectile_hit(obj/projectile/proj, cardinal_move, uncrossing)
 	return src == proj.original_target

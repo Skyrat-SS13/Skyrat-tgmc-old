@@ -81,11 +81,17 @@
 		S.use(1)
 
 
-/turf/open/space/Entered(atom/movable/AM, atom/oldloc)
+/turf/open/space/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	. = ..()
+<<<<<<< HEAD
 	if(isliving(AM))
 		to_chat(AM, "<span class='danger'>The cold vacuum instantly freezes you, maybe this was a bad idea?</span>")
 		var/mob/living/spaceman = AM
+=======
+	if(isliving(arrived))
+		to_chat(arrived, span_danger("The cold vacuum instantly freezes you, maybe this was a bad idea?"))
+		var/mob/living/spaceman = arrived
+>>>>>>> c092ca6f2 (Port movement ptoc multitile improvements (#7669))
 		spaceman.adjustFireLoss(600) //Death. Space shouldn't be entered.
 
 

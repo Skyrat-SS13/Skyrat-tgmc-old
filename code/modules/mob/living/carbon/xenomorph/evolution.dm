@@ -97,8 +97,13 @@
 		to_chat(src, "<span class='warning'>We must be at full health to evolve.</span>")
 		return
 
+<<<<<<< HEAD
 	if(plasma_stored < xeno_caste.plasma_max)
 		to_chat(src, "<span class='warning'>We must be at full plasma to evolve.</span>")
+=======
+	if(plasma_stored < (xeno_caste.plasma_max * xeno_caste.plasma_regen_limit))
+		to_chat(src, span_warning("We must be at full plasma to evolve."))
+>>>>>>> 4235f71cd (Fixes regress/evolve for xenos that use plasma_regen_limit (#7640))
 		return
 
 	if (agility || fortify || crest_defense)

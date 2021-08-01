@@ -166,7 +166,12 @@
 
 	newloc.Entered(src, oldloc)
 	if(oldarea != newarea)
+<<<<<<< HEAD
 		newarea.Entered(src, oldloc)
+=======
+		newarea.Entered(src, oldarea)
+
+>>>>>>> 5c142d275 (Fix crusher charging (#7703))
 
 	for(var/i in loc)
 		if(i == src) // Multi tile objects

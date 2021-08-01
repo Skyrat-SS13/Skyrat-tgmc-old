@@ -815,7 +815,7 @@ GLOBAL_LIST_INIT(marine_selector_cats, list(
 		/obj/item/storage/pouch/explosive = list(CAT_POU, "Explosive pouch", 0, "black"),
 		/obj/effect/essentials_set/mimir = list(CAT_ARMMOD, "Mark 1 Mimir Resistance set", 0,"black"),
 		/obj/item/armor_module/attachable/ballistic_armor = list(CAT_ARMMOD, "Ballistic armor module", 0,"black"),
-		/obj/item/armor_module/attachable/tyr_extra_armor/mark1 = list(CAT_ARMMOD, "Mark 1 Tyr extra armor module", 0,"black"),
+		/obj/effect/essentials_set/tyr = list(CAT_ARMMOD, "Mark 1 Tyr extra armor set", 0,"black"),
 		/obj/item/armor_module/attachable/better_shoulder_lamp/mark1 = list(CAT_ARMMOD, "Mark 1 Baldur light armor module", 0,"black"),
 		/obj/effect/essentials_set/vali = list(CAT_ARMMOD, "Vali chemical enhancement set", 0,"black"),
 		/obj/item/clothing/mask/gas = list(CAT_MAS, "Transparent gas mask", 0,"black"),
@@ -1452,6 +1452,13 @@ GLOBAL_LIST_INIT(available_specialist_sets, list("Scout Set", "Sniper Set", "Dem
 		/obj/item/armor_module/attachable/chemsystem,
 		/obj/item/storage/large_holster/machete/full_harvester,
 		/obj/item/paper/chemsystem,
+	)
+
+/obj/effect/essentials_set/tyr
+	desc = "A set of specialized gear for improved close-quarters combat longevitiy."
+	spawned_gear_list = list(
+		/obj/item/helmet_module/attachable/tyr_head,
+		/obj/item/armor_module/attachable/tyr_extra_armor/mark1,
 	)
 
 #undef MARINE_CAN_BUY_UNIFORM

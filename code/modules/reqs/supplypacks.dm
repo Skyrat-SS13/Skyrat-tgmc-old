@@ -781,6 +781,7 @@ ARMOR
 	name = "Jaeger tyr mark 2 modules"
 	contains = list(
 		/obj/item/armor_module/attachable/tyr_extra_armor,
+		/obj/item/helmet_module/attachable/tyr_head,
 	)
 	cost = 12
 

@@ -211,6 +211,16 @@
 		/obj/item/storage/box/visual/magazine = 30,
 		/obj/item/storage/box/visual/grenade = 10,
 		),
+<<<<<<< HEAD
+=======
+		"Utility" = list(
+		/obj/item/flashlight/combat = -1,
+		/obj/item/binoculars = -1,
+		/obj/item/compass = -1,
+		/obj/item/assembly/signaler = -1,
+		/obj/item/weapon/gun/flare/marine = 1,
+		),
+>>>>>>> a31fb9076 (adds a marine flaregun and makes it fit in flare pouches (#7709))
 	)
 
 	seasonal_items = list(

@@ -27,11 +27,16 @@
 #define SHIPSIDE "shipside"
 
 //The weight of each statistics in the state calculator when GROUNDSIDE
+<<<<<<< HEAD
 #define XENOS_LIFE_WEIGHT -50
+=======
+#define XENOS_LIFE_WEIGHT -180
+>>>>>>> 32a1d20bd (Update monitor balance calculation (#7679))
 #define HUMAN_LIFE_ON_GROUND_WEIGHT 100
 #define HUMAN_LIFE_ON_SHIP_WEIGHT 70
 #define BURROWED_LARVA_WEIGHT -20
 #define REQ_POINTS_WEIGHT 2
+<<<<<<< HEAD
 #define ELDER_T2_WEIGHT -20
 #define ANCIENT_T2_WEIGHT -40
 #define ELDER_T3_WEIGHT -40
@@ -40,6 +45,16 @@
 #define ANCIENT_QUEEN_WEIGHT -100
 #define OB_AVAILABLE_WEIGHT 20
 #define SPAWNING_POOL_WEIGHT -600
+=======
+#define ELDER_T2_WEIGHT -40
+#define ANCIENT_T2_WEIGHT -60
+#define ELDER_T3_WEIGHT -60
+#define ANCIENT_T3_WEIGHT -100
+#define ELDER_T4_WEIGHT -80
+#define ANCIENT_T4_WEIGHT -120
+#define KING_WEIGHT -200 //king is also counted as a T4
+#define SPAWNING_POOL_WEIGHT -100
+>>>>>>> 32a1d20bd (Update monitor balance calculation (#7679))
 
 //The weight of each statistics in the state calculator before shutters drop
 #define XENOS_LIFE_WEIGHT_PREGAME -300

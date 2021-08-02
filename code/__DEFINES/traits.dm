@@ -105,8 +105,17 @@
 #define TRAIT_UNDEFIBBABLE "undefibbable"//human can't be revived
 #define TRAIT_HEALING_INFUSION "healing_infusion"//greatly improves natural healing for xenos
 #define TRAIT_PSY_DRAINED "psy_drained"//mob was drained of life force by a xenos
+<<<<<<< HEAD
 #define TRAIT_STAGGERIMMUNE		"stagger_immunity" //Immunity to stagger
 #define TRAIT_SLOWDOWNIMMUNE	"slowdown_immunity" //Immunity to slowdown
+=======
+#define TRAIT_STAGGERIMMUNE	"stagger_immunity" //Immunity to stagger
+#define TRAIT_SLOWDOWNIMMUNE "slowdown_immunity" //Immunity to slowdown
+#define TRAIT_MUTED "muted" //target is mute and can't speak
+#define TRAIT_TURRET_HIDDEN "turret_hidden" //target gets passed over by turrets choosing a victim
+/// Prevents mob from riding mobs when buckled onto something
+#define TRAIT_CANT_RIDE "cant_ride"
+>>>>>>> 617911795 (Riding element, Runners can now ride crushers (#7690))
 
 // item traits
 #define TRAIT_T_RAY_VISIBLE "t-ray-visible" // Visible on t-ray scanners if the atom/var/level == 1

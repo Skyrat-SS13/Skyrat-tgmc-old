@@ -157,6 +157,11 @@
 
 	setup_firemodes()
 	AddComponent(/datum/component/automatedfire/autofire, fire_delay, burst_delay, burst_amount, gun_firemode, CALLBACK(src, .proc/set_bursting), CALLBACK(src, .proc/reset_fire), CALLBACK(src, .proc/Fire)) //This should go after handle_starting_attachment() and setup_firemodes() to get the proper values set.
+<<<<<<< HEAD
+=======
+
+	muzzle_flash = new(src, muzzleflash_iconstate)
+>>>>>>> e6e79dde3 (fix minigun (#7736))
 
 	muzzle_flash = new(src, muzzleflash_iconstate)
 
@@ -551,8 +556,13 @@ User can be passed as null, (a gun reloading itself for instance), so we need to
 ///Reset variables used in firing and remove the gun from the autofire system
 /obj/item/weapon/gun/proc/stop_fire()
 	SIGNAL_HANDLER
+<<<<<<< HEAD
 	gun_user.client.mouse_pointer_icon = initial(gun_user.client.mouse_pointer_icon)
 	if(windup_checked != WEAPON_WINDUP_CHECKING && !CHECK_BITFIELD(flags_gun_features, GUN_BURST_FIRING))
+=======
+	gun_user?.client?.mouse_pointer_icon = initial(gun_user.client.mouse_pointer_icon)
+	if(!CHECK_BITFIELD(flags_gun_features, GUN_BURST_FIRING))
+>>>>>>> e6e79dde3 (fix minigun (#7736))
 		reset_fire()
 	SEND_SIGNAL(src, COMSIG_GUN_STOP_FIRE)
 

@@ -113,8 +113,13 @@ SUBSYSTEM_DEF(persistence)
 		)
 
 /datum/season_datum/weapons/guns/pistol_seasonal_one
+<<<<<<< HEAD
 	name = "pistols bucket 1"
 	description = "Pistol guns, previously at import"
+=======
+	name = "Bouncy revolver and average revolver"
+	description = "A rather average revolver and it's far bouncier smaller cousin."
+>>>>>>> 08f5751d3 (Relores the 357, new sprite (#7731))
 	item_list = list(
 		/obj/item/weapon/gun/revolver/small = -1,
 		/obj/item/ammo_magazine/revolver/small = -1,

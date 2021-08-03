@@ -21,12 +21,20 @@
 
 /datum/element/shrapnel_removal/proc/attempt_remove(obj/item/removaltool, mob/living/M, mob/living/user)
 	if(!ishuman(M))
+<<<<<<< HEAD
 		to_chat(user, "<span class='warning'>You only know how to remove shrapnel from humans!</span>")
+=======
+		M.balloon_alert(user, "You only know how to remove shrapnel from humans!")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 		return
 	var/mob/living/carbon/human/target = M
 	var/datum/limb/targetlimb = target.get_limb(user.zone_selected)
 	if(!length(targetlimb.implants))
+<<<<<<< HEAD
 		to_chat(user, "<span class='warning'>There is nothing in this limb!</span>")
+=======
+		M.balloon_alert(user, "There is nothing in limb!")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 		return
 	var/skill = user.skills.getRating("medical")
 	if(skill < SKILL_MEDICAL_PRACTICED)

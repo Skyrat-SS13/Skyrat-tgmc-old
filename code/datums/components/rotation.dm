@@ -154,7 +154,11 @@
 
 
 /datum/component/simple_rotation/proc/default_after_rotation(mob/user, rotation_type)
+<<<<<<< HEAD
 	to_chat(user,"<span class='notice'>You [rotation_type == ROTATION_FLIP ? "flip" : "rotate"] [parent].</span>")
+=======
+	user.balloon_alert(user, "[rotation_type == ROTATION_FLIP ? "flipped" : "rotated"] [parent].")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 
 
 /atom/movable/proc/simple_rotate_clockwise()

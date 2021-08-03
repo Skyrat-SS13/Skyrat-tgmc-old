@@ -246,7 +246,11 @@
 				var/datum/limb/L = X
 				if(L.germ_level > 700)
 					continue
+<<<<<<< HEAD
 				to_chat(wearer, "<span class='warning'>You can feel the life force in your [L.display_name] draining away...</span>")
+=======
+				wearer.balloon_alert(wearer, "You feel the life in your [L.display_name] draining away...")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 				L.germ_level += max(INFECTION_LEVEL_THREE + 50 - L.germ_level, 200)
 				necrotized_counter -= 1
 				if(necrotized_counter < 1)
@@ -257,17 +261,29 @@
 		power_action.action_icon_state = "cboost_off"
 		power_action.update_button_icon()
 		boost_on = FALSE
+<<<<<<< HEAD
 		to_chat(wearer, "<span class='warning'>Halting reagent injection.</span>")
+=======
+		wearer.balloon_alert(wearer, "Halting reagent injection")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 		COOLDOWN_START(src, chemboost_activation_cooldown, 10 SECONDS)
 		setup_bonus_effects()
 		return
 
 	if(!COOLDOWN_CHECK(src, chemboost_activation_cooldown))
+<<<<<<< HEAD
 		to_chat(wearer, "<span class='warning'>Your body is still strained after the last exposure. You need to wait a bit... unless you want to burst from excessive use.</span>")
 		return
 
 	if(resource_storage_current < resource_drain_amount)
 		to_chat(wearer, "<span class='warning'>Not enough resource to sustain operation.</span>")
+=======
+		wearer.balloon_alert(wearer, "You need to wait!")
+		return
+
+	if(resource_storage_current < resource_drain_amount)
+		wearer.balloon_alert(wearer, "Not enough resource!")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 		return
 
 	boost_on = TRUE
@@ -285,11 +301,17 @@
 	setup_bonus_effects()
 
 ///Updates the boost amount of the suit and effect_str of reagents if component is on. "amount" is the final level you want to set the boost to.
+<<<<<<< HEAD
 /datum/component/chem_booster/proc/update_boost(amount, update_boost_amount = TRUE)
 	amount -= boost_amount
 	if(update_boost_amount)
 		boost_amount += amount
 		to_chat(wearer, "<span class='notice'>Power set to [boost_amount].</span>")
+=======
+/datum/component/chem_booster/proc/update_boost(amount)
+	boost_amount = amount
+	wearer?.balloon_alert(wearer, "Power set to [boost_amount]")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 	resource_drain_amount = boost_amount*(3 + boost_amount)
 
 ///Handles Vali stat boosts and any other potential buffs on activation/deactivation
@@ -329,11 +351,16 @@
 		return
 
 	if(wearer.do_actions)
+<<<<<<< HEAD
 		to_chat(wearer, "<span class='warning'>You are already occupied with something.</span>")
+=======
+		wearer.balloon_alert(wearer, "You are already occupied with something")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 		return
 
 	var/obj/item/held_item = wearer.get_held_item()
 	if(!held_item)
+<<<<<<< HEAD
 		to_chat(wearer, "<span class='warning'>You need to be holding an item compatible with the system.</span>")
 		return
 
@@ -349,13 +376,34 @@
 		return
 
 	to_chat(wearer, "<span class='notice'>You finish connecting the [held_item].</span>")
+=======
+		wearer.balloon_alert(wearer, "You need to be holding an item compatible with the system")
+		return
+
+	if(!CHECK_BITFIELD(held_item.flags_item, DRAINS_XENO))
+		wearer.balloon_alert(wearer, "You need to be holding an item compatible with the system")
+		return
+
+	wearer.add_movespeed_modifier(MOVESPEED_ID_CHEM_CONNECT, TRUE, 0, NONE, TRUE, 4)
+	wearer.balloon_alert(wearer, "You begin connecting [held_item]")
+	if(!do_after(wearer, 1 SECONDS, TRUE, held_item, BUSY_ICON_FRIENDLY, null, PROGRESS_BRASS, ignore_turf_checks = TRUE))
+		wearer.remove_movespeed_modifier(MOVESPEED_ID_CHEM_CONNECT)
+		wearer.balloon_alert(wearer, "You are interrupted")
+		return
+
+	wearer.balloon_alert(wearer, "finished connecting [held_item]")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 	wearer.remove_movespeed_modifier(MOVESPEED_ID_CHEM_CONNECT)
 	manage_weapon_connection(held_item)
 
 ///Handles the setting up and removal of signals and vars related to connecting an item to the suit
 /datum/component/chem_booster/proc/manage_weapon_connection(obj/item/weapon_to_connect)
 	if(connected_weapon)
+<<<<<<< HEAD
 		to_chat(wearer, "<span class='warning'>You disconnect the [connected_weapon].</span>")
+=======
+		wearer.balloon_alert(wearer, "Disconnected [connected_weapon]")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 		DISABLE_BITFIELD(connected_weapon.flags_item, NODROP)
 		UnregisterSignal(connected_weapon, COMSIG_ITEM_ATTACK)
 		UnregisterSignal(connected_weapon, list(COMSIG_ITEM_EQUIPPED_NOT_IN_SLOT, COMSIG_ITEM_DROPPED))
@@ -396,11 +444,16 @@
 		return
 
 	if(resource_storage_current < volume)
+<<<<<<< HEAD
 		to_chat(wearer, "<span class='warning'>Not enough resource to extract.</span>")
+=======
+		wearer.balloon_alert(wearer, "Not enough resource to extract")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 		return
 
 	var/obj/item/held_item = wearer.get_held_item()
 	if(!held_item)
+<<<<<<< HEAD
 		to_chat(wearer, "<span class='warning'>You need to be holding a chemical liquid container.</span>")
 		return
 
@@ -413,11 +466,29 @@
 		return
 
 	to_chat(wearer, "<span class='notice'>You begin filling [held_item].</span>")
+=======
+		wearer.balloon_alert(wearer, "You need to be holding a chemical liquid container")
+		return
+
+	if(!istype(held_item, /obj/item/reagent_containers/glass))
+		wearer.balloon_alert(wearer, "You need to be holding a specialized chemical liquid container")
+		return
+
+	if((held_item.reagents.maximum_volume-held_item.reagents.total_volume) < volume)
+		wearer.balloon_alert(wearer, "External container lacks sufficient space")
+		return
+
+	wearer.balloon_alert(wearer, "You begin filling [held_item]")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 	if(!do_after(wearer, 1 SECONDS, TRUE, held_item, BUSY_ICON_FRIENDLY, null, PROGRESS_BRASS))
 		return
 
 	if(resource_storage_current < volume)
+<<<<<<< HEAD
 		to_chat(wearer, "<span class='warning'>Not enough resource to extract.</span>")
+=======
+		wearer.balloon_alert(wearer, "Not enough resource to extract")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 		return
 
 	update_resource(-amount)
@@ -431,7 +502,11 @@
 
 	var/obj/item/held_item = wearer.get_held_item()
 	if((!istype(held_item, /obj/item/reagent_containers) && !meds_beaker.reagents.total_volume) || istype(held_item, /obj/item/reagent_containers/pill))
+<<<<<<< HEAD
 		to_chat(wearer, "<span class='warning'>You need to be holding a liquid container to fill up the system's reagent storage.</span>")
+=======
+		wearer.balloon_alert(wearer, "You need to be holding a liquid container")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 		return
 
 	if(!istype(held_item, /obj/item/reagent_containers) && meds_beaker.reagents.total_volume)
@@ -440,12 +515,20 @@
 			automatic_meds_use = TRUE
 		else if(pick == "No")
 			automatic_meds_use = FALSE
+<<<<<<< HEAD
 		to_chat(wearer, "<span class='notice'>The chemical system will <b>[automatic_meds_use ? "inject" : "not inject"]</b> loaded reagets on activation.</span>")
+=======
+		wearer.balloon_alert(wearer, "The chemical system will [automatic_meds_use ? "" : "not"] inject loaded reagents on activation")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 		return
 
 	var/obj/item/reagent_containers/held_beaker = held_item
 	if(!held_beaker.reagents.total_volume && !meds_beaker.reagents.total_volume)
+<<<<<<< HEAD
 		to_chat(wearer, "<span class='notice'>Both the held reagent container and the system's reagent storage are empty.</span>")
+=======
+		wearer.balloon_alert(wearer, "Both the held reagent container and the system's reagent storage are empty")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 		return
 
 	if(!held_beaker.reagents.total_volume && meds_beaker.reagents.total_volume)
@@ -458,14 +541,22 @@
 		return
 
 	if(meds_beaker.reagents.total_volume >= meds_beaker.volume)
+<<<<<<< HEAD
 		to_chat(wearer, "<span class='notice'>The system's reagent storage is full. You may consider unloading it if you want to load a different mix.</span>")
+=======
+		wearer.balloon_alert(wearer, "The system's reagent storage is full")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 		return
 
 	if(!do_after(wearer, 0.5 SECONDS, TRUE, held_item, BUSY_ICON_FRIENDLY, null, PROGRESS_BRASS, ignore_turf_checks = TRUE))
 		return
 
 	var/trans = held_beaker.reagents.trans_to(meds_beaker, held_beaker.amount_per_transfer_from_this)
+<<<<<<< HEAD
 	to_chat(wearer, "<span class='notice'>You load [trans] units into the system's reagent storage.</span>")
+=======
+	wearer.balloon_alert(wearer, "Loaded [trans] units")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 	show_meds_beaker_contents(wearer)
 
 ///Shows the loaded reagents to the person examining the parent/wearer

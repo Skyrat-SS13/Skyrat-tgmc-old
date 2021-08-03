@@ -171,12 +171,20 @@
 
 	if(C.internal)
 		C.internal = null
+<<<<<<< HEAD
 		to_chat(C, "<span class='notice'>No longer running on internals.</span>")
+=======
+		C.balloon_alert(C, "No longer running on internals")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 		icon_state = "internal0"
 		return
 
 	if(!istype(C.wear_mask, /obj/item/clothing/mask))
+<<<<<<< HEAD
 		to_chat(C, "<span class='notice'>You are not wearing a mask.</span>")
+=======
+		C.balloon_alert(C, "You are not wearing a mask")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 		return TRUE
 
 	var/list/nicename = null
@@ -224,14 +232,22 @@
 				bestpressure = t.pressure
 
 	if(best)
+<<<<<<< HEAD
 		to_chat(C, "<span class='notice'>You are now running on internals from [tankcheck[best]] on your [nicename[best]].</span>")
+=======
+		C.balloon_alert(C, "Running on internals from [tankcheck[best]] from [nicename[best]]")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 		C.internal = tankcheck[best]
 
 
 	if(C.internal)
 		icon_state = "internal1"
 	else
+<<<<<<< HEAD
 		to_chat(C, "<span class='notice'>You don't have a[breathes=="oxygen" ? "n oxygen" : addtext(" ",breathes)] tank.</span>")
+=======
+		C.balloon_alert(C, "You don't have a[breathes=="oxygen" ? "n oxygen" : addtext(" ",breathes)] tank")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 
 
 /obj/screen/mov_intent
@@ -495,9 +511,15 @@
 		return
 	var/mob/living/living_user = usr
 	if(living_user.getStaminaLoss() < 0 && living_user.max_stamina_buffer)
+<<<<<<< HEAD
 		to_chat(living_user, "<span class='notice'>Your stamina buffer is <b>[(-living_user.getStaminaLoss() * 100 / living_user.max_stamina_buffer)]%</b> full.</span>")
 		return
 	to_chat(living_user, "<span class='notice'>You have <b>[living_user.getStaminaLoss()]</b> stamina loss.<br></span>")
+=======
+		living_user.balloon_alert(living_user, "Stamina buffer:[(-living_user.getStaminaLoss() * 100 / living_user.max_stamina_buffer)]%")
+		return
+	living_user.balloon_alert(living_user, "You have [living_user.getStaminaLoss()] stamina loss")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 
 
 /obj/screen/component_button

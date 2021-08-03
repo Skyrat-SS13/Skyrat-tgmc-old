@@ -10,7 +10,11 @@ GLOBAL_LIST_INIT(ventcrawl_machinery, typecacheof(list(
 /mob/proc/ventcrawl_carry()
 	for(var/atom/A in src.contents)
 		if(!istype(A, /obj/item/clothing/mask/facehugger))
+<<<<<<< HEAD
 			to_chat(src, "<span class='warning'>You can't be carrying items or have items equipped when vent crawling!</span>")
+=======
+			balloon_alert(src, "You can't be carrying items!")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 			return FALSE
 	return TRUE
 
@@ -22,7 +26,11 @@ GLOBAL_LIST_INIT(ventcrawl_machinery, typecacheof(list(
 		if(is_type_in_list(U, GLOB.ventcrawl_machinery) && Adjacent(U))
 			pipes |= U
 	if(!pipes || !pipes.len)
+<<<<<<< HEAD
 		to_chat(src, "<span class='warning'>There are no pipes that you can ventcrawl into within range!</span>")
+=======
+		balloon_alert(src, "No pipes in range!")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 		return
 	if(pipes.len == 1)
 		pipe = pipes[1]

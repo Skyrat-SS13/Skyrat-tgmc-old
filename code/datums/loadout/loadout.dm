@@ -131,7 +131,11 @@
 	switch(action)
 		if("equipLoadout")
 			if(TIMER_COOLDOWN_CHECK(ui.user, COOLDOWN_LOADOUT_EQUIPPED))
+<<<<<<< HEAD
 				to_chat(ui.user, "<span class='warning'>The vendor is still reloading</span>")
+=======
+				ui.user.balloon_alert(ui.user, "The vendor is still reloading")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 				return
 			TIMER_COOLDOWN_START(ui.user, COOLDOWN_LOADOUT_EQUIPPED, 30 SECONDS)
 			if(!ui.user.client.prefs.loadout_manager.seller)

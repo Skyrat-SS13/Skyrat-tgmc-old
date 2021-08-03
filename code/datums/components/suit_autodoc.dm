@@ -199,7 +199,11 @@
 	UnregisterSignals(wearer)
 	STOP_PROCESSING(SSobj, src)
 	if(!silent)
+<<<<<<< HEAD
 		to_chat(wearer, "<span class='warning'>[parent] lets out a beep as its automedical suite deactivates.</span>")
+=======
+		wearer.balloon_alert(wearer, "The automedical suite deactivates")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 		playsound(parent,'sound/machines/click.ogg', 15, 0, 1)
 
 /**
@@ -215,7 +219,11 @@
 	RegisterSignals(wearer)
 	START_PROCESSING(SSobj, src)
 	if(!silent)
+<<<<<<< HEAD
 		to_chat(wearer, "<span class='notice'>[parent] lets out a hum as its automedical suite activates.</span>")
+=======
+		wearer.balloon_alert(wearer, "The automedical suite activates")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 		playsound(parent,'sound/voice/b18_activate.ogg', 15, 0, 1)
 
 
@@ -414,9 +422,15 @@
 	else if(href_list["toggle_mode"]) //Integrated scanner
 		analyzer.hud_mode = !analyzer.hud_mode
 		if(analyzer.hud_mode)
+<<<<<<< HEAD
 			to_chat(wearer, "<span class='notice'>The scanner now shows results on the hud.</span>")
 		else
 			to_chat(wearer, "<span class='notice'>The scanner no longer shows results on the hud.</span>")
+=======
+			wearer.balloon_alert(wearer, "The scanner now shows results on the hud")
+		else
+			wearer.balloon_alert(wearer, "The scanner no longer shows results on the hud")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 
 	else if(href_list["automed_damage"])
 		damage_threshold += text2num(href_list["automed_damage"])

@@ -288,7 +288,11 @@
 				cut_color(target_wire)
 				. = TRUE
 			else
+<<<<<<< HEAD
 				to_chat(L, "<span class='warning'>You need wirecutters!</span>")
+=======
+				holder.balloon_alert(L, "You need wirecutters!")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 		if("pulse")
 			I = L.is_holding_tool_quality(TOOL_MULTITOOL)
 			if(I || IsAdminGhost(usr))
@@ -297,7 +301,11 @@
 				pulse_color(target_wire, L)
 				. = TRUE
 			else
+<<<<<<< HEAD
 				to_chat(L, "<span class='warning'>You need a multitool!</span>")
+=======
+				holder.balloon_alert(L, "You need a multitool!")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 		if("attach")
 			if(is_attached(target_wire))
 				I = detach_assembly(target_wire)
@@ -315,6 +323,10 @@
 							A.forceMove(L.drop_location())
 						. = TRUE
 					else
+<<<<<<< HEAD
 						to_chat(L, "<span class='warning'>You need an attachable assembly!</span>")
+=======
+						holder.balloon_alert(L, "You need an attachable assembly!")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 
 #undef MAXIMUM_EMP_WIRES

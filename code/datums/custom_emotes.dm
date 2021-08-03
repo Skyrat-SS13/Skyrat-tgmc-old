@@ -13,7 +13,11 @@
 	if(!message)
 		return
 	if(TIMER_COOLDOWN_CHECK(user, "custom_emotes[id]"))
+<<<<<<< HEAD
 		to_chat(user, "<span class='notice'>You used that emote too recently.</span>")
+=======
+		user.balloon_alert(user, "You used that emote too recently")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 		return
 	TIMER_COOLDOWN_START(user, "custom_emotes[id]", cooldown)
 	if(user.stat > CONSCIOUS)

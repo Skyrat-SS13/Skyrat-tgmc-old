@@ -136,8 +136,16 @@
 			return FALSE
 
 		if(sound || get_sound(user))
+<<<<<<< HEAD
 			if(TIMER_COOLDOWN_CHECK(user, COOLDOWN_EMOTE))
 				to_chat(user, "<span class='notice'>You just did an audible emote. Wait a while.</span>")
+=======
+			if(HAS_TRAIT(user, TRAIT_MUTED))
+				user.balloon_alert(user, "You are muted!")
+				return FALSE
+			if(TIMER_COOLDOWN_CHECK(user, COOLDOWN_EMOTE))
+				user.balloon_alert(user, "You just did an audible emote")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 				return FALSE
 			else
 				TIMER_COOLDOWN_START(user, COOLDOWN_EMOTE, 8 SECONDS)
@@ -173,11 +181,19 @@
 				if(L.incapacitated())
 					if(!intentional)
 						return FALSE
+<<<<<<< HEAD
 					to_chat(user, "<span class='notice'>You cannot [key] while stunned.</span>")
+=======
+					user.balloon_alert(user, "You cannot [key] while stunned")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 					return FALSE
 
 		if((flags_emote & EMOTE_RESTRAINT_CHECK) && user.restrained())
 			if(!intentional)
 				return FALSE
+<<<<<<< HEAD
 			to_chat(user, "<span class='notice'>You cannot [key] while restrained.</span>")
+=======
+			user.balloon_alert(user, "You cannot [key] while restrained")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 			return FALSE

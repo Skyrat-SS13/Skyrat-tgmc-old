@@ -111,10 +111,18 @@
  */
 /obj/item/udder/proc/milk(obj/item/reagent_containers/glass/milk_holder, mob/user)
 	if(milk_holder.reagents.total_volume >= milk_holder.volume)
+<<<<<<< HEAD
 		to_chat(user, "<span class='warning'>[milk_holder] is full.</span>")
+=======
+		milk_holder.balloon_alert(user, "[milk_holder] is full.")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 		return
 	var/transfered = reagents.trans_to(milk_holder, rand(5,10))
 	if(transfered)
 		user.visible_message("<span class='notice'>[user] milks [src] using \the [milk_holder].</span>", "<span class='notice'>You milk [src] using \the [milk_holder].</span>")
 	else
+<<<<<<< HEAD
 		to_chat(user, "<span class='warning'>The udder is dry. Wait a bit longer...</span>")
+=======
+		milk_holder.balloon_alert(user, "The udder is dry. Wait a bit longer...")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))

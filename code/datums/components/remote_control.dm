@@ -64,7 +64,11 @@
 ///Turns the remote control on
 /datum/component/remote_control/proc/remote_control_on(mob/newuser)
 	if(QDELETED(controlled))
+<<<<<<< HEAD
 		to_chat(newuser, "<span class='warning'>The linked device is destroyed!</span>")
+=======
+		newuser.balloon_alert(newuser, "The linked device is destroyed!")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 		controlled = null
 		return
 	is_controlling = TRUE

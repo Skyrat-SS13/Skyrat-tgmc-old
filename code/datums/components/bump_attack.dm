@@ -33,7 +33,11 @@
 	if(should_enable == active)
 		return
 	var/mob/living/bumper = parent
+<<<<<<< HEAD
 	to_chat(bumper, "<span class='notice'>You will now [should_enable ? "attack" : "push"] enemies who are in your way.</span>")
+=======
+	bumper.balloon_alert(bumper, "Will now [should_enable ? "attack" : "push"] enemies in your way.")
+>>>>>>> 41bd2e723 (Convert a number of tochats to balloon messages (#7641))
 	toggle_action?.update_button_icon(should_enable)
 	if(should_enable)
 		active = TRUE

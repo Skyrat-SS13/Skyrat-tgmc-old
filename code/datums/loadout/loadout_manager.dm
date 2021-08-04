@@ -3,6 +3,7 @@
  * It also contains a tgui to navigate beetween loadouts
  */
 /datum/loadout_manager
+<<<<<<< HEAD
 	/// The loadout currently selected/modified
 	var/datum/loadout/current_loadout
 	/// A list of all loadouts
@@ -11,11 +12,18 @@
 	var/loadouts_data = list()
 	/// The datum in charge of the user wanting to equip a saved loadout
 	var/datum/loadout_seller/seller
+=======
+	/**
+	 * List of all loadouts. Format is list(list(loadout_job, loadout_name))
+	 */
+	var/list/loadouts_data = list()
+>>>>>>> c56828ce9 (Fix loadout deletion (#7632))
 	/// The host of the loadout_manager, aka from which loadout vendor are you managing loadouts
 	var/loadout_vendor 
 	/// The version of the loadout manager
 	var/version = 1
 
+<<<<<<< HEAD
 ///Remove a loadout from the list.
 /datum/loadout_manager/proc/delete_loadout(datum/loadout/loadout_to_delete)
 	loadouts_list -= loadout_to_delete
@@ -23,6 +31,16 @@
 		current_loadout = null
 	if(length(loadouts_data))
 		prepare_all_loadouts_data()
+=======
+///Remove the data of a loadout from the loadouts list
+/datum/loadout_manager/proc/delete_loadout(mob/user, loadout_name, loadout_job)
+	var/list/new_loadouts_data = list()
+	for(var/loadout_data in loadouts_data)
+		if(loadout_data[1] != loadout_job || loadout_data[2] != loadout_name)
+			new_loadouts_data += list(loadout_data)
+	loadouts_data = new_loadouts_data
+	user.client?.prefs.save_loadout_list(loadouts_data, CURRENT_LOADOUT_VERSION)
+>>>>>>> c56828ce9 (Fix loadout deletion (#7632))
 
 ///Prepare all loadouts data before sending them to tgui
 /datum/loadout_manager/proc/prepare_all_loadouts_data()

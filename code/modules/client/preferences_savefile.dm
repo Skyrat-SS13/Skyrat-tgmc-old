@@ -81,6 +81,7 @@
 		WRITE_FILE(S["see_chat_non_mob"], see_chat_non_mob)
 
 	savefile_version = SAVEFILE_VERSION_MAX
+	save_preferences()
 	return TRUE
 
 

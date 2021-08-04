@@ -2,10 +2,15 @@
 	if(lying_angle)
 		return FALSE
 
+<<<<<<< HEAD
 	if(xeno_caste)
 		changeNext_move(xeno_caste.attack_delay)
 	else
 		changeNext_move(CLICK_CD_MELEE)
+=======
+	if(!(isopenturf(A) || istype(A, /obj/effect/alien/weeds))) //We don't care about open turfs; they don't trigger our melee click cooldown
+		changeNext_move(xeno_caste ? xeno_caste.attack_delay : CLICK_CD_MELEE)
+>>>>>>> 751afc2a9 (Clicking a resin floor as xeno won't trigger attack delay (#7699))
 
 	var/atom/S = A.handle_barriers(src)
 	S.attack_alien(src, isrightclick = islist(modifiers) ? modifiers["right"] : FALSE)

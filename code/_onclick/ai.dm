@@ -123,12 +123,19 @@
 
 /* Airlocks */
 /obj/machinery/door/airlock/AICtrlClick(mob/living/silicon/ai/user) // Bolts doors
+<<<<<<< HEAD
 	if(z != user.z)
 		return
 
+=======
+	if(aiControlDisabled)
+		to_chat(user, span_notice("[src] AI remote control has been disabled."))
+		return
+>>>>>>> 2e3f43366 (Make the AI lose control over the dropship doors when the beans hijackk it. (#7737))
 	if(locked)
 		bolt_raise(usr)
 	else if(hasPower())
+<<<<<<< HEAD
 		bolt_drop(usr)
 
 /obj/machinery/door/airlock/AIShiftClick(mob/living/silicon/ai/user)  // Opens and closes doors!
@@ -136,6 +143,22 @@
 		return
 
 	user_toggle_open(usr)
+=======
+		bolt_drop(user)
+
+/obj/machinery/door/airlock/AIShiftClick(mob/living/silicon/ai/user)  // Opens and closes doors!
+	if(aiControlDisabled)
+		to_chat(user, span_notice("[src] AI remote control has been disabled."))
+		return
+	user_toggle_open(user)
+
+/obj/machinery/door/airlock/dropship_hatch/AICtrlClick(mob/living/silicon/ai/user)
+	return
+
+/obj/machinery/door/airlock/hatch/cockpit/AICtrlClick(mob/living/silicon/ai/user)
+	return
+
+>>>>>>> 2e3f43366 (Make the AI lose control over the dropship doors when the beans hijackk it. (#7737))
 
 
 /* APC */

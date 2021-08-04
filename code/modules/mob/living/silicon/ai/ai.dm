@@ -76,6 +76,13 @@
 
 	RegisterSignal(src, COMSIG_MOB_CLICK_ALT, .proc/send_order)
 	RegisterSignal(src, COMSIG_ORDER_SELECTED, .proc/set_order)
+<<<<<<< HEAD
+=======
+	RegisterSignal(SSdcs, COMSIG_GLOB_OB_LASER_CREATED, .proc/receive_laser_ob)
+	RegisterSignal(SSdcs, COMSIG_GLOB_CAS_LASER_CREATED, .proc/receive_laser_cas)
+
+	RegisterSignal(SSdcs, COMSIG_GLOB_SHUTTLE_TAKEOFF, .proc/shuttle_takeoff_notification)
+>>>>>>> 9d9a3f3c4 (Give the AI some BETTER notificaitons for shuttle moving (#7730))
 
 	var/datum/action/innate/order/attack_order/send_attack_order = new
 	var/datum/action/innate/order/defend_order/send_defend_order = new
@@ -108,6 +115,26 @@
 	SIGNAL_HANDLER
 	current_order = order
 
+<<<<<<< HEAD
+=======
+
+///Receive fire support laser notifications
+/mob/living/silicon/ai/proc/receive_laser_ob(datum/source, obj/effect/overlay/temp/laser_target/OB/incoming_laser)
+	SIGNAL_HANDLER
+	to_chat(src, span_notice("Orbital Bombardment laser detected. Target: [AREACOORD_NO_Z(incoming_laser)]"))
+	playsound_local(src, 'sound/effects/binoctarget.ogg', 15)
+
+/mob/living/silicon/ai/proc/receive_laser_cas(datum/source, obj/effect/overlay/temp/laser_target/cas/incoming_laser)
+	SIGNAL_HANDLER
+	to_chat(src, span_notice("CAS laser detected. Target: [AREACOORD_NO_Z(incoming_laser)]"))
+	playsound_local(src, 'sound/effects/binoctarget.ogg', 15)
+
+///This gives the stupid computer a notification whenever the dropship takes off. Crutch for a supercomputer.
+/mob/living/silicon/ai/proc/shuttle_takeoff_notification(datum/source, shuttleId, D)
+	SIGNAL_HANDLER
+	to_chat(src, span_notice("[shuttleId] taking off towards \the [D]"))
+
+>>>>>>> 9d9a3f3c4 (Give the AI some BETTER notificaitons for shuttle moving (#7730))
 /mob/living/silicon/ai/restrained(ignore_checks)
 	return FALSE
 

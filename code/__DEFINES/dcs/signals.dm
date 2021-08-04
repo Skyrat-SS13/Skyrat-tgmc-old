@@ -40,6 +40,10 @@
 ///Sent when the floodlight switch is powered
 #define COMSIG_GLOB_FLOODLIGHT_SWITCH "floodlight_switch_power_change"
 
+//Signals for shuttle
+#define COMSIG_GLOB_SHUTTLE_TAKEOFF "!shuttle_take_off"
+
+
 //////////////////////////////////////////////////////////////////
 
 // /datum signals

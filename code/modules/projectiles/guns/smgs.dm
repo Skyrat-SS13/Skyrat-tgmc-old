@@ -27,6 +27,12 @@
 
 
 /obj/item/weapon/gun/smg/unique_action(mob/user)
+<<<<<<< HEAD
+=======
+	. = ..()
+	if(!.)
+		return
+>>>>>>> 62d112f1c (/Mounted code improvement tweaks (#7751))
 	return cock(user)
 
 /obj/item/weapon/gun/smg/get_ammo_type()

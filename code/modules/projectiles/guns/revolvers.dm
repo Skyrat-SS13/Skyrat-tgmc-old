@@ -199,6 +199,12 @@
 	return TRUE
 
 /obj/item/weapon/gun/revolver/unique_action(mob/user)
+<<<<<<< HEAD
+=======
+	. = ..()
+	if(!.)
+		return
+>>>>>>> 62d112f1c (/Mounted code improvement tweaks (#7751))
 	if(catchworking)
 		return unload(user)
 	else

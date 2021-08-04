@@ -934,11 +934,16 @@ should be alright.
 		return
 	to_chat(user, "<span class='notice'>You steady your breathing...</b></span>")
 
-	if(user.do_actions)
+	if(user.do_actions && !CHECK_BITFIELD(flags_item, IS_DEPLOYED))
 		return
 	if(!user.marksman_aura)
+<<<<<<< HEAD
 		if(!do_after(user, 1 SECONDS, TRUE, src, BUSY_ICON_BAR, ignore_turf_checks = TRUE))
 			to_chat(user, "<span class='warning'>Your concentration is interrupted!</b></span>")
+=======
+		if(!do_after(user, 1 SECONDS, TRUE, CHECK_BITFIELD(flags_item, IS_DEPLOYED) ? loc : src, BUSY_ICON_BAR, ignore_turf_checks = TRUE))
+			to_chat(user, span_warning("Your concentration is interrupted!</b>"))
+>>>>>>> 62d112f1c (/Mounted code improvement tweaks (#7751))
 			return
 	if(!CHECK_BITFIELD(flags_item, WIELDED))
 		to_chat(user, "<span class='notice'>You need to wield your gun before aiming.</b></span>")

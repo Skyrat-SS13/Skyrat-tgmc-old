@@ -23,6 +23,12 @@
 
 
 /obj/item/weapon/gun/rifle/unique_action(mob/user)
+<<<<<<< HEAD
+=======
+	. = ..()
+	if(!.)
+		return
+>>>>>>> 62d112f1c (/Mounted code improvement tweaks (#7751))
 	return cock(user)
 
 

@@ -499,6 +499,12 @@
 
 
 /obj/item/weapon/gun/flamer/marinestandard/unique_action(mob/user)
+<<<<<<< HEAD
+=======
+	. = ..()
+	if(!.)
+		return
+>>>>>>> 62d112f1c (/Mounted code improvement tweaks (#7751))
 	var/obj/item/attachable/hydro_cannon/hydro = LAZYACCESS(attachments, ATTACHMENT_SLOT_UNDER)
 	if(!istype(hydro))
 		return

@@ -153,16 +153,27 @@
 		"<span class='danger'>We start slashing at \the [src], tearing at it's components!</span>")
 	fail_rate += 5 // 5% fail rate every attack
 
-/obj/machinery/power/geothermal/attack_hand(mob/living/user)
-	. = ..()
+/obj/machinery/power/geothermal/attack_hand(mob/living/carbon/user)
+	interact_hand(user)
+
+/obj/machinery/power/geothermal/attack_ai(mob/living/silicon/ai/user)
+	interact_hand(user)
+
+
+/obj/machinery/power/geothermal/proc/interact_hand(mob/living/user)
 	if(.)
 		return
 	if(!anchored) //Shouldn't actually be possible
 		return FALSE
 	if(user.incapacitated())
 		return FALSE
+<<<<<<< HEAD
 	if(!ishuman(user))
 		to_chat(user, "<span class='warning'>You have no idea how to use that.</span>")
+=======
+	if(!ishuman(user) && !issilicon(user))
+		to_chat(user, span_warning("You have no idea how to use that."))
+>>>>>>> d957896b3 (Allow the AI to turn on groundside generators like shipside ones, provided that they are intact. (#7687))
 		return FALSE
 	if(corrupted)
 		to_chat(user, "<span class='warning'>You have to clean that generator before it can be used!</span>")

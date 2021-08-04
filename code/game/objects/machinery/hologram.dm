@@ -129,7 +129,12 @@
 			for(var/mob/living/silicon/ai/AI in GLOB.silicon_mobs)
 				if(!AI.client)
 					continue
+<<<<<<< HEAD
 				to_chat(AI, "<span class='info'>Your presence is requested at <a href='?src=[REF(AI)];jumptoholopad=[REF(src)]'>\the [area]</a>.</span>")
+=======
+				to_chat(AI, span_info("Your presence is requested at <a href='?src=[REF(AI)];jumptoholopad=[REF(src)]'>\the [area]</a>."))
+				playsound(AI, 'sound/machines/two_tones_beep.ogg', 30, 1)
+>>>>>>> 867a474c3 (Give the AI a noise notification whenever it gets a call on the holopad. (#7757))
 		else
 			temp = "A request for AI presence was already sent recently.<BR>"
 			temp += "<A href='?src=[REF(src)];mainmenu=1'>Main Menu</A>"

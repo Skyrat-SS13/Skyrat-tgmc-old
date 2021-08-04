@@ -21,12 +21,21 @@
  * If it fails to find a vendor, it will add that item to a list on seller to warns him that it failed
  * Return the instantatiated item if it was successfully sold, and return null otherwise
  */
+<<<<<<< HEAD
 /datum/item_representation/proc/instantiate_object(datum/loadout_seller/seller, master = null)
 	if(seller && !bypass_vendor_check)
 		if(!buy_item_in_vendor(item_type))
 			seller.unavailable_items ++
 			return
 		seller.bought_items += item_type
+=======
+/datum/item_representation/proc/instantiate_object(datum/loadout_seller/seller, master = null, mob/living/user)
+	if(seller && !bypass_vendor_check && !buy_item_in_vendor(item_type, seller, user))
+		return
+	if(!text2path("[item_type]"))
+		to_chat(user, span_warning("[item_type] in your loadout is an invalid item, it has probably been changed or removed."))
+		return
+>>>>>>> a207d24da (fix loadouts (#7775))
 	var/obj/item/item = new item_type(master)
 	return item
 

@@ -76,6 +76,12 @@
 
 	RegisterSignal(src, COMSIG_MOB_CLICK_ALT, .proc/send_order)
 	RegisterSignal(src, COMSIG_ORDER_SELECTED, .proc/set_order)
+<<<<<<< HEAD
+=======
+	RegisterSignal(SSdcs, COMSIG_GLOB_OB_LASER_CREATED, .proc/receive_laser_ob)
+	RegisterSignal(SSdcs, COMSIG_GLOB_CAS_LASER_CREATED, .proc/receive_laser_cas)
+
+>>>>>>> 5ad6ed732 (AI notifications tweaks (#7644))
 
 	var/datum/action/innate/order/attack_order/send_attack_order = new
 	var/datum/action/innate/order/defend_order/send_defend_order = new
@@ -99,7 +105,11 @@
 /mob/living/silicon/ai/proc/send_order(datum/source, atom/target)
 	SIGNAL_HANDLER
 	if(!current_order)
+<<<<<<< HEAD
 		to_chat(src, "<span class='warning'>Your have no order selected.</span>")
+=======
+		to_chat(src, span_warning("You have no order selected."))
+>>>>>>> 5ad6ed732 (AI notifications tweaks (#7644))
 		return
 	current_order.send_order(target)
 
@@ -108,6 +118,22 @@
 	SIGNAL_HANDLER
 	current_order = order
 
+<<<<<<< HEAD
+=======
+
+///Receive fire support laser notifications
+/mob/living/silicon/ai/proc/receive_laser_ob(datum/source, obj/effect/overlay/temp/laser_target/OB/incoming_laser)
+	SIGNAL_HANDLER
+	to_chat(src, span_notice("Orbital Bombardment laser detected. Target: [AREACOORD_NO_Z(incoming_laser)]"))
+	playsound_local(src, 'sound/effects/binoctarget.ogg', 15)
+
+/mob/living/silicon/ai/proc/receive_laser_cas(datum/source, obj/effect/overlay/temp/laser_target/cas/incoming_laser)
+	SIGNAL_HANDLER
+	to_chat(src, span_notice("CAS laser detected. Target: [AREACOORD_NO_Z(incoming_laser)]"))
+	playsound_local(src, 'sound/effects/binoctarget.ogg', 15)
+
+
+>>>>>>> 5ad6ed732 (AI notifications tweaks (#7644))
 /mob/living/silicon/ai/restrained(ignore_checks)
 	return FALSE
 

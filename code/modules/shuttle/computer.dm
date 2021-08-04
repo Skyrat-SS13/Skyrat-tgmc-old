@@ -66,7 +66,16 @@
 				if(previous_status != SHUTTLE_IDLE)
 					visible_message("<span class='notice'>Destination updated, recalculating route.</span>")
 				else
+<<<<<<< HEAD
 					visible_message("<span class='notice'>Shuttle departing. Please stand away from the doors.</span>")
+=======
+					visible_message(span_notice("Shuttle departing. Please stand away from the doors."))
+
+					for(var/mob/living/silicon/ai/AI in GLOB.silicon_mobs)
+						if(!AI.client)
+							continue
+						to_chat(AI, span_info("NOTICE - [M.name] taking off towards [href_list["move"]]"))
+>>>>>>> 5ad6ed732 (AI notifications tweaks (#7644))
 			if(1)
 				to_chat(usr, "<span class='warning'>Invalid shuttle requested.</span>")
 				return TRUE

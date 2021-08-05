@@ -129,7 +129,7 @@
 	if(A && istype(A) && A.ceiling >= CEILING_METAL)
 		to_chat(user, "<span class='warning'>You have to be outside or under a glass ceiling to activate this.</span>")
 		return
-	beacon_datum = new /datum/supply_beacon(user.name, user.loc, user.faction, 1 MINUTES)
+	beacon_datum = new /datum/supply_beacon(user.name, user.loc, user.faction, 4 MINUTES)
 	RegisterSignal(beacon_datum, COMSIG_PARENT_QDELETING, .proc/clean_beacon_datum)
 	user.show_message("<span class='notice'>The [src] beeps and states, \"Your current coordinates were registered by the supply console. LONGITUDE [location.x]. LATITUDE [location.y]. Area ID: [get_area(src)]\"</span>", EMOTE_AUDIBLE, "<span class='notice'>The [src] vibrates but you can not hear it!</span>")
 

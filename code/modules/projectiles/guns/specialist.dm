@@ -113,7 +113,7 @@
 /obj/item/weapon/gun/rifle/sniper/antimaterial/Destroy()
 	laser_off()
 	QDEL_NULL(integrated_laze)
-	. = ..()
+	return ..()
 
 /obj/item/weapon/gun/rifle/sniper/antimaterial/dropped()
 	laser_off()
@@ -381,9 +381,20 @@
 	damage_falloff_mult = 0.5
 
 
+<<<<<<< HEAD
 /obj/item/weapon/gun/smartgun/Initialize()
 	. = ..()
 	ammo_secondary = GLOB.ammo_list[ammo_secondary]
+=======
+
+/obj/item/weapon/gun/minigun/Initialize()
+	. = ..()
+	SSmonitor.stats.miniguns_in_use += src
+
+/obj/item/weapon/gun/minigun/Destroy()
+	SSmonitor.stats.miniguns_in_use -= src
+	return ..()
+>>>>>>> e16b2d59e (Fix some of destroy code not abiding to contrib guidelines (#7789))
 
 
 /obj/item/weapon/gun/smartgun/examine_ammo_count(mob/user)
@@ -996,8 +1007,8 @@
 	SSmonitor.stats.sadar_in_use += src
 
 /obj/item/weapon/gun/launcher/rocket/sadar/Destroy()
-	. = ..()
 	SSmonitor.stats.sadar_in_use -= src
+	return ..()
 
 //-------------------------------------------------------
 //M5 RPG'S MEAN FUCKING COUSIN

@@ -628,7 +628,7 @@
 	if(current_gun)
 		qdel(current_gun)
 		current_gun = null
-	. = ..()
+	return ..()
 
 
 /obj/item/storage/belt/gun/attack_hand(mob/living/user)

@@ -7,14 +7,16 @@
 	icon_state = "tube-construct-item"
 	flags_atom = CONDUCT
 	var/fixture_type = "tube"
-	var/obj/machinery/light/newlight = null
 	var/sheets_refunded = 2
 
+<<<<<<< HEAD
 /obj/item/frame/light_fixture/Destroy()
 	QDEL_NULL(newlight)
 	return ..()
 	
 
+=======
+>>>>>>> 60d9655ac (Fixes new light fixtures being destroyed upon creation (#7824))
 /obj/item/frame/light_fixture/attackby(obj/item/I, mob/user, params)
 	. = ..()
 
@@ -38,6 +40,7 @@
 	var/constrloc = usr.loc
 	if (!do_after(usr, 30, TRUE, on_wall, BUSY_ICON_BUILD))
 		return
+	var/obj/machinery/light/newlight
 	switch(fixture_type)
 		if("bulb")
 			newlight = new /obj/machinery/light_construct/small(constrloc)

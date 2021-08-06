@@ -42,9 +42,12 @@ SUBSYSTEM_DEF(ticker)
 /datum/controller/subsystem/ticker/Initialize(timeofday)
 	load_mode()
 
+<<<<<<< HEAD
 	GLOB.respawntime = CONFIG_GET(number/marine_respawn)
 	GLOB.xenorespawntime = CONFIG_GET(number/xeno_respawn)
 
+=======
+>>>>>>> 7be03684f (Final purge of xeno respawn timers (#7794))
 	var/all_music = CONFIG_GET(keyed_list/lobby_music)
 	var/key = SAFEPICK(all_music)
 	if(key)

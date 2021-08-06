@@ -126,6 +126,7 @@
 	config_entry_value = 30 MINUTES
 	max_val = 30 MINUTES
 	min_val = 0
+<<<<<<< HEAD
 
 /datum/config_entry/number/xeno_respawn
 	config_entry_value = 30 MINUTES
@@ -146,3 +147,5 @@
 /datum/config_entry/number/account_age_restriction_days
 	config_entry_value = 0
 	min_val = 0
+=======
+>>>>>>> 7be03684f (Final purge of xeno respawn timers (#7794))

@@ -38,6 +38,7 @@
 /mob/living/proc/can_xeno_slash(mob/living/carbon/xenomorph/X)
 	if(CHECK_BITFIELD(X.xeno_caste.caste_flags, CASTE_IS_INTELLIGENT)) // intelligent ignore restrictions
 		return TRUE
+<<<<<<< HEAD
 
 	if(X.hive.slashing_allowed == XENO_SLASHING_RESTRICTED)
 		if(status_flags & XENO_HOST)
@@ -51,6 +52,8 @@
 			to_chat(X, "<span class='warning'>We try to slash [src], but find we <B>cannot</B>. We are not yet injured enough to overcome the Queen's orders.</span>")
 			return FALSE
 
+=======
+>>>>>>> 2358e5191 (Removes Queen Slashing Permissions (#7783))
 	else if(isnestedhost(src))
 		for(var/obj/item/alien_embryo/embryo in src)
 			if(!embryo.issamexenohive(X))
@@ -63,9 +66,12 @@
 	. = ..()
 	if(!.)
 		return FALSE
+<<<<<<< HEAD
 	if(!X.hive.slashing_allowed && !(X.xeno_caste.caste_flags & CASTE_IS_INTELLIGENT))
 		to_chat(X, "<span class='warning'>Slashing is currently <b>forbidden</b> by the Queen. We refuse to slash [src].</span>")
 		return FALSE
+=======
+>>>>>>> 2358e5191 (Removes Queen Slashing Permissions (#7783))
 
 /mob/living/proc/get_xeno_slash_zone(mob/living/carbon/xenomorph/X, set_location = FALSE, random_location = FALSE, no_head = FALSE)
 	return

@@ -70,6 +70,7 @@
 	log_game("[key_name(src)] has created a Word of the Queen report: [queensWord]")
 	message_admins("[ADMIN_TPMONTY(src)] has created a Word of the Queen report.")
 
+<<<<<<< HEAD
 // ***************************************
 // *********** Slashing permissions
 // ***************************************
@@ -109,6 +110,8 @@
 		xeno_message("The Queen has <b>forbidden</b> the harming of hosts. We can no longer slash your enemies.")
 		hive.slashing_allowed = XENO_SLASHING_FORBIDDEN
 
+=======
+>>>>>>> 2358e5191 (Removes Queen Slashing Permissions (#7783))
 
 // ***************************************
 // *********** Screech

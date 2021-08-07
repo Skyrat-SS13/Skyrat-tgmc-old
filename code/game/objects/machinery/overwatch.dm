@@ -901,7 +901,12 @@ GLOBAL_LIST_EMPTY(active_cas_targets)
 	SIGNAL_HANDLER
 	if(!current_order)
 		var/mob/user = source
+<<<<<<< HEAD
 		to_chat(user, "<span class='warning'>Your have no order selected.</span>")
+=======
+		to_chat(user, span_warning("You have no order selected."))
+		return
+>>>>>>> befe66450 (Runtime overwatch (#7826))
 	current_order.send_order(target, faction = faction)
 
 ///Setter for the current order

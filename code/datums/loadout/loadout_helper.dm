@@ -71,7 +71,7 @@
 	return FALSE
 
 /// Will give a headset corresponding to the user job to the user
-/proc/give_free_headset(mob/living/carbon/human/user)
+/proc/give_free_headset(mob/living/carbon/human/user, faction)
 	if(user.wear_ear)
 		return
 	if(user.job.outfit.ears)
@@ -79,4 +79,67 @@
 		return
 	if(!user.assigned_squad)
 		return
+<<<<<<< HEAD
 	user.equip_to_slot_or_del(new /obj/item/radio/headset/mainship/marine(null, user.assigned_squad, user.job), SLOT_EARS, override_nodrop = TRUE)
+=======
+	var/headset_type = faction == FACTION_TERRAGOV_REBEL ? /obj/item/radio/headset/mainship/marine/rebel : /obj/item/radio/headset/mainship/marine
+	user.equip_to_slot_or_del(new headset_type(null, user.assigned_squad, user.job.type), SLOT_EARS, override_nodrop = TRUE)
+
+/// Will check if the selected category can be bought according to the buying_bitfield
+/proc/can_buy_category(category, buying_bitfield)
+	var/selling_bitfield = NONE
+	for(var/i in GLOB.marine_selector_cats[category])
+		selling_bitfield |= i
+	return buying_bitfield & selling_bitfield
+
+/// Return true if you can buy this category, and also change the loadout seller buying bitfield
+/proc/buy_category(category, datum/loadout_seller/seller)
+	var/selling_bitfield = NONE
+	for(var/i in GLOB.marine_selector_cats[category])
+		selling_bitfield |= i
+	if(!(seller.buying_bitfield & selling_bitfield))
+		return FALSE
+	if(selling_bitfield == (MARINE_CAN_BUY_R_POUCH|MARINE_CAN_BUY_L_POUCH))
+		if(seller.buying_bitfield & MARINE_CAN_BUY_R_POUCH)
+			seller.buying_bitfield &= ~MARINE_CAN_BUY_R_POUCH
+		else
+			seller.buying_bitfield &= ~MARINE_CAN_BUY_L_POUCH
+		return TRUE
+	if(selling_bitfield == (MARINE_CAN_BUY_ATTACHMENT|MARINE_CAN_BUY_ATTACHMENT2))
+		if(seller.buying_bitfield & MARINE_CAN_BUY_ATTACHMENT)
+			seller.buying_bitfield &= ~MARINE_CAN_BUY_ATTACHMENT
+		else
+			seller.buying_bitfield &= ~MARINE_CAN_BUY_ATTACHMENT2
+		return TRUE
+	seller.buying_bitfield &= ~selling_bitfield
+	return TRUE
+
+/proc/load_player_loadout(player_ckey, loadout_job, loadout_name)
+	player_ckey = ckey(player_ckey)
+	if(!player_ckey)
+		return
+	var/path = "data/player_saves/[player_ckey[1]]/[player_ckey]/preferences.sav"
+	if(!path)
+		return
+	if(!fexists(path))
+		return
+	var/savefile/S = new /savefile(path)
+	if(!S)
+		return
+	S.cd = "/loadouts"
+	var/loadout_json = ""
+	READ_FILE(S["[loadout_name + loadout_job]"], loadout_json)
+	if(!loadout_json)
+		return
+	var/datum/loadout/loadout = jatum_deserialize(loadout_json)
+	return loadout
+
+/proc/convert_loadouts_list(list/loadouts_data)
+	var/list/new_loadouts_data = list()
+	for(var/i = 1 to length(loadouts_data) step 2)
+		var/next_loadout_data = list()
+		next_loadout_data += loadouts_data[i]
+		next_loadout_data += loadouts_data[++i]
+		new_loadouts_data += list(next_loadout_data)
+	return new_loadouts_data
+>>>>>>> 58053f3e6 (Fix wrong headset being given to rebels from loadout vendor (#7844))

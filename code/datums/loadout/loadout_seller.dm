@@ -36,9 +36,14 @@
 			continue
 		item = item_list[slot_key]
 		if(!user.equip_to_slot_if_possible(item, GLOB.slot_str_to_slot[slot_key], warning = FALSE))
+<<<<<<< HEAD
 			sell_back_item_in_vendor(item.type)
 			qdel(item)
 	give_free_headset(user)
+=======
+			item.forceMove(user.loc)
+	give_free_headset(user, faction)
+>>>>>>> 58053f3e6 (Fix wrong headset being given to rebels from loadout vendor (#7844))
 
 /**
  * Buy all items of the loadout from vendors. If some items could not be bought, we warned the user and ask him if he wants to continue.

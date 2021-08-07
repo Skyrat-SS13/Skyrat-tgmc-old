@@ -45,3 +45,9 @@ GLOBAL_LIST_INIT(faction_to_alignement, list(
 	FACTION_HOSTILE = ALIGNEMENT_HOSTILE,
 	FACTION_PIRATE = ALIGNEMENT_HOSTILE,
 ))
+
+//List of correspond factions to freq
+GLOBAL_LIST_INIT(faction_to_freq, list(
+	FACTION_TERRAGOV = FREQ_COMMON,
+	FACTION_TERRAGOV_REBEL = FREQ_COMMON_REBEL,
+))

@@ -190,6 +190,12 @@ GLOBAL_LIST_INIT(marine_selector_cats, list(
 			var/list/L = listed_products[idx]
 			var/cost = L[3]
 
+			if(SSticker.mode?.flags_round_type & MODE_HUMAN_ONLY && is_type_in_typecache(idx, GLOB.hvh_restricted_items_list))
+				to_chat(usr, span_warning("This item is banned by the Space Geneva Convention."))
+				if(icon_deny)
+					flick(icon_deny, src)
+				return
+
 			if(use_points && I.marine_points < cost)
 				to_chat(usr, "<span class='warning'>Not enough points.</span>")
 				if(icon_deny)

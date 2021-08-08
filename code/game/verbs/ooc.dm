@@ -98,11 +98,17 @@
 		// Admins open straight to player panel
 		if(check_other_rights(C, R_ADMIN, FALSE))
 			display_name = "<a class='hidelink' href='?_src_=holder;[HrefToken(TRUE)];playerpanel=[REF(usr)]'>[display_name]</a>"
-
+		var/avoid_highlight = C == src
 		if(display_colour)
+<<<<<<< HEAD
 			to_chat(C, "<font color='[display_colour]'><span class='ooc'><span class='prefix'>OOC: [display_name]</span>: <span class='message linkify'>[msg]</span></span></font>")
 		else
 			to_chat(C, "<span class='[display_class]'><span class='prefix'>OOC: [display_name]</span>: <span class='message linkify'>[msg]</span></span>")
+=======
+			to_chat(C, "<font color='[display_colour]'>[span_ooc("<span class='prefix'>OOC: [display_name]")]: <span class='message linkify'>[msg]</span></span></font>", avoid_highlighting = avoid_highlight)
+		else
+			to_chat(C, "<span class='[display_class]'>[span_prefix("OOC: [display_name]")]: <span class='message linkify'>[msg]</span></span>", avoid_highlighting = avoid_highlight)
+>>>>>>> 50918c7cd (Updates alot of tgui stuff (#7852))
 
 
 /client/verb/looc_wrapper()

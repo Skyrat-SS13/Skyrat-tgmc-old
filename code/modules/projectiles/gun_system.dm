@@ -535,7 +535,11 @@ User can be passed as null, (a gun reloading itself for instance), so we need to
 
 ///Set the target and take care of hard delete
 /obj/item/weapon/gun/proc/set_target(atom/object)
+<<<<<<< HEAD
 	if(object == target)
+=======
+	if(object == target || object == gun_user)
+>>>>>>> ffed6479e (fix (#7849))
 		return
 	if(target)
 		UnregisterSignal(target, COMSIG_PARENT_QDELETING)

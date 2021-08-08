@@ -29,7 +29,11 @@
 	victim = _victim
 	victim.forceMove(src)
 	START_PROCESSING(SSslowprocess, src)
+<<<<<<< HEAD
 	addtimer(CALLBACK(src, .proc/life_draining_over, TRUE), cocoon_life_time)
+=======
+	addtimer(CALLBACK(src, .proc/life_draining_over, null, TRUE), cocoon_life_time)
+>>>>>>> cf59dba29 (Fixes cocoons opening instantly (#7858))
 	RegisterSignal(SSdcs, COMSIG_GLOB_DROPSHIP_HIJACKED, .proc/life_draining_over)
 	new /obj/effect/alien/weeds/node(loc)
 

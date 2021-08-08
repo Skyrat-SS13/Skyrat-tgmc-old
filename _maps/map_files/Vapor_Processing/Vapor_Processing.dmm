@@ -2888,10 +2888,6 @@
 	dir = 1
 	},
 /area/vapor_processing/cargo2)
-"ly" = (
-/obj/effect/landmark/corpsespawner/clown,
-/turf/open/floor/tile/green/whitegreen,
-/area/lv624/lazarus/medbay)
 "lA" = (
 /obj/structure/closet/emcloset,
 /turf/open/floor/plating,
@@ -7075,7 +7071,7 @@ fm
 fD
 fD
 fD
-ly
+fD
 ht
 fC
 eK

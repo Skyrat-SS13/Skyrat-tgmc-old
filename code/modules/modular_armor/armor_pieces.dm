@@ -20,6 +20,7 @@
 	greyscale_config = /datum/greyscale_config/modularchest_infantry
 	greyscale_colors = "#444732"
 
+<<<<<<< HEAD
 	///Assoc list of color-hex for colors we're allowed to color this armor
 	var/static/list/colorable_colors = list(
 		"black" = "#474A50",
@@ -36,6 +37,11 @@
 		"orange" = "#BC4D25",
 		"pink" = "#D354BA",
 	)
+=======
+	///optional assoc list of colors we can color this armor
+	var/list/colorable_colors
+
+>>>>>>> b15a62596 (You can now color jaeger any color you want (#7445))
 
 /obj/item/armor_module/armor/Initialize()
 	. = ..()
@@ -56,11 +62,14 @@
 		to_chat(user, "<span class='warning'>\the [paint] is out of color!</span>")
 		return TRUE
 
+	var/new_color
+	if(colorable_colors)
+		new_color = tgui_input_list(user, "Pick a color", "Pick color", colorable_colors)
+	else
+		new_color = input(user, "Pick a color", "Pick color") as null|color
 
-	var/new_color = tgui_input_list(user, "Pick a color", "Pick color", colorable_colors)
 	if(!new_color)
 		return
-	new_color = colorable_colors[new_color]
 
 	if(!do_after(user, 1 SECONDS, TRUE, src, BUSY_ICON_GENERIC))
 		return TRUE

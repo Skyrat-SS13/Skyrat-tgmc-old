@@ -1096,6 +1096,7 @@ to_chat will check for valid clients itself already so no need to double check f
 /obj/structure/xeno/resin/xeno_turret/get_xeno_hivenumber()
 	return associated_hive.hivenumber
 
+<<<<<<< HEAD
 /datum/hive_status/ui_state(mob/user)
 	return GLOB.xeno_state
 
@@ -1175,6 +1176,8 @@ to_chat will check for valid clients itself already so no need to double check f
 			xeno.do_evolve(caste.caste_type_path, caste.display_name) // All the checks for can or can't are handled inside do_evolve
 			return TRUE
 
+=======
+>>>>>>> 7ada2aec5 (Relocates Xeno Evolution Panel Backend From Hive_Status To New Datum Evolution_Panel (#7784))
 /datum/hive_status/proc/update_tier_limits()
 	tier3_xeno_limit = max(length(xenos_by_tier[XENO_TIER_THREE]),FLOOR((length(xenos_by_tier[XENO_TIER_ZERO])+length(xenos_by_tier[XENO_TIER_ONE])+length(xenos_by_tier[XENO_TIER_TWO])+length(xenos_by_tier[XENO_TIER_FOUR]))/3+1,1))
 	tier2_xeno_limit = max(length(xenos_by_tier[XENO_TIER_TWO]),length(xenos_by_tier[XENO_TIER_ZERO]) + length(xenos_by_tier[XENO_TIER_ONE]) + length(xenos_by_tier[XENO_TIER_FOUR])+1 - length(xenos_by_tier[XENO_TIER_THREE]))

@@ -111,7 +111,11 @@
 			new_caste_type = /mob/living/carbon/xenomorph/king/Zeta
 		if(XENO_HIVE_ADMEME)
 			new_caste_type = /mob/living/carbon/xenomorph/king/admeme
+<<<<<<< HEAD
 	var/mob/living/carbon/xenomorph/king/kong = new new_caste_type(src)
+=======
+	var/mob/living/carbon/xenomorph/king/kong = new new_caste_type()
+>>>>>>> 3e3354ed5 (Fixes King Minimap Icon (#7763))
 	RegisterSignal(kong, COMSIG_MOB_LOGIN , .proc/on_king_occupied)
 	if(future_king)
 		future_king.mind.transfer_to(kong)
@@ -119,7 +123,7 @@
 	kong.offer_mob()
 
 ///When the king mob is offered and then accepted this proc ejects the king and does announcements
-/obj/structure/resin/king_pod/proc/on_king_occupied(mob/occupied)
+/obj/structure/resin/king_pod/proc/on_king_occupied(mob/living/carbon/xenomorph/king/occupied)
 	SIGNAL_HANDLER
 	UnregisterSignal(occupied, COMSIG_MOB_LOGIN)
 	occupied.forceMove(get_turf(src))
@@ -127,6 +131,7 @@
 	priority_announce("Warning: Psychic anomaly signature in [myarea] has spiked and begun to move.", "TGMC Intel Division")
 	xeno_message("<span class='xenoannounce'>[occupied] has awakened at [myarea]. Praise the Queen Mother!</span>", 3, ownerhive)
 	future_king?.offer_mob()
+	SSminimaps.add_marker(occupied, occupied.z, MINIMAP_FLAG_XENO, occupied.xeno_caste.minimap_icon)
 	qdel(src)
 
 /obj/structure/resin/king_pod/obj_destruction(damage_flag)

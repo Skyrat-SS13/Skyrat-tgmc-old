@@ -163,7 +163,11 @@
 			/obj/item/weapon/shield/riot/marine = 6,
 			/obj/item/weapon/powerfist = -1,
 			/obj/item/weapon/throwing_knife = -1,
+<<<<<<< HEAD
 			/obj/item/weapon/combat_knife = -1,
+=======
+			/obj/item/weapon/twohanded/spear/tactical = -1,
+>>>>>>> f1411cedc (adds bayonet knife to marine vending, moves knives to utility, combat knife buff (#7875))
 			/obj/item/ammo_magazine/standard_smartmachinegun = 4,
 		),
 		"Grenades" = list(
@@ -211,6 +215,18 @@
 		/obj/item/storage/box/visual/magazine = 30,
 		/obj/item/storage/box/visual/grenade = 10,
 		),
+<<<<<<< HEAD
+=======
+		"Utility" = list(
+		/obj/item/flashlight/combat = -1,
+		/obj/item/attachable/bayonetknife = -1,
+		/obj/item/weapon/combat_knife = -1,
+		/obj/item/binoculars = -1,
+		/obj/item/compass = -1,
+		/obj/item/assembly/signaler = -1,
+		/obj/item/weapon/gun/flare/marine = -1,
+		),
+>>>>>>> f1411cedc (adds bayonet knife to marine vending, moves knives to utility, combat knife buff (#7875))
 	)
 
 	seasonal_items = list(

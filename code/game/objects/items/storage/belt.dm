@@ -604,6 +604,13 @@
 	item_state = "m4a3_holster"
 	use_sound = null
 	w_class = WEIGHT_CLASS_BULKY
+<<<<<<< HEAD
+=======
+	storage_type_limits = list(
+		/obj/item/weapon/gun = 1,
+		/obj/item/cell/lasgun/lasrifle/marine = 2,
+	)
+>>>>>>> fc4a57633 (laser pistol and magazines fit in your belt (#7889))
 	storage_slots = 7
 	max_storage_space = 15
 	max_w_class = 3
@@ -619,6 +626,8 @@
 	can_hold = list(
 		/obj/item/weapon/gun/pistol,
 		/obj/item/ammo_magazine/pistol,
+		/obj/item/weapon/gun/energy/lasgun/lasrifle/standard_marine_pistol,
+		/obj/item/cell/lasgun/lasrifle/marine,
 	)
 
 /obj/item/storage/belt/gun/Destroy()
@@ -713,6 +722,8 @@
 	can_hold = list(
 		/obj/item/weapon/gun/pistol,
 		/obj/item/ammo_magazine/pistol,
+		/obj/item/weapon/gun/energy/lasgun/lasrifle/standard_marine_pistol,
+		/obj/item/cell/lasgun/lasrifle/marine,
 	)
 
 /obj/item/storage/belt/gun/pistol/m4a3/full/Initialize()

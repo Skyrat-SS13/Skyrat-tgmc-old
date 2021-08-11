@@ -867,6 +867,10 @@
 			/obj/item/armor_module/storage/medical = -1,
 			/obj/item/helmet_module/welding = -1,
 			/obj/item/helmet_module/binoculars = -1,
+<<<<<<< HEAD
+=======
+			/obj/item/helmet_module/attachable/tyr_head = -1,
+>>>>>>> 6437a07e3 (tyr head is now inifnite (#7890))
 			/obj/item/helmet_module/antenna = -1,
 			/obj/item/helmet_module/attachable/mimir_environment_protection/mark1 = -1,
 			/obj/item/armor_module/attachable/mimir_environment_protection/mark1 = -1,

@@ -189,7 +189,7 @@
 	playsound(user, reload_sound, 25, 1, 5)
 	update_icon(user)
 	var/obj/screen/ammo/A = user.hud_used.ammo
-	A.update_hud(user)
+	A.update_hud(user, src)
 
 
 /**Proced when unlinking the back fuel tank, making the flamer unlit and unable to fire
@@ -206,7 +206,7 @@
 	light_pilot(user,FALSE)
 	update_icon(user)
 	var/obj/screen/ammo/A = user.hud_used.ammo
-	A.update_hud(user)
+	A.update_hud(user, src)
 
 
 /obj/item/weapon/gun/flamer/removed_from_inventory(mob/user)
@@ -288,7 +288,7 @@
 		prev_T = T
 		sleep(1)
 	var/obj/screen/ammo/A = user.hud_used.ammo
-	A.update_hud(user)
+	A.update_hud(user, src)
 
 /obj/item/weapon/gun/flamer/proc/flame_turf(turf/T, mob/living/user, heat, burn, f_color = "red")
 	if(!istype(T))
@@ -511,7 +511,7 @@
 		if (current_mag?.current_rounds > 0)
 			light_pilot(user, TRUE)
 	var/obj/screen/ammo/A = user.hud_used.ammo
-	A.update_hud(user)
+	A.update_hud(user, src)
 	SEND_SIGNAL(src, COMSIG_ITEM_HYDRO_CANNON_TOGGLED)
 
 /obj/item/weapon/gun/flamer/marinestandard/attach_fueltank(mob/user, obj/item/ammo_magazine/flamer_tank/backtank/fueltank)
@@ -540,7 +540,7 @@
 	playsound(user, reload_sound, 25, 1, 5)
 	update_icon(user)
 	var/obj/screen/ammo/A = user.hud_used.ammo
-	A.update_hud(user)
+	A.update_hud(user, src)
 
 /obj/item/weapon/gun/flamer/marinestandard/Fire()
 	if(active_attachable && istype(active_attachable, /obj/item/attachable/hydro_cannon) && (world.time > last_use + 10))
@@ -549,7 +549,7 @@
 		last_fired = world.time
 		last_use = world.time
 		var/obj/screen/ammo/A = gun_user.hud_used.ammo
-		A.update_hud(gun_user)
+		A.update_hud(gun_user, src)
 		return
 	if(gun_user.skills.getRating("firearms") < 0)
 		switch(windup_checked)
@@ -578,7 +578,7 @@
 		to_chat(user, "<span class='notice'>\The [src]'s hydro cannon is refilled with water.</span>")
 		playsound(src.loc, 'sound/effects/refill.ogg', 25, 1, 3)
 		var/obj/screen/ammo/A = user.hud_used.ammo
-		A.update_hud(user)
+		A.update_hud(user, src)
 		return
 
 /obj/item/weapon/gun/flamer/marinestandard/get_ammo_count()

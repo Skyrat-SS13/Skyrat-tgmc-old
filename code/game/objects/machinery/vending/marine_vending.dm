@@ -88,6 +88,8 @@
 			/obj/item/ammo_magazine/rifle/standard_assaultrifle = -1,
 			/obj/item/weapon/gun/rifle/standard_carbine = -1,
 			/obj/item/ammo_magazine/rifle/standard_carbine = -1,
+			/obj/item/weapon/gun/rifle/standard_skirmishrifle = -1,
+			/obj/item/ammo_magazine/rifle/standard_skirmishrifle = -1,
 			/obj/item/weapon/gun/rifle/tx11 = -1,
 			/obj/item/ammo_magazine/rifle/tx11 = -1,
 		),
@@ -202,12 +204,23 @@
 			/obj/item/attachable/standard_revolver_longbarrel = -1
 		),
 		"Boxes" = list(
+<<<<<<< HEAD
 		/obj/item/ammo_magazine/box9mm = 100,
 		/obj/item/ammo_magazine/acp = 100,
 		/obj/item/ammo_magazine/magnum = 100,
 		/obj/item/ammo_magazine/box10x24mm = 100,
 		/obj/item/ammo_magazine/box10x26mm = 100,
 		/obj/item/ammo_magazine/box10x27mm = 100,
+=======
+		/obj/item/ammo_magazine/packet/p9mm = 100,
+		/obj/item/ammo_magazine/packet/acp = 100,
+		/obj/item/ammo_magazine/packet/magnum = 100,
+		/obj/item/ammo_magazine/packet/p10x24mm = 100,
+		/obj/item/ammo_magazine/packet/p10x25mm = 100,
+		/obj/item/ammo_magazine/packet/p10x26mm = 100,
+		/obj/item/ammo_magazine/packet/p10x27mm = 100,
+		/obj/item/ammo_magazine/packet/p492x34mm = 100,
+>>>>>>> 578feb64f (Adds a new rifle type to marines-Skirmish Rifle (#7692))
 		/obj/item/storage/box/visual/magazine = 30,
 		/obj/item/storage/box/visual/grenade = 10,
 		),

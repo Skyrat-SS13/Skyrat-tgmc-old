@@ -535,8 +535,16 @@
 	storage_slots = 7
 	draw_mode = 1
 	icon_state = "flare"
+<<<<<<< HEAD
 	can_hold = list(
 		/obj/item/flashlight/flare,
+=======
+	storage_type_limits = list(/obj/item/weapon/gun/launcher/m81/flare = 1)
+
+	can_hold = list(
+		/obj/item/flashlight/flare,
+		/obj/item/weapon/gun/launcher/m81/flare,
+>>>>>>> fc154228f (Flare gun improvements (#7869))
 		/obj/item/explosive/grenade/flare,
 	)
 

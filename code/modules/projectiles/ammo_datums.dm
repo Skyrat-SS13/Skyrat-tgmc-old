@@ -2012,6 +2012,7 @@ GLOBAL_LIST_INIT(no_sticky_resin, typecacheof(list(/obj/item/clothing/mask/faceh
 /datum/ammo/water
 	name = "water"
 	hud_state = "water"
+<<<<<<< HEAD
 
 /datum/ammo/flare
 	name = "flare"
@@ -2039,6 +2040,8 @@ GLOBAL_LIST_INIT(no_sticky_resin, typecacheof(list(/obj/item/clothing/mask/faceh
 	G.visible_message("<span class='warning'>\A [G] bursts into brilliant light nearby!</span>")
 	G.turn_on()
 
+=======
+>>>>>>> fc154228f (Flare gun improvements (#7869))
 /datum/ammo/rocket/toy
 	name = "\improper toy rocket"
 	damage = 1

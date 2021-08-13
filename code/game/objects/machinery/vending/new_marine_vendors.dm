@@ -113,6 +113,7 @@ GLOBAL_LIST_INIT(marine_selector_cats, list(
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(!allowed(H))
+			to_chat(user, span_warning("Access denied. Your assigned role doesn't have access to this machinery."))
 			return FALSE
 
 		var/obj/item/card/id/I = H.get_idcard()
@@ -123,9 +124,11 @@ GLOBAL_LIST_INIT(marine_selector_cats, list(
 			return FALSE
 
 		if(lock_flags & JOB_LOCK && vendor_role && !istype(H.job, vendor_role))
+			to_chat(user, span_warning("Access denied. This vendor is heavily restricted."))
 			return FALSE
 
 		if(lock_flags & SQUAD_LOCK && (!H.assigned_squad || (squad_tag && H.assigned_squad.name != squad_tag)))
+			to_chat(user, span_warning("Access denied. Your assigned squad isn't allowed to access this machinery."))
 			return FALSE
 
 	return TRUE

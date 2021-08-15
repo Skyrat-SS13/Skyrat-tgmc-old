@@ -1350,8 +1350,8 @@ GLOBAL_LIST_INIT(available_specialist_sets, list("Scout Set", "Sniper Set", "Dem
 		/obj/item/beacon/orbital_bombardment_beacon,
 		/obj/item/whistle,
 		/obj/item/radio,
-		/obj/item/motiondetector,
 		/obj/item/binoculars/tactical,
+		/obj/item/attachable/motiondetector,
 		/obj/item/pinpointer/pool,
 	)
 
@@ -1363,7 +1363,7 @@ GLOBAL_LIST_INIT(available_specialist_sets, list("Scout Set", "Sniper Set", "Dem
 		/obj/item/roller/medevac,
 		/obj/item/medevac_beacon,
 		/obj/item/whistle,
-		/obj/item/motiondetector,
+		/obj/item/attachable/motiondetector,
 		/obj/item/clothing/suit/modular,
 		/obj/item/facepaint/green,
 	)

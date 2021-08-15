@@ -25,6 +25,39 @@
 			if(item_datum.product_path == item_to_buy_type && item_datum.amount != 0)
 				item_datum.amount--
 				return TRUE
+<<<<<<< HEAD
+=======
+
+	var/list/job_specific_list = GLOB.loadout_role_essential_set[user.job.title]
+
+	//If we still have our essential kit, and the item is in there, we take one from it
+	if(seller.buying_bitfield & MARINE_CAN_BUY_ESSENTIALS && islist(job_specific_list) && job_specific_list[item_to_buy_type] > seller.unique_items_list[item_to_buy_type])
+		seller.unique_items_list[item_to_buy_type]++
+		return TRUE
+
+	//If it's in a clothes vendor that uses buying bitfield, we check if we still have that field and we use it
+	job_specific_list = GLOB.job_specific_clothes_vendor[user.job.title]
+	if(!islist(job_specific_list))
+		return FALSE
+	var/list/item_info = job_specific_list[item_to_buy_type]
+	if(item_info && buy_category(item_info[1], seller))
+		return TRUE
+
+	//Lastly, we try to use points to buy from a job specific points vendor
+	var/list/listed_products = GLOB.job_specific_points_vendor[user.job.title]
+	if(!listed_products)
+		return FALSE
+	for(var/item_type in listed_products)
+		if(item_to_buy_type != item_type)
+			continue
+		item_info = listed_products[item_type]
+		if(item_info[1] == CAT_ESS)
+			return FALSE
+		if(seller.available_points < item_info[3])
+			return FALSE
+		seller.available_points -= item_info[3]
+		return TRUE
+>>>>>>> d549f08ef (fix sg having infinite sg goggles (#7923))
 	return FALSE
 
 /// Will put back an item in a linked vendor

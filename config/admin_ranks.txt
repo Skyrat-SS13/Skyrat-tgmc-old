@@ -1,9 +1,49 @@
-Name = Admin
+Name = Host
 Include = EVERYTHING
 Exclude =
 Edit = EVERYTHING
 
+Name = Overseer
+Include = EVERYTHING
+Exclude =
+Edit = EVERYTHING
+
+Name = Lead
+Include = EVERYTHING
+Exclude =
+Edit = EVERYTHING
+
+Name = Staff Manager
+Include = EVERYTHING
+Exclude = 
+Edit = 
+
+Name = Administrator
+Include = EVERYTHING
+Exclude = DBRANKS
+Edit =
+
+Name = Trial Administrator
+Include = EVERYTHING
+Exclude = DBRANKS, PERMISSION
+Edit =
+
+Name = Administrator Candidate
+Include = EVERYTHING
+Exclude = DBRANKS, PERMISSION
+Edit =
+
+Name = Admin Observer
+Include = MENTOR, ASAY
+Exclude =
+Edit =
+
+Name = Maintainer
+Include = EVERYTHING
+Exclude = BAN, ADMIN, ASAY, DBRANKS, PERMISSION
+Edit =
+
 Name = Mentor
-Include = MENTOR COLOR
+Include = Mentor
 Exclude =
 Edit =

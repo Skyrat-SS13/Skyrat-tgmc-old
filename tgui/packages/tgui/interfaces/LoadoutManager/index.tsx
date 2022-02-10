@@ -1,10 +1,10 @@
 import { useBackend, useLocalState } from "../../backend";
-import { Stack, Button, Section, LabeledList, Tabs, Box, Flex } from "../../components";
+import { Stack, Button, Section, LabeledList, Tabs, Flex } from "../../components";
 import { Window } from "../../layouts";
 import { LoadoutListData, LoadoutTabData, LoadoutManagerData, LoadoutItemData } from './Types';
 import { NameInputModal } from './NameInputModal';
 
-const LoadoutItem = (props : LoadoutItemData, context) => { 
+const LoadoutItem = (props : LoadoutItemData, context) => {
   const { act } = useBackend(context);
   const {
     loadout,
@@ -36,7 +36,7 @@ const LoadoutList = (props: LoadoutListData) => {
           {loadout_list
             .map(loadout_visible => {
               return (
-                <LoadoutItem 
+                <LoadoutItem
                   key={loadout_visible.name}
                   loadout={loadout_visible} />
               );
@@ -55,19 +55,19 @@ const JobTabs = (props: LoadoutTabData) => {
         <Flex.Item grow={1}><div> </div></Flex.Item>
         <Flex.Item>
           <Tabs>
-            <Tabs.Tab selected={job === "marine"} onClick={() => setJob("marine")}>
-              Marine
+            <Tabs.Tab selected={job === "Squad Marine"} onClick={() => setJob("Squad Marine")}>
+              Squad Marine
             </Tabs.Tab>
-            <Tabs.Tab selected={job === "engineer"} onClick={() => setJob("engineer")}>
-              Engineer
+            <Tabs.Tab selected={job === "Squad Engineer"} onClick={() => setJob("Squad Engineer")}>
+              Squad Engineer
             </Tabs.Tab>
-            <Tabs.Tab selected={job === "medic"} onClick={() => setJob("medic")}>
-              Medic
+            <Tabs.Tab selected={job === "Squad Corpsman"} onClick={() => setJob("Squad Corpsman")}>
+              Squad Corpsman
             </Tabs.Tab>
-            <Tabs.Tab selected={job === "smartgunner"} onClick={() => setJob("smartgunner")}>
-              SmartGunner
+            <Tabs.Tab selected={job === "Squad Smartgunner"} onClick={() => setJob("Squad Smartgunner")}>
+              Squad Smartgunner
             </Tabs.Tab>
-            <Tabs.Tab selected={job === "leader"} onClick={() => setJob("leader")}>
+            <Tabs.Tab selected={job === "Squad Leader"} onClick={() => setJob("Squad Leader")}>
               Squad Leader
             </Tabs.Tab>
           </Tabs>
@@ -85,44 +85,74 @@ export const LoadoutManager = (props, context) => {
   const [
     job,
     setJob,
-  ] = useLocalState(context, 'job', "marine");
+  ] = useLocalState(context, 'job', "Squad Marine");
   const [
     saveNewLoadout,
     setSaveNewLoadout,
-  ] = useLocalState(context, 'newLoadout', false);
+  ] = useLocalState(context, 'saveLoadout', false);
+  const [
+    importNewLoadout,
+    setImportNewLoadout,
+  ] = useLocalState(context, 'importLoadout', false);
 
-  return ( 
-    <Window 
+  return (
+    <Window
       title="Loadout Manager"
-      width={400} 
+      width={700}
       height={400}>
       <Window.Content>
         <Stack vertical>
           <JobTabs job={job} setJob={setJob} />
-          <LoadoutList 
-            loadout_list={loadout_list.filter(loadout => loadout.job === job)} 
-            job={job}
+          <LoadoutList
+            loadout_list={loadout_list.filter(loadout => loadout.job === job)}
           />
-          <Button
-            onClick={() => setSaveNewLoadout(true)}>
-            Save your equipped loadout
-          </Button>
-          {
-            saveNewLoadout
-            && <NameInputModal
-              label="Name of the new Loadout"
-              button_text="Save"
-              onBack={() => setSaveNewLoadout(false)}
-              onSubmit={name => {
-                act("saveLoadout", {
-                  loadout_job: job,
-                  loadout_name: name,
-                });
-                setSaveNewLoadout(false);
-              }}
-            />
-          }
+          <Flex>
+            <Flex.Item grow={1}><div> </div></Flex.Item>
+            <Flex.Item>
+              <Button
+                onClick={() => setSaveNewLoadout(true)}>
+                Save your equipped loadout
+              </Button>
+            </Flex.Item>
+            <Flex.Item grow={1}><div> </div></Flex.Item>
+            <Flex.Item>
+              <Button
+                onClick={() => setImportNewLoadout(true)}>
+                Import Loadout
+              </Button>
+            </Flex.Item>
+            <Flex.Item grow={1}><div> </div></Flex.Item>
+          </Flex>
         </Stack>
+        {
+          saveNewLoadout
+          && <NameInputModal
+            label="Name of the new Loadout"
+            button_text="Save"
+            onBack={() => setSaveNewLoadout(false)}
+            onSubmit={name => {
+              act("saveLoadout", {
+                loadout_name: name,
+                loadout_job: job,
+              });
+              setSaveNewLoadout(false);
+            }}
+          />
+        }
+        {
+          importNewLoadout
+          && <NameInputModal
+            label="Format requested : ckey//job//name_of_loadout "
+            button_text="Import the loadout"
+            onBack={() => setImportNewLoadout(false)}
+            onSubmit={id => {
+              act("importLoadout", {
+                loadout_id: id,
+              });
+              setImportNewLoadout(false);
+            }}
+          />
+        }
       </Window.Content>
     </Window>
   );

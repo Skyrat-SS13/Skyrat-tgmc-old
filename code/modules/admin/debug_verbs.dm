@@ -36,7 +36,7 @@ GLOBAL_PROTECT(AdminProcCallSpamPrevention)
 		return
 
 	if(!A || !IsValidSrc(A))
-		to_chat(starting_client, "<span class='warning'>Error: callproc_datum(): owner of proc no longer exists.</span>")
+		to_chat(starting_client, span_warning("Error: callproc_datum(): owner of proc no longer exists."))
 		return
 
 	log_admin("[key_name(usr)] called [A]'s [procname]() with [length(lst) ? "the arguments [list2params(lst)]" : "no arguments"].")
@@ -305,16 +305,8 @@ GLOBAL_PROTECT(AdminProcCallSpamPrevention)
 
 	log_admin("[key_name(usr)] is debugging the [choice] list.")
 	message_admins("[ADMIN_TPMONTY(usr)] is debugging the [choice] list.")
-// SKYRAT EDIT ADDITION - RELOAD CONFIGS
-/datum/admins/proc/reload_configuration()
-	set category = "Debug"
-	set name = "Reload Configuration"
-	set desc = "Force config reload to world default"
-	if(!check_rights(R_DEBUG))
-		return
-	if(tgui_alert(usr, "Are you absolutely sure you want to reload the configuration from the default path on the disk, wiping any in-round modificatoins?", "Really reset?", list("No", "Yes")) == "Yes")
-		config.admin_reload()
-// SKYRAT EDIT END
+
+
 /datum/admins/proc/spawn_atom(object as text)
 	set category = "Debug"
 	set desc = "(atom path) Spawn an atom"
@@ -417,7 +409,7 @@ GLOBAL_PROTECT(AdminProcCallSpamPrevention)
 		return
 
 	if(!CONFIG_GET(flag/sql_enabled))
-		to_chat(usr, "<span class='adminnotice'>The Database is not enabled!</span>")
+		to_chat(usr, span_adminnotice("The Database is not enabled!"))
 		return
 
 	if(SSdbcore.IsConnected(TRUE))
@@ -458,7 +450,7 @@ GLOBAL_PROTECT(AdminProcCallSpamPrevention)
 	set category = "Debug"
 	set name = "Spatial Agent"
 
-	if(!check_rights(R_DEBUG))
+	if(!check_rights(R_FUN))
 		return
 
 	var/mob/M = usr
@@ -663,6 +655,8 @@ GLOBAL_PROTECT(AdminProcCallSpamPrevention)
 	for(var/path in SSgarbage.items)
 		var/datum/qdel_item/I = SSgarbage.items[path]
 		dellog += "<li><u>[path]</u><ul>"
+		if (I.qdel_flags & QDEL_ITEM_SUSPENDED_FOR_LAG)
+			dellog += "<li>SUSPENDED FOR LAG</li>"
 		if (I.failures)
 			dellog += "<li>Failures: [I.failures]</li>"
 		dellog += "<li>qdel() Count: [I.qdels]</li>"
@@ -670,6 +664,9 @@ GLOBAL_PROTECT(AdminProcCallSpamPrevention)
 		if (I.hard_deletes)
 			dellog += "<li>Total Hard Deletes [I.hard_deletes]</li>"
 			dellog += "<li>Time Spent Hard Deleting: [I.hard_delete_time]ms</li>"
+			dellog += "<li>Highest Time Spent Hard Deleting: [I.hard_delete_max]ms</li>"
+			if (I.hard_deletes_over_threshold)
+				dellog += "<li>Hard Deletes Over Threshold: [I.hard_deletes_over_threshold]</li>"
 		if (I.slept_destroy)
 			dellog += "<li>Sleeps: [I.slept_destroy]</li>"
 		if (I.no_respect_force)

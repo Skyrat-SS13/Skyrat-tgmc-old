@@ -10,18 +10,6 @@
 	max_rounds = 21
 	w_class = WEIGHT_CLASS_SMALL
 	default_ammo = /datum/ammo/bullet/pistol
-	gun_type = /obj/item/weapon/gun/pistol/standard_pistol
-
-/obj/item/ammo_magazine/box9mm
-	name = "packet of 9mm"
-	desc = "A packet containing 70 rounds of 9mm."
-	caliber = CALIBER_9X19
-	icon_state = "box_9mm"
-	current_rounds = 70
-	max_rounds = 70
-	w_class = WEIGHT_CLASS_SMALL
-	default_ammo = /datum/ammo/bullet/pistol
-	icon_state_mini = "ammo_packet"
 
 //-------------------------------------------------------
 //TX-7 Plasma Pistol
@@ -33,7 +21,6 @@
 	max_rounds = 10
 	w_class = WEIGHT_CLASS_SMALL
 	default_ammo = /datum/ammo/energy/plasma_pistol
-	gun_type = /obj/item/weapon/gun/pistol/plasma_pistol
 	flags_magazine = NONE
 	icon_state_mini = "mag_tx7"
 
@@ -48,7 +35,6 @@
 	max_rounds = 14
 	w_class = WEIGHT_CLASS_SMALL
 	default_ammo = /datum/ammo/bullet/pistol
-	gun_type = /obj/item/weapon/gun/pistol/rt3
 	icon_state_mini = "mag_pistol"
 
 /obj/item/ammo_magazine/pistol/hp
@@ -84,16 +70,7 @@
 	caliber = CALIBER_45ACP
 	icon_state = "1911"
 	max_rounds = 10
-	gun_type = /obj/item/weapon/gun/pistol/m1911
 
-/obj/item/ammo_magazine/acp
-	name = "packet of .45 ACP"
-	icon_state = "box_45acp"
-	default_ammo = /datum/ammo/bullet/pistol/heavy
-	caliber = CALIBER_45ACP
-	current_rounds = 50
-	max_rounds = 50
-	icon_state_mini = "ammo_packet"
 
 
 //-------------------------------------------------------
@@ -105,7 +82,6 @@
 	caliber = CALIBER_45ACP
 	icon_state = ".45"
 	max_rounds = 14
-	gun_type = /obj/item/weapon/gun/pistol/standard_heavypistol
 
 
 //-------------------------------------------------------
@@ -117,7 +93,6 @@
 	icon_state = "g22"
 	max_rounds = 15
 	default_ammo = /datum/ammo/bullet/pistol
-	gun_type = /obj/item/weapon/gun/pistol/g22
 
 /obj/item/ammo_magazine/pistol/g22tranq
 	name = "\improper G22 tranq magazine (9mm)"
@@ -125,7 +100,6 @@
 	icon_state = "g22"
 	max_rounds = 12
 	default_ammo = /datum/ammo/bullet/pistol/tranq
-	gun_type = /obj/item/weapon/gun/pistol/g22/tranq
 
 
 //-------------------------------------------------------
@@ -133,11 +107,10 @@
 
 /obj/item/ammo_magazine/pistol/heavy
 	name = "\improper Desert Eagle magazine (.50)"
-	default_ammo = /datum/ammo/bullet/pistol/heavy
+	default_ammo = /datum/ammo/bullet/pistol/superheavy
 	caliber = CALIBER_50AE
 	icon_state = "50ae"
 	max_rounds = 7
-	gun_type = /obj/item/weapon/gun/pistol/heavy
 
 
 
@@ -150,7 +123,7 @@
 	caliber = CALIBER_22LR
 	icon_state = "pk-9_tranq"
 	max_rounds = 8
-	gun_type = /obj/item/weapon/gun/pistol/c99
+	icon_state_mini = "mag_pistol_green"
 
 /obj/item/ammo_magazine/pistol/c99
 	name = "\improper PK-9 hollowpoint magazine (.22)"
@@ -158,7 +131,6 @@
 	caliber = CALIBER_22LR
 	icon_state = "pk-9"
 	max_rounds = 12
-	gun_type = /obj/item/weapon/gun/pistol/c99
 
 //-------------------------------------------------------
 //PIZZACHIMP PROTECTION
@@ -171,7 +143,6 @@
 	icon_state = ".22"
 	max_rounds = 5
 	w_class = WEIGHT_CLASS_TINY
-	gun_type = /obj/item/weapon/gun/pistol/holdout
 
 //-------------------------------------------------------
 //TP-17.
@@ -184,20 +155,16 @@
 	icon_state = "tp17"
 	max_rounds = 8
 	w_class = WEIGHT_CLASS_TINY
-	gun_type = /obj/item/weapon/gun/pistol/standard_pocketpistol
-
 
 //-------------------------------------------------------
-//.45 MARSHALS PISTOL //Inspired by the Browning Hipower
+//Automag. .50.
 
 /obj/item/ammo_magazine/pistol/highpower
-	name = "\improper Highpower magazine (9mm)"
-	default_ammo = /datum/ammo/bullet/pistol/ap
-	caliber = CALIBER_9X19
+	name = "\improper Highpower magazine (.50 AE)"
+	default_ammo = /datum/ammo/bullet/pistol/superheavy
+	caliber = CALIBER_50AE
 	icon_state = "m4a3" //PLACEHOLDER
 	max_rounds = 13
-	gun_type = /obj/item/weapon/gun/pistol/highpower
-
 
 //-------------------------------------------------------
 //VP70 //Not actually the VP70, but it's more or less the same thing. VP70 was the standard sidearm in Aliens though.
@@ -208,8 +175,6 @@
 	caliber = CALIBER_9X19
 	icon_state = "88m4"
 	max_rounds = 18
-	gun_type = /obj/item/weapon/gun/pistol/vp70
-
 
 //-------------------------------------------------------
 //VP78
@@ -220,8 +185,6 @@
 	caliber = CALIBER_9X19
 	icon_state = "50ae"
 	max_rounds = 18
-	gun_type = /obj/item/weapon/gun/pistol/vp78
-
 
 //-------------------------------------------------------
 
@@ -234,8 +197,6 @@
 	caliber = CALIBER_9X19
 	icon_state = "tp17"
 	max_rounds = 50
-	gun_type = /obj/item/weapon/gun/pistol/auto9
-
 
 
 //-------------------------------------------------------
@@ -246,4 +207,3 @@
 	caliber = CALIBER_70MANKEY
 	icon_state = "c70"
 	max_rounds = 300
-	gun_type = /obj/item/weapon/gun/pistol/chimp

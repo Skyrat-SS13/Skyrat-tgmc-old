@@ -20,7 +20,7 @@
 		traits += "It's best fired with a two-handed grip."
 
 
-	if(flags_gun_features & GUN_TRIGGER_SAFETY)
+	if(HAS_TRAIT(src, TRAIT_GUN_SAFETY))
 		traits += "It has a safety switch. Alt-Click it to toggle safety."
 
 	if(scope_zoom) //flawed, unless you check the codex for the first time when the scope is attached, this won't show. works for sniper rifles though.
@@ -71,9 +71,9 @@
 	if(recoil)
 		traits += "Recoil: [recoil]"
 	if(scatter)
-		traits += "Scatter chance modifier: [scatter]%"
+		traits += "Scatter angle: [scatter]"
 	if(burst_scatter_mult)
-		traits += "Burst scatter chance multiplier: x[burst_scatter_mult]"
+		traits += "Burst scatter angle multiplier: x[burst_scatter_mult]"
 	if(accuracy_mod)
 		traits += "Accuracy modifier: [accuracy_mod * 100]%"
 	if(accuracy_mult_unwielded)
@@ -81,7 +81,7 @@
 	if(recoil_unwielded)
 		traits += "Recoil Unwielded: [recoil_unwielded]"
 	if(scatter_unwielded)
-		traits += "Unwielded Scatter chance modifier: [scatter_unwielded > 0 ? "+[scatter_unwielded]" : "[scatter_unwielded]"]%"
+		traits += "Unwielded Scatter angle: [scatter_unwielded > 0 ? "+[scatter_unwielded]" : "[scatter_unwielded]"]"
 	if(movement_acc_penalty_mult)
 		traits += "Movement unwielded penalty modifier: -[(movement_acc_penalty_mult * 0.15) * 100]%"
 	if(fire_delay)
@@ -133,10 +133,11 @@
 /datum/codex_entry/energy_weapons
 	display_name = "energy weapons"
 	mechanics_text = "This weapon is an energy weapon; they run on battery charge rather than traditional ammunition. You can recharge \
-		an energy weapon by placing it in a wall-mounted or table-mounted charger such as those found in Medical or around the \
-		place. In addition, energy weapons, if compatible, can be recharged via energy-fed battery cells acting as magazines, \
+		an energy weapon by placing it in a table-mounted or field-deployed charger such as those found in Medical or around the \
+		area. In addition, energy weapons, if compatible, can be recharged via energy-fed battery cells acting as magazines, \
 		which can also be recharged at chargers. Most energy weapons' projectiles can go straight through windows and hit whatever \
 		is on the other side, and have very fast projectiles, making them accurate and useful against distant targets. \
+		Some (like the TE series of weapons) have hitscan properties, allowing the weapon to hit the target instantly. \
 		<br>"
 	lore_text = "\"OPERATOR\", the tagline and marketing tactic of energy weapons (usually lasguns) in the 25th century, \
 		especially made popular with the rise of the xenomorph threat in 2414. Energy weapons are usually famed by private security firms \
@@ -218,15 +219,6 @@
 	It's a rather rare sight due to the current doctrine adopted by the TGMC not using heavy explosives often, so it's a rather \
 	rare sight outside of specialized users. and the rising prevalence of shipside combat making it dangerous to fire inside those \
 	spaces makes it even used less. Not that it makes it any less dangerous on an open field."
-
-/datum/codex_entry/smartgun
-	associated_paths = list(/obj/item/weapon/gun/smartgun)
-	lore_text = "The T-90A's design is the one used by most forces under the world who use the M56 4-kit smartgun system, \
-	it has several different other names depending on the user but the one used by the TGMC is defined as T-90A. <br><br>\
-	The M56 4-piece system was adopted when the technology eventually developed a practical point as older systems required \
-	a much heavier powerpack or assistant to carry ammunition due to the lack of an autoloading system. After these problems \
-	were solved with the powerpacks autoloading system and eventual size reductions to allow for more practical use of the gun \
-	inside combat, the M56 system was offered to the TGMC and was eventually met with adoption after combat tests showed good results."
 
 /datum/codex_entry/standard_shotgun
 	associated_paths = list(/obj/item/weapon/gun/shotgun/pump/t35)

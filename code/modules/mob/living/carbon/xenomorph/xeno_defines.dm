@@ -8,6 +8,11 @@
 	var/caste_type_path = null
 
 	var/ancient_message = ""
+	///primordial message that is shown when a caste becomes primordial
+	var/primordial_message = ""
+
+	///name of primordial upgrade this caste looks for, keep this as define
+	var/primordial_upgrade_name = ""
 
 	var/tier = XENO_TIER_ZERO
 	var/upgrade = XENO_UPGRADE_ZERO
@@ -48,6 +53,8 @@
 	var/plasma_max = 10
 	///How much plasma a caste gains every life tick.
 	var/plasma_gain = 5
+	///up to how % much plasma regens in decimals, generally used if you have a special way of regeninng plasma.
+	var/plasma_regen_limit = 1
 
 	// *** Health *** //
 	///Maximum health a caste has.
@@ -139,14 +146,14 @@
 	var/bomb_strength = 0
 	///Delay between firing the bombard ability for boilers
 	var/bomb_delay = 0
+	///Used to reduce cooldown for the boiler
+	var/ammo_multiplier = 0
 
 	// *** Carrier Abilities *** //
 	///maximum amount of huggers a carrier can carry at one time.
 	var/huggers_max = 0
 	///delay between the throw hugger ability activation for carriers
 	var/hugger_delay = 0
-	///maximum amount of eggs a carrier can carry at one time.
-	var/eggs_max = 0
 
 	// *** Defender Abilities *** //
 	///modifying amount to the crest defense ability for defenders. Positive integers only.
@@ -161,6 +168,16 @@
 	var/stomp_damage = 0
 	///How many tiles the Crest toss ability throws the victim.
 	var/crest_toss_distance = 0
+
+	// *** Gorger Abilities *** //
+	///Maximum amount of overheal that can be gained
+	var/overheal_max = 150
+	///Amount of plasma gained from draining someone
+	var/drain_plasma_gain = 0
+	///Amount of plasma gained from clashing after activating carnage
+	var/carnage_plasma_gain = 0
+	///Amount of plasma drained each tick while feast buff is actuve
+	var/feast_plasma_drain = 0
 
 	// *** Queen Abilities *** //
 	///Amount of leaders allowed
@@ -181,11 +198,38 @@
 	///Base range of Blink
 	var/wraith_blink_range = WRAITH_BLINK_RANGE
 
+	// *** Hunter Abilities ***
+	///Damage breakpoint to knock out of stealth
+	var/stealth_break_threshold = 0
+
 	///the 'abilities' available to a caste.
 	var/list/actions
 
 	///The iconstate for the xeno on the minimap
 	var/minimap_icon = "xeno"
+	///The iconstate for leadered xenos on the minimap
+	var/minimap_leadered_icon = "xenoleader"
+	///The iconstate of the plasma bar, format used is "[plasma_icon_state][amount]"
+	var/plasma_icon_state = "plasma"
+
+	///How quickly the caste enters vents
+	var/vent_enter_speed = XENO_DEFAULT_VENT_ENTER_TIME
+	///How quickly the caste enters vents
+	var/vent_exit_speed = XENO_DEFAULT_VENT_EXIT_TIME
+	///Whether the caste enters and crawls through vents silently
+	var/silent_vent_crawl = FALSE
+
+///Add needed component to the xeno
+/datum/xeno_caste/proc/on_caste_applied(mob/xenomorph)
+	xenomorph.AddComponent(/datum/component/bump_attack)
+	if(caste_flags & CASTE_CAN_RIDE_CRUSHER)
+		xenomorph.RegisterSignal(xenomorph, COMSIG_GRAB_SELF_ATTACK, /mob/living/carbon/xenomorph.proc/grabbed_self_attack)
+
+/datum/xeno_caste/proc/on_caste_removed(mob/xenomorph)
+	var/datum/component/bump_attack = xenomorph.GetComponent(/datum/component/bump_attack)
+	bump_attack?.RemoveComponent()
+	if(caste_flags & CASTE_CAN_RIDE_CRUSHER)
+		xenomorph.UnregisterSignal(xenomorph, COMSIG_GRAB_SELF_ATTACK)
 
 /mob/living/carbon/xenomorph
 	name = "Drone"
@@ -209,7 +253,7 @@
 	appearance_flags = TILE_BOUND|PIXEL_SCALE|KEEP_TOGETHER
 	see_infrared = TRUE
 	hud_type = /datum/hud/alien
-	hud_possible = list(HEALTH_HUD_XENO, PLASMA_HUD, PHEROMONE_HUD, QUEEN_OVERWATCH_HUD, ARMOR_SUNDER_HUD)
+	hud_possible = list(HEALTH_HUD_XENO, PLASMA_HUD, PHEROMONE_HUD, QUEEN_OVERWATCH_HUD, ARMOR_SUNDER_HUD, XENO_DEBUFF_HUD)
 	buckle_flags = NONE
 	faction = FACTION_XENO
 	initial_language_holder = /datum/language_holder/xeno
@@ -234,7 +278,8 @@
 	var/max_grown = 200
 	var/time_of_birth
 
-	var/list/stomach_contents
+	///A mob the xeno ate
+	var/mob/living/carbon/eaten_mob
 
 	var/evolution_stored = 0 //How much evolution they have stored
 
@@ -246,7 +291,6 @@
 
 	var/obj/structure/xeno/tunnel/start_dig = null
 	var/datum/ammo/xeno/ammo = null //The ammo datum for our spit projectiles. We're born with this, it changes sometimes.
-	var/pslash_delay = 0
 
 	var/evo_points = 0 //Current # of evolution points. Max is 1000.
 	var/list/upgrades_bought = list()
@@ -270,9 +314,12 @@
 
 	var/list/datum/action/xeno_abilities = list()
 	var/datum/action/xeno_action/activable/selected_ability
-	var/selected_resin = /turf/closed/wall/resin/regenerating //which resin structure to build when we secrete resin
-	var/selected_reagent = /datum/reagent/toxin/xeno_hemodile //which reagent to slash with using reagent slash
-
+	///which resin structure to build when we secrete resin
+	var/selected_resin = /turf/closed/wall/resin/regenerating
+	///which reagent to slash with using reagent slash
+	var/selected_reagent = /datum/reagent/toxin/xeno_hemodile
+	///which plant to place when we use sow
+	var/obj/structure/xeno/plant/selected_plant = /obj/structure/xeno/plant/heal_fruit
 	//Naming variables
 	var/nicknumber = 0 //The number/name after the xeno type. Saved right here so it transfers between castes.
 
@@ -287,6 +334,9 @@
 	var/warding_new = 0
 	var/recovery_new = 0
 
+	///Multiplicative melee damage modifier; referenced by attack_alien.dm, most notably attack_alien_harm
+	var/xeno_melee_damage_modifier = 1
+
 	var/xeno_mobhud = FALSE //whether the xeno mobhud is activated or not.
 
 	var/queen_chosen_lead //whether the xeno has been selected by the queen as a leader.
@@ -296,6 +346,9 @@
 
 	//Pounce vars
 	var/usedPounce = 0
+
+	// Gorger vars
+	var/overheal = 0
 
 	// Warrior vars
 	var/agility = 0		// 0 - upright, 1 - all fours
@@ -315,6 +368,8 @@
 	// *** Ravager vars *** //
 	/// when true the rav will not go into crit or take crit damage.
 	var/endure = FALSE
+	///when true the rav leeches healing off of hitting marines
+	var/vampirism
 
 	// *** Carrier vars *** //
 	var/selected_hugger_type = /obj/item/clothing/mask/facehugger
@@ -327,5 +382,8 @@
 
 	///The xenos/silo/nuke currently tracked by the xeno_tracker arrow
 	var/atom/tracked
+
+	///Are we the roony version of this xeno
+	var/is_a_rouny = FALSE
 
 	COOLDOWN_DECLARE(xeno_health_alert_cooldown)

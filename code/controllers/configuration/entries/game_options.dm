@@ -87,22 +87,11 @@
 
 /datum/config_entry/flag/fun_allowed //a lot of LRP features
 
+/datum/config_entry/flag/xenos_on_strike
+
 /datum/config_entry/number/min_xenos
 	config_entry_value = 5
 	min_val = 1
-
-/datum/config_entry/number/crash_larvapoints_required
-	config_entry_value = 9
-	min_val = 1
-
-/datum/config_entry/number/distress_larvapoints_required
-	config_entry_value = 8
-	min_val = 1
-
-/datum/config_entry/number/hunt_larvapoints_required
-	config_entry_value = 7
-	min_val = 1
-
 /datum/config_entry/keyed_list/lobby_music
 	key_mode = KEY_MODE_TEXT
 	value_mode = VALUE_MODE_TEXT
@@ -125,24 +114,4 @@
 /datum/config_entry/number/marine_respawn
 	config_entry_value = 30 MINUTES
 	max_val = 30 MINUTES
-	min_val = 0
-
-/datum/config_entry/number/xeno_respawn
-	config_entry_value = 30 MINUTES
-	max_val = 30 MINUTES
-	min_val = 0
-
-/datum/config_entry/flag/account_age_restriction
-	config_entry_value = FALSE
-
-/datum/config_entry/number/account_age_restriction_years
-	config_entry_value = 0
-	min_val = 0
-
-/datum/config_entry/number/account_age_restriction_months
-	config_entry_value = 0
-	min_val = 0
-
-/datum/config_entry/number/account_age_restriction_days
-	config_entry_value = 0
 	min_val = 0

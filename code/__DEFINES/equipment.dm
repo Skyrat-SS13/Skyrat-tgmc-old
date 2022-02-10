@@ -28,11 +28,15 @@
 #define PREVENT_CONTENTS_EXPLOSION (1<<13)
 /// was this spawned by an admin? used for stat tracking stuff.
 #define ADMIN_SPAWNED (1<<14)
+/// Can this atom be bumped attack
+#define BUMP_ATTACKABLE (1<<15)
+///This atom will not be qdeled when a shuttle lands on it; it will just move onto the shuttle tile. It will stay on the ground when the shuttle takes off
+#define SHUTTLE_IMMUNE (1<<16)
 /// Should we use the initial icon for display? Mostly used by overlay only objects
 #define HTML_USE_INITAL_ICON_1 (1<<21)
 
 //turf-only flags
-#define NOJAUNT_1 (1<<0)
+#define AI_BLOCKED (1<<0) //Prevent ai from going onto this turf
 #define UNUSED_RESERVATION_TURF_1 (1<<1)
 /// If a turf can be made dirty at roundstart. This is also used in areas.
 #define CAN_BE_DIRTY_1 (1<<2)
@@ -60,6 +64,13 @@
 #define DRAINS_XENO (1<<10)  //Enables the item to collect resource for chem_booster component
 #define CAN_BUMP_ATTACK (1<<11)	 //Item triggers bump attack
 #define NO_VACUUM (1<<12) //Roomba won't eat this
+#define IS_DEPLOYABLE (1<<13) //Item can be deployed into a machine
+#define DEPLOY_ON_INITIALIZE (1<<14)
+#define IS_DEPLOYED (1<<15) //If this is on an item, said item is currently deployed
+#define DEPLOYED_NO_PICKUP  (1<<16) //Disables deployed item pickup
+#define DEPLOYED_NO_ROTATE  (1<<17) //Disables deployed item rotation abilities to rotate.
+#define DEPLOYED_WRENCH_DISASSEMBLE (1<<18) //If this is on an item, the item can only be disassembled using a wrench once deployed.
+
 //==========================================================================================
 
 //flags_inv_hide

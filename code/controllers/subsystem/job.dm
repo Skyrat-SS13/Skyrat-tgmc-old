@@ -16,7 +16,7 @@ SUBSYSTEM_DEF(job)
 	var/list/squads = list()			//List of potential squads.
 	///Assoc list of all joinable squads, categorised by faction
 	var/list/active_squads = list()
-	///assoc list of squad_name_string->squad_reference for easy lookup
+	///assoc list of squad_name_string->squad_reference for easy lookup, categorised in factions
 	var/list/squads_by_name = list()
 
 	var/list/unassigned = list()		//Players who need jobs.
@@ -40,7 +40,7 @@ SUBSYSTEM_DEF(job)
 	var/list/all_jobs = subtypesof(/datum/job)
 	var/list/all_squads = subtypesof(/datum/squad)
 	if(!length(all_jobs))
-		to_chat(world, "<span class='boldnotice'>Error setting up jobs, no job datums found</span>")
+		to_chat(world, span_boldnotice("Error setting up jobs, no job datums found"))
 		return FALSE
 
 	for(var/J in all_jobs)
@@ -69,7 +69,7 @@ SUBSYSTEM_DEF(job)
 		if(!squad)
 			continue
 		squads[squad.id] = squad
-		squads_by_name[squad.name] = squad
+		LAZYSET(squads_by_name[squad.faction], squad.name, squad)
 	return TRUE
 
 
@@ -107,8 +107,6 @@ SUBSYSTEM_DEF(job)
 	if(!latejoin)
 		unassigned -= player
 	if(job.job_category != JOB_CAT_XENO && !GLOB.joined_player_list.Find(player.ckey))
-		if(SSticker.mode.flags_round_type & MODE_PSY_POINTS_ADVANCED)
-			SSpoints.add_psy_points(XENO_HIVE_NORMAL, SILO_PRICE / 15)
 		SSpoints.supply_points[job.faction] += SUPPLY_POINT_MARINE_SPAWN
 	job.occupy_job_positions(1, GLOB.joined_player_list.Find(player.ckey))
 	player.assigned_role = job
@@ -340,9 +338,6 @@ SUBSYSTEM_DEF(job)
 
 
 /datum/controller/subsystem/job/proc/SendToLateJoin(mob/M, datum/job/assigned_role)
-	if(isxenosjob(assigned_role) && length(GLOB.xeno_resin_silos))
-		SendToAtom(M, pick(GLOB.xeno_resin_silos))
-		return
 	if(assigned_role && length(GLOB.jobspawn_overrides[assigned_role])) //We're doing something special today.
 		SendToAtom(M, pick(GLOB.jobspawn_overrides[assigned_role]))
 		return

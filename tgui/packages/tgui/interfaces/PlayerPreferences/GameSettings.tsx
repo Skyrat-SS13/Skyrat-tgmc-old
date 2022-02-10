@@ -1,10 +1,34 @@
 import { useBackend } from '../../backend';
 import { Button, Section, LabeledList, Grid, ColorBox } from '../../components';
-import { ToggleFieldPreference, TextFieldPreference, SelectFieldPreference } from './FieldPreferences';
+import { ToggleFieldPreference, TextFieldPreference, SelectFieldPreference, LoopingSelectionPreference } from './FieldPreferences';
+
+const ParallaxNumToString = (integer) => {
+  let returnval = "";
+  switch (integer) {
+    case -1:
+      returnval = "Insane";
+      break;
+    case 0:
+      returnval = "High";
+      break;
+    case 1:
+      returnval = "Medium";
+      break;
+    case 2:
+      returnval = "Low";
+      break;
+    case 3:
+      returnval = "Disabled";
+      break;
+    default:
+      returnval = "Error!";
+  }
+  return returnval;
+};
 
 export const GameSettings = (props, context) => {
-  const { act, data, config } = useBackend<PlayerPreferencesData>(context);
-  const { ui_style_color } = data;
+  const { act, data } = useBackend<GameSettingData>(context);
+  const { ui_style_color, scaling_method, pixel_size, parallax } = data;
   return (
     <Section title="Game Settings">
       <Grid>
@@ -19,11 +43,11 @@ export const GameSettings = (props, context) => {
                 rightLabel={'Disabled'}
               />
               <ToggleFieldPreference
-                label="Focus Chat"
-                value="focus_chat"
-                action="focus_chat"
-                leftLabel={'Enabled'}
-                rightLabel={'Disabled'}
+                label="Unique action behaviour"
+                value="unique_action_use_active_hand"
+                action="unique_action_use_active_hand"
+                leftLabel={'Use on active hand'}
+                rightLabel={'Use on both hands'}
               />
               <ToggleFieldPreference
                 label="Mute xeno health alert messages"
@@ -31,6 +55,13 @@ export const GameSettings = (props, context) => {
                 action="mute_xeno_health_alert_messages"
                 leftLabel={'Muted'}
                 rightLabel={'Enabled'}
+              />
+              <ToggleFieldPreference
+                label="Fullscreen mode"
+                value="fullscreen_mode"
+                action="fullscreen_mode"
+                leftLabel={'Fullscreen'}
+                rightLabel={'Windowed'}
               />
               <ToggleFieldPreference
                 label="TGUI Window Mode"
@@ -45,6 +76,29 @@ export const GameSettings = (props, context) => {
                 action="tgui_lock"
                 leftLabel={'Free (default)'}
                 rightLabel={'Primary monitor'}
+              />
+              <ToggleFieldPreference
+                label="TGUI Input boxes"
+                value="tgui_input"
+                action="tgui_input"
+                leftLabel={'Enabled'}
+                rightLabel={'Disabled'}
+              />
+              <ToggleFieldPreference
+                label="TGUI Input Buttons"
+                value="tgui_input_big_buttons"
+                action="tgui_input_big_buttons"
+                leftLabel={'Normal'}
+                leftValue={0}
+                rightLabel={'Large'}
+                rightValue={1}
+              />
+              <ToggleFieldPreference
+                label="TGUI Input Buttons placement"
+                value="tgui_input_buttons_swap"
+                action="tgui_input_buttons_swap"
+                leftLabel={'Submit/Cancel'}
+                rightLabel={'Cancel/Submit'}
               />
               <ToggleFieldPreference
                 label="Tooltips"
@@ -107,23 +161,22 @@ export const GameSettings = (props, context) => {
                 rightValue={0}
                 rightLabel={'Disabled'}
               />
-
               <ToggleFieldPreference
                 label="Show self combat messages"
                 value="mute_self_combat_messages"
                 action="mute_self_combat_messages"
-                leftValue={1}
+                leftValue={0}
                 leftLabel={'Enabled'}
-                rightValue={0}
+                rightValue={1}
                 rightLabel={'Disabled'}
               />
               <ToggleFieldPreference
                 label="Show others combat messages"
                 value="mute_others_combat_messages"
                 action="mute_others_combat_messages"
-                leftValue={1}
+                leftValue={0}
                 leftLabel={'Enabled'}
-                rightValue={0}
+                rightValue={1}
                 rightLabel={'Disabled'}
               />
             </LabeledList>
@@ -154,6 +207,28 @@ export const GameSettings = (props, context) => {
                 label={'UI Alpha'}
                 value={'ui_style_alpha'}
                 action={'uialpha'}
+              />
+              <ToggleFieldPreference
+                label="Widescreen mode"
+                value="widescreenpref"
+                action="widescreenpref"
+                leftLabel={'Enabled'}
+                rightLabel={'Disabled'}
+              />
+              <LoopingSelectionPreference
+                label="Scaling Method"
+                value={scaling_method}
+                action="scaling_method"
+              />
+              <LoopingSelectionPreference
+                label="Pixel Size Scaling"
+                value={pixel_size}
+                action="pixel_size"
+              />
+              <LoopingSelectionPreference
+                label="Parallax"
+                value={ParallaxNumToString(parallax)}
+                action="parallax"
               />
             </LabeledList>
           </Section>

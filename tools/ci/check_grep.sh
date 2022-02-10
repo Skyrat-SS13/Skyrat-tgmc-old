@@ -6,9 +6,6 @@ shopt -s globstar
 
 st=0
 
-curl --output ./pcregrep.deb http://archive.ubuntu.com/ubuntu/pool/universe/p/pcre3/pcregrep_8.39-12build1_amd64.deb > /dev/null
-sudo apt -qq install -y ./pcregrep.deb > /dev/null
-
 echo "Checking for TGM formatting"
 if grep -El '^\".+\" = \(.+\)' _maps/**/*.dmm;	then
     echo "Non-TGM formatted map detected. Please convert it using Map Merger!"
@@ -143,7 +140,7 @@ if grep -ni '/obj/structure/mineral_door/resin' _maps/**/*.dmm; then
     echo "Do not directly add resin doors on maps, use landmarks."
     st=1
 fi;
-if grep -ni '/obj/structure/xeno/resin/xeno_turret' _maps/**/*.dmm; then
+if grep -ni '/obj/structure/xeno/xeno_turret' _maps/**/*.dmm; then
     echo "Do not directly add xeno turrets on maps, use landmarks."
     st=1
 fi;

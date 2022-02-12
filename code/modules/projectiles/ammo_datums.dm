@@ -2150,6 +2150,9 @@ datum/ammo/bullet/revolver/tp44
 	hit_eye_blur = 16
 	hit_drowsyness = 18
 	fixed_spread_range = 2
+	accuracy = 100
+	accurate_range = 30
+	shell_speed = 1.5
 
 /datum/ammo/xeno/boiler_gas/corrosive/lance
 	name = "pressurized glob of acid"
@@ -2166,6 +2169,9 @@ datum/ammo/bullet/revolver/tp44
 	hit_eye_blur = 4
 	hit_drowsyness = 2
 	fixed_spread_range = 2
+	accuracy = 100
+	accurate_range = 30
+	shell_speed = 1.5
 
 /datum/ammo/xeno/hugger
 	name = "hugger ammo"

@@ -31,7 +31,17 @@
 ///Wrapper for proc/finish_deploy
 /datum/element/deployable_item/proc/deploy(datum/source, mob/user, location, direction)
 	SIGNAL_HANDLER
+<<<<<<< HEAD
 	INVOKE_ASYNC(src, .proc/finish_deploy, source, user, location, direction)
+=======
+	var/obj/item/item_in_active_hand = user.get_active_held_item()
+	if(!(item_in_active_hand?.flags_item & IS_DEPLOYABLE))
+		return
+	var/list/modifiers = params2list(params)
+	if(!modifiers["ctrl"] || modifiers["right"] || get_turf(user) == location || !(user.Adjacent(object)) || !location)
+		return
+	INVOKE_ASYNC(src, .proc/finish_deploy, item_in_active_hand, user, location)
+>>>>>>> 18665aed10 (Stops you from deploying into nullspace (#9629))
 	return COMSIG_KB_ACTIVATED
 
 
